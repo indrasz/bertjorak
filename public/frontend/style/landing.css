@@ -1,0 +1,379 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+:root {
+    --dark-1: #101d2e;
+    --dark-2: #0f1c2d;
+    --dark-3: #1e2a39;
+    --grey-1: #6f7781;
+    --grey-2: #626a7f;
+    --dull-purple: #7f31ff;
+    --strong-purple: #8f00ff;
+    --soft-purple: #f9faff;
+    --noto-sans: 'Noto Sans', sans-serif;
+    --montserrat: 'Montserrat', sans-serif;
+}
+
+.font-noto-sans {
+    font-family: var(--noto-sans);
+}
+
+.font-montserrat {
+    font-family: var(--montserrat);
+}
+
+/* START:Navbar */
+.bertjorak-navbar {
+    font-family: var(--noto-sans);
+    font-size: 16px;
+}
+
+.get-shayna-container {
+    padding: 10px 20px;
+}
+
+@media (max-width: 768px) {
+    .navbar-buttons {
+        width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .get-shayna-container {
+        padding: 20px 60px;
+    }
+}
+
+nav .nav-link {
+    font-weight: 500;
+    color: var(--dark-2);
+}
+
+nav .nav-link.active {
+    font-weight: 700;
+    color: var(--dark-1);
+}
+
+nav .btn-login {
+    padding: 12px 16px;
+    border: 1px solid var(--dull-purple);
+    border-radius: 50px;
+    color: var(--dull-purple);
+    background-color: white;
+    text-align: center;
+}
+
+nav .btn-login:hover {
+    background-color: var(--strong-purple);
+    color: var(--soft-purple);
+}
+
+nav .btn-register {
+    padding: 12px 16px;
+    color: white;
+    background-color: var(--dull-purple);
+    border: none;
+    border-radius: 50px;
+    text-align: center;
+}
+
+nav .btn-register:hover {
+    color: var(--soft-purple);
+    background-color: var(--strong-purple);
+}
+
+/* END:Navbar */
+
+/* START:Header */
+.header-background img {
+    z-index: -1;
+    width: 100%;
+    top: 120px;
+    left: 0;
+    right: 0;
+}
+
+.bertjorak-header main {
+    font-family: var(--noto-sans);
+    font-size: 16px;
+    padding-top: 88px;
+    padding-bottom: 64px;
+}
+
+.bertjorak-header .headline {
+    font-family: var(--montserrat);
+    font-size: 54px;
+    font-weight: 500;
+    line-height: 70px;
+    text-align: center;
+    color: var(--dark-3);
+    width: auto;
+}
+
+.bertjorak-header .header-description>p {
+    color: var(--grey-2);
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    font-weight: 400;
+    margin: 16px 0 42px;
+    width: auto;
+}
+
+.btn-join {
+    padding: 20px 32px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 20px;
+    background-color: var(--dull-purple);
+    border-radius: 50px;
+}
+
+.btn-join:hover {
+    color: var(--soft-purple);
+    background-color: var(--strong-purple);
+}
+
+.statistic-text {
+    text-align: center;
+    color: var(--grey-2);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 200px;
+    margin-bottom: 24px;
+}
+
+.partner-logo {
+    font-family: var(--montserrat);
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: -2%;
+    color: #a5aab0;
+}
+
+.cart-badge {
+    display: inline-block;
+    min-width: 2em; /* em unit */
+    padding: 0.3em; /* em unit */
+    border-radius: 50%;
+    font-size: 10px;
+    text-align: center;
+    background: #29a867;
+    color: #fefefe;
+    margin-left: -10px;
+}
+
+@media (max-width: 765px) {
+    .bertjorak-header .headline {
+        font-size: 40px;
+        line-height: 48px;
+    }
+}
+
+@media (min-width: 768px) {
+    .header-background img {
+        top: 375px;
+    }
+}
+
+@media (min-width: 992px) {
+    .header-background img {
+        top: 250px;
+    }
+
+    .bertjorak-header .headline {
+        width: 900px;
+    }
+
+    .bertjorak-header .header-description>p {
+        width: 487px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .header-background img {
+        top: 175px;
+    }
+}
+
+/* END:Header */
+
+.content-8-2 button.active path {
+    fill-opacity: 1;
+}
+
+.content-8-2 button.disabled path {
+    fill-opacity: 0.5;
+}
+
+.content-8-2 .text-black-1 {
+    color: #121212;
+}
+
+.content-8-2 .text-yellow-1 {
+    color: #e77d00;
+}
+
+.content-8-2 .main {
+    padding: 6rem 2rem;
+}
+
+.content-8-2 .title-font {
+    font: normal 3.75rem/1 "Bebas Neue", cursive;
+    margin-bottom: 1rem;
+}
+
+.content-8-2 .caption-font {
+    font: 500 1rem/2.25rem "Inter", sans-serif;
+    letter-spacing: 0.025em;
+}
+
+.content-8-2 .main-carousel {
+    padding: 1.5rem;
+}
+
+.content-8-2 .title-carousel {
+    font: normal 2.25rem/2.5rem "Bebas Neue", cursive;
+}
+
+.content-8-2 .caption-carousel {
+    font: normal 0.875rem/2.25rem "Inter", sans-serif;
+}
+
+@media (min-width: 576px) {}
+
+@media (min-width: 768px) {
+    .content-8-2 .main {
+        padding: 6rem 0rem 6rem 4rem;
+    }
+
+    .content-8-2 .main-carousel {
+        padding: 4rem 0rem 2.25rem 4rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .content-8-2 .main {
+        padding: 6rem 0rem 6rem 6rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .content-8-2 .main {
+        padding: 12rem 0rem 6rem 9rem;
+    }
+
+    .content-8-2 .button-arrow {
+        margin-right: 8rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .content-8-2 .left-col {
+        order: 2;
+    }
+
+    .content-8-2 .right-col {
+        order: 1;
+    }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.footer-3-2 .list-footer li a {
+    color: #40467e;
+    transition: 0.3s;
+}
+
+.footer-3-2 .list-footer li {
+    line-height: 35px;
+    text-decoration: none;
+}
+
+.footer-3-2 .list-footer li:hover a {
+    color: #FF3EA6;
+    transition: 0.3s;
+}
+
+.footer-3-2 .footer-icon {
+    font-weight: 500;
+}
+
+.footer-3-2 .footer-icon .icon-fill:hover path {
+    fill: #FF3EA6;
+}
+
+.footer-3-2 .footer-icon .icon-stroke:hover path {
+    stroke: #FF3EA6;
+}
+
+.footer-3-2 .main {
+    padding: 6rem 1rem;
+}
+
+.footer-3-2 .left-col,
+.footer-3-2 .right-col {
+    width: 100%;
+}
+
+.footer-3-2 .left-col {
+    margin-bottom: 40px;
+}
+
+.footer-3-2 .caption-font {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    letter-spacing: 1%;
+    color: #121212;
+    margin-top: 1.25rem;
+}
+
+.footer-3-2 .title-font {
+    font: 600 1.25rem/1.75rem "Poppins", sans-serif;
+    margin-bottom: 1.25rem;
+    color: #060c45;
+}
+
+.footer-3-2 .credit-font {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #121212;
+}
+
+@media (min-width: 576px) {
+    .footer-3-2 .main {
+        background-image: url('http://api.elements.buildwithangga.com/storage/files/2/assets/Footer/Footer3/Footer-3-2.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .footer-3-2 .main {
+        padding: 6rem 2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .footer-3-2 .main {
+        padding: 6rem 4rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .footer-3-2 .main {
+        padding: 6rem 8rem;
+    }
+
+    .footer-3-2 .left-col,
+    .footer-3-2 .right-col {
+        width: 50%;
+    }
+
+    .footer-3-2 .left-col {
+        margin-bottom: 0rem;
+    }
+}
+
+@media (min-width: 1200px) {}
