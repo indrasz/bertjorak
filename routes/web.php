@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\DetailController;
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/detail/{id}', [DetailController::class, 'index'])->name('detail');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
