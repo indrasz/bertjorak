@@ -33,8 +33,10 @@
                             </ul>
                         </span>
                     </div>
+
                     @auth
-                        @if (Auth::user()->level == 0)
+                        {{-- Buyer --}}
+                        @if (Auth::user()->hasRole('buyer'))
                             <div class="mt-3 flex-lg-row flex-column d-flex mt-lg-0 navbar-buttons">
                                 <a href="#" class="nav-link d-inline-block">
                                     <img src="{{ asset('frontend/images/icon-user.png') }}" alt="icon-user" width="45"
@@ -46,7 +48,13 @@
                                     <div class="cart-badge">3</div>
                                 </a>
                             </div>
+                            {{-- Admin --}}
+                        @else
+                            <button type="button" class="btn btn-primary">
+                                Dashboard
+                            </button>
                         @endif
+                        {{-- Belum Login --}}
                     @else
                         <div class="mt-3 flex-lg-row flex-column d-flex mt-lg-0 navbar-buttons">
                             <a href="/login" class="btn btn-login mx-3">Login</a>

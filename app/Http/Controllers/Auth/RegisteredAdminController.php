@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Admin;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        return view('auth.admin.register');
     }
 
     /**
@@ -40,17 +40,17 @@ class RegisteredUserController extends Controller
             // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
+        $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        $user->attachRole('buyer');
+        $admin->attachRole('admin');
 
-        event(new Registered($user));
+        event(new Registered($admin));
 
-        Auth::login($user);
+        Auth::login($admin);
 
         return redirect(RouteServiceProvider::HOME);
     }

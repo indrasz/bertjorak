@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/detail/{id}', [DetailController::class, 'index'])->name('detail');
@@ -22,6 +22,6 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
