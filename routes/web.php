@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
         Route::resource('user', UserController::class)->only([
-            'index', 'create', 'store', 'destroy', 'show'
+            'index', 'create', 'store', 'destroy', 'show',
         ]);
         Route::resource('product', ProductController::class);
         Route::resource('transaction', TransactionController::class);
@@ -38,6 +38,5 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 // Route::get('/users', function () {
 //     return view('pages.admin.user.index');
 // })->middleware(['auth', 'verified'])->name('users');
-
 
 require __DIR__ . '/auth.php';
