@@ -38,7 +38,7 @@
                         {{-- Buyer --}}
                         @if (Auth::user()->hasRole('buyer'))
                             <div class="mt-3 flex-lg-row flex-column d-flex mt-lg-0 navbar-buttons">
-                                <a href="#" class="nav-link d-inline-block">
+                                <a href="{{ route('dashboard.index') }}" class="nav-link d-inline-block">
                                     <img src="{{ asset('frontend/images/icon-user.png') }}" alt="icon-user" width="45"
                                         height="45">
                                     Holaa, Everyone
@@ -50,9 +50,11 @@
                             </div>
                             {{-- Admin --}}
                         @else
-                            <button type="button" class="btn btn-primary">
-                                Dashboard
-                            </button>
+                            <a href="{{ route('dashboard.index') }}">
+                                <button type="button" class="btn btn-primary">
+                                    Dashboard
+                                </button>
+                            </a>
                         @endif
                         {{-- Belum Login --}}
                     @else

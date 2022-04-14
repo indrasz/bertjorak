@@ -1,12 +1,17 @@
 <?php
 
+use App\Http\Controllers\Admin\AddressController;
 use App\Http\Controllers\Admin\DashboardController;
+// Admin
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\DetailController;
+
+// Frontend
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\SessionProduct;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,10 +35,15 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::resource('user', UserController::class)->only([
             'index', 'create', 'store', 'destroy', 'show',
         ]);
+        Route::resource('address', AddressController::class);
         Route::resource('product', ProductController::class);
         Route::resource('transaction', TransactionController::class);
     });
 });
+
+Route::get('/session/tampil', [SessionProduct::class, 'tampilkanSession']);
+Route::get('/session/buat', [SessionProduct::class, 'buatSession']);
+Route::get('/session/hapus', [SessionProduct::class, 'hapusSession']);
 
 // Route::get('/users', function () {
 //     return view('pages.admin.user.index');

@@ -20,9 +20,7 @@ class ProductController extends Controller
 
         $data = Product::all();
 
-        $imgFirst = Product::select('images')->first()->get();
-
-        return view('pages.dashboard.product.index')->with('count', $count)->with('data', $data)->with('firstImg', $imgFirst);
+        return view('pages.dashboard.product.index')->with('count', $count)->with('data', $data);
     }
 
     /**
@@ -89,13 +87,11 @@ class ProductController extends Controller
     {
         $count = Product::count();
 
-        $data = Product::all();
+        $data = Product::where('id', $id)->get();
 
-        $imgFirst = Product::select('images')->first()->get();
+        $dataAll = Product::all();
 
-        $size = json_decode(Product::select('images')->get());
-
-        return view('pages.detail')->with('count', $count)->with('data', $data)->with('firstImg', $imgFirst)->with('size', $size);
+        return view('pages.detail')->with('count', $count)->with('data', $data)->with('dataAll', $dataAll);
     }
 
     /**
@@ -159,7 +155,6 @@ class ProductController extends Controller
         // $files->images = json_decode($data->images);
 
         // unlink(public_path('dashboard_assets/products/images/' . $files));
-
         $data->delete();
 
         return redirect()->route('dashboard.product.index');

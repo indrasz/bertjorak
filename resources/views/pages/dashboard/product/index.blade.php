@@ -48,15 +48,10 @@
                                                     <div class="relative w-10 h-10 mr-3 rounded-full md:block">
 
 
+                                                        <?php $property_images = json_decode($d->images); ?>
+                                                        <img src="/dashboard_assets/products/images/{{ $property_images[0] }}"
+                                                            alt="" loading="lazy">
 
-                                                        @foreach (json_decode($d->images, true) as $image)
-                                                            <img src="/dashboard_assets/products/images/{{ $image }}"
-                                                                alt="" loading="lazy">
-                                                        @endforeach
-
-                                                        {{-- <img class="object-cover w-full h-full rounded"
-                                                            src="{{ url('/dashboard_assets/products/images/', $d->images) }}"
-                                                            alt="" loading="lazy" /> --}}
                                                         <div class="absolute inset-0 rounded-full shadow-inner"
                                                             aria-hidden="true">
                                                         </div>

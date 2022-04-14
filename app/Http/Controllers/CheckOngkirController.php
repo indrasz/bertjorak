@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 
-class AddressController extends Controller
+class CheckOngkirController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -16,7 +15,7 @@ class AddressController extends Controller
     public function index()
     {
         $provinces = Province::pluck('name', 'province_id');
-        return view('pages.dashboard.address.index', compact('provinces'));
+        return view('ongkir', compact('provinces'));
     }
 
     /**
