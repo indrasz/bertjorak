@@ -151,7 +151,7 @@
                                             <button type="button"
                                                 class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                                                 id="addAdvantagesRow">
-                                                Tambahkan Soze Yang Tersedia +
+                                                Tambahkan Size Yang Tersedia +
                                             </button>
                                         </div>
 
