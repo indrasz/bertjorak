@@ -62,6 +62,119 @@
     background: #fff;
     border-radius: 12px;
 }
+.detail-product .card-detail-product {
+    box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
+    border-radius: 15px;
+    background-color: #ffffff;
+}
+
+.detail-product .card-detail-product .product-name{
+    font: 600 1.50rem/1.90rem "Poppins", sans-serif;
+}
+
+.detail-product .card-detail-product .desc-product{
+    color: #ADB2B8;
+}
+
+.detail-product .card-detail-product .price-product{
+    font: 500 1.25rem/1.90rem "Poppins", sans-serif;
+    color: #121213;
+}
+
+.detail-product .card-detail-product .stock-product{
+    font: 400 1rem/1.90rem "Poppins", sans-serif;
+}
+
+.detail-product .card-detail-product .btn-add-cart{
+    background-color: var(--dull-purple);
+    color: #fff;
+    font: 600 1rem/1.90rem "Poppins", sans-serif;
+}
+.detail-product input[type="radio"]:checked+.detail-size-card{
+    border: 2px solid var(--dull-purple);
+    color: var(--dull-purple);
+    width: 50px;
+    text-align: center;
+    background-color: rgba(0, 186, 255, 0.05);
+}
+
+.detail-product .detail-size-card {
+    border: 2px solid #000000;
+    border-radius: 6px;
+    width: 50px;
+    text-align: center;
+    font-size: 17px;
+}
+.related-product .caption-related-product{
+    font: 600 1.50rem/1.90rem "Poppins", sans-serif;
+} 
+.related-product .card-related-carousel {
+    width: 325px;
+    padding: 28px 28px 40px;
+    border-radius: 28px;
+    background: white;
+    -webkit-box-shadow: 20px 8px 18px rgba(178, 177, 255, 0.05);
+    box-shadow: 20px 8px 18px rgba(178, 177, 255, 0.05);
+}
+
+@media only screen and (max-width: 768px) {
+    .related-product .card-related-carousel {
+        margin-right: 20px;
+    }
+}
+
+.related-product .card-related-carousel .image-placeholder {
+    width: 268px;
+    height: 190px;
+}
+
+.related-product .card-related-carousel .image-placeholder img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.related-product .card-related-carousel .card-details {
+    height: 70px;
+}
+
+.related-product .card-related-carousel .card-details .caption {
+    font-weight: 700;
+    font-size: 24px;
+    color: #080E09;
+    margin-top: 24px;
+}
+
+.related-product .card-related-carousel .card-details .sub-caption {
+    font-weight: 400;
+    color: #ADB2B8;
+}
+
+.related-product .card-related-carousel .bottom-text .price-content {
+    color: #080E09;
+    font-size: 16px;
+}
+
+.related-product .card-related-carousel .bottom-text .price-content span {
+    font-weight: 400;
+}
+
+.related-product .card-related-carousel .bottom-text .price-content span.price {
+    font-weight: 700;
+}
+
+.related-product .card-related-carousel .bottom-text .rating {
+    font-weight: 700;
+    font-size: 16px;
+    color: #FF9900;
+}
+
+.related-product .card-related-carousel .bottom-text .rating img {
+    margin-top: -1px;
+    margin-right: 5px;
+}
 
 
 
