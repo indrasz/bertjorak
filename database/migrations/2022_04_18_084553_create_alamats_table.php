@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('carts', function (Blueprint $table) {
-            $table->increments('id_cart');
+        Schema::create('alamats', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('id_user')->constrained('users', 'id');
-            $table->foreignId('id_product')->constrained('products', 'id_product');
-            $table->string('sizeSelected');
-            $table->mediumText('note')->nullable();
+            $table->string('type_address', 25);
+            // $table->string('country');
+            $table->foreignId('id_province');
+            $table->foreignId('city_id');
+            // $table->string('subdistric');
+            $table->string('detail_address')->nullable();
+            $table->string('zipcode');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('address');
     }
 };

@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
 
-        @include('includes.meta')
+<head>
 
-        <title>@yield('title') | Bertjorak</title>
+    @include('includes.meta')
 
-        @stack('before-style')
-        @include('includes.style')
-        @stack('after-style')
-        
-    </head>
+    <title>@yield('title') | Bertjorak</title>
 
-    <body>
+    @stack('before-style')
+    @include('includes.style')
+    @stack('after-style')
 
-        @yield('content')
+    @livewireStyles
+</head>
 
-        @stack('before-script')
-        @include('includes.script')
-        @stack('after-script')
+<body>
 
-    </body>
+    @yield('content')
+
+    @stack('before-script')
+    @include('includes.script')
+    @stack('after-script')
+
+    @livewireScripts
+</body>
+
 </html>

@@ -47,8 +47,11 @@
                                                 <div class="flex items-center text-sm">
                                                     <div class="relative w-10 h-10 mr-3 rounded-full md:block">
 
-
                                                         <?php $property_images = json_decode($d->images); ?>
+                                                        {{-- <input type="text" name="photoText"
+                                                            value="{{ $property_images[0] }}"> --}}
+
+
                                                         <img src="/dashboard_assets/products/images/{{ $property_images[0] }}"
                                                             alt="" loading="lazy">
 
@@ -57,7 +60,7 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <a href="{{ route('dashboard.product.show', $d->id) }}"
+                                                        <a href="{{ route('detail.show', $d->id_product) }}"
                                                             class="font-medium text-black">
                                                             {{ $d->title }}
                                                         </a>
@@ -74,13 +77,13 @@
                                                 Active
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                <a href="{{ route('dashboard.product.edit', $d->id) }}"
+                                                <a href="{{ route('dashboard.product.edit', $d->id_product) }}"
                                                     class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
                                                     Edit Service
                                                 </a>
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                <form action="{{ route('dashboard.product.destroy', $d->id) }}"
+                                                <form action="{{ route('dashboard.product.destroy', $d->id_product) }}"
                                                     method="post">
                                                     @csrf
                                                     @method('DELETE')

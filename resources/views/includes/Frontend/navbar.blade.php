@@ -1,5 +1,3 @@
-
-
 <section class="h-100 w-100" style="box-sizing: border-box; background-color: #fcfcff">
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -50,7 +48,7 @@
             background-color: #7F31FF;
             border-radius: 999px;
             padding: 0.75rem 3rem;
-                -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+            -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
             box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
         }
 
@@ -61,14 +59,14 @@
             border: 1px solid #7F31FF;
             border-radius: 999px;
             padding: 0.75rem 3rem;
-                -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+            -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
             box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
         }
 
         .header-5-1 .btn-register:hover {
             color: #FFFFFF;
             background-color: #7F31FF;
-                -webkit-box-shadow: 0px 20px 40px rgba(180, 81, 226, 0.18);
+            -webkit-box-shadow: 0px 20px 40px rgba(180, 81, 226, 0.18);
             box-shadow: 0px 20px 40px rgba(182, 84, 228, 0.18);
         }
 
@@ -268,6 +266,7 @@
         }
 
         @media (min-width: 992px) {
+
             /* .header-5-1 .navbar-expand-lg .navbar-nav .nav-link {
                 padding-right: 1.5rem;
                 padding-left: 1.5rem;
@@ -331,11 +330,13 @@
                 padding: 2.5rem 10rem 5rem;
             }
         }
+
     </style>
     <div class="header-5-1 container  mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a href="#">
-                <img style="margin-right: 0.75rem" src="{{ asset('frontend/images/main-logo.png') }}" alt="main-logo" width="100" />
+            <a href="/">
+                <img style="margin-right: 0.75rem" src="{{ asset('frontend/images/main-logo.png') }}" alt="main-logo"
+                    width="100" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#targetModal-item">
                 <span class="navbar-toggler-icon"></span>
@@ -347,7 +348,8 @@
                     <div class="modal-content modal-content bg-white border-0">
                         <div class="modal-header" style="padding: 2rem; padding-bottom: 0">
                             <a class="modal-title" id="targetModalLabel">
-                                <img style="margin-top: 0.5rem" src="{{ asset('frontend/images/main-logo.png') }}" alt="main-logo" width="90" />
+                                <img style="margin-top: 0.5rem" src="{{ asset('frontend/images/main-logo.png') }}"
+                                    alt="main-logo" width="90" />
                             </a>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -357,7 +359,7 @@
                         <div class="modal-body" style="padding: 2rem; padding-top: 0; padding-bottom: 0">
                             <ul class="navbar-nav responsive me-auto mt-2 mt-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#">Home</a>
+                                    <a class="nav-link active" href="/">Home</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Products</a>
@@ -421,8 +423,10 @@
                             @auth
                                 {{-- Buyer --}}
                                 @if (Auth::user()->hasRole('buyer'))
-                                     <a class="nav-link " href="{{ route('dashboard.index') }}" data-bs-toggle="dropdown">
-                                        <img src="{{ asset('frontend/images/icon-user.png') }}" class="me-2" alt="icon-user" width="45" height="45">
+                                    <a class="nav-link " href="{{ route('dashboard.index') }}"
+                                        data-bs-toggle="dropdown">
+                                        <img src="{{ asset('frontend/images/icon-user.png') }}" class="me-2"
+                                            alt="icon-user" width="45" height="45">
                                         Username
                                     </a>
                                     <a class="nav-link" href="#">
@@ -526,14 +530,16 @@
                     @if (Auth::user()->hasRole('buyer'))
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                             <li class="nav-item me-2 dropdown">
-                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
-                                    <img src="{{ aaset('frontend/images/icon-user.png') }}" class="me-2" alt="icon-user" width="45" height="45">
-                                    Username
+                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                                    data-bs-toggle="dropdown">
+                                    <img src="{{ asset('frontend/images/icon-user.png') }}" class="me-2"
+                                        alt="icon-user" width="45" height="45">
+                                    {{ Auth::user()->name }}
                                 </a>
                                 <ul class="dropdown-menu" style="cursor: pointer">
 
                                     <li>
-                                        <a href="#"
+                                        <a href="{{ route('dashboard.index') }}"
                                             class="dropdown-hover d-flex align-items-center justify-content-center text-start text-decoration-none">
                                             <img class=""
                                                 src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header5/Header-5-5.png"
@@ -544,8 +550,8 @@
                                                     Update your profile
                                                 </p>
                                             </div>
-                                            <svg class="dropdown-icon-arrow d-none" width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="dropdown-icon-arrow d-none" width="18" height="18"
+                                                viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M14.5237 9.41999L10.7887 13.17C10.6687 13.29 10.5187 13.35 10.3687 13.35C10.2187 13.35 10.0687 13.29 9.94871 13.17C9.70871 12.93 9.70871 12.555 9.94871 12.315L12.6637 9.58499H3.90371C3.57371 9.58499 3.30371 9.31499 3.30371 8.98499C3.30371 8.65499 3.57371 8.38499 3.90371 8.38499H12.6637L9.94871 5.655C9.70871 5.415 9.70871 5.04 9.94871 4.8C10.1887 4.56 10.5637 4.56 10.8037 4.8L14.5387 8.54999C14.7637 8.80499 14.7637 9.19499 14.5237 9.41999Z"
                                                     fill="#7F31FF" />
@@ -555,9 +561,10 @@
                                 </ul>
                             </li>
                         </ul>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('cart.index') }}">
                             <img src="{{ asset('frontend/images/icon-cart.svg') }}" alt="" />
-                            <div class="cart-badge">3</div>
+                            <livewire:cart.count-cart />
+                            {{-- <div class="cart-badge">3</div> --}}
                         </a>
                         {{-- Admin --}}
                     @else
@@ -576,4 +583,3 @@
         </nav>
     </div>
 </section>
-

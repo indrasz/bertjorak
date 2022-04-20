@@ -55,7 +55,7 @@ class ProductController extends Controller
 
         if ($request->hasfile('photos')) {
             foreach ($request->file('photos') as $image) {
-                $name = time() . rand(1, 100) . $image->getClientOriginalName();
+                $name = time() . rand(1, 100) . ' - ' . $image->getClientOriginalName();
                 $image->move(public_path() . '/dashboard_assets/products/images/', $name);
                 $data[] = $name;
             }
@@ -83,16 +83,6 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $count = Product::count();
-
-        $data = Product::where('id', $id)->get();
-
-        $dataAll = Product::all();
-
-        return view('pages.detail')->with('count', $count)->with('data', $data)->with('dataAll', $dataAll);
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -102,7 +92,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $editData = Product::where('id', $id)->get();
+        $editData = Product::where('id_product', $id)->get();
 
         return view('pages.dashboard.product.edit')->with('editData', $editData);
     }
@@ -148,13 +138,25 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $data = Product::findOrFail($id);
 
-        // $files->images = json_decode($data->images);
+        // $image = Product::where('id_product', 6)->select('images')->get();
 
-        // unlink(public_path('dashboard_assets/products/images/' . $files));
+        $fotoReq = $request->photoText;
+
+        // if (File::exists('dashboard_assets/products/images/WhatsApp Image 2021-11-07 at 12.04.22 PM.jpeg')) {
+        //     File::delete('dashboard_assets/products/images/WhatsApp Image 2021-11-07 at 12.04.22 PM.jpeg');
+        // } else {
+        //     dd('File does not exists.');
+        // }
+        // foreach (json_decode($image, true) as $img) {
+        //     //unlink(public_path('/dashboard_assets/products/images/' . $value));
+
+        //     dd($img);
+        // }
+
         $data->delete();
 
         return redirect()->route('dashboard.product.index');
