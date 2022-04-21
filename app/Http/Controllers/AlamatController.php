@@ -14,7 +14,7 @@ class AlamatController extends Controller
      */
     public function index()
     {
-        return view('pages.address.index');
+        return view('pages.dashboard.address.index');
     }
 
     public function store(Request $request)
