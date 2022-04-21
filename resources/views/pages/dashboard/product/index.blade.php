@@ -55,9 +55,9 @@
                                                         <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
                                                             alt="" loading="lazy">
 
-                                                        <div class="absolute inset-0 rounded-full shadow-inner"
+                                                        {{-- <div class="absolute inset-0 rounded-full shadow-inner"
                                                             aria-hidden="true">
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                     <div>
                                                         <a href="{{ route('detail.show', $d->id_product) }}"

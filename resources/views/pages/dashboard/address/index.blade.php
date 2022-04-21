@@ -5,10 +5,8 @@
 @section('content')
 
 
-    <div class="container-fluid mt-5">
+    <livewire:address.create />
 
-        <livewire:address.create />
 
-    </div>
 
 @endsection
