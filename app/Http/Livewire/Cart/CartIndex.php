@@ -22,6 +22,9 @@ class CartIndex extends Component
     public $alamatKantor, $alamatKantorId;
     public $alamatK;
 
+    public $calPrice;
+    public $result;
+
     public function increment()
     {
         $this->count += 1;
@@ -57,6 +60,9 @@ class CartIndex extends Component
     {
         $this->authId = Auth::user()->id;
         $this->carts = Cart::where('id_user', $this->authId)->join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->get();
+
+        // $this->result = Cart::where('id_user', $this->authId)->join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->select('price', 'jumlah')->get();
+
         return view('livewire.cart.cart-index');
     }
 

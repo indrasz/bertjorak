@@ -25,13 +25,13 @@
                     <div class="col-12 col-lg-8 ">
                         <div class="card-product p-4">
                             <?php $property_images = json_decode($d->images); ?>
-                            <img src="{{ asset('dashboard_assets/products/images/' . $property_images[0]) }}"
+                            <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
                                 class="w-100" alt="">
                             <div class="carousel pt-2"
                                 data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
 
                                 @foreach (json_decode($d->images, true) as $image)
-                                    <img src="/dashboard_assets/products/images/{{ $image }}"
+                                    <img src="{{ asset('/storage/products/images/' . $image) }}"
                                         class="w-25 img-thumbnail" alt="">
                                 @endforeach
                             </div>
@@ -58,13 +58,16 @@
                             </div>
 
                             <div class="d-flex flex-row mt-3 px-3">
-                                @foreach (json_decode($d->size, false) as $ukuran)
-                                    <label class="me-3 " for="topup1">
-                                        <input class="d-none b" type="radio" id="topup1" name="topup" value="topup1">
-                                        <div class="detail-size-card justify-content-center">
-                                            <div class="text-size m-0">{{ $ukuran['0'] }}</div>
-                                        </div>
-                                    </label>
+                                @foreach (json_decode($d->size, true) as $ukuran)
+                                    @foreach ($ukuran as $u)
+                                        <label class="me-3 " for="{{ $u }}">
+                                            <input class="d-none b" type="radio" id="{{ $u }}"
+                                                name="sizeSelected" value="{{ $u }}">
+                                            <div class="detail-size-card justify-content-center">
+                                                <div class="text-size m-0">{{ $u }}</div>
+                                            </div>
+                                        </label>
+                                    @endforeach
                                 @endforeach
                             </div>
 
@@ -125,13 +128,13 @@
                         }
 
                         /* .detail-product .detail-size-card #icon-check{
-                                                                                                                                                                                transition: all 0.1s linear;
-                                                                                                                                                                                opacity: 0;
-                                                                                                                                                                            }
+                                                                                                                                                                                                        transition: all 0.1s linear;
+                                                                                                                                                                                                        opacity: 0;
+                                                                                                                                                                                                    }
 
-                                                                                                                                                                            .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
-                                                                                                                                                                                opacity: 1;
-                                                                                                                                                                            } */
+                                                                                                                                                                                                    .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
+                                                                                                                                                                                                        opacity: 1;
+                                                                                                                                                                                                    } */
 
                     </style>
                 </div>
@@ -152,8 +155,7 @@
 
                         <?php $property_images = json_decode($all->images); ?>
                         <div class="image-placeholder">
-                            <img src="{{ asset('dashboard_assets/products/images/' . $property_images[0]) }}"
-                                alt="images" />
+                            <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}" alt="images" />
                         </div>
 
                         <div class="card-details">

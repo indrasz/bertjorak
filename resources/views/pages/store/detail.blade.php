@@ -35,15 +35,15 @@
                             <div class="card-product p-4">
 
                                 <?php $property_images = json_decode($d->images); ?>
-                                <img src="{{ asset('dashboard_assets/products/images/' . $property_images[0]) }}"
-                                    class="w-100" alt="">
+                                <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
+                                    class="w-75" alt="">
 
 
                                 <div class="carousel pt-2"
                                     data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
 
                                     @foreach (json_decode($d->images, true) as $image)
-                                        <img src="/dashboard_assets/products/images/{{ $image }}"
+                                        <img src="{{ asset('/storage/products/images/' . $image) }}"
                                             class="w-25 img-thumbnail" alt="">
                                     @endforeach
                                 </div>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-lg-4 ">
+                        <div class="col-12 col-lg-4">
                             <div class="card-detail-product py-4 px-4 mt-4">
                                 <div class="product-name ms-2 ps-2 mt-3">
                                     {{ $d->title }}
@@ -64,6 +64,11 @@
                                 <div class="desc-product mt-3 px-3">
                                     {{ $d->desc }}
                                 </div>
+
+                                <div class="chose-size mt-3 px-3">
+                                    Jumlah Barang :
+                                </div>
+                                <livewire:cart.counter-barang />
 
                                 <div class="chose-size mt-3 px-3">
                                     Pilih Ukuran :
@@ -90,6 +95,18 @@
                                 </button>
                             </div>
                         </div>
+
+                        {{-- <div class="col-md-12 ">
+                            <div class="card-detail-product py-4 px-4 mt-4">
+                                <div class="product-name ms-2 ps-2 mt-3">
+                                    {{ $d->title }}
+                                </div>
+
+                                <button type="submit" class="btn btn-add-cart d-inline-block w-100 p-2 mt-4">
+                                    Add to cart
+                                </button>
+                            </div>
+                        </div> --}}
 
                         <style>
                             .detail-product .card-detail-product {
@@ -138,13 +155,13 @@
                             }
 
                             /* .detail-product .detail-size-card #icon-check{
-                                                                                                                                                                                                                                                                                                                                                                                                                    transition: all 0.1s linear;
-                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 0;
-                                                                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            transition: all 0.1s linear;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            opacity: 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
-                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 1;
-                                                                                                                                                                                                                                                                                                                                                                                                                } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            opacity: 1;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        } */
 
                         </style>
                     </div>
@@ -166,12 +183,13 @@
 
                         <?php $property_images = json_decode($all->images); ?>
                         <div class="image-placeholder">
-                            <img src="{{ asset('dashboard_assets/products/images/' . $property_images[0]) }}"
-                                alt="images" />
+                            <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}" alt="images" />
                         </div>
 
                         <div class="card-details">
-                            <div class="caption">{{ $all->title }}</div>
+                            <a href="{{ route('detail.show', $all->id_product) }}" style="text-decoration: none;">
+                                <div class="caption">{{ $all->title }}</div>
+                            </a>
                             <span class="sub-caption">150m</span>
                         </div>
                         <div class="bottom-text d-flex flex-row justify-content-between">

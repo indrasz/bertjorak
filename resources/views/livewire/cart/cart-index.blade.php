@@ -5,17 +5,20 @@
 
                 <div class="col-12 col-lg-8">
 
-                    @if (is_array($carts) || is_object($carts))
+                    @if (count($carts) >= 1)
                         @foreach ($carts as $c)
                             <div class="card-product-preview p-3 mb-3">
                                 <div class="d-flex flex-row">
                                     <div class="col-2">
                                         <?php $property_images = json_decode($c->images); ?>
-                                        <img src="/dashboard_assets/products/images/{{ $property_images[0] }}" alt=""
-                                            loading="lazy" class="w-100">
+                                        <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
+                                            alt="" loading="lazy" class="w-100">
                                     </div>
                                     <div class="col-4 name-product-preview ms-3">
                                         {{ $c->title }}
+                                        <div class="size-preview">
+                                            Jumlah item : {{ $c->jumlah }} item
+                                        </div>
                                         <div class="size-preview">
                                             Size : {{ $c->sizeSelected }}
                                         </div>
@@ -28,29 +31,29 @@
                                     <div
                                         class="col-4 d-flex text-center align-items-center justify-content-center name-product-preview ms-3">
 
-                                        <livewire:cart.counter-barang />
+                                        {{-- <livewire:cart.counter-barang /> --}}
 
                                         {{-- <div class="input-group border p-2 w-50 mx-auto" style="border-radius: 10px;">
-                                            <span class="input-group-btn">
-                                                <button wire:click="decrement" class="btn btn-minus pb-3 px-1">
-                                                    -
-                                                </button>
-                                            </span>
-                                            <input type="text" class="form-control input-number text-center border-0"
-                                                max="100" value="{{ $count }}" />
-                                            <span class="input-group-btn">
-                                                <button wire:click="increment" class="btn btn-add pb-3 px-1">
-                                                    +
-                                                </button>
-                                            </span>
-                                        </div> --}}
+                                        <span class="input-group-btn">
+                                            <button wire:click="decrement" class="btn btn-minus pb-3 px-1">
+                                                -
+                                            </button>
+                                        </span>
+                                        <input type="text" class="form-control input-number text-center border-0"
+                                            max="100" value="{{ $count }}" />
+                                        <span class="input-group-btn">
+                                            <button wire:click="increment" class="btn btn-add pb-3 px-1">
+                                                +
+                                            </button>
+                                        </span>
+                                    </div> --}}
 
                                     </div>
 
                                     <div
                                         class="col-2 d-flex text-center align-items-center justify-content-center name-product-preview ms-3">
 
-                                        <form action="{{ route('cart.destroy', $c->id_cart) }}" method="POST">
+                                        <form action="{{ route('cart.destroy', $c->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
 
@@ -63,7 +66,12 @@
                                 </div>
                             </div>
                         @endforeach
+                    @else
+                        <div class="error-details">
+                            Keranjang kamu kosong nih! Ayo belanja dulu
+                        </div>
                     @endif
+
 
                 </div>
 
@@ -73,16 +81,18 @@
                             Informasi Pembayaran
                         </div>
 
-                        @if (is_array($carts) || is_object($carts))
+                        @if (count($carts) >= 1)
                             @foreach ($carts as $c)
                                 <div class="preview-summary">
-                                    {{ $c->title }}({{ $qty }} Barang)
+                                    {{ $c->title }} ({{ $c->jumlah }} item)
                                     <input type="number" wire:model="priceBarang" value="{{ $c->price }}" hidden>
-                                    <span class="float-end">
-                                        @currency($c->price)
+                                    <span class="float-end" wire:model="calPrice">
+                                        @currency($c->price * $c->jumlah)
                                     </span>
                                 </div>
                             @endforeach
+                        @else
+                            <p class="text-center opacity-50">Belum ada barang ditambahkan.</p>
                         @endif
 
 
@@ -144,7 +154,10 @@
                             Total Harga Belanja
 
                             <span class="float-end">
-                                {{-- @currency($cartList->sum('price')) --}}
+                                {{-- <h1>{{ $calPrice }}</h1> --}}
+                                {{-- @currency($result->sum('price') * $result->sum('jumlah')) --}}
+                                {{-- <h1>{{ $result->sum('price') }}</h1> --}}
+                                {{-- @currency(sum($c->price * $c->jumlah)) --}}
                             </span>
                         </div>
 

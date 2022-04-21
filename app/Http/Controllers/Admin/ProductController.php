@@ -56,7 +56,7 @@ class ProductController extends Controller
         if ($request->hasfile('photos')) {
             foreach ($request->file('photos') as $image) {
                 $name = time() . rand(1, 100) . ' - ' . $image->getClientOriginalName();
-                $image->move(public_path() . '/dashboard_assets/products/images/', $name);
+                $image->storeAs('products/images/', $name, 'public');
                 $data[] = $name;
             }
         }
@@ -106,6 +106,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data = Product::findOrFail($id);
+
         $this->validate($request, [
             'photos' => 'required',
             'photos.*' => 'mimes:png,jpg,jpeg',
@@ -118,16 +120,40 @@ class ProductController extends Controller
             'weight' => 'required',
         ]);
 
-        $dataUpdate = Product::findOrFail($id);
+        // if ($request->hasfile('photos')) {
+        //     foreach ($request->file('photos') as $image) {
+        //         $name = time() . rand(1, 100) . ' - ' . $image->getClientOriginalName();
+        //         $image->storeAs('products/images/', $name, 'public');
+        //         $data[] = $name;
+        //     }
+        // }
 
-        $dataUpdate->update([
-            'title' => $request->name,
-            'price' => $request->price,
-            'desc' => $request->desc,
-            'stock' => $request->stock,
-            'size' => $request->size,
-            'weight' => $request->weight,
-        ]);
+        $productUp = Product::find($id);
+
+        // $productUp->images = json_encode($data);
+        $productUp->title = $request->name;
+        $productUp->price = $request->price;
+        $productUp->desc = $request->desc;
+        $productUp->stock = $request->stock;
+        $productUp->size = $request->size;
+        $productUp->weight = $request->weight;
+
+        $productUp->save();
+
+        // Delete Multiple Images From Public Folder
+        foreach (json_decode($data->images, true) as $image => $value) {
+            File::delete('storage/products/images/' . $value);
+        }
+
+        // $dataUpdate->update([
+        //     // 'images' => json_encode($data),
+        //     'title' => $request->name,
+        //     'price' => $request->price,
+        //     'desc' => $request->desc,
+        //     'stock' => $request->stock,
+        //     'size' => $request->size,
+        //     'weight' => $request->weight,
+        // ]);
 
         return redirect()->route('dashboard.product.index');
     }
@@ -142,20 +168,9 @@ class ProductController extends Controller
     {
         $data = Product::findOrFail($id);
 
-        // $image = Product::where('id_product', 6)->select('images')->get();
-
-        $fotoReq = $request->photoText;
-
-        // if (File::exists('dashboard_assets/products/images/WhatsApp Image 2021-11-07 at 12.04.22 PM.jpeg')) {
-        //     File::delete('dashboard_assets/products/images/WhatsApp Image 2021-11-07 at 12.04.22 PM.jpeg');
-        // } else {
-        //     dd('File does not exists.');
-        // }
-        // foreach (json_decode($image, true) as $img) {
-        //     //unlink(public_path('/dashboard_assets/products/images/' . $value));
-
-        //     dd($img);
-        // }
+        foreach (json_decode($data->images, true) as $image => $value) {
+            File::delete('storage/products/images/' . $value);
+        }
 
         $data->delete();
 

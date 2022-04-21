@@ -29,6 +29,7 @@ class CartController extends Controller
 
         $cart->id_user = $idUser;
         $cart->id_product = $request->idProduct;
+        $cart->jumlah = $request->jumlah;
         $cart->sizeSelected = $request->sizeSelected;
 
         $cart->save();

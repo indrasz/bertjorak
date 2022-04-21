@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('id_cart');
             $table->foreignId('id_user')->constrained('users', 'id');
             $table->foreignId('id_product')->constrained('products', 'id_product');
+            $table->integer('jumlah');
             $table->string('sizeSelected');
             $table->mediumText('note')->nullable();
             $table->timestamps();
