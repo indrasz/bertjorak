@@ -52,7 +52,7 @@
                                                             value="{{ $property_images[0] }}"> --}}
 
 
-                                                        <img src="/dashboard_assets/products/images/{{ $property_images[0] }}"
+                                                        <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
                                                             alt="" loading="lazy">
 
                                                         <div class="absolute inset-0 rounded-full shadow-inner"
