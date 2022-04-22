@@ -80,66 +80,86 @@
                         <div class="caption-summary mb-3">
                             Informasi Pembayaran
                         </div>
-
                         @if (count($carts) >= 1)
+                            @php
+                                $totalPrice = 0;
+                            @endphp
                             @foreach ($carts as $c)
                                 <div class="preview-summary">
                                     {{ $c->title }} ({{ $c->jumlah }} item)
-                                    <input type="number" wire:model="priceBarang" value="{{ $c->price }}" hidden>
-                                    <span class="float-end" wire:model="calPrice">
+
+                                    <span class="float-end">
                                         @currency($c->price * $c->jumlah)
                                     </span>
                                 </div>
+                                @php
+                                    $totalHargaItem = $c->price * $c->jumlah;
+                                    $totalPrice += $totalHargaItem;
+                                @endphp
                             @endforeach
                         @else
                             <p class="text-center opacity-50">Belum ada barang ditambahkan.</p>
                         @endif
 
-
+                        {{-- Pilih Jasa Pengiriman --}}
                         <div class="preview-summary">
                             Jasa Kirim
                         </div>
+                        <select class="col p-2" wire:model="pilihKurir" name="cost" id="cost">
+                            @if (is_array($cost) || is_object($cost))
+                                <option value="none" selected>-- Pilih Kurir --</option>
+                                @foreach ($cost as $k => $value)
+                                    <option value="{{ $value['code'] }}">{{ $value['name'] }}</option>
+                                @endforeach
 
-                        @foreach ($alamatKantorId as $a)
-                            <h1 hidden>{{ $a->city_id }}</h1>
-                            <input type="text" wire:model="alamatK" placeholder="{{ $a->city_id }}">
-                        @endforeach
+                            @endif
+                        </select>
 
-                        {{-- <select class="col p-2" name="prov" id="prov">
-                        @foreach ($data as $d => $value)
-                            <option value="0">{{ $value['name'] }}</option>
-                        @endforeach
-                    </select> --}}
+                        {{-- Pilih Jenis Pengiriman --}}
+                        <div class="preview-summary">
+                            Jenis Pengiriman
+                        </div>
+                        <select class="col p-2" wire:model="jenisKurir" name="cost" id="cost">
+                            <option value="none" selected>-- Pilih Jenis --</option>
+                            @foreach ($cost as $k => $y)
+                                @if ($y['code'] == $pilihKurir)
+                                    @foreach ($y['costs'] as $p)
+                                        <option value="{{ $p['service'] }}">{{ $p['service'] }}</option>
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        </select>
 
+
+                        {{-- Ongkos Kirim Display --}}
                         <div class="d-flex justify-content-between">
                             <div class="preview-summary">
+                                Ongkos Kirim:
                             </div>
-
-                            {{-- <select class="col p-2" wire:model="kota" name="kota" id="kota">
-                            @if (is_array($kota) || is_object($kota))
-                                @foreach ($kota as $k => $value)
-                                    <option value="{{ $value['city_id'] }}">{{ $value['city_name'] }}</option>
-                                @endforeach
-                            @endif
-                        </select> --}}
-
+                            <span class="p-2" wire:model="ongkirResult">
+                                @if (!is_array($jenisKurir) || is_object($jenisKurir))
+                                    @foreach ($cost as $k => $y)
+                                        @if ($y['code'] == $pilihKurir)
+                                            @foreach ($y['costs'] as $p)
+                                                @if ($p['service'] == $jenisKurir)
+                                                    @foreach ($p['cost'] as $harga)
+                                                        @currency($harga['value'])
+                                                        @php
+                                                            $hargaOngkir = $harga['value'];
+                                                        @endphp
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <h5>none</h5>
+                                @endif
+                            </span>
                         </div>
 
-                        <div class="preview-summary">
-                            Kurir:
-                        </div>
-                        <span class="p-2">JNE</span>
 
-                        <div class="preview-summary">
-                            Jenis Paket:
-                        </div>
-                        <span class="p-2">YES</span>
-
-                        <div class="preview-summary">
-                            Ongkos Kirim:
-                        </div>
-                        <span class="p-2">Rp10.000</span>
-
+                        {{-- Estimasi Pengiriman --}}
                         <div class="preview-summary mt-2">
                             <svg class="inline" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -147,21 +167,48 @@
                                 <path d="M12 7V12L15 13.5" stroke="#ADB2B8" stroke-width="1.5" stroke-linecap="round" />
                             </svg>
 
-                            <span>7 Hari Pengiriman</span>
-                        </div>
-
-                        <div class="total-summary mt-1">
-                            Total Harga Belanja
-
-                            <span class="float-end">
-                                {{-- <h1>{{ $calPrice }}</h1> --}}
-                                {{-- @currency($result->sum('price') * $result->sum('jumlah')) --}}
-                                {{-- <h1>{{ $result->sum('price') }}</h1> --}}
-                                {{-- @currency(sum($c->price * $c->jumlah)) --}}
+                            <span>
+                                @if (!$hargaOngkir == null)
+                                    @foreach ($cost as $k => $y)
+                                        @if ($y['code'] == $pilihKurir)
+                                            @foreach ($y['costs'] as $p)
+                                                @if ($p['service'] == $jenisKurir)
+                                                    @foreach ($p['cost'] as $harga)
+                                                        @php
+                                                            $convert = $harga['etd'];
+                                                            $hasilKonversi = str_replace('HARI', '', $convert);
+                                                        @endphp
+                                                        {{ $hasilKonversi }} hari pengiriman
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                @else
+                                    -
+                                @endif
                             </span>
                         </div>
 
+                        {{-- Total Harga Belanja --}}
+                        <div class="total-summary mt-1">
+                            Total Harga Barang
+                            @if (!$hargaOngkir == null)
+                                <span class="float-end">@currency($totalPrice) </span>
+                            @else
+                                <span class="float-end">@currency(0)</span>
+                            @endif
+                        </div>
 
+                        {{-- Total Harga Belanja --}}
+                        <div class="total-summary mt-1">
+                            Total Harga Belanja
+                            @if (!$hargaOngkir == null)
+                                <span class="float-end">@currency($totalPrice + $hargaOngkir) </span>
+                            @else
+                                <span class="float-end">@currency(0)</span>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="card-summary px-lg-4 px-2 py-3 mb-3">
@@ -171,15 +218,29 @@
 
                         <form action="">
 
-                            <label for="name" class="mb-1">Nama Lengkap</label>
+                            {{-- Alamat Pembeli --}}
+                            <label for="alamat" class="mb-1">Alamat Anda</label>
                             <div class="input-group w-100 mx-auto mb-2">
 
-                                <input type="text" id="name" class="form-control input-shipping-details" max="100"
-                                    placeholder="Nama lengkap penerima" />
-
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and
+                                        make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
                             </div>
 
-                            <label for="email" class="mb-1">Email</label>
+
+
+                            {{-- Catatan Dari Pembeli --}}
+                            <label for="notes" class="mb-1">Catatan</label>
+                            <div class="input-group w-100 mx-auto mb-2">
+
+                                <textarea name="notes" id="notes" class="form-control input-shipping-details" style="resize: none;" cols="10"
+                                    rows="5"></textarea>
+                            </div>
+
+                            {{-- <label for="email" class="mb-1">Email</label>
                             <div class="input-group w-100 mx-auto mb-2">
 
                                 <input type="text" id="email" class="form-control input-shipping-details" max="100"
@@ -201,7 +262,7 @@
                                 <input type="text" id="address" class="form-control input-shipping-details" max="100"
                                     placeholder="Alamat Lengkap penerima" />
 
-                            </div>
+                            </div> --}}
 
                             <div class="btn btn-confirm d-inline-block w-100 p-2 mt-4">
                                 Checkout Now

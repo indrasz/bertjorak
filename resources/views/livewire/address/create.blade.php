@@ -77,49 +77,72 @@
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6">
                                         <div class="flex items-center mt-1">
-                                            <span class="inline-block w-16 h-16 overflow-hidden bg-gray-100 rounded-full">
-                                                <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                            <span
+                                                class="inline-block w-16 h-16 overflow-hidden bg-gray-100 rounded-full">
+                                                <svg class="w-full h-full text-gray-300" fill="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                                                 </svg>
                                             </span>
                                         </div>
                                     </div>
                                     <div class="md:col-span-6 lg:col-span-3">
-                                        <label for="type_address" class="block mb-3 font-medium text-gray-700 text-md">Place Type </label>
-                                        <input placeholder="Kost / Kantor / Rumah" type="text" name="type_address" id="type_address" autocomplete="type_address" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                        <label for="type_address"
+                                            class="block mb-3 font-medium text-gray-700 text-md">Place Type </label>
+                                        <input placeholder="Kost / Kantor / Rumah" type="text" name="type_address"
+                                            id="type_address" autocomplete="type_address"
+                                            class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                     </div>
                                     <div class="md:col-span-6 lg:col-span-3">
-                                        <label for="detail" class="block mb-3 font-medium text-gray-700 text-md">Address</label>
-                                        <input placeholder="Alamat Lengkap" type="text" name="detail" id="detail" autocomplete="detail" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                    </div>
-                                    {{-- <div class="md:col-span-6 lg:col-span-3">
-                                        <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Email Address</label>
-                                        <input placeholder="Alex.jones@gmail.com" type="text" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                        <label for="detail"
+                                            class="block mb-3 font-medium text-gray-700 text-md">Address</label>
+                                        <input placeholder="Alamat Lengkap" type="text" name="detail" id="detail"
+                                            autocomplete="detail"
+                                            class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                     </div>
                                     <div class="md:col-span-6 lg:col-span-3">
-                                        <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Contact Number</label>
-                                        <input placeholder="087721205555" type="number" name="service-name" id="service-name" autocomplete="service-name" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                    </div> --}}
+                                        <label for="service-name"
+                                            class="block mb-3 font-medium text-gray-700 text-md">Email Address</label>
+                                        <input placeholder="Alex.jones@gmail.com" type="text" name="service-name"
+                                            id="service-name" autocomplete="service-name"
+                                            class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                    </div>
                                     <div class="md:col-span-6 lg:col-span-3">
-                                        <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">Province</label>
-                                        <select class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                        <label for="service-name"
+                                            class="block mb-3 font-medium text-gray-700 text-md">Contact Number</label>
+                                        <input placeholder="087721205555" type="number" name="service-name"
+                                            id="service-name" autocomplete="service-name"
+                                            class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                    </div>
+                                    <div class="md:col-span-6 lg:col-span-3">
+                                        <label for="service-name"
+                                            class="block mb-3 font-medium text-gray-700 text-md">Province</label>
+                                        <select
+                                            class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             <option value="">a</option>
                                         </select>
                                     </div>
                                     <div class="md:col-span-6 lg:col-span-3">
-                                        <label for="service-name" class="block mb-3 font-medium text-gray-700 text-md">City</label>
-                                        <select class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                        <label for="service-name"
+                                            class="block mb-3 font-medium text-gray-700 text-md">City</label>
+                                        <select
+                                            class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             <option value="">a</option>
                                         </select>
                                     </div>
                                     <div class="md:col-span-6 lg:col-span-3">
-                                        <label for="zipCode" class="block mb-3 font-medium text-gray-700 text-md">Zip Code</label>
-                                        <input placeholder="Kode pos" type="text" name="zipCode" id="zipCode" autocomplete="zipCode" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                        <label for="zipCode" class="block mb-3 font-medium text-gray-700 text-md">Zip
+                                            Code</label>
+                                        <input placeholder="Kode pos" type="text" name="zipCode" id="zipCode"
+                                            autocomplete="zipCode"
+                                            class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                     </div>
                                 </div>
                             </div>
                             <div class="px-4 py-3 text-right sm:px-6">
-                                <a href="{{ route('dashboard.user.index') }}" class="inline-flex justify-center px-4 py-2 mr-4 text-sm font-medium text-gray-700 bg-white border border-gray-600 rounded-lg shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
+                                <a href="{{ route('dashboard.user.index') }}"
+                                    class="inline-flex justify-center px-4 py-2 mr-4 text-sm font-medium text-gray-700 bg-white border border-gray-600 rounded-lg shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
                                     Back
                                 </a>
                                 <button type="submit"
