@@ -45,7 +45,7 @@ class CartController extends Controller
 
     public function destroy($id)
     {
-        $this->cartDelete = Cart::where('id_cart', $id);
+        $this->cartDelete = Cart::where('id', $id);
 
         $this->cartDelete->delete();
 

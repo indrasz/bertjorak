@@ -81,13 +81,17 @@
                                                 class="block mb-3 font-medium text-gray-700 text-md">Thumbnail Product
                                                 Feeds</label>
 
-                                            <input placeholder="Thumbnail 1" type="file" name="photos[]" id="photos"
+                                            @include(
+                                                'pages.dashboard.product.preview'
+                                            )
+
+                                            {{-- <input placeholder="Thumbnail 1" type="file" name="photos[]" id="photos"
                                                 autocomplete="photos"
                                                 class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
 
                                             @if ($errors->has('photos[]'))
                                                 <p class="text-red-500 mb-3 text-sm">{{ $errors->first('photos') }}</p>
-                                            @endif
+                                            @endif --}}
 
                                             <div id="newThumbnailRow"></div>
 

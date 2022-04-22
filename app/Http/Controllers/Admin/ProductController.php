@@ -145,16 +145,6 @@ class ProductController extends Controller
             File::delete('storage/products/images/' . $value);
         }
 
-        // $dataUpdate->update([
-        //     // 'images' => json_encode($data),
-        //     'title' => $request->name,
-        //     'price' => $request->price,
-        //     'desc' => $request->desc,
-        //     'stock' => $request->stock,
-        //     'size' => $request->size,
-        //     'weight' => $request->weight,
-        // ]);
-
         return redirect()->route('dashboard.product.index');
     }
 
@@ -169,7 +159,7 @@ class ProductController extends Controller
         $data = Product::findOrFail($id);
 
         foreach (json_decode($data->images, true) as $image => $value) {
-            File::delete('storage/products/images/' . $value);
+            File::delete(storage_path() . '/app/public/products/images/' . $value);
         }
 
         $data->delete();

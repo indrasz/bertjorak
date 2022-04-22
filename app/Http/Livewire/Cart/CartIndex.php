@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Cart;
 
-use App\Models\Alamat;
 use App\Models\Cart;
 use Auth;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
@@ -12,47 +11,37 @@ class CartIndex extends Component
 {
     public $authId, $carts;
 
-    public $qty = 10;
+    public $cost;
+    public $pilihHarga;
 
-    public $city_id = '';
+    public $goals;
+    public $goal;
 
-    public $count = 1;
-    public $userId, $cartCounter;
-
-    public $alamatKantor, $alamatKantorId;
-    public $alamatK;
-
-    public $calPrice;
-    public $result;
-
-    public function increment()
-    {
-        $this->count += 1;
-    }
-
-    public function decrement()
-    {
-        if ($this->count > 1) {
-            $this->count -= 1;
-        } else {
-            session()->flash('info', "You cannot have negative value in counter");
-        }
-    }
+    public $pilihKurir;
+    public $jenisKurir;
+    public $ongkirResult;
+    public $hargaOngkir;
 
     public function mount()
     {
-        $this->alamatKantor = Alamat::select('city_id')->join('users', 'alamats.id_user', '=', 'users.id')->where('id_user', 1)->get();
 
-        $this->alamatKantorId = $this->alamatKantor;
+        // dd($this->alamatKantor);
+        // $this->alamatKantorId = $this->alamatKantor;
 
-        $cost = RajaOngkir::ongkosKirim([
-            'origin' => 398,
+        $this->cost = RajaOngkir::ongkosKirim([
+            'origin' => 255,
             'originType' => "city",
             'destination' => 398,
             'destinationType' => "city",
             'weight' => 1300,
             'courier' => 'jne:pos:tiki',
         ])->get();
+
+        $this->pilihHarga = $this->pilihKurir;
+
+        // $json = json_decode($this->cost, true);
+
+        //dd($this->cost);
 
     }
 
@@ -61,13 +50,18 @@ class CartIndex extends Component
         $this->authId = Auth::user()->id;
         $this->carts = Cart::where('id_user', $this->authId)->join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->get();
 
-        // $this->result = Cart::where('id_user', $this->authId)->join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->select('price', 'jumlah')->get();
+        // $this->result = $this->carts->get('jumlah');
 
         return view('livewire.cart.cart-index');
     }
 
     public function changeEvent($value)
     {
-        $this->city_id = $value;
+        $this->pilihKurir = $value;
+
+        $this->jenisKurir = $p;
+
+        $this->ongkirResult = $harga;
+
     }
 }
