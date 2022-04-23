@@ -33,16 +33,17 @@ Route::resource('product/detail', DetailController::class);
 // Cart
 Route::resource('cart', CartController::class);
 
+// Dashboard Admin
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
-        // Route::resource('user', UserController::class)->only([
-        //     'index', 'create', 'store', 'destroy', 'show',
-        // ]);
+        Route::resource('user', UserController::class)->only([
+            'index', 'create', 'store', 'destroy', 'show',
+        ]);
 
         Route::resource('user', UserController::class);
         Route::resource('address', AlamatController::class);
-        Route::resource('product', ProductController::class);
+        Route::resource('product', ProductController::class)->middleware('is_admin');
         Route::resource('transaction', TransactionController::class);
     });
 });

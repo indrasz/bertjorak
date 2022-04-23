@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -16,11 +17,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $count = Product::count();
+        if (Auth::user()->hasRole('admin')) {
+            $count = Product::count();
 
-        $data = Product::all();
+            $data = Product::all();
 
-        return view('pages.dashboard.product.index')->with('count', $count)->with('data', $data);
+            return view('pages.dashboard.product.index')->with('count', $count)->with('data', $data);
+        } else {
+            return view('errors.404');
+        }
+
     }
 
     /**
