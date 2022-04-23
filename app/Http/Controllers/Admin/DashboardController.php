@@ -17,7 +17,7 @@ class DashboardController extends Controller
 
             return view('pages.dashboard.index')->with('countCustomer', $countCustomer);
         } elseif (Auth::user()->hasRole('buyer')) {
-            return view('pages.store.dashboard-user.transaction.index');
+            return view('pages.store.dashboard-user.index');
         } else {
             return view('auth.login');
         }
