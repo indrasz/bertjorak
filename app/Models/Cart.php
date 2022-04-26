@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'id_cart';
+
+    protected $guarded = [];
 }

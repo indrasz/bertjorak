@@ -19,7 +19,7 @@ class DashboardController extends Controller
         } elseif (Auth::user()->hasRole('buyer')) {
             return view('pages.store.dashboard-user.index');
         } else {
-            return view('auth.login');
+            return route('login');
         }
     }
 }

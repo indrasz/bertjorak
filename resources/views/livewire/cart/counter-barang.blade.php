@@ -4,8 +4,8 @@
             -
         </div>
     </span>
-    <input type="text" name="jumlah" class="form-control input-number text-center border-0" max="100"
-        value="{{ $count }}" />
+    <input type="text" name="jumlah" class="form-control input-number text-center border-0"
+        max="{{ $maxProduct->stock }}" value="{{ $count }}" />
     <span class="input-group-btn">
         <div wire:click="increment" class="btn btn-add pb-3 px-1">
             +

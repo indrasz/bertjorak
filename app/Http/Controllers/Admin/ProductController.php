@@ -26,7 +26,6 @@ class ProductController extends Controller
         } else {
             return view('errors.404');
         }
-
     }
 
     /**

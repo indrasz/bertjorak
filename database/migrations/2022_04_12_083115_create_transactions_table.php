@@ -15,9 +15,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->string('id_transaction')->primary();
+            $table->string('status');
             $table->foreignId('id_buyer')->constrained('users', 'id');
-            $table->foreignId('id_product')->constrained('products', 'id_product');
-            $table->timestamp('date_transaction');
+            $table->string('id_product');
+            $table->mediumText('notes')->nullable();
+            $table->timestamp('date_transaction')->nullable();
+            $table->timestamp('date_payment')->nullable();
             $table->timestamps();
         });
     }

@@ -18,8 +18,10 @@ class is_Buyer
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->hasRole('buyer')) {
-            return $next($request);
+        if (Auth::user()) {
+            if (Auth::user()->hasRole('buyer')) {
+                return $next($request);
+            }
         } else {
             return response()->view('errors.404');
         }

@@ -1,4 +1,4 @@
-@extends('layouts.profile')
+@extends('layouts.app')
 
 @section('title', ' Dashboard')
 
@@ -64,51 +64,54 @@
 
                     </div>
                     <div class="p-6 mt-8 bg-white rounded-xl">
-                    <div>
-                        <h2 class="mb-1 text-xl font-semibold">
-                            My Address
-                        </h2>
-                        <p class="text-sm text-gray-400">
-                            3 Total Address
-                        </p>
+                        <div>
+                            <h2 class="mb-1 text-xl font-semibold">
+                                My Address
+                            </h2>
+                            <p class="text-sm text-gray-400">
+                                3 Total Address
+                            </p>
+                        </div>
+                        <table class="w-full mt-4" aria-label="Table">
+                            <thead>
+                                <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
+                                    <th class="py-4" scope="">Name</th>
+                                    <th class="py-4" scope="">Address</th>
+                                    <th class="py-4" scope="">Province</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white">
+                                <tr class="text-gray-700">
+                                    <td class="w-1/3 px-1 py-5">
+                                        <div class="flex items-center text-sm">
+                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
+                                                <img class="object-cover w-full h-full rounded-full"
+                                                    src="https://randomuser.me/api/portraits/men/2.jpg" alt=""
+                                                    loading="lazy" />
+                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-black">Siri Leaf</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="w-2/4 px-1 py-5">
+                                        <div class="flex items-center text-sm">
+                                            <div>
+                                                <p class="font-medium text-black">
+                                                    Design WordPress E-Commerce Modules
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-1 py-5 text-xs text-green-500">
+                                        Kab Bandung
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <table class="w-full mt-4" aria-label="Table">
-                        <thead>
-                            <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
-                                <th class="py-4" scope="">Name</th>
-                                <th class="py-4" scope="">Address</th>
-                                <th class="py-4" scope="">Province</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white">
-                            <tr class="text-gray-700">
-                                <td class="w-1/3 px-1 py-5">
-                                    <div class="flex items-center text-sm">
-                                        <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                            <img class="object-cover w-full h-full rounded-full" src="https://randomuser.me/api/portraits/men/2.jpg" alt="" loading="lazy" />
-                                            <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-black">Siri Leaf</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="w-2/4 px-1 py-5">
-                                    <div class="flex items-center text-sm">
-                                        <div>
-                                            <p class="font-medium text-black">
-                                                Design WordPress E-Commerce Modules
-                                            </p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-1 py-5 text-xs text-green-500">
-                                    Kab Bandung
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
                 </main>
                 <aside class="p-4 lg:col-span-5 md:col-span-12 md:pt-0">
                     <div

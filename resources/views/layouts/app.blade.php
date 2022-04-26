@@ -5,7 +5,7 @@
 
     @include('includes.dashboard.meta')
 
-    <title>@yield('title') | Let's Camv</title>
+    <title>@yield('title') | {{ Auth::user()->name }}</title>
 
     @stack('before-style')
 

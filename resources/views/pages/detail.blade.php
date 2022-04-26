@@ -18,128 +18,174 @@
         </div>
     </section>
 
+    {{-- Notification Alert --}}
+    {{-- <div class="alert alert-primary" role="alert">
+        Barang berhasil ditambahkan lihat <a href="/cart" class="alert-link"> keranjang belanja anda</a>.
+    </div> --}}
+
     @foreach ($data as $d)
-        <section class="w-100 h-100 detail-product">
-            <div class="container mt-4 pb-5">
-                <div class="row">
-                    <div class="col-12 col-lg-8 ">
-                        <div class="card-product p-4">
-                            <?php $property_images = json_decode($d->images); ?>
-                            <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
-                                class="w-100" alt="">
-                            <div class="carousel pt-2"
-                                data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
+        <form action="{{ route('cart.store') }}" method="POST">
+            @csrf
 
-                                @foreach (json_decode($d->images, true) as $image)
-                                    <img src="{{ asset('/storage/products/images/' . $image) }}"
-                                        class="w-25 img-thumbnail" alt="">
-                                @endforeach
-                            </div>
+            <input type="text" name="idProduct" id="idProduct" value="{{ $d->id_product }}" hidden>
+            <section class="w-100 h-100 detail-product">
+                <div class="container mt-4 pb-5">
+                    <div class="row">
+                        <div class="col-12 col-lg-8 ">
+                            <div class="card-product p-4">
 
-                        </div>
-                    </div>
+                                @php
+                                    $property_images = json_decode($d->images);
+                                @endphp
+                                <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
+                                    class="w-75" alt="" id="imgDisp">
 
-                    <div class="col-12 col-lg-4 ">
-                        <div class="card-detail-product py-4 px-4 mt-4">
-                            <div class="product-name ms-2 ps-2 mt-3">
-                                {{ $d->title }}
-                            </div>
+                                <div class="carousel pt-2"
+                                    data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
 
-                            <div class="price-product mt-lg-2 ms-2 ps-2 ">@currency($d->price)</div>
-
-                            <div class="stock-product mt-lg-2 ms-2 ps-2 ">Stok : {{ $d->stock }}</div>
-
-                            <div class="desc-product mt-3 px-3">
-                                {{ $d->desc }}
-                            </div>
-
-                            <div class="chose-size mt-3 px-3">
-                                Pilih Ukuran :
-                            </div>
-
-                            <div class="d-flex flex-row mt-3 px-3">
-                                @foreach (json_decode($d->size, true) as $ukuran)
-                                    @foreach ($ukuran as $u)
-                                        <label class="me-3 " for="{{ $u }}">
-                                            <input class="d-none b" type="radio" id="{{ $u }}"
-                                                name="sizeSelected" value="{{ $u }}">
-                                            <div class="detail-size-card justify-content-center">
-                                                <div class="text-size m-0">{{ $u }}</div>
-                                            </div>
-                                        </label>
+                                    @foreach (json_decode($d->images, true) as $image)
+                                        <img src="{{ asset('/storage/products/images/' . $image) }}"
+                                            class="w-25 img-thumbnail"
+                                            onclick="changeImage('{{ asset('/storage/products/images/' . $image) }}')"
+                                            alt="">
                                     @endforeach
-                                @endforeach
+                                </div>
+
                             </div>
-
-
-                            <a href="{{ route('dashboard.product.edit', $d->id_product) }}">
-                                <button type="submit" class="btn btn-add-cart d-inline-block w-100 p-2 mt-4">
-                                    Edit Product
-                                </button>
-                            </a>
-
                         </div>
+
+                        <div class="col-12 col-lg-4">
+                            <div class="card-detail-product py-4 px-4 mt-4">
+                                <div class="product-name ms-2 ps-2 mt-3">
+                                    {{ $d->title }}
+                                </div>
+
+                                <div class="price-product mt-lg-2 ms-2 ps-2 ">@currency($d->price)</div>
+
+                                @if ($d->stock >= 10)
+                                    <div class="stock-product mt-lg-2 ms-2 ps-2">Stok : {{ $d->stock }}</div>
+                                @else
+                                    <div class="stock-product mt-lg-2 ms-2 ps-2 text-danger">Stok : {{ $d->stock }}
+                                    </div>
+                                @endif
+
+                                <div class="desc-product mt-3 px-3">
+                                    {{ $d->desc }}
+                                </div>
+
+                                <div class="chose-size mt-3 px-3">
+                                    Jumlah Barang :
+                                </div>
+                                <livewire:cart.counter-barang :maxProduct="$d" />
+
+                                <div class="chose-size mt-3 px-3">
+                                    Pilih Ukuran :
+                                </div>
+
+                                <div class="d-flex flex-row mt-3 px-3">
+                                    @php
+                                        $ukuranConvert = json_decode($d->size);
+                                    @endphp
+                                    @forelse ($ukuranConvert as $u)
+                                        @foreach ($u as $a)
+                                            <label class="me-3 " for="{{ $a }}">
+                                                <input class="d-none b" type="radio" id="{{ $a }}"
+                                                    name="sizeSelected" value="{{ $a }}">
+                                                <div class="detail-size-card justify-content-center">
+                                                    <div class="text-size m-0">{{ $a }}</div>
+                                                </div>
+                                            </label>
+                                        @endforeach
+                                    @empty
+                                        <h5>Tidak ada ukuran yang tersedia</h5>
+                                    @endforelse
+                                </div>
+
+
+                                <a href="{{ route('dashboard.product.edit', $d->id_product) }}"
+                                    class="btn btn-add-cart d-inline-block w-100 p-2 mt-4">
+                                    Edit Product
+                                </a>
+
+                            </div>
+                        </div>
+
+                        {{-- <div class="col-md-12 ">
+                            <div class="card-detail-product py-4 px-4 mt-4">
+                                <div class="product-name ms-2 ps-2 mt-3">
+                                    {{ $d->title }}
+                                </div>
+
+                                <button type="submit" class="btn btn-add-cart d-inline-block w-100 p-2 mt-4">
+                                    Add to cart
+                                </button>
+                            </div>
+                        </div> --}}
+
+                        <style>
+                            .detail-product .card-detail-product {
+                                box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
+                                border-radius: 15px;
+                                background-color: #ffffff;
+                            }
+
+                            .detail-product .card-detail-product .product-name {
+                                font: 600 1.50rem/1.90rem "Poppins", sans-serif;
+                            }
+
+                            .detail-product .card-detail-product .desc-product {
+                                color: #ADB2B8;
+                            }
+
+                            .detail-product .card-detail-product .price-product {
+                                font: 500 1.25rem/1.90rem "Poppins", sans-serif;
+                                color: #121213;
+                            }
+
+                            .detail-product .card-detail-product .stock-product {
+                                font: 400 1rem/1.90rem "Poppins", sans-serif;
+                            }
+
+                            .detail-product .card-detail-product .btn-add-cart {
+                                background-color: var(--dull-purple);
+                                color: #fff;
+                                font: 600 1rem/1.90rem "Poppins", sans-serif;
+                            }
+
+                            .detail-product input[type="radio"]:checked+.detail-size-card {
+                                border: 2px solid var(--dull-purple);
+                                color: var(--dull-purple);
+                                width: 50px;
+                                text-align: center;
+                                background-color: rgba(0, 186, 255, 0.05);
+                            }
+
+                            .detail-product .detail-size-card {
+                                border: 2px solid #000000;
+                                border-radius: 6px;
+                                width: 50px;
+                                text-align: center;
+                                font-size: 17px;
+                            }
+
+                            /* .detail-product .detail-size-card #icon-check{
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    transition: all 0.1s linear;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 1;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                } */
+
+                        </style>
                     </div>
-
-                    <style>
-                        .detail-product .card-detail-product {
-                            box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
-                            border-radius: 15px;
-                            background-color: #ffffff;
-                        }
-
-                        .detail-product .card-detail-product .product-name {
-                            font: 600 1.50rem/1.90rem "Poppins", sans-serif;
-                        }
-
-                        .detail-product .card-detail-product .desc-product {
-                            color: #ADB2B8;
-                        }
-
-                        .detail-product .card-detail-product .price-product {
-                            font: 500 1.25rem/1.90rem "Poppins", sans-serif;
-                            color: #121213;
-                        }
-
-                        .detail-product .card-detail-product .stock-product {
-                            font: 400 1rem/1.90rem "Poppins", sans-serif;
-                        }
-
-                        .detail-product .card-detail-product .btn-add-cart {
-                            background-color: var(--dull-purple);
-                            color: #fff;
-                            font: 600 1rem/1.90rem "Poppins", sans-serif;
-                        }
-
-                        .detail-product input[type="radio"]:checked+.detail-size-card {
-                            border: 2px solid var(--dull-purple);
-                            color: var(--dull-purple);
-                            width: 50px;
-                            text-align: center;
-                            background-color: rgba(0, 186, 255, 0.05);
-                        }
-
-                        .detail-product .detail-size-card {
-                            border: 2px solid #000000;
-                            border-radius: 6px;
-                            width: 50px;
-                            text-align: center;
-                            font-size: 17px;
-                        }
-
-                        /* .detail-product .detail-size-card #icon-check{
-                                                                                                                                                                                                        transition: all 0.1s linear;
-                                                                                                                                                                                                        opacity: 0;
-                                                                                                                                                                                                    }
-
-                                                                                                                                                                                                    .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
-                                                                                                                                                                                                        opacity: 1;
-                                                                                                                                                                                                    } */
-
-                    </style>
                 </div>
-            </div>
-        </section>
+            </section>
+        </form>
+
+        @php
+            $getId = $d->id_product;
+        @endphp
     @endforeach
 
     <section class="related-product w-100 h-100">
@@ -151,31 +197,37 @@
                 data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
 
                 @foreach ($dataAll as $all)
-                    <div class="card-related-carousel">
-
-                        <?php $property_images = json_decode($all->images); ?>
-                        <div class="image-placeholder">
-                            <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}" alt="images" />
-                        </div>
-
-                        <div class="card-details">
-                            <a href="{{ route('detail.show', $all->id_product) }}" style="text-decoration: none;">
-                                <div class="caption">{{ $all->title }}</div>
-                            </a>
-                            <span class="sub-caption">150m</span>
-                        </div>
-                        <div class="bottom-text d-flex flex-row justify-content-between">
-                            <div class="price-content flex-grow-1">
-                                <span>Start from</span> <span class="price">200k</span>
+                    @if ($all->id_product != $getId)
+                        <div class="card-related-carousel">
+                            @php
+                                $property_images = json_decode($all->images);
+                            @endphp
+                            <div class="image-placeholder">
+                                <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}" alt="images" />
                             </div>
-                            <div class="rating d-flex align-items-center">
-                                <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
-                                    alt="star" />
-                                <span>4.8</span>
+
+                            <div class="card-details">
+                                <a href="{{ route('detail.show', $all->id_product) }}" style="text-decoration: none;">
+                                    <div class="caption">{{ $all->title }}</div>
+                                </a>
+                                <span class="sub-caption">@currency($all->price)</span>
                             </div>
+
+
+                            {{-- <div class="bottom-text d-flex flex-row justify-content-between">
+                                <div class="price-content flex-grow-1">
+                                    <span>Start from</span> <span class="price">200k</span>
+                                </div>
+                                <div class="rating d-flex align-items-center">
+                                    <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
+                                        alt="star" />
+                                    <span>4.8</span>
+                                </div>
+                            </div> --}}
                         </div>
-                    </div>
+                    @endif
                 @endforeach
+
 
             </div>
         </div>
@@ -254,6 +306,13 @@
             }
 
         </style>
+
+        <script>
+            function changeImage(imgName) {
+                image = document.getElementById('imgDisp');
+                image.src = imgName;
+            }
+        </script>
     </section>
 
     {{-- Footer --}}

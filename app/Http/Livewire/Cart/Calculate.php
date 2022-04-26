@@ -3,24 +3,24 @@
 namespace App\Http\Livewire\Cart;
 
 use App\Models\Cart;
+use App\Models\User;
 use Auth;
-use Illuminate\Support\Facades\DB;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use Livewire\Component;
 
 class Calculate extends Component
 {
-    // Calculate
-    public $auth;
-    public $cart;
-    public $data;
-
     // Raja Ongkir
-    public $adminCityId;
-    public $userCityId;
+    public $pilihKurir, $jenisKurir, $hargaOngkir, $cartsPrice;
 
-    public $prov;
-    public $kotaId;
+    // Get Alamat Admin
+    public $adminAlamat, $getAlamatKantor;
+
+    // Get Alamat Buyer
+    public $authBuyer, $alamatBuyer, $getAlamatBuyer;
+
+    // Get Weight
+    public $getWeight;
 
     public function mount()
     {
@@ -30,42 +30,36 @@ class Calculate extends Component
             ->join('products', 'products.id_product', '=', 'carts.id_product')
             ->get();
 
-        $this->userCityId = DB::table('address')->join('users', 'users.id', '=', 'address.id_user')->where('address.id_user', $this->auth)->get('city');
+        // Get Alamat Admin
+        $this->adminAlamat = User::whereHas('roles', function ($q) {
+            $q->where('name', 'admin');
+        })->get();
+        foreach ($this->adminAlamat as $key => $value) {
+            $this->getAlamatKantor = $value->id_city;
+        }
 
-        $this->data = RajaOngkir::ongkosKirim([
-            'origin' => 9,
+        // Get Alamat Buyer
+        $this->authBuyer = Auth::user()->id;
+        $this->alamatBuyer = User::find($this->authBuyer)->whereHas('roles', function ($q) {
+            $q->where('name', 'admin');
+        })->get();
+        foreach ($this->alamatBuyer as $key => $value) {
+            $this->getAlamatBuyer = $value->id_city;
+        }
+
+        // Get Weight
+        foreach ($this->cart as $keyWeight) {
+            $this->getWeight = $keyWeight->weight;
+        }
+
+        $this->cost = RajaOngkir::ongkosKirim([
+            'origin' => $this->getAlamatKantor,
             'originType' => "city",
-            'destination' => 398,
+            'destination' => $this->getAlamatBuyer,
             'destinationType' => "city",
-            'weight' => 1300,
+            'weight' => $this->getWeight,
             'courier' => 'jne:pos:tiki',
         ])->get();
-
-        // dd($this->data);
-
-        // $this->data = RajaOngkir::provinsi()->all();
-
-        // $this->kota = $this->prov;
-
-        // dd($this->kota);
-
-        // $this->kota = RajaOngkir::kota()->dariProvinsi($this->prov)->get();
-
-        // dd($this->userCityId);
-        // dd($this->data[0]['costs'][2]['cost'][0]['value']);
-
-        // if ($this->jenisPilih) {
-        //     # code...
-        // }
-
-        // Calculate
-        // foreach ($this->cartList as $key) {
-        //     dd($key);
-        // }
-
-        // $this->qty = $this->qty;
-        // $this->result = $this->cartList;
-
     }
 
     public function render()

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\Transaction;
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -35,7 +39,31 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $authId = Auth::user()->id;
+        $getIdProduct = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->get();
+
+        foreach ($getIdProduct as $key) {
+            $as = $key->id_product;
+            $getProduct[] = $as;
+            dd($getProduct);
+        }
+
+        $transaction = new Transaction();
+
+        $transaction->id_transaction = "BRJ - " . time() . $authId;
+        $transaction->status = "Pending";
+        $transaction->id_buyer = $authId;
+        $transaction->id_product = json_encode($getProduct);
+        $transaction->notes = $request->notes;
+        $transaction->date_transaction = Carbon::now();
+
+        $transaction->save();
+
+        // $getIdProduct = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->get();
+        // foreach ($getIdProduct as $key => $value) {
+        //     $ta[] = $value;
+        //     dd($ta);
+        // }
     }
 
     /**

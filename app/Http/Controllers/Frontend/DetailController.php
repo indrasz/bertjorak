@@ -21,9 +21,13 @@ class DetailController extends Controller
 
         $dataAll = Product::all();
 
-        if (Auth::user()->hasRole('admin')) {
-            return view('pages.detail')->with('count', $count)->with('data', $data)->with('dataAll', $dataAll);
-        } elseif (Auth::user()->hasRole('buyer')) {
+        if (Auth::user()) {
+            if (Auth::user()->hasRole('admin')) {
+                return view('pages.detail')->with('count', $count)->with('data', $data)->with('dataAll', $dataAll);
+            } elseif (Auth::user()->hasRole('buyer')) {
+                return view('pages.store.detail')->with('count', $count)->with('data', $data)->with('dataAll', $dataAll);
+            }
+        } else {
             return view('pages.store.detail')->with('count', $count)->with('data', $data)->with('dataAll', $dataAll);
         }
     }
