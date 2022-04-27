@@ -13,7 +13,7 @@ class CartController extends Controller
     {
         if (Auth::user()) {
             $authId = Auth::user()->id;
-            $cartList = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->get();
+            $cartList = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->where('status', 'Cart')->get();
 
             return view('pages.store.cart')->with('carts', $cartList);
         } else {
@@ -28,6 +28,7 @@ class CartController extends Controller
         $cart = new Cart();
 
         $cart->id_user = $idUser;
+        $cart->status = "Cart";
         $cart->id_product = $request->idProduct;
         $cart->jumlah = $request->jumlah;
         $cart->sizeSelected = $request->sizeSelected;

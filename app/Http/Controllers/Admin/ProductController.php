@@ -17,12 +17,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->hasRole('admin')) {
-            $count = Product::count();
+        if (Auth::user()) {
+            if (Auth::user()->hasRole('admin')) {
+                $count = Product::count();
 
-            $data = Product::all();
+                $data = Product::all();
 
-            return view('pages.dashboard.product.index')->with('count', $count)->with('data', $data);
+                return view('pages.dashboard.product.index')->with('count', $count)->with('data', $data);
+            }
         } else {
             return view('errors.404');
         }

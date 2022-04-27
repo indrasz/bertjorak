@@ -185,73 +185,75 @@
                     </div>
 
                     <div class="col-12 col-lg-4">
-                        <div class="card-summary px-lg-4 py-3 mb-3">
-                            <div class="caption-summary mb-3">
-                                Informasi Pembayaran
-                            </div>
-                            @if (count($carts) >= 1)
-                                @php
-                                    $totalPrice = 0;
-                                @endphp
-                                @foreach ($carts as $c)
-                                    <div class="preview-summary">
-                                        {{ $c->title }} ({{ $c->jumlah }} item)
-
-                                        <span class="float-end">
-                                            @currency($c->price * $c->jumlah)
-                                        </span>
-                                    </div>
-                                    @php
-                                        $totalHargaItem = $c->price * $c->jumlah;
-                                        $totalPrice += $totalHargaItem;
-                                    @endphp
-                                @endforeach
-                            @else
-                                <p class="text-center opacity-50">Belum ada barang ditambahkan.</p>
-                            @endif
-
-                            @if (count($carts) >= 1)
-                                <livewire:cart.calculate :cartsPrice="$totalPrice" />
-                            @endif
-                        </div>
-
                         <form action="{{ route('dashboard.transaction.store') }}" method="POST">
                             @csrf
-                            <div class="card-summary px-lg-4 px-2 py-3 mb-3">
+                            <div class="card-summary px-lg-4 py-3 mb-3">
                                 <div class="caption-summary mb-3">
-                                    Rincian Pengiriman
+                                    Informasi Pembayaran
                                 </div>
-                                @foreach ($carts as $c)
-                                    <h4>{{ $c->jumlah }}</h4>
-                                @endforeach
+                                @if (count($carts) >= 1)
+                                    @php
+                                        $totalPrice = 0;
+                                    @endphp
+                                    @foreach ($carts as $c)
+                                        <div class="preview-summary">
+                                            {{ $c->title }} ({{ $c->jumlah }} item)
 
-                                {{-- Alamat Pembeli --}}
-                                <label for="alamat" class="mb-1">Alamat Anda</label>
-                                <div class="input-group w-100 mx-auto mb-2">
+                                            <span class="float-end">
+                                                @currency($c->price * $c->jumlah)
+                                            </span>
+                                        </div>
+                                        @php
+                                            $totalHargaItem = $c->price * $c->jumlah;
+                                            $totalPrice += $totalHargaItem;
+                                        @endphp
+                                    @endforeach
+                                @else
+                                    <p class="text-center opacity-50">Belum ada barang ditambahkan.</p>
+                                @endif
 
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and
-                                            make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                </div>
-
-
-
-                                {{-- Catatan Dari Pembeli --}}
-                                <label for="notes" class="mb-1">Catatan</label>
-                                <div class="input-group w-100 mx-auto mb-2">
-
-                                    <textarea name="notes" id="notes" class="form-control input-shipping-details" style="resize: none;" cols="10"
-                                        rows="5"></textarea>
-                                </div>
-
-                                <button type="submit" class="btn btn-confirm d-inline-block w-100 p-2 mt-4">
-                                    Checkout Now
-                                </button>
-
+                                @if (count($carts) >= 1)
+                                    <livewire:cart.calculate :cartsPrice="$totalPrice" />
+                                @endif
                             </div>
+
+                            @if (count($carts) >= 1)
+                                <div class="card-summary px-lg-4 px-2 py-3 mb-3">
+                                    <div class="caption-summary mb-3">
+                                        Rincian Pengiriman
+                                    </div>
+                                    @foreach ($carts as $c)
+                                        <input type="text" name="idCart[]" value="{{ $c->id_cart }}" hidden>
+                                    @endforeach
+
+                                    {{-- Alamat Pembeli --}}
+                                    <label for="alamat" class="mb-1">Alamat Anda</label>
+                                    <div class="input-group w-100 mx-auto mb-2">
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                                    </div>
+
+
+
+                                    {{-- Catatan Dari Pembeli --}}
+                                    <label for="notes" class="mb-1">Catatan</label>
+                                    <div class="input-group w-100 mx-auto mb-2">
+
+                                        <textarea name="notes" id="notes" class="form-control input-shipping-details" style="resize: none;" cols="10"
+                                            rows="5"></textarea>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-confirm d-inline-block w-100 p-2 mt-4">
+                                        Checkout Now
+                                    </button>
+
+                                </div>
+                            @endif
                         </form>
                     </div>
                 </div>

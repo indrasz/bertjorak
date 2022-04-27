@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Transaction;
 use Auth;
 use Carbon\Carbon;
@@ -18,7 +19,21 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard.transaction.index');
+        $authId = Auth::user()->id;
+        $orderData = Order::where('id_buyer', $authId)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->get();
+
+        // foreach ($orderData as $key => $value) {
+        //     $totalCart = json_decode($value['id_cart']);
+        // }
+        //dd($orderData);
+        // //join('users', 'carts.id_user', '=', 'users.id')
+        // $as = Order::all();
+        // foreach ($as as $key => $value) {
+        //     $ka = $value->join('transactions', 'orders.id', '=', 'transactions.id_order')->get();
+        //     dd($ka);
+        // }
+
+        return view('pages.dashboard.transaction.index')->with('orderData', $orderData);
     }
 
     /**
@@ -39,31 +54,83 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->pilihKurir);
         $authId = Auth::user()->id;
-        $getIdProduct = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->get();
 
-        foreach ($getIdProduct as $key) {
-            $as = $key->id_product;
-            $getProduct[] = $as;
-            dd($getProduct);
-        }
+        $id_cart = $request->idCart;
 
         $transaction = new Transaction();
 
-        $transaction->id_transaction = "BRJ - " . time() . $authId;
         $transaction->status = "Pending";
-        $transaction->id_buyer = $authId;
-        $transaction->id_product = json_encode($getProduct);
-        $transaction->notes = $request->notes;
         $transaction->date_transaction = Carbon::now();
 
-        $transaction->save();
+        if ($transaction->save()) {
 
-        // $getIdProduct = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->get();
-        // foreach ($getIdProduct as $key => $value) {
-        //     $ta[] = $value;
-        //     dd($ta);
+            $order = new Order();
+
+            $order->id_order = "BRJ - " . time() . $authId;
+            $order->id_buyer = $authId;
+            foreach ($id_cart as $key => $value) {
+                $getIdCart[] = $value;
+                $order->id_cart = json_encode($getIdCart);
+            }
+            $order->id_transaction = $transaction->id_transaction;
+            $order->date_order = Carbon::now();
+
+            if ($order->save()) {
+                foreach ($id_cart as $key => $value) {
+                    $cartUpdate = Cart::where('id_cart', $value)->update([
+                        'status' => 'Sukses',
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->back();
+
+        // $id_cart = $request->idCart;
+        // foreach ($id_cart as $key => $value) {
+        //     $cartDelete = Cart::where('id_cart', $value);
+
+        //     $cartDelete->delete();
         // }
+
+        // $data = Order::create([
+        //     'jumlah' => 12,
+        // ]);
+
+        // $order = new Order();
+
+        // $order->id_order = "BRJ - " . time() . $authId;
+        // $order->date_order = Carbon::now();
+
+        // $order->save();
+
+        // $getIdLastOrder = $order->id;
+
+        // $id_cart = $request->idCart;
+        // foreach ($id_cart as $key => $valueIdCart) {
+        //     $getDataCart = Cart::where('id_cart', $valueIdCart)->get();
+
+        //     foreach ($getDataCart as $key => $valueData) {
+        //         Cart::where('id_cart', $valueIdCart)->update([
+        //             'status' => 'Sukses',
+        //         ]);
+
+        //         $transaction = new Transaction();
+
+        //         $transaction->status = "Pending";
+        //         $transaction->id_buyer = $authId;
+        //         $transaction->id_cart = $valueIdCart;
+        //         $transaction->id_order = $getIdLastOrder;
+        //         $transaction->notes = $request->notes;
+        //         $transaction->date_transaction = Carbon::now();
+
+        //         $transaction->save();
+        //     }
+        // }
+
+        // return redirect()->back();
     }
 
     /**

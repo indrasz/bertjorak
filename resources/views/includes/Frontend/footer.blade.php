@@ -87,7 +87,10 @@
                 <div
                     class="container-xxl p-0 mx-auto d-flex flex-column-reverse flex-lg-row justify-content-between align-items-center gap-lg-0 gap-3">
                     <nav class="text-lg-start text-center credit-font">
-                        <p>© 2021 with Bertjorak. All rights reserved.</p>
+                        @php
+                            $year = date('Y');
+                        @endphp
+                        <p>© {{ $year }} with Bertjorak. All rights reserved.</p>
                     </nav>
                     <div class="d-flex footer-icon align-items-center mb-2 mb-md-0 gap-4">
                         <a href="">

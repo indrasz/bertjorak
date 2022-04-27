@@ -14,11 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('carts', function (Blueprint $table) {
-            $table->increments('id_cart');
+            $table->id('id_cart');
             $table->foreignId('id_user')->constrained('users', 'id');
+            $table->string('status')->nullable();
             $table->foreignId('id_product')->constrained('products', 'id_product');
-            $table->integer('jumlah');
-            $table->string('sizeSelected');
+            $table->integer('jumlah')->nullable();
+            $table->string('pilihanSelected')->nullable();
+            $table->string('sizeSelected')->nullable();
             $table->mediumText('note')->nullable();
             $table->timestamps();
         });
