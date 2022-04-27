@@ -5,12 +5,12 @@ use App\Http\Controllers\Admin\ProductController;
 // Admin
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\DetailController;
 
 // Frontend
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +31,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('product/detail', DetailController::class);
 
 // Cart
-Route::resource('cart', CartController::class);
+Route::resource('cart', CartController::class)->middleware('is_buyer');
 
 // Dashboard Admin
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         ]);
 
         Route::resource('user', UserController::class);
-        Route::resource('address', AlamatController::class);
+        Route::resource('profile', ProfileController::class);
         Route::resource('product', ProductController::class)->middleware('is_admin');
         Route::resource('transaction', TransactionController::class);
     });

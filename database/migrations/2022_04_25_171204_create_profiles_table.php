@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('alamats', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_user')->constrained('users', 'id');
             $table->string('type_address', 25);
             // $table->string('country');
             $table->foreignId('id_province');
-            $table->foreignId('city_id');
+            $table->foreignId('id_city');
             // $table->string('subdistric');
             $table->string('detail_address')->nullable();
-            $table->string('zipcode');
+            $table->string('zipcode')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('address');
+        Schema::dropIfExists('profiles');
     }
 };

@@ -454,7 +454,7 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo">
                 <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
                     <li class="nav-item me-2">
-                        <a class="nav-link active" href="#">Home</a>
+                        <a class="nav-link active" href="/">Home</a>
                     </li>
                     <li class="nav-item me-2 dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"

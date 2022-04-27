@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class Transaction extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_cart';
+    protected $primaryKey = 'id_transaction';
 
     protected $guarded = [];
 }

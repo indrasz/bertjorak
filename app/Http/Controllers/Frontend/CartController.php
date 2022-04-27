@@ -12,10 +12,10 @@ class CartController extends Controller
     public function index()
     {
         if (Auth::user()) {
-            // $authId = Auth::user()->id;
-            // $carts = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->get();
+            $authId = Auth::user()->id;
+            $cartList = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->where('status', 'Cart')->get();
 
-            return view('pages.store.cart');
+            return view('pages.store.cart')->with('carts', $cartList);
         } else {
             return view('auth.login');
         }
@@ -28,6 +28,7 @@ class CartController extends Controller
         $cart = new Cart();
 
         $cart->id_user = $idUser;
+        $cart->status = "Cart";
         $cart->id_product = $request->idProduct;
         $cart->jumlah = $request->jumlah;
         $cart->sizeSelected = $request->sizeSelected;
@@ -45,7 +46,7 @@ class CartController extends Controller
 
     public function destroy($id)
     {
-        $this->cartDelete = Cart::where('id', $id);
+        $this->cartDelete = Cart::where('id_cart', $id);
 
         $this->cartDelete->delete();
 

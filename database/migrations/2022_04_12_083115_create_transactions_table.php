@@ -14,10 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->string('id_transaction')->primary();
-            $table->foreignId('id_buyer')->constrained('users', 'id');
-            $table->foreignId('id_product')->constrained('products', 'id_product');
-            $table->timestamp('date_transaction');
+            $table->id('id_transaction');
+            $table->string('status');
+            $table->mediumText('notes')->nullable();
+            $table->string('id_kurir');
+            $table->string('id_jenisKurir');
+            $table->double('totalCost');
+            $table->timestamp('date_transaction')->nullable();
+            $table->timestamp('date_payment')->nullable();
             $table->timestamps();
         });
     }

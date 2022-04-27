@@ -12,6 +12,8 @@ class Create extends Component
     public $provinces, $cities;
     public $provinceId = null;
 
+    public $edit_data;
+
     public function mount()
     {
 

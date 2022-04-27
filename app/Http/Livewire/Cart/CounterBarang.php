@@ -10,9 +10,14 @@ class CounterBarang extends Component
     public $qty;
     public $userId, $cartCounter;
 
+    public $maxProduct;
+
     public function increment()
     {
-        $this->count += 1;
+        if ($this->count < $this->maxProduct->stock) {
+            $this->count += 1;
+        }
+
     }
 
     public function decrement()

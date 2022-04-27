@@ -1,4 +1,9 @@
-<aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 overflow-y-auto bg-white md:hidden" x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150" x-transition:enter-start="opacity-0 transform -translate-x-20" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu" @keydown.escape="closeSideMenu" aria-label="aside">
+<aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 overflow-y-auto bg-white md:hidden" x-show="isSideMenuOpen"
+    x-transition:enter="transition ease-in-out duration-150"
+    x-transition:enter-start="opacity-0 transform -translate-x-20" x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
+    @keydown.escape="closeSideMenu" aria-label="aside">
 
     <div class="py-4 text-gray-500 dark:text-gray-400">
 
@@ -50,12 +55,12 @@
         </ul>
 
         <ul>
-            {{-- Address Nav --}}
+            {{-- Profile Nav --}}
             <li class="relative px-6 py-3">
 
-                @if (request()->is('dashboard/address') || request()->is('dashboard/address/*') || request()->is('dashboard/*/address') || request()->is('dashboard/*/address/*'))
+                @if (request()->is('dashboard/profile') || request()->is('dashboard/profile/*') || request()->is('dashboard/*/profile') || request()->is('dashboard/*/profile/*'))
                     <a class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 "
-                        href="{{ route('dashboard.address.index') }}">
+                        href="{{ route('dashboard.profile.index') }}">
 
 
                         <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
@@ -78,7 +83,7 @@
                         </svg>
 
 
-                        <span class="ml-4">Address</span>
+                        <span class="ml-4">Profile</span>
                         {{-- <span class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">
                         {{ auth()->user()->order_buyer()->count() }}
                     </span> --}}
@@ -86,9 +91,9 @@
                     </a>
                 @else
                     <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800"
-                        href="{{ route('dashboard.address.index') }}">
+                        href="{{ route('dashboard.profile.index') }}">
 
-                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="24" height="24" fill="white" />
                             <circle cx="10.5" cy="5.5" r="2.75" stroke="#082431" stroke-width="1.5" />
                             <path
