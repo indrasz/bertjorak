@@ -25,7 +25,7 @@
         <section class="container px-6 mx-auto mt-5">
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="col-span-12 p-4 md:pt-0">
-
+                    
                 </main>
             </div>
         </section>
