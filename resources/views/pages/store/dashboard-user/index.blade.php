@@ -41,7 +41,12 @@
                                     <img src="{{ asset('/assets/images/services-progress-icon.svg') }}" alt=""
                                         class="w-8 h-8">
                                 </div>
-                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">3</p>
+
+                                @php
+                                    $sukses = $order->where('status', '=', 'Sukses');
+                                @endphp
+
+                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($sukses) }}</p>
                                 <p class="text-sm text-left text-gray-500">
                                     Transaction <br class="hidden lg:block">
                                     Success
@@ -54,7 +59,12 @@
                                     <img src="{{ asset('/assets/images/services-completed-icon.svg') }}" alt=""
                                         class="w-8 h-8">
                                 </div>
-                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">144</p>
+
+                                @php
+                                    $pending = $order->where('status', '=', 'Pending');
+                                @endphp
+
+                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($pending) }}</p>
                                 <p class="text-sm text-left text-gray-500">
                                     Transaction <br class="hidden lg:block">
                                     Pending

@@ -19,21 +19,23 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $authId = Auth::user()->id;
-        $orderData = Order::where('id_buyer', $authId)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->get();
+        if (Auth::user()) {
+            // Admin Transaction
+            if (Auth::user()->hasRole('admin')) {
+                $orderData = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
-        // foreach ($orderData as $key => $value) {
-        //     $totalCart = json_decode($value['id_cart']);
-        // }
-        //dd($orderData);
-        // //join('users', 'carts.id_user', '=', 'users.id')
-        // $as = Order::all();
-        // foreach ($as as $key => $value) {
-        //     $ka = $value->join('transactions', 'orders.id', '=', 'transactions.id_order')->get();
-        //     dd($ka);
-        // }
+                return view('pages.dashboard.transaction.index')->with('orderData', $orderData);
+            }
+            // Buyer Transaction
+            elseif (Auth::user()->hasRole('buyer')) {
+                $authId = Auth::user()->id;
+                $orderData = Order::where('id_buyer', $authId)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->get();
 
-        return view('pages.dashboard.transaction.index')->with('orderData', $orderData);
+                return view('pages.store.dashboard-user.transaction.index')->with('orderData', $orderData);
+            }
+        } else {
+            return view('errors.404');
+        }
     }
 
     /**
@@ -54,7 +56,8 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->pilihKurir);
+        // $al = $request->pilihKurir;
+        // dd($al);
         $authId = Auth::user()->id;
 
         $id_cart = $request->idCart;
@@ -62,13 +65,18 @@ class TransactionController extends Controller
         $transaction = new Transaction();
 
         $transaction->status = "Pending";
+        $transaction->id_kurir = $request->pilihKurir;
+        $transaction->id_jenisKurir = $request->pilihJenisKurir;
+        $transaction->totalCost = $request->totalPrice;
         $transaction->date_transaction = Carbon::now();
 
         if ($transaction->save()) {
 
             $order = new Order();
 
-            $order->id_order = "BRJ - " . time() . $authId;
+            $time = time();
+            $date = date('d', $time);
+            $order->id_order = "BRJ - " . $date . rand() . $authId;
             $order->id_buyer = $authId;
             foreach ($id_cart as $key => $value) {
                 $getIdCart[] = $value;
@@ -87,50 +95,6 @@ class TransactionController extends Controller
         }
 
         return redirect()->back();
-
-        // $id_cart = $request->idCart;
-        // foreach ($id_cart as $key => $value) {
-        //     $cartDelete = Cart::where('id_cart', $value);
-
-        //     $cartDelete->delete();
-        // }
-
-        // $data = Order::create([
-        //     'jumlah' => 12,
-        // ]);
-
-        // $order = new Order();
-
-        // $order->id_order = "BRJ - " . time() . $authId;
-        // $order->date_order = Carbon::now();
-
-        // $order->save();
-
-        // $getIdLastOrder = $order->id;
-
-        // $id_cart = $request->idCart;
-        // foreach ($id_cart as $key => $valueIdCart) {
-        //     $getDataCart = Cart::where('id_cart', $valueIdCart)->get();
-
-        //     foreach ($getDataCart as $key => $valueData) {
-        //         Cart::where('id_cart', $valueIdCart)->update([
-        //             'status' => 'Sukses',
-        //         ]);
-
-        //         $transaction = new Transaction();
-
-        //         $transaction->status = "Pending";
-        //         $transaction->id_buyer = $authId;
-        //         $transaction->id_cart = $valueIdCart;
-        //         $transaction->id_order = $getIdLastOrder;
-        //         $transaction->notes = $request->notes;
-        //         $transaction->date_transaction = Carbon::now();
-
-        //         $transaction->save();
-        //     }
-        // }
-
-        // return redirect()->back();
     }
 
     /**
@@ -141,7 +105,7 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('pages.store.dashboard-user.transaction.detail');
     }
 
     /**

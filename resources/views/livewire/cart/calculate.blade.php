@@ -7,7 +7,7 @@
         @if (is_array($cost) || is_object($cost))
             <option value="none" selected>-- Pilih Kurir --</option>
             @foreach ($cost as $k => $value)
-                <option value="{{ $value['code'] }}">{{ $value['name'] }}</option>
+                <option value="{{ $value['name'] }}">{{ $value['name'] }}</option>
             @endforeach
 
         @endif
@@ -17,10 +17,10 @@
     <div class="preview-summary pt-2">
         Jenis Pengiriman
     </div>
-    <select class="form-select" wire:model="jenisKurir" name="cost" id="cost">
+    <select class="form-select" wire:model="jenisKurir" name="pilihJenisKurir" id="cost">
         <option value="none" selected>-- Pilih Jenis --</option>
         @foreach ($cost as $k => $y)
-            @if ($y['code'] == $pilihKurir)
+            @if ($y['name'] == $pilihKurir)
                 @foreach ($y['costs'] as $p)
                     <option value="{{ $p['service'] }}">{{ $p['service'] }}</option>
                 @endforeach
@@ -37,7 +37,7 @@
         <span class="p-2" wire:model="ongkirResult">
             @if (!is_array($jenisKurir) || is_object($jenisKurir))
                 @foreach ($cost as $k => $y)
-                    @if ($y['code'] == $pilihKurir)
+                    @if ($y['name'] == $pilihKurir)
                         @foreach ($y['costs'] as $p)
                             @if ($p['service'] == $jenisKurir)
                                 @foreach ($p['cost'] as $harga)
@@ -68,7 +68,7 @@
         <span>
             @if (!$hargaOngkir == null)
                 @foreach ($cost as $k => $y)
-                    @if ($y['code'] == $pilihKurir)
+                    @if ($y['name'] == $pilihKurir)
                         @foreach ($y['costs'] as $p)
                             @if ($p['service'] == $jenisKurir)
                                 @foreach ($p['cost'] as $harga)
@@ -107,6 +107,7 @@
         Total Harga Belanja
         @if (!$hargaOngkir == null)
             <span class="float-end">@currency($cartsPrice + $hargaOngkir) </span>
+            <input type="number" name="totalPrice" value="{{ $cartsPrice + $hargaOngkir }}">
         @else
             <span class="float-end">@currency(0)</span>
         @endif

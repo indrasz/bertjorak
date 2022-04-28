@@ -5,7 +5,7 @@
 
     @include('includes.dashboard.meta')
 
-    <title>@yield('title') | {{ Auth::user()->name }}</title>
+    <title>@yield('title') | Bertjorak</title>
 
     @stack('before-style')
 

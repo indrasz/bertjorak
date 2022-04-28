@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', ' Add Service')
+@section('title', ' Edit Product')
 
 @section('content')
 
@@ -88,15 +88,16 @@
                                                 <div class="p-2">
                                                     <div class="w-50 p-3" style="background-color: #eee;">
                                                         <h5>Gambar yang disimpan:</h5>
-                                                        @foreach (json_decode($d->images, true) as $u)
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <img src="{{ asset('/storage/products/images/' . $u) }}"
-                                                                        class="w-25 img-thumbnail p-1" alt="">
+                                                        @if ($d->images != null)
+                                                            @foreach (json_decode($d->images, true) as $i)
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <img src="{{ asset('/storage/products/images/' . $i) }}"
+                                                                            class="w-25 img-thumbnail p-1" alt="">
+                                                                    </div>
                                                                 </div>
-
-                                                            </div>
-                                                        @endforeach
+                                                            @endforeach
+                                                        @endif
                                                     </div>
                                                 </div>
 
@@ -161,19 +162,55 @@
                                             </div>
 
                                             <div class="col-span-6">
+                                                <label for="pilihan"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Pilihan
+                                                    Produk (optional)</label>
+
+                                                @if ($d->pilihan != null)
+                                                    <div class="p-2">
+                                                        <div class="w-50 p-3" style="background-color: #eee;">
+                                                            <h5>Ukuran yang tersedia:</h5>
+                                                            @foreach (json_decode($d->pilihan, true) as $p)
+                                                                @if ($p != null)
+                                                                    @foreach ($p as $i)
+                                                                        <h1>- {{ $i }}</h1>
+                                                                    @endforeach
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                @endif
+
+                                                <input placeholder="Warna / Tipe" type="text" name="pilihan[]" id="pilihan"
+                                                    autocomplete="pilihan"
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                    value="{{ old('pilihan[]') }}">
+
+                                                <div id="newPilihan"></div>
+
+                                                <button type="button"
+                                                    class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                                    id="addPilihan">
+                                                    Tambahkan Pilihan Yang Tersedia +
+                                                </button>
+                                            </div>
+
+                                            <div class="col-span-6">
                                                 <label for="size" class="block mb-3 font-medium text-gray-700 text-md">Size
                                                     Produk</label>
 
-                                                <div class="p-2">
-                                                    <div class="w-50 p-3" style="background-color: #eee;">
-                                                        <h5>Ukuran yang tersedia:</h5>
-                                                        @foreach (json_decode($d->size, true) as $u)
-                                                            @foreach ($u as $i)
-                                                                <h1>- {{ $i }}</h1>
+                                                @if ($d->size != null)
+                                                    <div class="p-2">
+                                                        <div class="w-50 p-3" style="background-color: #eee;">
+                                                            <h5>Ukuran yang tersedia:</h5>
+                                                            @foreach (json_decode($d->size, true) as $u)
+                                                                @foreach ($u as $i)
+                                                                    <h1>- {{ $i }}</h1>
+                                                                @endforeach
                                                             @endforeach
-                                                        @endforeach
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                @endif
 
 
                                                 <input placeholder="Size" type="text" name="size[]" id="size"
@@ -223,10 +260,18 @@
 
     <script type="text/javascript">
         // add row
+        $("#addPilihan").click(function() {
+            var html = '';
+            html +=
+                '<input placeholder="Warna / Tipe" type="text" name="pilihan[]" id="pilihan" autocomplete="pilihan" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>';
+
+            $('#newPilihan').append(html);
+        });
+
         $("#addAdvantagesRow").click(function() {
             var html = '';
             html +=
-                '<input placeholder="size" type="text" name="size[]" id="size" autocomplete="size" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>';
+                '<input placeholder="Size" type="text" name="size[]" id="size" autocomplete="size" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>';
 
             $('#newAdvantagesRow').append(html);
         });

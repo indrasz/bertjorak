@@ -12,10 +12,14 @@ class CartController extends Controller
     public function index()
     {
         if (Auth::user()) {
-            $authId = Auth::user()->id;
-            $cartList = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->where('status', 'Cart')->get();
+            if (Auth::user()->id_province != null || Auth::user()->id_city != null || Auth::user()->detail_address != null || Auth::user()->zipcode != null) {
+                $authId = Auth::user()->id;
+                $cartList = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->where('status', 'Cart')->get();
 
-            return view('pages.store.cart')->with('carts', $cartList);
+                return view('pages.store.cart')->with('carts', $cartList);
+            } else {
+                return redirect()->route('dashboard.profile.edit', Auth::user()->id);
+            }
         } else {
             return view('auth.login');
         }
@@ -33,7 +37,11 @@ class CartController extends Controller
         $cart->jumlah = $request->jumlah;
         $cart->sizeSelected = $request->sizeSelected;
 
-        $cart->save();
+        if ($cart->save()) {
+            if (URL::previous() == '/cart') {
+                return view('pages.store.cart');
+            }
+        }
 
         session()->put('success', 'Item created successfully.');
         return redirect()->back();

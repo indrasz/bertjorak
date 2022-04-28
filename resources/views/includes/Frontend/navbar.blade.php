@@ -532,8 +532,19 @@
                             <li class="nav-item me-2 dropdown">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
                                     data-bs-toggle="dropdown">
-                                    <img src="{{ asset('frontend/images/icon-user.png') }}" class="me-2"
-                                        alt="icon-user" width="45" height="45">
+                                    @php
+                                        $convertImg = json_decode(Auth::user()->avatar);
+                                    @endphp
+
+                                    @if ($convertImg == null)
+                                        <img src="{{ asset('assets/images/blank-profile-picture.png') }}"
+                                            class="me-2" alt="icon-user" width="45" height="45"
+                                            style="border-radius: 50%;">
+                                    @elseif ($convertImg != null)
+                                        <img src="{{ asset('/storage/account/' . Auth::user()->id . '/avatar/' . $convertImg) }}"
+                                            class="me-2" alt="icon-user" width="45" height="45"
+                                            style="border-radius: 50%;">
+                                    @endif
                                     {{ Auth::user()->name }}
                                 </a>
                                 <ul class="dropdown-menu" style="cursor: pointer">

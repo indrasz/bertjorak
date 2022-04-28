@@ -30,6 +30,7 @@
                                 <thead>
                                     <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
                                         <th class="py-4" scope="">Kode Order</th>
+                                        <th class="py-4" scope="">Nama Pemesan</th>
                                         <th class="py-4" scope="">Total Jenis Barang</th>
                                         <th class="py-4" scope="">Tanggal Pemesanan</th>
                                         <th class="py-4" scope="">Total Harga</th>
@@ -48,6 +49,9 @@
                                                 </div>
                                             </td>
                                             <td class="px-1 py-5 text-sm">
+                                                {{ $o->name }}
+                                            </td>
+                                            <td class="px-1 py-5 text-sm">
                                                 @php
                                                     $getIdCart = json_decode($o->id_cart);
                                                     $getCount = count($getIdCart);
@@ -63,7 +67,7 @@
                                                 {{ date_format($date, 'H:i:s') }}
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                Rp120.000
+                                                @currency($o->totalCost)
                                             </td>
                                             <td class="px-1 py-5 text-sm text-green-500 text-md">
                                                 {{ $o->status }}
