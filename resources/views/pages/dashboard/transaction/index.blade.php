@@ -44,7 +44,9 @@
                                             <td class="px-1 py-5 text-sm w-2/8">
                                                 <div class="flex items-center text-sm">
                                                     <div>
-                                                        <p class="font-medium text-black">{{ $o->id_order }}</p>
+                                                        <p class="font-medium text-black">
+                                                            {{ $o->kode_order }}
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </td>
@@ -52,11 +54,7 @@
                                                 {{ $o->name }}
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                @php
-                                                    $getIdCart = json_decode($o->id_cart);
-                                                    $getCount = count($getIdCart);
-                                                @endphp
-                                                {{ $getCount }} Jenis Barang
+                                                2 Jenis Barang
                                             </td>
                                             <td class="px-1 py-5 text-sm">
                                                 @php
@@ -73,9 +71,9 @@
                                                 {{ $o->status }}
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                <a href="/dashboard/requests/details.php"
+                                                <a href="{{ route('dashboard.transaction.edit', $o->id_order) }}"
                                                     class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
-                                                    Details
+                                                    Edit
                                                 </a>
                                             </td>
                                         </tr>

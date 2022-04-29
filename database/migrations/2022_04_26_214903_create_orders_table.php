@@ -14,10 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->string('id_order');
+            $table->id('id_order');
+            $table->string('kode_order');
             $table->foreignId('id_buyer')->constrained('users', 'id');
-            $table->string('id_cart');
             $table->foreignId('id_transaction')->constrained('transactions', 'id_transaction');
             $table->timestamp('date_order')->nullable();
             // $table->foreignId('id_product')->constrained('products', 'id_product');

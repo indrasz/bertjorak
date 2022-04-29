@@ -38,13 +38,12 @@ class CartController extends Controller
         $cart->sizeSelected = $request->sizeSelected;
 
         if ($cart->save()) {
-            if (URL::previous() == '/cart') {
-                return view('pages.store.cart');
-            }
+            return redirect()->back();
+
         }
 
         session()->put('success', 'Item created successfully.');
-        return redirect()->back();
+
     }
 
     public function show()

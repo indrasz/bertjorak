@@ -29,7 +29,15 @@ class TransactionController extends Controller
             // Buyer Transaction
             elseif (Auth::user()->hasRole('buyer')) {
                 $authId = Auth::user()->id;
+                // Get Order Data
                 $orderData = Order::where('id_buyer', $authId)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->get();
+
+                // foreach ($orderData as $getIdOrder) {
+                //     $getIdO = $getIdOrder->id_order;
+                // }
+                // dd($getIdOrder);
+                // Get Cart Data
+                // $cartData = Cart::where('carts.id_order', $getIdO)->join('orders', 'carts.id_order', '=', 'orders.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->get();
 
                 return view('pages.store.dashboard-user.transaction.index')->with('orderData', $orderData);
             }
@@ -76,18 +84,19 @@ class TransactionController extends Controller
 
             $time = time();
             $date = date('d', $time);
-            $order->id_order = "BRJ - " . $date . rand() . $authId;
+            $order->kode_order = "BRJ - " . $date . rand() . $authId;
             $order->id_buyer = $authId;
-            foreach ($id_cart as $key => $value) {
-                $getIdCart[] = $value;
-                $order->id_cart = json_encode($getIdCart);
-            }
+            // foreach ($id_cart as $key => $value) {
+            //     $getIdCart[] = $value;
+            //     $order->id_cart = json_encode($getIdCart);
+            // }
             $order->id_transaction = $transaction->id_transaction;
             $order->date_order = Carbon::now();
 
             if ($order->save()) {
                 foreach ($id_cart as $key => $value) {
                     $cartUpdate = Cart::where('id_cart', $value)->update([
+                        'id_order' => $order->id,
                         'status' => 'Sukses',
                     ]);
                 }
@@ -114,9 +123,39 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $cartList = Cart::all();
+
+        $cart = $cartList->where('id_order', $id);
+
+        $as = $cart->join('products', 'carts.id_product', '=', 'products.id_product');
+
+        //dd($as->id_order);
+        // $orderData = Order::where('id_order', $id)->get();
+
+        // foreach ($orderData as $key => $value) {
+        //     $getId = json_decode($value->id_cart);
+        //     //dd($getId);
+
+        //     $orderCart = Order::join('carts', 'orders.id_cart', '=', 'carts.id_cart')->get();
+        //     dd($orderCart);
+        //     ////dd($orderCart);
+        // }
+
+        //dd($orderData);
+
+        //dd($orderData);
+
+        // foreach ($orderData as $key => $value) {
+        //     foreach (json_decode($value->id_cart, true) as $getCart) {
+        //         dd($);
+        //         //echo $getCart;
+        //     }
+        // }
+        return view('pages.dashboard.transaction.edit');
+
+        // return view('pages.dashboard.transaction.edit')->with('orderData', $orderData)->with('getId', $getId)->with('order');
     }
 
     /**

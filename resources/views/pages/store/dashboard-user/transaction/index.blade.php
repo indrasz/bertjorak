@@ -39,20 +39,25 @@
                                 </thead>
                                 <tbody class="bg-white">
                                     @foreach ($orderData as $o)
+                                        @php
+                                            $joinCart = $o
+                                                ->join('carts', 'orders.id_order', '=', 'carts.id_order')
+                                                ->where('carts.id_order', $o->id_order)
+                                                ->get();
+                                        @endphp
+                                        {{-- @foreach ($cartData as $a)
+                                            {{ $a->title }}
+                                        @endforeach --}}
                                         <tr class="text-gray-700 border-b">
                                             <td class="px-1 py-5 text-sm w-2/8">
                                                 <div class="flex items-center text-sm">
                                                     <div>
-                                                        <p class="font-medium text-black">{{ $o->id_order }}</p>
+                                                        <p class="font-medium text-black">{{ $o->kode_order }}</p>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                @php
-                                                    $getIdCart = json_decode($o->id_cart);
-                                                    $getCount = count($getIdCart);
-                                                @endphp
-                                                {{ $getCount }} Jenis Barang
+                                                2 Jenis
                                             </td>
                                             <td class="px-1 py-5 text-sm">
                                                 @php

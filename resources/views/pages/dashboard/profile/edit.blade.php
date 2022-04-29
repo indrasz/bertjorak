@@ -73,7 +73,7 @@
                                                 <label for="username"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Username</label>
                                                 @if (Auth::user()->username == null)
-                                                    <input placeholder="@johnsmith" type="text" name="username"
+                                                    <input placeholder="Nama anda" type="text" name="username"
                                                         id="username" autocomplete="username"
                                                         class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                                 @elseif (Auth::user()->username != null)
