@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('id_cart');
             $table->foreignId('id_user')->constrained('users', 'id');
             $table->string('status')->nullable();
-            $table->foreignId('id_order')->constrained('orders', 'id_order');
+            $table->foreignId('id_order')->constrained('orders', 'id');
             $table->foreignId('id_product')->constrained('products', 'id_product');
             $table->integer('jumlah')->nullable();
             $table->string('pilihanSelected')->nullable();

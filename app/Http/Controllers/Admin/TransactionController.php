@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
-use App\Models\Transaction;
 use Auth;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\Transaction;
+use Illuminate\Support\Carbon;
 
 class TransactionController extends Controller
 {
@@ -32,9 +32,9 @@ class TransactionController extends Controller
                 // Get Order Data
                 $orderData = Order::where('id_buyer', $authId)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->get();
 
-                // foreach ($orderData as $getIdOrder) {
-                //     $getIdO = $getIdOrder->id_order;
-                // }
+                foreach ($orderData as $getIdOrder) {
+                    $getIdO = $getIdOrder->id_order;
+                }
                 // dd($getIdOrder);
                 // Get Cart Data
                 // $cartData = Cart::where('carts.id_order', $getIdO)->join('orders', 'carts.id_order', '=', 'orders.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->get();
@@ -64,8 +64,6 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        // $al = $request->pilihKurir;
-        // dd($al);
         $authId = Auth::user()->id;
 
         $id_cart = $request->idCart;
@@ -76,6 +74,8 @@ class TransactionController extends Controller
         $transaction->id_kurir = $request->pilihKurir;
         $transaction->id_jenisKurir = $request->pilihJenisKurir;
         $transaction->totalCost = $request->totalPrice;
+        $transaction->namaPembeli = $request->namaPembeli;
+        $transaction->phonePembeli = $request->nomorPembeli;
         $transaction->date_transaction = Carbon::now();
 
         if ($transaction->save()) {
@@ -84,7 +84,7 @@ class TransactionController extends Controller
 
             $time = time();
             $date = date('d', $time);
-            $order->kode_order = "BRJ - " . $date . rand() . $authId;
+            $order->kode_order = "BRJ-" . $date . rand() . $authId;
             $order->id_buyer = $authId;
             // foreach ($id_cart as $key => $value) {
             //     $getIdCart[] = $value;
@@ -114,7 +114,13 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        return view('pages.store.dashboard-user.transaction.detail');
+        $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
+
+        // $getData = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->get();
+        // dd($orderShow);
+
+        return view('pages.store.dashboard-user.transaction.detail')->with('orderShow', $orderShow);
+        // return view('pages.store.dashboard-user.transaction.detail');
     }
 
     /**
@@ -125,37 +131,15 @@ class TransactionController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $cartList = Cart::all();
+        if (Auth::user()) {
+            if (Auth::user()->hasRole('admin')) {
+                $orderShow = Order::where('kode_order', $id)->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->get();
 
-        $cart = $cartList->where('id_order', $id);
-
-        $as = $cart->join('products', 'carts.id_product', '=', 'products.id_product');
-
-        //dd($as->id_order);
-        // $orderData = Order::where('id_order', $id)->get();
-
-        // foreach ($orderData as $key => $value) {
-        //     $getId = json_decode($value->id_cart);
-        //     //dd($getId);
-
-        //     $orderCart = Order::join('carts', 'orders.id_cart', '=', 'carts.id_cart')->get();
-        //     dd($orderCart);
-        //     ////dd($orderCart);
-        // }
-
-        //dd($orderData);
-
-        //dd($orderData);
-
-        // foreach ($orderData as $key => $value) {
-        //     foreach (json_decode($value->id_cart, true) as $getCart) {
-        //         dd($);
-        //         //echo $getCart;
-        //     }
-        // }
-        return view('pages.dashboard.transaction.edit');
-
-        // return view('pages.dashboard.transaction.edit')->with('orderData', $orderData)->with('getId', $getId)->with('order');
+                return view('pages.dashboard.transaction.edit')->with('orderShow', $orderShow);
+            } else {
+                return redirect()->back();
+            }
+        }
     }
 
     /**

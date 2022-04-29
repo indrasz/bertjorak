@@ -3,7 +3,7 @@
     <div class="preview-summary pt-2">
         Jasa Kirim
     </div>
-    <select class="form-select" wire:model="pilihKurir" name="pilihKurir" id="cost">
+    <select class="form-select" wire:model="pilihKurir" name="pilihKurir" id="cost" required>
         @if (is_array($cost) || is_object($cost))
             <option value="none" selected>-- Pilih Kurir --</option>
             @foreach ($cost as $k => $value)
@@ -17,7 +17,7 @@
     <div class="preview-summary pt-2">
         Jenis Pengiriman
     </div>
-    <select class="form-select" wire:model="jenisKurir" name="pilihJenisKurir" id="cost">
+    <select class="form-select" wire:model="jenisKurir" name="pilihJenisKurir" id="cost" required>
         <option value="none" selected>-- Pilih Jenis --</option>
         @foreach ($cost as $k => $y)
             @if ($y['name'] == $pilihKurir)

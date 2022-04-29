@@ -38,16 +38,16 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white">
-                                    @foreach ($orderData as $o)
-                                        @php
+                                    {{-- @php
                                             $joinCart = $o
                                                 ->join('carts', 'orders.id_order', '=', 'carts.id_order')
                                                 ->where('carts.id_order', $o->id_order)
                                                 ->get();
-                                        @endphp
-                                        {{-- @foreach ($cartData as $a)
+                                        @endphp --}}
+                                    {{-- @foreach ($cartData as $a)
                                             {{ $a->title }}
                                         @endforeach --}}
+                                    @foreach ($orderData as $o)
                                         <tr class="text-gray-700 border-b">
                                             <td class="px-1 py-5 text-sm w-2/8">
                                                 <div class="flex items-center text-sm">
@@ -74,7 +74,7 @@
                                                 {{ $o->status }}
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                <a href="{{ route('dashboard.transaction.show', $o->id_order) }}"
+                                                <a href="{{ route('dashboard.transaction.show', $o->kode_order) }}"
                                                     class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
                                                     Details
                                                 </a>

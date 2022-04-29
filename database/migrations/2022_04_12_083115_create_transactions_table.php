@@ -19,7 +19,10 @@ return new class extends Migration
             $table->mediumText('notes')->nullable();
             $table->string('id_kurir');
             $table->string('id_jenisKurir');
+            $table->string('nomorResi')->nullable();
             $table->double('totalCost');
+            $table->string('namaPembeli');
+            $table->string('phonePembeli');
             $table->timestamp('date_transaction')->nullable();
             $table->timestamp('date_payment')->nullable();
             $table->timestamps();
