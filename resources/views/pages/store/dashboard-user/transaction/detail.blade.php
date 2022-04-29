@@ -23,7 +23,8 @@
                 <main class="col-span-12 p-4 md:pt-0">
                     <div class="px-6 py-2 mt-2 bg-white rounded-xl">
 
-                        <label for="transaction detail" class="block mb-3 font-medium text-md">Transaction Detail</label>
+                        <label for="transaction detail" class="block mb-3 font-medium text-md"
+                            style="font-weight: 700;">Transaction Detail</label>
                         <table class="w-full" aria-label="Table">
                             <thead>
                                 <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
@@ -172,6 +173,36 @@
                                     </tr>
 
                                 </table>
+
+                                <style>
+                                    .payButton {
+                                        background-color: #44c767;
+                                        border-radius: 7px;
+                                        border: 1px solid #18ab29;
+                                        display: inline-block;
+                                        cursor: pointer;
+                                        color: #ffffff;
+                                        font-family: Verdana;
+                                        font-size: 17px;
+                                        font-weight: bold;
+                                        padding: 5px 76px;
+                                        text-decoration: none;
+                                        text-shadow: 0px 1px 15px #2f6627;
+                                    }
+
+                                    .payButton:hover {
+                                        background-color: #59ff00;
+                                    }
+
+                                    .payButton:active {
+                                        position: relative;
+                                        top: 1px;
+                                    }
+
+                                </style>
+                                <button class="payButton" style="background-color: blue; width: 100%;" id="pay-button">
+                                    Bayar
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -180,5 +211,41 @@
             </div>
         </section>
     </main>
+    <script type="text/javascript">
+        // For example trigger on button clicked, or any time you need
+        var payButton = document.getElementById('pay-button');
+        payButton.addEventListener('click', function() {
+            // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+            window.snap.pay('{{ $snap_token }}', {
+                onSuccess: function(result) {
+                    /* You may add your own implementation here */
+                    alert("payment success!");
+                    console.log(result);
+                    send_response_to_form(result);
+                },
+                onPending: function(result) {
+                    /* You may add your own implementation here */
+                    alert("wating your payment!");
+                    console.log(result);
+                    send_response_to_form(result);
+                },
+                onError: function(result) {
+                    /* You may add your own implementation here */
+                    alert("payment failed!");
+                    console.log(result);
+                    send_response_to_form(result);
+                },
+                onClose: function() {
+                    /* You may add your own implementation here */
+                    alert('you closed the popup without finishing the payment');
+                }
+            })
+        });
 
+
+        function send_response_to_form(result) {
+            document.getElementById('json_callback').value = JSON.stringify(result);
+            $('#sumbit_form').submit();
+        }
+    </script>
 @endsection
