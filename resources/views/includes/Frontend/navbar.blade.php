@@ -489,7 +489,7 @@
                         <ul class="dropdown-menu" style="cursor: pointer">
 
                             <li>
-                                <a href="#"
+                                <a href="{{ route('all-product') }}"
                                     class="dropdown-hover d-flex align-items-center justify-content-center text-start text-decoration-none">
                                     <img class=""
                                         src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header5/Header-5-5.png"

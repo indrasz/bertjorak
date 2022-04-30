@@ -12,4 +12,9 @@ class HomeController extends Controller
         $productList = Product::all()->take(8);
         return view('pages.store.index')->with('products', $productList);
     }
+
+    public function allProduct()
+    {
+        return view('pages.store.product');
+    }
 }

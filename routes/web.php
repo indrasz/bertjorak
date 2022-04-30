@@ -28,6 +28,8 @@ use App\Http\Controllers\TransaksiShow;
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('product', [HomeController::class, 'allProduct'])->name('all-product');
+
 // Detail Product
 Route::resource('product/detail', DetailController::class);
 
