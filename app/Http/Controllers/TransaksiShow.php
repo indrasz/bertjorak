@@ -12,13 +12,14 @@ class TransaksiShow extends Controller
     {
         $orderShow = Order::where('id_buyer', Auth::user()->id)->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->where('carts.id_cart', $id)->get();
 
-        foreach ($orderShow as $key) {
-            if ($key->id_cart == $id) {
-                return view('pages.detailItems')->with('orderShow', $orderShow);
-            } else {
-                return view('errors.404');
-            }
-        }
+        return view('pages.detailItems')->with('orderShow', $orderShow);
+        // foreach ($orderShow as $key) {
+        //     if ($key->id_cart == $id) {
+        //         return view('pages.detailItems')->with('orderShow', $orderShow);
+        //     } else {
+        //         return view('errors.404');
+        //     }
+        // }
 
 
         //dd($orderShow);

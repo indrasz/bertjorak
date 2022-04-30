@@ -168,7 +168,7 @@
         }
     </script>
 
-    <script>
+    {{-- <script>
         function gallery() {
             return {
                 featured: '{{ asset('/storage/products/images/' . $image[0]) }}',
@@ -179,5 +179,5 @@
                 }
             }
         }
-    </script>
+    </script> --}}
 @endpush

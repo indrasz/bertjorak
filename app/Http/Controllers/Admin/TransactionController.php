@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Services\Midtrans\CreateSnapTokenService;
+use App\Models\Payment;
 use Auth;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
@@ -73,6 +75,7 @@ class TransactionController extends Controller
         $transaction->status = "Pending";
         $transaction->id_kurir = $request->pilihKurir;
         $transaction->id_jenisKurir = $request->pilihJenisKurir;
+        $transaction->ongkir = $request->ongkir;
         $transaction->totalCost = $request->totalPrice;
         $transaction->namaPembeli = $request->namaPembeli;
         $transaction->phonePembeli = $request->nomorPembeli;
@@ -112,49 +115,64 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Payment $order, $id)
     {
         $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
-        // Midtrans
-        // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
+        // // Midtrans
+        // // Set your Merchant Server Key
+        // \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        // // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        // \Midtrans\Config::$isProduction = false;
+        // // Set sanitization on (default)
+        // \Midtrans\Config::$isSanitized = true;
+        // // Set 3DS transaction for credit card to true
+        // \Midtrans\Config::$is3ds = true;
 
-        foreach ($orderShow as $key) {
-            $transaction_details[] = array(
-                'id' => $key->id_product,
-                'price' => $key->price,
-                'quantity' => $key->jumlah,
-                'name' => $key->title,
+        // foreach ($orderShow as $key) {
+        //     //dd($key);
+        //     $transaction_details[] = [
+        //         'id' => $key->id_product,
+        //         'price' => $key->price,
+        //         'quantity' => $key->jumlah,
+        //         'name' => $key->title,
+        //     ];
+        // }
 
-            );
+        // $transaction_details[] = [
+        //     'id' => $key->id_jenisKurir,
+        //     'price' => $key->ongkir,
+        //     'quantity' => 1,
+        //     'name' => $key->id_kurir,
+        // ];
+
+
+
+        // $params = array(
+        //     'transaction_details' => array(
+        //         'order_id' => rand(),
+        //         'gross_amount' => null,
+        //     ),
+        //     'item_details' => $transaction_details,
+        //     'customer_details' => array(
+        //         'first_name' => Auth::user()->name,
+        //         'email' => Auth::user()->email,
+        //         'phone' => Auth::user()->phone_number,
+        //     ),
+        // );
+
+        // $snapToken = \Midtrans\Snap::getSnapToken($params);
+        $snapToken = $order->snap_token;
+        if (is_null($snapToken)) {
+            // Jika snap token masih NULL, buat token snap dan simpan ke database
+
+            $midtrans = new CreateSnapTokenService($order);
+            $snapToken = $midtrans->getSnapToken();
+
+            $order->snap_token = $snapToken;
+            $order->save();
         }
 
-
-
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => rand(),
-                'gross_amount' => null,
-            ),
-            'item_details' => $transaction_details,
-            'customer_details' => array(
-                'first_name' => Auth::user()->name,
-                'email' => Auth::user()->email,
-                'phone' => Auth::user()->phone_number,
-            ),
-        );
-
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-
-        // $getData = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->get();
-        // dd($orderShow);
 
         return view('pages.store.dashboard-user.transaction.detail')->with('orderShow', $orderShow)->with('snap_token', $snapToken);
         // return view('pages.store.dashboard-user.transaction.detail');
@@ -200,5 +218,30 @@ class TransactionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function payment_pos(Request $request)
+    {
+        $json = json_decode($request->get('json'));
+        //dd($json);
+
+        $payment = new Payment();
+
+        $payment->id_order = $request->idOrder;
+        $payment->status_code = $json->status_code;
+        $payment->status_message = $json->status_message;
+        $payment->transaction_id = $json->transaction_id;
+        $payment->order_id = $json->order_id;
+        $payment->gross_amount = $json->gross_amount;
+        $payment->payment_type = $json->payment_type;
+        $payment->transaction_time = $json->transaction_time;
+        $payment->transaction_status = $json->transaction_status;
+        $payment->payment_code = isset($json->payment_code) ? $json->payment_code : null;
+        $payment->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
+
+        if ($payment->save()) {
+            return redirect()->back();
+        }
     }
 }

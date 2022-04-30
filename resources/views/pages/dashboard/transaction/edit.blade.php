@@ -79,7 +79,7 @@
                                     <th class="py-4" scope="">Product Name</th>
                                     <th class="py-4" scope="">Quantity</th>
                                     <th class="py-4" scope="">Total Price</th>
-                                    <th class="py-4" scope="">Action</th>
+                                    {{-- <th class="py-4" scope="">Action</th> --}}
                                 </tr>
                             </thead>
                             <tbody class="bg-white">
@@ -124,12 +124,12 @@
                                         <td class="px-1 py-5 text-sm">
                                             @currency($os->price * $os->jumlah)
                                         </td>
-                                        <td class="px-1 py-5 text-sm">
-                                            <a href="/dashboard/requests/details.php"
+                                        {{-- <td class="px-1 py-5 text-sm">
+                                            <a href="{{ route('detailitem.show', $os->id_cart) }}"
                                                 class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
                                                 Details
                                             </a>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>

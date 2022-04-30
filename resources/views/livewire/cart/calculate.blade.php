@@ -45,6 +45,7 @@
                                     @php
                                         $hargaOngkir = $harga['value'];
                                     @endphp
+                                    <input type="text" name="ongkir" value="{{ $hargaOngkir }}" hidden>
                                 @endforeach
                             @endif
                         @endforeach

@@ -35,10 +35,10 @@ Route::resource('product/detail', DetailController::class);
 Route::resource('cart', CartController::class)->middleware('is_buyer');
 
 // Transaksi
-Route::resource('detailitem', TransaksiShow::class)->middleware('is_buyer');
+Route::resource('detailitem', TransaksiShow::class)->middleware('auth:sanctum');
 
 // Payment
-Route::post('cart/payment', [CartController::class, 'payment_pos']);
+Route::post('transaction/payment', [TransactionController::class, 'payment_pos']);
 
 // Dashboard Admin
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {

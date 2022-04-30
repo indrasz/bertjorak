@@ -100,25 +100,4 @@ class CartController extends Controller
 
         return redirect()->back();
     }
-
-    public function payment_pos(Request $request)
-    {
-        $json = json_decode($request->get('json'));
-        //dd($json);
-
-        $payment = new Payment();
-
-        $payment->status_code = $json->status_code;
-        $payment->status_message = $json->status_message;
-        $payment->transaction_id = $json->transaction_id;
-        $payment->order_id = $json->order_id;
-        $payment->gross_amount = $json->gross_amount;
-        $payment->payment_type = $json->payment_type;
-        $payment->transaction_time = $json->transaction_time;
-        $payment->transaction_status = $json->transaction_status;
-        $payment->payment_code = isset($json->payment_code) ? $json->payment_code : null;
-        $payment->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
-
-        $payment->save();
-    }
 }

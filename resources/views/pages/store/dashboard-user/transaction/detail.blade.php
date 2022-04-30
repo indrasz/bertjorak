@@ -160,6 +160,15 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="text-sm leading-7 text-serv-text">
+                                            Ongkos Kirim
+                                        </td>
+                                        <td class="mb-4 text-sm font-semibold text-right text-black">
+                                            @currency($value->ongkir)
+                                        </td>
+                                    </tr>
+
                                 </table>
 
                                 <table class="w-full mb-4">
@@ -210,6 +219,13 @@
                 </main>
             </div>
         </section>
+
+        <form action="/transaction/payment" id="submit_form" method="POST">
+            @csrf
+            <input type="hidden" name="idOrder" value="{{ $get->id_order }}">
+            <input type="hidden" name="json" id="json_callback">
+        </form>
+
     </main>
     <script type="text/javascript">
         // For example trigger on button clicked, or any time you need
@@ -245,7 +261,7 @@
 
         function send_response_to_form(result) {
             document.getElementById('json_callback').value = JSON.stringify(result);
-            $('#sumbit_form').submit();
+            $('#submit_form').submit();
         }
     </script>
 @endsection

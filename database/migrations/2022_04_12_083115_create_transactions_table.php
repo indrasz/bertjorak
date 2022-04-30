@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('id_kurir');
             $table->string('id_jenisKurir');
             $table->string('nomorResi')->nullable();
+            $table->double('ongkir');
             $table->double('totalCost');
             $table->string('namaPembeli');
             $table->string('phonePembeli');

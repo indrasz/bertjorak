@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('order_id')->nullable();
             $table->string('gross_amount')->nullable();
             $table->string('payment_type')->nullable();
+            $table->enum('payment_status', ['1', '2', '3'])->comment('1=menunggu pembayaran, 2=sudah dibayar, 3=kadaluarsa');
+            $table->string('snap_token', 36)->nullable();
             $table->timestamp('transaction_time')->nullable();
             $table->string('transaction_status')->nullable();
             $table->string('payment_code')->nullable();
