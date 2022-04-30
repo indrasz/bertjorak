@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', ' Edit Transaction')
+@section('title', ' Transaction')
 
 @section('content')
 
@@ -11,25 +11,46 @@
                     <h2 class="mt-8 mb-1 text-2xl font-semibold text-gray-700">
                         Your Transaction
                     </h2>
-                </div>
-                <div class="col-span-4 lg:text-right">
 
+                    @php
+                        foreach ($orderShow as $os) {
+                            $ka = $os;
+                        }
+                    @endphp
+                    <ol class="inline-flex py-2 list-none">
+                        <li class="flex items-center">
+                            <a href="{{ route('dashboard.transaction.index') }}" class="text-gray-400">My Transaction</a>
+                            <svg class="w-3 h-3 mx-3 text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 320 512">
+                                <path
+                                    d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                            </svg>
+                        </li>
+                        <li class="flex items-center">
+                            <a href="{{ route('dashboard.transaction.show', $ka->kode_order) }}"
+                                class="font-medium">{{ $ka->kode_order }}</a>
+                        </li>
+                    </ol>
                 </div>
             </div>
         </div>
 
-        <section class="container px-6 mx-auto mt-5">
+        <section class="container px-6 mx-auto mt-2">
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="col-span-12 p-4 md:pt-0">
                     <div class="px-6 py-2 mt-2 bg-white rounded-xl">
-
-                        <label for="transaction detail" class="block mb-3 font-medium text-md"
-                            style="font-weight: 700;">Transaction Detail</label>
+                        <div class="flex justify-between pt-6">
+                            <label for="transaction detail" class="block mb-3 font-medium text-md"
+                                style="font-weight: 700;">Transaction Detail</label>
+                            <span
+                                class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-green-500 rounded-full bg-serv-green-badge">Success</span>
+                        </div>
                         <table class="w-full" aria-label="Table">
                             <thead>
                                 <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
                                     <th class="py-4" scope="">Product Name</th>
                                     <th class="py-4" scope="">Quantity</th>
+                                    <th class="py-4" scope="">Warna/Tipe</th>
                                     <th class="py-4" scope="">Total Price/Item</th>
                                     <th class="py-4" scope="">Action</th>
                                 </tr>
@@ -53,7 +74,7 @@
                                                 </div>
                                                 <div>
                                                     <p class="font-medium text-black">{{ $os->title }}</p>
-                                                    <p class="text-sm text-gray-400">Size Product</p>
+                                                    <p class="text-sm text-gray-400">Size : {{ $os->sizeSelected }}</p>
                                                 </div>
                                             </div>
                                         </td>
@@ -74,6 +95,9 @@
                                             {{ $os->jumlah }}
                                         </td>
                                         <td class="px-1 py-5 text-sm">
+                                            {{ $os->pilihanSelected }}
+                                        </td>
+                                        <td class="px-1 py-5 text-sm">
                                             @currency($os->price * $os->jumlah)
                                         </td>
                                         <td class="px-1 py-5 text-sm">
@@ -88,19 +112,110 @@
                             </tbody>
                         </table>
 
+                        @php
+                            foreach ($orderShow as $key => $value) {
+                                $get = $value;
+                            }
+                            
+                        @endphp
+
+                        @if ($get->noted != null)
+                            <div class="py-2">
+                                <h3 style="font-size: 1.1rem; font-weight: 800;">Catatan
+                                </h3>
+                                <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Reiciendis
+                                    dolor cum illo distinctio
+                                    nam asperiores soluta ducimus corporis, consequuntur, vero, harum assumenda aut itaque
+                                    odit
+                                    omnis laudantium earum. Vitae, esse.</p>
+                            </div>
+                        @endif
+
+                        <div class="pt-6">
+                            <h3 class="pb-2" style="font-size: 1.1rem; font-weight: 800;">Data Pemesan
+                            </h3>
+                            <table class="w-full mb-2">
+                                <tr>
+                                    <td class="text-sm text-serv-text">
+                                        Name
+                                    </td>
+                                    <td class="mb-4 text-sm font-semibold text-right text-black">
+                                        {{ $value->name }}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-sm leading-7 text-serv-text">
+                                        Email
+                                    </td>
+                                    <td class="mb-4 text-sm font-semibold text-right text-black">
+                                        {{ $value->email }}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-sm leading-7 text-serv-text">
+                                        Phone Number
+                                    </td>
+                                    <td class="mb-4 text-sm font-semibold text-right text-black">
+                                        {{ $value->phone_number }}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-sm leading-7 text-serv-text">
+                                        Tipe Alamat
+                                    </td>
+                                    <td class="mb-4 text-sm font-semibold text-right text-black">
+                                        {{ $value->type_address }}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-sm leading-7 text-serv-text">
+                                        Province
+                                    </td>
+                                    <td class="mb-4 text-sm font-semibold text-right text-black">
+                                        {{ $value->name_province }}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-sm leading-7 text-serv-text">
+                                        City
+                                    </td>
+                                    <td class="mb-4 text-sm font-semibold text-right text-black">
+                                        {{ $value->name_city }}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-sm leading-7 text-serv-text">
+                                        Postal Code
+                                    </td>
+                                    <td class="mb-4 text-sm font-semibold text-right text-black">
+                                        {{ $value->zipcode }}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-sm leading-7 text-serv-text">
+                                        Detail Address
+                                    </td>
+                                    <td class="w-1/2 mb-4 text-sm font-semibold text-right text-black">
+                                        {{ $value->detail_address }}
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
                         <div style="padding-top: 2em;">
                             <h3 style="font-size: 1.1rem; font-weight: 800;">Ringkasan Pemesanan
                             </h3>
                             <div style="padding-top: 1em;" class="pt- pb-2 features-list">
                                 <table class="w-full mb-4">
-                                    @php
-                                        foreach ($orderShow as $key => $value) {
-                                            $get = $value;
-                                        
-                                            //dd($get);
-                                        }
-                                        
-                                    @endphp
                                     <tr>
                                         <td class="text-sm text-serv-text">
                                             Kode Order
@@ -129,7 +244,7 @@
                                             Name
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
-                                            {{ $value->name }}
+                                            {{ $value->namaPembeli }}
                                         </td>
                                     </tr>
 
@@ -138,7 +253,7 @@
                                             Phone Number
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
-                                            {{ $value->phone_number }}
+                                            {{ $value->phonePembeli }}
                                         </td>
                                     </tr>
 
@@ -209,9 +324,21 @@
                                     }
 
                                 </style>
+
                                 <button class="payButton" style="background-color: blue; width: 100%;" id="pay-button">
                                     Bayar
                                 </button>
+                                {{-- @if ($value->payment_status == 1)
+                                    <button class="payButton" style="background-color: blue; width: 100%;"
+                                        id="pay-button">
+                                        Bayar
+                                    </button>
+                                @else
+                                    Pembayaran berhasil
+                                @endif --}}
+                                {{-- <button class="payButton" style="background-color: blue; width: 100%;" id="pay-button">
+                                    Bayar
+                                </button> --}}
                             </div>
                         </div>
                     </div>

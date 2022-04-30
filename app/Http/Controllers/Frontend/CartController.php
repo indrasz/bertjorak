@@ -64,7 +64,7 @@ class CartController extends Controller
                 return redirect()->route('dashboard.profile.edit', Auth::user()->id);
             }
         } else {
-            return view('auth.login');
+            return route('login');
         }
     }
 

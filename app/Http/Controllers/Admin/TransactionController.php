@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
-use App\Services\Midtrans\CreateSnapTokenService;
 use App\Models\Payment;
 use Auth;
+use App\Services\Midtrans\CreateSnapTokenService;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use Illuminate\Support\Carbon;
@@ -106,7 +106,7 @@ class TransactionController extends Controller
             }
         }
 
-        return redirect()->back();
+        return redirect()->route('dashboard.transaction.edit', $order->kode_order);
     }
 
     /**
@@ -117,7 +117,7 @@ class TransactionController extends Controller
      */
     public function show(Payment $order, $id)
     {
-        $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
+        $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->join('provinces', 'users.id_province', '=', 'provinces.province_id')->join('cities', 'users.id_city', '=', 'cities.city_id')->get();
 
         // // Midtrans
         // // Set your Merchant Server Key
@@ -163,15 +163,16 @@ class TransactionController extends Controller
 
         // $snapToken = \Midtrans\Snap::getSnapToken($params);
         $snapToken = $order->snap_token;
-        if (is_null($snapToken)) {
-            // Jika snap token masih NULL, buat token snap dan simpan ke database
+        $midtrans = new CreateSnapTokenService($order);
+        $snapToken = $midtrans->getSnapToken($id);
+        // if (is_null($snapToken)) {
+        //     // Jika snap token masih NULL, buat token snap dan simpan ke database
 
-            $midtrans = new CreateSnapTokenService($order);
-            $snapToken = $midtrans->getSnapToken();
 
-            $order->snap_token = $snapToken;
-            $order->save();
-        }
+
+        //     $order->snap_token = $snapToken;
+        //     $order->save();
+        // }
 
 
         return view('pages.store.dashboard-user.transaction.detail')->with('orderShow', $orderShow)->with('snap_token', $snapToken);

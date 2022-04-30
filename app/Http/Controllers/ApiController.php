@@ -11,7 +11,7 @@ class ApiController extends Controller
     {
         $json = json_decode($request->getContent());
 
-        $signatur_key = hash('sha512', $json->order_id . $json->status_code. $json->gross_amount . env('MIDTRANS_SERVER_KEY'));
+        $signatur_key = hash('sha512', $json->order_id . $json->status_code . $json->gross_amount . env('MIDTRANS_SERVER_KEY'));
 
         if ($signatur_key != $json->signature_key) {
             return abort(404);
@@ -19,7 +19,7 @@ class ApiController extends Controller
 
         $order = Payment::where('order_id', $json->order_id)->first();
         return $order->update([
-            'status_messagex' => $json->transaction_status,
+            'status_message' => $json->transaction_status,
         ]);
     }
 }
