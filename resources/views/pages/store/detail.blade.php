@@ -79,6 +79,31 @@
                                 <livewire:cart.counter-barang :maxProduct="$d" />
 
                                 <div class="chose-size mt-3 px-3">
+                                    Pilih Tipe :
+                                </div>
+
+                                <div class="d-flex flex-row mt-3 px-3">
+                                    @php
+                                        $pilihan = json_decode($d->pilihan);
+                                    @endphp
+                                    @if ($pilihan != null)
+                                        @forelse ($pilihan as $pil)
+                                            @foreach ($pil as $p)
+                                                <label class="me-3 " for="{{ $p }}">
+                                                    <input class="d-none b" type="radio" id="{{ $p }}"
+                                                        name="pilihanSelected" value="{{ $p }}" required>
+                                                    <div class="detail-size-card justify-content-center">
+                                                        <div class="text-size m-0">{{ $p }}</div>
+                                                    </div>
+                                                </label>
+                                            @endforeach
+                                        @empty
+                                            <h5>Tidak ada ukuran yang tersedia</h5>
+                                        @endforelse
+                                    @endif
+                                </div>
+
+                                <div class="chose-size mt-3 px-3">
                                     Pilih Ukuran :
                                 </div>
 
@@ -86,19 +111,21 @@
                                     @php
                                         $ukuranConvert = json_decode($d->size);
                                     @endphp
-                                    @forelse ($ukuranConvert as $u)
-                                        @foreach ($u as $a)
-                                            <label class="me-3 " for="{{ $a }}">
-                                                <input class="d-none b" type="radio" id="{{ $a }}"
-                                                    name="sizeSelected" value="{{ $a }}">
-                                                <div class="detail-size-card justify-content-center">
-                                                    <div class="text-size m-0">{{ $a }}</div>
-                                                </div>
-                                            </label>
-                                        @endforeach
-                                    @empty
-                                        <h5>Tidak ada ukuran yang tersedia</h5>
-                                    @endforelse
+                                    @if ($ukuranConvert != null)
+                                        @forelse ($ukuranConvert as $u)
+                                            @foreach ($u as $a)
+                                                <label class="me-3 " for="{{ $a }}">
+                                                    <input class="d-none b" type="radio" id="{{ $a }}"
+                                                        name="sizeSelected" value="{{ $a }}" required>
+                                                    <div class="detail-size-card justify-content-center">
+                                                        <div class="text-size m-0">{{ $a }}</div>
+                                                    </div>
+                                                </label>
+                                            @endforeach
+                                        @empty
+                                            <h5>Tidak ada ukuran yang tersedia</h5>
+                                        @endforelse
+                                    @endif
                                 </div>
 
 
@@ -175,13 +202,13 @@
                             }
 
                             /* .detail-product .detail-size-card #icon-check{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    transition: all 0.1s linear;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                transition: all 0.1s linear;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                opacity: 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 1;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                opacity: 1;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } */
 
                         </style>
                     </div>

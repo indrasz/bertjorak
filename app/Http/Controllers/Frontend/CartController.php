@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Payment;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,56 @@ class CartController extends Controller
     public function index()
     {
         if (Auth::user()) {
-            $authId = Auth::user()->id;
-            $cartList = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->where('status', 'Cart')->get();
+            if (Auth::user()->id_province != null || Auth::user()->id_city != null || Auth::user()->detail_address != null || Auth::user()->zipcode != null) {
 
-            return view('pages.store.cart')->with('carts', $cartList);
+                $authId = Auth::user()->id;
+                $cartList = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->where('status', 'Cart')->get();
+
+                //dd($cartList);
+
+
+
+                // // Midtrans
+                // // Set your Merchant Server Key
+                // \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+                // // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+                // \Midtrans\Config::$isProduction = false;
+                // // Set sanitization on (default)
+                // \Midtrans\Config::$isSanitized = true;
+                // // Set 3DS transaction for credit card to true
+                // \Midtrans\Config::$is3ds = true;
+
+                // foreach ($cartList as $key) {
+                //     $transaction_details[] = array(
+                //         'id' => $key->id_product,
+                //         'price' => $key->price,
+                //         'quantity' => $key->jumlah,
+                //         'name' => $key->title,
+
+                //     );
+                // }
+
+
+
+                // $params = array(
+                //     'transaction_details' => array(
+                //         'order_id' => rand(),
+                //         'gross_amount' => null,
+                //     ),
+                //     'item_details' => $transaction_details,
+                //     'customer_details' => array(
+                //         'first_name' => Auth::user()->name,
+                //         'email' => Auth::user()->email,
+                //         'phone' => Auth::user()->phone_number,
+                //     ),
+                // );
+
+                // $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+                return view('pages.store.cart')->with('carts', $cartList);
+            } else {
+                return redirect()->route('dashboard.profile.edit', Auth::user()->id);
+            }
         } else {
             return view('auth.login');
         }
@@ -31,17 +78,18 @@ class CartController extends Controller
         $cart->status = "Cart";
         $cart->id_product = $request->idProduct;
         $cart->jumlah = $request->jumlah;
+        $cart->pilihanSelected = $request->pilihanSelected;
         $cart->sizeSelected = $request->sizeSelected;
 
-        $cart->save();
+        if ($cart->save()) {
+            return redirect()->back();
+        }
 
         session()->put('success', 'Item created successfully.');
-        return redirect()->back();
     }
 
     public function show()
     {
-
     }
 
     public function destroy($id)
@@ -51,5 +99,26 @@ class CartController extends Controller
         $this->cartDelete->delete();
 
         return redirect()->back();
+    }
+
+    public function payment_pos(Request $request)
+    {
+        $json = json_decode($request->get('json'));
+        //dd($json);
+
+        $payment = new Payment();
+
+        $payment->status_code = $json->status_code;
+        $payment->status_message = $json->status_message;
+        $payment->transaction_id = $json->transaction_id;
+        $payment->order_id = $json->order_id;
+        $payment->gross_amount = $json->gross_amount;
+        $payment->payment_type = $json->payment_type;
+        $payment->transaction_time = $json->transaction_time;
+        $payment->transaction_status = $json->transaction_status;
+        $payment->payment_code = isset($json->payment_code) ? $json->payment_code : null;
+        $payment->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
+
+        $payment->save();
     }
 }

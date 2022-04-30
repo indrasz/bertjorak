@@ -21,7 +21,8 @@ return new class extends Migration
             $table->longText('desc');
             $table->double('weight');
             $table->integer('stock');
-            $table->string('size');
+            $table->string('pilihan')->nullable();
+            $table->string('size')->nullable();
             $table->timestamps();
         });
     }

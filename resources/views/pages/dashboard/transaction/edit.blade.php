@@ -31,27 +31,40 @@
                                 <div class="p-1 mt-5">
                                     <div class="grid grid-cols-6 gap-6">
                                         <div class="col-span-6 ">
-                                            <label for="cityId" class="block mb-3 font-medium text-gray-700 text-md">Transaction Status</label>
+                                            <label for="cityId" class="block mb-3 font-medium text-gray-700 text-md">Nomor
+                                                Resi</label>
+                                            <input type="text" placeholder="Masukkan Nomor Resi Pengiriman" name="nomorResi"
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                        </div>
+
+                                        <div class="col-span-6 ">
+                                            <label for="cityId"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Transaction
+                                                Status</label>
                                             <select name="cityId" id="cityId"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                <option value="" selected>Pending</option>
-                                                <option value="" selected>Success</option>
-                                                <option value="" selected>Cancel</option>
+                                                <option value="Pending" selected>Pending</option>
+                                                <option value="Succes" selected>Success</option>
+                                                <option value="Cancel" selected>Cancel</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="px-1 py-4 text-right">
-                                    <a href="" type="button" class="inline-flex justify-center px-4 py-2 mr-4 text-sm font-medium text-gray-700 bg-white border border-gray-600 rounded-lg shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300" onclick="return confirm('Are you sure want to back? , Any changes you make will not be saved.')">
+                                    <a href="{{ route('dashboard.transaction.index') }}" type="button"
+                                        class="inline-flex justify-center px-4 py-2 mr-4 text-sm font-medium text-gray-700 bg-white border border-gray-600 rounded-lg shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300"
+                                        onclick="return confirm('Are you sure want to back? , Any changes you make will not be saved.')">
                                         Back
                                     </a>
 
-                                    {{-- @if (isset($order->file) == FALSE) --}}
-                                        <button type="submit" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" onclick="return confirm('Are you sure want to submit this data?')">
-                                            Approve
-                                        </button>
+                                    {{-- @if (isset($order->file) == false) --}}
+                                    <button type="submit"
+                                        class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                        onclick="return confirm('Are you sure want to submit this data?')">
+                                        Approve
+                                    </button>
                                     {{-- @else --}}
-                                        {{-- <button type="submit" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" disabled>
+                                    {{-- <button type="submit" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" disabled>
                                             Approve
                                         </button>
                                     @endif --}}
@@ -70,20 +83,29 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white">
-                                <tr class="text-gray-700 border-b">
-                                    <td class="px-1 py-5 text-sm w-2/8">
-                                        <div class="flex items-center text-sm">
-                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded-full" src="https://randomuser.me/api/portraits/men/6.jpg" alt="" loading="lazy" />
-                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                                @foreach ($orderShow as $os)
+                                    <tr class="text-gray-700 border-b">
+                                        <td class="px-1 py-5 text-sm w-2/8">
+                                            <div class="flex items-center text-sm">
+                                                <div class="relative w-10 h-10 mr-3 rounded-full md:block">
+                                                    @php
+                                                        $img = json_decode($os->images);
+                                                        //dd($img[0]);
+                                                    @endphp
+                                                    <img class="object-cover w-full h-full rounded-full"
+                                                        src="{{ asset('/storage/products/images/' . $img[0]) }}" alt=""
+                                                        loading="lazy" />
+                                                    <div class="absolute inset-0 rounded-full shadow-inner"
+                                                        aria-hidden="true">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-black">{{ $os->title }}</p>
+                                                    <p class="text-sm text-gray-400">Size Product</p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p class="font-medium text-black">Nama Product</p>
-                                                <p class="text-sm text-gray-400">Size Product</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    {{-- <td class="w-2/6 px-1 py-5">
+                                        </td>
+                                        {{-- <td class="w-2/6 px-1 py-5">
                                         <div class="flex items-center text-sm">
                                             <div class="relative w-10 h-10 mr-3 rounded-full md:block">
                                                 <img class="object-cover w-full h-full rounded" src="https://randomuser.me/api/portraits/men/3.jpg" alt="" loading="lazy" />
@@ -96,19 +118,20 @@
                                             </div>
                                         </div>
                                     </td> --}}
-                                     <td class="px-1 py-5 text-sm">
-                                        3
-                                    </td>
-                                    <td class="px-1 py-5 text-sm">
-                                        Rp120.000
-                                    </td>
-                                    <td class="px-1 py-5 text-sm">
-                                        <a href="/dashboard/requests/details.php" class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
-                                            Details
-                                        </a>
-                                    </td>
-                                </tr>
-
+                                        <td class="px-1 py-5 text-sm">
+                                            {{ $os->jumlah }}
+                                        </td>
+                                        <td class="px-1 py-5 text-sm">
+                                            @currency($os->price * $os->jumlah)
+                                        </td>
+                                        <td class="px-1 py-5 text-sm">
+                                            <a href="/dashboard/requests/details.php"
+                                                class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
+                                                Details
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

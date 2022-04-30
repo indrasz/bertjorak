@@ -226,31 +226,39 @@
                                         <input type="text" name="idCart[]" value="{{ $c->id_cart }}" hidden>
                                     @endforeach
 
-                                    {{-- Alamat Pembeli --}}
-                                    <label for="alamat" class="mb-1">Alamat Anda</label>
+                                    {{-- Nama Pembeli --}}
+                                    <label for="namaPembeli" class="mb-1">Name</label>
                                     <div class="input-group w-100 mx-auto mb-2">
 
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">Some quick example text to build on the card title and
-                                                make up the bulk of the card's content.</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                                        </div>
+                                        <input type="text" placeholder="John Smith" name="namaPembeli" id="namaPembeli"
+                                            class="form-control input-shipping-details" required>
+                                    </div>
+
+                                    {{-- Nomor Pembeli --}}
+                                    <label for="nomorPembeli" class="mb-1">Phone Number</label>
+                                    <div class="input-group w-100 mx-auto mb-2">
+
+                                        <input type="text" placeholder="08xxxxxxxxxx" name="nomorPembeli" id="nomorPembeli"
+                                            class="form-control input-shipping-details" required>
                                     </div>
 
 
 
                                     {{-- Catatan Dari Pembeli --}}
-                                    <label for="notes" class="mb-1">Catatan</label>
+                                    <label for="notes" class="mb-1">Notes</label>
                                     <div class="input-group w-100 mx-auto mb-2">
 
-                                        <textarea name="notes" id="notes" class="form-control input-shipping-details" style="resize: none;" cols="10"
-                                            rows="5"></textarea>
+                                        <textarea name="notes" placeholder="Jangan lupa dikirim ya!" id="notes" class="form-control input-shipping-details"
+                                            style="resize: none;" cols="10" rows="5"></textarea>
                                     </div>
+
 
                                     <button type="submit" class="btn btn-confirm d-inline-block w-100 p-2 mt-4">
                                         Checkout Now
                                     </button>
+                                    {{-- <button class="btn btn-confirm d-inline-block w-100 p-2 mt-4" id="pay-button">
+                                        Checkout Now
+                                    </button> --}}
 
                                 </div>
                             @endif
@@ -260,13 +268,17 @@
             </div>
         </section>
 
+        <form action="{{ url('/cart/payment') }}" id="sumbit_form" method="POST">
+            @csrf
+            <input type="hidden" name="json" id="json_callback">
+        </form>
+
 
     </section>
 
     {{-- Footer --}}
     @include('includes.Frontend.footer')
 @endsection
-
 
 
 {{-- <label for="email" class="mb-1">Email</label>

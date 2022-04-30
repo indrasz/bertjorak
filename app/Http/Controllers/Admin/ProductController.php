@@ -56,7 +56,8 @@ class ProductController extends Controller
             'price' => 'required',
             'desc' => 'required',
             'stock' => 'required',
-            'size' => 'required',
+            // 'pilihan' => 'required',
+            // 'size' => 'required',
             'weight' => 'required',
         ]);
 
@@ -68,6 +69,7 @@ class ProductController extends Controller
             }
         }
 
+        $pilihanText[] = $request->pilihan;
         $sizeText[] = $request->size;
 
         $file = new Product();
@@ -76,7 +78,12 @@ class ProductController extends Controller
         $file->price = $request->price;
         $file->desc = $request->desc;
         $file->stock = $request->stock;
-        $file->size = json_encode($sizeText);
+        if ($pilihanText[0][0] != null) {
+            $file->pilihan = json_encode($pilihanText);
+        }
+        if ($sizeText[0][0] != null) {
+            $file->size = json_encode($sizeText);
+        }
         $file->weight = $request->weight;
 
         $file->save();
@@ -113,7 +120,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Product::findOrFail($id);
+        //$data = Product::findOrFail($id);
 
         $this->validate($request, [
             'photos' => 'required',
@@ -127,30 +134,63 @@ class ProductController extends Controller
             'weight' => 'required',
         ]);
 
+        $editData = Product::where('id_product', $id)->get();
+
+        if ($request->hasfile('photos')) {
+            // Delete Old Photos
+            foreach ($editData as $key => $value) {
+                foreach (json_decode($value->images, true) as $image) {
+                    File::delete(storage_path() . '/app/public/products/images/' . $value->images);
+                }
+            }
+
+            // Add new images
+            foreach ($request->photos as $image) {
+                ///dd($image);
+                $name = time() . rand(1, 100) . ' - ' . $image->getClientOriginalName();
+                $image->storeAs('products/images/', $name, 'public');
+                $dataNewImages[] = $name;
+            }
+        }
+
+        // foreach ($request->photos as $image) {
+        //     ///dd($image);
+        //     $name = time() . rand(1, 100) . ' - ' . $image->getClientOriginalName();
+        //     $image->storeAs('products/images/', $name, 'public');
+        //     $dataNewImages[] = $name;
+        // }
+
         // if ($request->hasfile('photos')) {
-        //     foreach ($request->file('photos') as $image) {
+        //     foreach ($request->photos as $image) {
+        //         ///dd($image);
         //         $name = time() . rand(1, 100) . ' - ' . $image->getClientOriginalName();
         //         $image->storeAs('products/images/', $name, 'public');
-        //         $data[] = $name;
+        //         $dataNewImages[] = $name;
         //     }
         // }
 
+        $imageInput[] = $request->photos;
+        $pilihanText[] = $request->pilihan;
+        $sizeText[] = $request->size;
+
         $productUp = Product::find($id);
 
-        // $productUp->images = json_encode($data);
+        if ($imageInput[0][0] != null) {
+            $productUp->images = json_encode($dataNewImages);
+        }
         $productUp->title = $request->name;
         $productUp->price = $request->price;
         $productUp->desc = $request->desc;
         $productUp->stock = $request->stock;
-        $productUp->size = $request->size;
+        if ($pilihanText[0][0] != null) {
+            $file->pilihan = json_encode($pilihanText);
+        }
+        if ($sizeText[0][0] != null) {
+            $file->size = json_encode($sizeText);
+        }
         $productUp->weight = $request->weight;
 
         $productUp->save();
-
-        // Delete Multiple Images From Public Folder
-        foreach (json_decode($data->images, true) as $image => $value) {
-            File::delete('storage/products/images/' . $value);
-        }
 
         return redirect()->route('dashboard.product.index');
     }
