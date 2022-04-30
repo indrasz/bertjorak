@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('province_id');
             $table->unsignedInteger('city_id');
-            $table->string('name');
+            $table->string('name_city');
             $table->timestamps();
         });
     }

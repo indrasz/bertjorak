@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', ' Add Service')
+@section('title', ' Add Product')
 
 @section('content')
 
@@ -47,14 +47,29 @@
                                 <div class="px-4 py-5 sm:p-6">
                                     <div class="grid grid-cols-6 gap-6">
 
+                                        {{-- <div class="wrapper">
+                                            <input name="the-textarea" id="the-textarea" maxlength="300"
+                                                placeholder="Start Typin..." autofocus>
+                                            <div id="the-count">
+                                                <span id="current">0</span>
+                                                <span id="maximum">/ 300</span>
+                                            </div>
+                                        </div> --}}
+
+
+
                                         <div class="col-span-6">
                                             <label for="title" class="block mb-3 font-medium text-gray-700 text-md">Nama
                                                 Produk</label>
 
-                                            <input placeholder="Nama Produk yang ingin ditambahkan" type="text" name="name"
-                                                id="name" autocomplete="name"
+                                            <input placeholder="Nama Produk yang ingin ditambahkan" maxlength="100"
+                                                type="text" name="name" id="name" autocomplete="name"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('name') }}" required>
+                                            <div id="the-count" style="float: right; padding-top: 0.5em;">
+                                                <span id="current">0</span>
+                                                <span id="maximum">/ 100</span>
+                                            </div>
 
                                             @if ($errors->has('name'))
                                                 <p class="text-red-500 mb-3 text-sm">{{ $errors->first('name') }}</p>
@@ -108,7 +123,7 @@
                                         <div class="col-span-6">
                                             <label for="desc"
                                                 class="block mb-3 font-medium text-gray-700 text-md">Description</label>
-                                            <textarea name="desc" id="desc" cols="30" rows="10"
+                                            <textarea name="desc" id="desc" placeholder="Description of product" cols="30" rows="10"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('desc') }}"></textarea>
 
@@ -145,13 +160,32 @@
                                         </div>
 
                                         <div class="col-span-6">
+                                            <label for="pilihan"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Pilihan
+                                                Produk (optional)</label>
+
+                                            <input placeholder="Warna / Tipe" type="text" name="pilihan[]" id="pilihan"
+                                                autocomplete="pilihan"
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                value="{{ old('pilihan[]') }}">
+
+                                            <div id="newPilihan"></div>
+
+                                            <button type="button"
+                                                class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                                id="addPilihan">
+                                                Tambahkan Pilihan Yang Tersedia +
+                                            </button>
+                                        </div>
+
+                                        <div class="col-span-6">
                                             <label for="size" class="block mb-3 font-medium text-gray-700 text-md">Size
-                                                Produk</label>
+                                                Produk (optional)</label>
 
                                             <input placeholder="size" type="text" name="size[]" id="size"
                                                 autocomplete="size"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                                                value="{{ old('size[]') }}" required>
+                                                value="{{ old('size[]') }}">
 
                                             <div id="newAdvantagesRow"></div>
 
@@ -194,7 +228,28 @@
     <script src="{{ url('https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}"></script>
 
     <script type="text/javascript">
+        // Count Char
+        $('#name').keyup(function() {
+
+            var characterCount = $(this).val().length,
+                current = $('#current'),
+                maximum = $('#maximum'),
+                theCount = $('#the-count');
+
+            current.text(characterCount);
+        });
+    </script>
+
+    <script type="text/javascript">
         // add row
+        $("#addPilihan").click(function() {
+            var html = '';
+            html +=
+                '<input placeholder="Warna / Tipe" type="text" name="pilihan[]" id="pilihan" autocomplete="pilihan" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>';
+
+            $('#newPilihan').append(html);
+        });
+
         $("#addAdvantagesRow").click(function() {
             var html = '';
             html +=

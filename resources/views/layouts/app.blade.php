@@ -5,15 +5,22 @@
 
     @include('includes.dashboard.meta')
 
-    <title>@yield('title') | {{ Auth::user()->name }}</title>
+    <title>@yield('title') | Bertjorak</title>
 
     @stack('before-style')
 
     @include('includes.dashboard.style')
 
     @stack('after-style')
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
     @livewireStyles
+
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-kaa6AvrE4lw2X9z1"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body class="antialiased">

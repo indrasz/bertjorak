@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('provinces', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('province_id');
-            $table->string('name');
+            $table->string('name_province');
             $table->timestamps();
         });
     }

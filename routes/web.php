@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\DetailController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TransaksiShow;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +28,19 @@ use Illuminate\Support\Facades\Route;
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('product', [HomeController::class, 'allProduct'])->name('all-product');
+
 // Detail Product
 Route::resource('product/detail', DetailController::class);
 
 // Cart
 Route::resource('cart', CartController::class)->middleware('is_buyer');
+
+// Transaksi
+Route::resource('detailitem', TransaksiShow::class)->middleware('auth:sanctum');
+
+// Payment
+Route::post('transaction/payment', [TransactionController::class, 'payment_pos']);
 
 // Dashboard Admin
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {

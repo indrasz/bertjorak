@@ -19,8 +19,12 @@ class ProfileController extends Controller
 
     public function edit($id)
     {
-        $editProfile = User::where('id', $id)->get();
-        return view('pages.dashboard.profile.edit')->with('editProfile', $editProfile);
+        if (Auth::user()->id == $id) {
+            $editProfile = User::where('id', $id)->get();
+            return view('pages.dashboard.profile.edit')->with('editProfile', $editProfile);
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function update(Request $request, $id)

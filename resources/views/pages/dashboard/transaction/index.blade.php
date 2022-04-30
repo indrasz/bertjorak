@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        {{-- @if (count($orderData) >= 1) --}}
+        @if (count($orderData) >= 1)
             <section class="container px-6 mx-auto mt-5">
                 <div class="grid gap-5 md:grid-cols-12">
                     <main class="col-span-12 p-4 md:pt-0">
@@ -30,6 +30,7 @@
                                 <thead>
                                     <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
                                         <th class="py-4" scope="">Kode Order</th>
+                                        <th class="py-4" scope="">Nama Pemesan</th>
                                         <th class="py-4" scope="">Total Jenis Barang</th>
                                         <th class="py-4" scope="">Tanggal Pemesanan</th>
                                         <th class="py-4" scope="">Total Harga</th>
@@ -38,53 +39,52 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white">
-                                    {{-- @foreach ($orderData as $o) --}}
-                                        <tr class="text-gray-700 border-b">
+                                    @foreach ($orderData as $o)
+                                        <tr class="text-gray-700">
                                             <td class="px-1 py-5 text-sm w-2/8">
                                                 <div class="flex items-center text-sm">
                                                     <div>
                                                         <p class="font-medium text-black">
-                                                            {{-- {{ $o->id_order }} --}}
+                                                            {{ $o->kode_order }}
                                                         </p>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                @php
-                                                    // $getIdCart = json_decode($o->id_cart);
-                                                    // $getCount = count($getIdCart);
-                                                @endphp
-                                                {{-- {{ $getCount }} Jenis Barang --}}
+                                                {{ $o->name }}
+                                            </td>
+                                            <td class="px-1 py-5 text-sm">
+                                                2 Jenis Barang
                                             </td>
                                             <td class="px-1 py-5 text-sm">
                                                 @php
-                                                    // $date = date_create($o->date_order);
+                                                    $date = date_create($o->date_order);
                                                 @endphp
-                                                {{-- {{ date_format($date, 'D, d/m/y') }} --}}
+                                                {{ date_format($date, 'D, d/m/y') }}
                                                 <br>
-                                                {{-- {{ date_format($date, 'H:i:s') }} --}}
+                                                {{ date_format($date, 'H:i:s') }}
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                Rp120.000
+                                                @currency($o->totalCost)
                                             </td>
                                             <td class="px-1 py-5 text-sm text-green-500 text-md">
-                                                {{-- {{ $o->status }} --}}
+                                                {{ $o->status }}
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                <a href="{{ route('dashboard.transaction.edit', 1) }}"
+                                                <a href="{{ route('dashboard.transaction.edit', $o->kode_order) }}"
                                                     class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
                                                     Edit
                                                 </a>
                                             </td>
                                         </tr>
-                                    {{-- @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </main>
                 </div>
             </section>
-        {{-- @endif --}}
+        @endif
     </main>
 
 @endsection

@@ -331,6 +331,20 @@
             }
         }
 
+        .cart-badge {
+            display: inline-block;
+            min-width: 2em;
+            /* em unit */
+            padding: 0.3em;
+            /* em unit */
+            border-radius: 50%;
+            font-size: 10px;
+            text-align: center;
+            background: #29a867;
+            color: #fefefe;
+            margin-left: -10px;
+        }
+
     </style>
     <div class="header-5-1 container  mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -475,7 +489,7 @@
                         <ul class="dropdown-menu" style="cursor: pointer">
 
                             <li>
-                                <a href="#"
+                                <a href="{{ route('all-product') }}"
                                     class="dropdown-hover d-flex align-items-center justify-content-center text-start text-decoration-none">
                                     <img class=""
                                         src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header5/Header-5-5.png"
@@ -532,8 +546,19 @@
                             <li class="nav-item me-2 dropdown">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
                                     data-bs-toggle="dropdown">
-                                    <img src="{{ asset('frontend/images/icon-user.png') }}" class="me-2"
-                                        alt="icon-user" width="45" height="45">
+                                    @php
+                                        $convertImg = json_decode(Auth::user()->avatar);
+                                    @endphp
+
+                                    @if ($convertImg == null)
+                                        <img src="{{ asset('assets/images/blank-profile-picture.png') }}"
+                                            class="me-2" alt="icon-user" width="45" height="45"
+                                            style="border-radius: 50%;">
+                                    @elseif ($convertImg != null)
+                                        <img src="{{ asset('/storage/account/' . Auth::user()->id . '/avatar/' . $convertImg) }}"
+                                            class="me-2" alt="icon-user" width="45" height="45"
+                                            style="border-radius: 50%;">
+                                    @endif
                                     {{ Auth::user()->name }}
                                 </a>
                                 <ul class="dropdown-menu" style="cursor: pointer">
@@ -566,6 +591,7 @@
                             <livewire:cart.count-cart />
                             {{-- <div class="cart-badge">3</div> --}}
                         </a>
+
                         {{-- Admin --}}
                     @else
                         <a href="{{ route('dashboard.index') }}">
