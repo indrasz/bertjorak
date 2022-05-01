@@ -59,8 +59,8 @@
     <h1 class="fs-1 fw-bold" style="font-weight: bold; font-size: 1.25rem;">Address
     </h1>
     <br>
-    <div class="grid grid-cols-6 gap-6">
-        <div class="md:col-span-6 lg:col-span-3">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
+        <div class="col-span-3">
             <label for="type_address" class="block mb-3 font-medium text-gray-700 text-md">Place Type </label>
             @if ($edit_data->type_address == null)
                 <input placeholder="Kost / Kantor / Rumah" type="text" name="type_address" id="type_address"
@@ -73,7 +73,7 @@
             @endif
         </div>
 
-        <div class="md:col-span-6 lg:col-span-3">
+        <div class="col-span-3">
             <label for="provincesId" class="block mb-3 font-medium text-gray-700 text-md">Provinsi</label>
             <select name="provincesId" id="provincesId" wire:model="provinceId"
                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
@@ -93,7 +93,7 @@
             </select>
         </div>
 
-        <div class="md:col-span-6 lg:col-span-3">
+        <div class="col-span-3">
             <label for="cityId" class="block mb-3 font-medium text-gray-700 text-md">City</label>
             @if (is_array($cities) || is_object($cities))
                 <select name="cityId" id="cityId"
@@ -105,7 +105,7 @@
                 </select>
             @endif
         </div>
-        <div class="md:col-span-6 lg:col-span-3">
+        <div class="col-span-3">
             <label for="zipCode" class="block mb-3 font-medium text-gray-700 text-md">Zip
                 Code</label>
             @if ($edit_data->zipcode == null)
@@ -119,7 +119,7 @@
         </div>
     </div>
 
-    <div class="md:col-span-6 lg:col-span-3 py-5">
+    <div class="col-span-3 py-5">
         <label for="detailAddress" class="block mb-3 font-medium text-gray-700 text-md">Address</label>
         @if ($edit_data->detail_address == null)
             <textarea name="detailAddress" id="detailAddress" cols="30" rows="10" autocomplete="detailAddress"

@@ -25,7 +25,137 @@
         <section class="container px-6 mx-auto mt-5">
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="col-span-12 p-4 md:pt-0">
-                    
+                    <section class="featured bg-noise-texture-1 font-worksans">
+                        <style>
+                            @import url("https://fonts.googleapis.com/css2?family=Sarala:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap");
+
+                            .font-sarala {
+                                font-family: 'Sarala', sans-serif;
+                            }
+
+                            .font-worksans {
+                                font-family: 'Work Sans', sans-serif;
+                            }
+
+                            :root {
+                                --soft-purple-1: #6558F5;
+                                --soft-purple-2: #9392CC;
+                                --soft-purple-3: #9D8FFB;
+                                --dark-navy: #0D092E;
+                                --deepBlue-1: #1F1569;
+                                --deepBlue-2: #081537;
+                            }
+
+                            .bg-dark-navy {
+                                background-color: var(--dark-navy);
+                            }
+
+                            .bg-soft-purple-1 {
+                                background-color: var(--soft-purple-1);
+                            }
+
+                            .text-soft-purple-2 {
+                                color: var(--soft-purple-2);
+                            }
+
+                            .text-soft-purple-3 {
+                                color: var(--soft-purple-3);
+                            }
+
+                            .border-borderColor-1 {
+                                border-color: #242359;
+                            }
+
+                            .border-borderColor-2 {
+                                border-color: #5452A5;
+                            }
+
+                            .text-40 {
+                                font-size: 40px;
+                            }
+
+                            .rounded-10 {
+                                border-radius: 10px;
+                            }
+
+                            .rounded-t-10 {
+                                border-top-left-radius: 10px;
+                                border-top-right-radius: 10px;
+                            }
+
+                            .bg-noise-texture-1 {
+                                background-image: url('https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-Crypto/noise-texture.png');
+                            }
+
+                            .bg-noise-texture-2 {
+                                background-image: url('https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-Crypto/noise-texture-2.png');
+                            }
+
+                            .card-creator {
+                                border: 1.5px solid rgba(255, 255, 255, 0.7);
+                                background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0.55%, rgba(255, 255, 255, 0.06) 99.99%);
+                            }
+
+                            .pt-60 {
+                                padding-top: 60px;
+                            }
+
+                            .w-240 {
+                                width: 240px;
+                            }
+
+                        </style>
+                        <div
+                            class="flex flex-col flex-wrap items-start justify-between gap-10 space-y-2 md:flex-row md:gap-0">
+                            <!-- card 1 -->
+                            <div class="backdrop-filter backdrop-blur-xl rounded-10 bg-white w-full">
+
+                                <!-- card content -->
+                                <div class="px-8 rounded-10 card-creator pt-60 pb-10 w-full">
+                                    <div class="relative z-10 flex flex-col items-left">
+                                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-Crypto/creator-1.png" alt="profile" class="w-240" />
+                                    </div>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
+                                        <div class="col-span-3 mt-3">
+                                            <label class="block mb-3 font-medium text-gray-700 text-md">Email Address</label>
+                                            <div class="block w-full mt-1 sm:text-sm" >
+                                                email
+                                            </div>
+                                        </div>
+
+                                        <div class="col-span-3 mt-3">
+                                            <label for="name"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Name</label>
+                                            <div class="block w-full mt-1 sm:text-sm" >
+                                                nama
+                                            </div>
+                                        </div>
+                                         <div class="col-span-3 mt-3">
+                                            <label class="block mb-3 font-medium text-gray-700 text-md">Username</label>
+                                            <div class="block w-full mt-1 sm:text-sm" >
+                                                username
+                                            </div>
+                                        </div>
+
+                                        <div class="col-span-3 mt-3">
+                                            <label for="name"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Contact Number</label>
+                                            <div class="block w-full mt-1 sm:text-sm" >
+                                                contact number
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div> <!-- card 2 -->
+
+                        </div>
+                    </section>
+
                 </main>
             </div>
         </section>

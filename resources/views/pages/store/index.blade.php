@@ -326,6 +326,8 @@
 
             body .resort .content .gradient-travland {
                 background-image: linear-gradient(113.4deg, #7F31FF 0%, #FA7219 100%);
+                max-width: 40px;
+                max-height: 40px;
             }
 
             body .resort .content .popular-card {
@@ -386,6 +388,7 @@
                     @foreach ($products as $pl)
                         <div class="box-border relative bg-white rounded-2xl popular-card">
                             <div class="flex flex-col">
+<<<<<<< HEAD
                                 <a href="{{ route('detail.show', $pl->id_product) }}"
                                     class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 rounded-2xl hover:bg-opacity-20">
                                     <div class="position-absolute z-10 pt-3 ps-3">
@@ -403,6 +406,23 @@
                                     </div>
 
                                     <div class="flex flex-col gap-2 px-4 z-10">
+=======
+                                <div class="position-absolute z-10 pt-3 ps-3">
+                                    <div
+                                        class="d-flex p-3 font-semibold text-white text-center justify-content-center align-items-center rounded-circle badge-rating gradient-travland">
+                                        {{ $pl->stock }}
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    @php
+                                        $property_images = json_decode($pl->images);
+                                    @endphp
+                                    <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
+                                        alt="bertjorak" class="image-product w-100" height="250px" />
+                                </div>
+                                <div class="flex flex-col gap-2 px-4">
+                                    <a href="{{ route('detail.show', $pl->id_product) }}" style="text-decoration: none;">
+>>>>>>> 84a9b568e3e011d3f903a664ace874b1de1398b6
                                         <div class="title">{{ $pl->title }}</div>
                                         <div class="price"> @currency($pl->price)</div>
                                     </div>
@@ -410,7 +430,33 @@
                             </div>
                         </div>
                     @endforeach
+<<<<<<< HEAD
 
+=======
+                @else
+                    <div class="box-border relative bg-white rounded-2xl popular-card">
+                        <div class="flex flex-col">
+                            <div class="position-absolute z-10 pt-3 ps-3">
+                                <div
+                                    class="d-flex p-3 font-semibold text-white text-center justify-content-center align-items-center rounded-circle badge-rating gradient-travland">
+                                    {{ $pl->stock }}
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <img src="{{ asset('/frontend/images/product1.jpg') }}" alt="GetShayna"
+                                    class="image-product w-100" height="250px" />
+                            </div>
+                            <div class="flex flex-col gap-2 px-4">
+                                <a href="{{ route('detail.show', $pl->id_product) }}" style="text-decoration: none;">
+                                    <div class="title">{{ $pl->title }}</div>
+                                </a>
+                                <div class="price"> @currency($pl->price)</div>
+                            </div>
+                            <a href="#"
+                                class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
+                        </div>
+                    </div>
+>>>>>>> 84a9b568e3e011d3f903a664ace874b1de1398b6
                 @endif
 
 
