@@ -17,16 +17,9 @@
 
     <section class="related-product w-100 h-100">
         <div class="container px-4 mt-4">
-<<<<<<< HEAD
 
             <livewire:product.product-list />
             {{-- <div class="row">
-=======
-            <div class="caption-related-product ps-3">
-                Explore Our Product
-            </div>
-            <div class="row">
->>>>>>> 84a9b568e3e011d3f903a664ace874b1de1398b6
                 <div class="col-12 col-lg-4">
                     <div class="card-related-carousel">
                         <div class="image-placeholder">
@@ -94,20 +87,17 @@
                 </div>
            </div> --}}
 
-<<<<<<< HEAD
-            {{-- <div class="d-flex justify-content-center align-items-center text-center py-3">
+            <<<<<<< HEAD {{-- <div class="d-flex justify-content-center align-items-center text-center py-3">
                 <button class="btn btn-primary px-4">
                     load more
                 </button>
-            </div> --}}
-
-=======
-           <div class="d-flex justify-content-center align-items-center text-center py-3">
-               <button class="btn btn-primary px-4">
-                   load more
-               </button>
-           </div>
->>>>>>> 84a9b568e3e011d3f903a664ace874b1de1398b6
+            </div> --}}=======<div
+                class="d-flex justify-content-center align-items-center text-center py-3">
+                <button class="btn btn-primary px-4">
+                    load more
+                </button>
+        </div>
+        >>>>>>> 84a9b568e3e011d3f903a664ace874b1de1398b6
         </div>
     </section>
 

@@ -32,25 +32,33 @@
                                             Information</h1>
                                         <br>
                                         <div class="">
-                                                <div class="flex items-center mt-1" style="width: 15%;">
-                                                    @php
-                                                        $convertImg = json_decode($edit->avatar);
-                                                    @endphp
-                                                    @if ($convertImg == null)
+                                            <div class="flex items-center mt-1">
+                                                @php
+                                                    $convertImg = json_decode($edit->avatar);
+                                                @endphp
+                                                @if ($convertImg == null)
+                                                    <div class="overflow-hidden rounded-full"
+                                                        style="background-color: pink; width: 10em; height: 10em;">
                                                         <img src="{{ asset('assets/images/blank-profile-picture.png') }}"
-                                                            alt="profile image" id="img_display"
-                                                            style="border-radius: 50%;">
-                                                    @elseif ($convertImg != null)
+                                                            alt="profile"
+                                                            style="width: 100%; height: 100%; object-fit: contain;"
+                                                            id="img_display" />
+                                                    </div>
+                                                @elseif ($convertImg != null)
+                                                    <div class="overflow-hidden rounded-full"
+                                                        style="background-color: pink; width: 10em; height: 10em;">
                                                         <img src="{{ asset('/storage/account/' . Auth::user()->id . '/avatar/' . $convertImg) }}"
-                                                            alt="profile image" id="img_display"
-                                                            style="border-radius: 50%;">
-                                                    @endif
+                                                            alt="profile"
+                                                            style="width: 100%; height: 100%; object-fit: contain;"
+                                                            id="img_display" />
+                                                    </div>
+                                                @endif
 
 
-                                                </div>
-                                                <input type="file" accept="image/*" name="avatar" id="avatar"
-                                                    class="py-4" onchange="loadFile(event)">
                                             </div>
+                                            <input type="file" accept="image/*" name="avatar" id="avatar"
+                                                class="py-4" onchange="loadFile(event)">
+                                        </div>
                                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
 
 

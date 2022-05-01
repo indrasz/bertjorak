@@ -111,46 +111,155 @@
                             <div class="backdrop-filter backdrop-blur-xl rounded-10 bg-white w-full">
 
                                 <!-- card content -->
-                                <div class="px-8 rounded-10 card-creator pt-60 pb-10 w-full">
-                                    <div class="relative z-10 flex flex-col items-left">
-                                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content-Crypto/creator-1.png" alt="profile" class="w-240" />
+                                @foreach ($users as $u)
+                                    <div class="px-8 rounded-10 card-creator pt-60 pb-10 w-full">
+                                        <h5 class="font-semibold text-xl">Personal Information</h5>
+                                        <br>
+                                        <div class="relative z-10 flex flex-col items-left">
+                                            @php
+                                                $convertImg = json_decode($u->avatar);
+                                            @endphp
+                                            @if ($convertImg == null)
+                                                <div class="overflow-hidden rounded-full"
+                                                    style="background-color: pink; width: 10em; height: 10em;">
+                                                    <img src="{{ asset('assets/images/blank-profile-picture.png') }}"
+                                                        alt="profile"
+                                                        style="width: 100%; height: 100%; object-fit: contain;" />
+                                                </div>
+                                            @elseif ($convertImg != null)
+                                                <div class="overflow-hidden rounded-full"
+                                                    style="background-color: pink; width: 10em; height: 10em;">
+                                                    <img src="{{ asset('/storage/account/' . Auth::user()->id . '/avatar/' . $convertImg) }}"
+                                                        alt="profile"
+                                                        style="width: 100%; height: 100%; object-fit: contain;" />
+                                                </div>
+                                            @endif
+
+
+                                        </div>
+
+                                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
+                                            <div class="col-span-3 mt-3">
+                                                <label class="block mb-3 font-medium text-gray-700 text-md">Email
+                                                    Address</label>
+                                                <div class="block w-full mt-1 sm:text-sm">
+                                                    {{ $u->email }}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-span-3 mt-3">
+                                                <label for="name"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Name</label>
+                                                <div class="block w-full mt-1 sm:text-sm">
+                                                    {{ $u->name }}
+                                                </div>
+                                            </div>
+                                            <div class="col-span-3 mt-3">
+                                                <label class="block mb-3 font-medium text-gray-700 text-md">Username</label>
+                                                <div class="block w-full mt-1 sm:text-sm">
+                                                    {{ '@' . $u->username }}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-span-3 mt-3">
+                                                <label for="name"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Contact
+                                                    Number</label>
+                                                <div class="block w-full mt-1 sm:text-sm">
+                                                    {{ $u->phone_number }}
+                                                </div>
+                                            </div>
+
+                                            {{-- @php
+                                                $dd = json_decode($userProv);
+                                                dd($dd->id_province);
+                                                // foreach ($userProv as $keyProv) {
+                                                //     $prov = $keyProv;
+                                                //     dd($prov);
+                                                // }
+                                            @endphp --}}
+
+                                            <div class="col-span-3 mt-3">
+                                                <label for="name" class="block mb-3 font-medium text-gray-700 text-md">Label
+                                                    Address</label>
+                                                <div class="block w-full mt-1 sm:text-sm">
+                                                    @if ($u->type_address != null)
+                                                        {{ $u->type_address }}
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            @php
+                                                // Get Province
+                                                $getProv = $userProv->where('province_id', $u->id_province);
+                                                foreach ($getProv as $keyProv) {
+                                                    $valProv = $keyProv->name_province;
+                                                }
+                                                
+                                                // Get City
+                                                $getCity = $userCity->where('city_id', $u->id_city);
+                                                foreach ($getCity as $keyCity) {
+                                                    $valCity = $keyCity->name_city;
+                                                }
+                                            @endphp
+                                            <div class="col-span-3 mt-3">
+                                                <label for="name"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Province</label>
+                                                <div class="block w-full mt-1 sm:text-sm">
+                                                    @if ($u->id_province != null)
+                                                        {{ $valProv }}
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-span-3 mt-3">
+                                                <label for="name"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">City</label>
+                                                <div class="block w-full mt-1 sm:text-sm">
+                                                    @if ($u->id_city != null)
+                                                        {{ $valCity }}
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-span-3 mt-3">
+                                                <label for="name" class="block mb-3 font-medium text-gray-700 text-md">Zip
+                                                    Code</label>
+                                                <div class="block w-full mt-1 sm:text-sm">
+                                                    @if ($u->zipcode != null)
+                                                        {{ $u->zipcode }}
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+                                        <div class="col-span-3 mt-3">
+                                            <label for="name" class="block mb-3 font-medium text-gray-700 text-md">Detail
+                                                Address</label>
+                                            <div class="block w-full mt-1 sm:text-sm text-justify">
+                                                @if ($u->detail_address != null)
+                                                    {{ $u->detail_address }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
-                                        <div class="col-span-3 mt-3">
-                                            <label class="block mb-3 font-medium text-gray-700 text-md">Email Address</label>
-                                            <div class="block w-full mt-1 sm:text-sm" >
-                                                email
-                                            </div>
-                                        </div>
-
-                                        <div class="col-span-3 mt-3">
-                                            <label for="name"
-                                                class="block mb-3 font-medium text-gray-700 text-md">Name</label>
-                                            <div class="block w-full mt-1 sm:text-sm" >
-                                                nama
-                                            </div>
-                                        </div>
-                                         <div class="col-span-3 mt-3">
-                                            <label class="block mb-3 font-medium text-gray-700 text-md">Username</label>
-                                            <div class="block w-full mt-1 sm:text-sm" >
-                                                username
-                                            </div>
-                                        </div>
-
-                                        <div class="col-span-3 mt-3">
-                                            <label for="name"
-                                                class="block mb-3 font-medium text-gray-700 text-md">Contact Number</label>
-                                            <div class="block w-full mt-1 sm:text-sm" >
-                                                contact number
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                @endforeach
 
 
 
-                                </div>
                             </div> <!-- card 2 -->
 
                         </div>

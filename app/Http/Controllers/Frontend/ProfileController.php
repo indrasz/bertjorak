@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\Province;
 use App\Models\User;
 use Auth;
 use File;
@@ -13,8 +15,14 @@ class ProfileController extends Controller
     public function index()
     {
         $authId = Auth::user()->id;
-        $user = User::where('id', $authId)->get();
-        return view('pages.dashboard.profile.index')->with('user', $user);
+        $user = User::where('users.id', $authId)->get();
+
+        $userProv = Province::all();
+
+        $userCity = City::all();
+        //dd($userProv->id_province);
+
+        return view('pages.dashboard.profile.index')->with('users', $user)->with('userProv', $userProv)->with('userCity', $userCity);
     }
 
     public function edit($id)

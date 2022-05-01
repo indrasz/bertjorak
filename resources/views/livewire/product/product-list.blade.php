@@ -4,7 +4,7 @@
             <span class="fa fa-search form-control-feedback"></span>
         </div>
         <input type="text" class="px-4 py-2 w-full border-transparent focus:border-transparent focus:ring-0"
-            wire:model="search" placeholder="Search...">
+            style="outline: none;" wire:model="search" placeholder="Search...">
     </div>
 
 
@@ -14,7 +14,7 @@
 
     <div class="row min-h-screen">
 
-        @foreach ($products as $p)
+        @forelse ($products as $p)
             <div class="col-12 col-lg-4">
                 <a href="{{ route('detail.show', $p->id_product) }}">
                     <div class="card-related-carousel">
@@ -42,7 +42,12 @@
                     </div>
                 </a>
             </div>
-        @endforeach
+        @empty
+            <div class="w-full h-screen" style="background-color: pinkl">
+                <img src="{{ asset('assets/images/no-product-found.png') }}" style="width: 50%;"
+                    class="mx-auto" alt="Not Found">
+            </div>
+        @endforelse
 
         {{ $products->links() }}
 

@@ -128,7 +128,7 @@
                                                 {{ $c->title }}
                                             </div>
                                             <div class="size-preview">
-                                                Jumlah item : {{ $c->jumlah }} item
+                                                Total items : {{ $c->jumlah }} item
                                             </div>
                                             <div class="price-preview">
                                                 @currency($c->price)
