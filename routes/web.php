@@ -14,6 +14,8 @@ use App\Http\Controllers\Frontend\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiShow;
 
+use App\Http\Livewire\Transaction\PushPaymentData;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,23 +41,25 @@ Route::resource('cart', CartController::class)->middleware('is_buyer');
 // Transaksi
 Route::resource('detailitem', TransaksiShow::class)->middleware('auth:sanctum');
 
-// Payment
-Route::post('transaction/payment', [TransactionController::class, 'payment_pos']);
+
 
 // Dashboard Admin
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
-        Route::resource('user', UserController::class)->only([
-            'index', 'create', 'store', 'destroy', 'show',
-        ]);
+        // Route::resource('user', UserController::class)->only([
+        //     'index', 'create', 'store', 'destroy', 'show',
+        // ]);
 
-        Route::resource('user', UserController::class);
+        // Route::resource('user', UserController::class);
         Route::resource('profile', ProfileController::class);
         Route::resource('product', ProductController::class)->middleware('is_admin');
         Route::resource('transaction', TransactionController::class)->only([
             'index', 'create', 'store', 'edit', 'destroy', 'show',
-        ]);;
+        ]);
+
+        // Payment
+        Route::post('transaction/payment', [PushPaymentData::class, 'payment_pos']);
     });
 });
 

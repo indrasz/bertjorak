@@ -12,7 +12,6 @@
     @include('includes.dashboard.style')
 
     @stack('after-style')
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
     @livewireStyles
 </head>

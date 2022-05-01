@@ -7,12 +7,19 @@
     {{-- Navigation bar --}}
     @include('includes.Frontend.navbar')
 
+    <style>
+        .card-related-carousel:hover {
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            transition: 1s;
+        }
+
+    </style>
+
     <section class="related-product w-100 h-100">
         <div class="container px-4 mt-4">
-            <div class="caption-related-product ps-3">
-                Explore Our Product
-            </div>
-           <div class="row">
+
+            <livewire:product.product-list />
+            {{-- <div class="row">
                 <div class="col-12 col-lg-4">
                     <div class="card-related-carousel">
                         <div class="image-placeholder">
@@ -78,13 +85,13 @@
                         </div>
                     </div>
                 </div>
-           </div>
+           </div> --}}
 
-           <div class="d-flex justify-content-center align-items-center text-center py-3">
-               <button class="btn btn-primary px-4">
-                   load more
-               </button>
-           </div>
+            {{-- <div class="d-flex justify-content-center align-items-center text-center py-3">
+                <button class="btn btn-primary px-4">
+                    load more
+                </button>
+            </div> --}}
 
         </div>
 

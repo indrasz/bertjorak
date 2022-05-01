@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\City;
 use App\Models\Order;
 use App\Models\Payment;
+use App\Models\Province;
 use Auth;
 use App\Services\Midtrans\CreateSnapTokenService;
 use Illuminate\Http\Request;
@@ -66,6 +68,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $authId = Auth::user()->id;
 
         $id_cart = $request->idCart;
@@ -73,11 +76,13 @@ class TransactionController extends Controller
         $transaction = new Transaction();
 
         $transaction->status = "Pending";
+        $transaction->notes = $request->notes;
         $transaction->id_kurir = $request->pilihKurir;
         $transaction->id_jenisKurir = $request->pilihJenisKurir;
         $transaction->ongkir = $request->ongkir;
         $transaction->totalCost = $request->totalPrice;
         $transaction->namaPembeli = $request->namaPembeli;
+        $transaction->emailPembeli = $request->emailPembeli;
         $transaction->phonePembeli = $request->nomorPembeli;
         $transaction->date_transaction = Carbon::now();
 
@@ -89,24 +94,21 @@ class TransactionController extends Controller
             $date = date('d', $time);
             $order->kode_order = "BRJ-" . $date . rand() . $authId;
             $order->id_buyer = $authId;
-            // foreach ($id_cart as $key => $value) {
-            //     $getIdCart[] = $value;
-            //     $order->id_cart = json_encode($getIdCart);
-            // }
             $order->id_transaction = $transaction->id_transaction;
             $order->date_order = Carbon::now();
 
             if ($order->save()) {
                 foreach ($id_cart as $key => $value) {
-                    $cartUpdate = Cart::where('id_cart', $value)->update([
+                    Cart::where('id_cart', $value)->update([
                         'id_order' => $order->id,
                         'status' => 'Sukses',
                     ]);
                 }
+                if (Auth::user()->hasRole('buyer')) {
+                    return redirect()->route('dashboard.transaction.show', $order->kode_order);
+                }
             }
         }
-
-        return redirect()->route('dashboard.transaction.edit', $order->kode_order);
     }
 
     /**
@@ -115,68 +117,40 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $order, $id)
+    public function show(Payment $payment, $id)
     {
-        $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->join('provinces', 'users.id_province', '=', 'provinces.province_id')->join('cities', 'users.id_city', '=', 'cities.city_id')->get();
+        $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
-        // // Midtrans
-        // // Set your Merchant Server Key
-        // \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        // // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        // \Midtrans\Config::$isProduction = false;
-        // // Set sanitization on (default)
-        // \Midtrans\Config::$isSanitized = true;
-        // // Set 3DS transaction for credit card to true
-        // \Midtrans\Config::$is3ds = true;
+        $province = Province::all();
 
-        // foreach ($orderShow as $key) {
-        //     //dd($key);
-        //     $transaction_details[] = [
-        //         'id' => $key->id_product,
-        //         'price' => $key->price,
-        //         'quantity' => $key->jumlah,
-        //         'name' => $key->title,
-        //     ];
-        // }
+        $city = City::all();
 
-        // $transaction_details[] = [
-        //     'id' => $key->id_jenisKurir,
-        //     'price' => $key->ongkir,
-        //     'quantity' => 1,
-        //     'name' => $key->id_kurir,
-        // ];
+        $paymentAll = Payment::all();
 
+        foreach ($paymentAll as $key) {
+            $getToken = $key;
+            //dd($key->snap_token);
+        }
 
+        // $midtrans = new CreateSnapTokenService($order);
+        // $snapToken = $midtrans->getSnapToken($id);
 
-        // $params = array(
-        //     'transaction_details' => array(
-        //         'order_id' => rand(),
-        //         'gross_amount' => null,
-        //     ),
-        //     'item_details' => $transaction_details,
-        //     'customer_details' => array(
-        //         'first_name' => Auth::user()->name,
-        //         'email' => Auth::user()->email,
-        //         'phone' => Auth::user()->phone_number,
-        //     ),
-        // );
+        $snapToken = $payment->snap_token;
+        //dd($snapToken);
+        if (is_null($snapToken)) {
+            // Jika snap token masih NULL, buat token snap dan simpan ke database
 
-        // $snapToken = \Midtrans\Snap::getSnapToken($params);
-        $snapToken = $order->snap_token;
-        $midtrans = new CreateSnapTokenService($order);
-        $snapToken = $midtrans->getSnapToken($id);
-        // if (is_null($snapToken)) {
-        //     // Jika snap token masih NULL, buat token snap dan simpan ke database
+            $midtrans = new CreateSnapTokenService($payment);
+            $snapToken = $midtrans->getSnapToken();
+            //dd($snapToken);
+
+            $payment->order_id = rand();
+            $payment->snap_token = $snapToken;
+            $payment->save();
+        }
 
 
-
-        //     $order->snap_token = $snapToken;
-        //     $order->save();
-        // }
-
-
-        return view('pages.store.dashboard-user.transaction.detail')->with('orderShow', $orderShow)->with('snap_token', $snapToken);
-        // return view('pages.store.dashboard-user.transaction.detail');
+        return view('pages.store.dashboard-user.transaction.detail')->with('orderShow', $orderShow)->with('snap_token', $snapToken)->with('province', $province)->with('city', $city);
     }
 
     /**
@@ -219,30 +193,5 @@ class TransactionController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-    public function payment_pos(Request $request)
-    {
-        $json = json_decode($request->get('json'));
-        //dd($json);
-
-        $payment = new Payment();
-
-        $payment->id_order = $request->idOrder;
-        $payment->status_code = $json->status_code;
-        $payment->status_message = $json->status_message;
-        $payment->transaction_id = $json->transaction_id;
-        $payment->order_id = $json->order_id;
-        $payment->gross_amount = $json->gross_amount;
-        $payment->payment_type = $json->payment_type;
-        $payment->transaction_time = $json->transaction_time;
-        $payment->transaction_status = $json->transaction_status;
-        $payment->payment_code = isset($json->payment_code) ? $json->payment_code : null;
-        $payment->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
-
-        if ($payment->save()) {
-            return redirect()->back();
-        }
     }
 }

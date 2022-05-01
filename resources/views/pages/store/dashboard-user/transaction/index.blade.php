@@ -12,7 +12,7 @@
                         My Transaction
                     </h2>
                     <p class="text-sm text-gray-400">
-                        {{ count($orderData) }} Total Transaction
+                        {{ count($orderData) }} Total Transactions
                     </p>
                 </div>
                 <div class="col-span-4 lg:text-right">
@@ -29,10 +29,10 @@
                             <table class="w-full" aria-label="Table">
                                 <thead>
                                     <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
-                                        <th class="py-4" scope="">Kode Order</th>
+                                        <th class="py-4" scope="">Order Code</th>
                                         <th class="py-4" scope="">Total Jenis Barang</th>
-                                        <th class="py-4" scope="">Tanggal Pemesanan</th>
-                                        <th class="py-4" scope="">Total Harga</th>
+                                        <th class="py-4" scope="">Date Order</th>
+                                        <th class="py-4" scope="">Total Price</th>
                                         <th class="py-4" scope="">Status</th>
                                         <th class="py-4" scope="">Action</th>
                                     </tr>
@@ -57,7 +57,9 @@
                                                 </div>
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                2 Jenis
+                                                @php
+                                                    //dd($o);
+                                                @endphp
                                             </td>
                                             <td class="px-1 py-5 text-sm">
                                                 @php

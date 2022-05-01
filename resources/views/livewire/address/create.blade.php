@@ -77,9 +77,18 @@
             <label for="provincesId" class="block mb-3 font-medium text-gray-700 text-md">Provinsi</label>
             <select name="provincesId" id="provincesId" wire:model="provinceId"
                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                <option value="0" selected>Select Province</option>
+                @php
+                    foreach ($provinces as $province) {
+                        $getProv = $province;
+                    }
+                @endphp
+                @if ($edit_data->id_province = $getProv)
+                    <option value="{{ $getProv->province_id }}" selected>{{ $getProv->name_province }}</option>
+                @else
+                    <option value="0" selected>Select Province</option>
+                @endif
                 @foreach ($provinces as $province)
-                    <option value="{{ $province->province_id }}">{{ $province->name }}</option>
+                    <option value="{{ $province->province_id }}">{{ $province->name_province }}</option>
                 @endforeach
             </select>
         </div>
@@ -91,7 +100,7 @@
                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                     <option value="" selected>Select City</option>
                     @foreach ($cities as $city)
-                        <option value="{{ $city->city_id }}">{{ $city->name }}</option>
+                        <option value="{{ $city->city_id }}">{{ $city->name_city }}</option>
                     @endforeach
                 </select>
             @endif

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->double('ongkir');
             $table->double('totalCost');
             $table->string('namaPembeli');
+            $table->string('emailPembeli');
             $table->string('phonePembeli');
             $table->timestamp('date_transaction')->nullable();
             $table->timestamp('date_payment')->nullable();

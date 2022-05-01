@@ -5,7 +5,8 @@
         </div>
     </span>
     <input type="text" name="jumlah" class="form-control input-number text-center border-0"
-        max="{{ $maxProduct->stock }}" value="{{ $count }}" />
+        max="{{ $maxProduct->stock }}" value="{{ $count }}" style="background-color: transparent;"
+        autocomplete="off" readonly />
     <span class="input-group-btn">
         <div wire:click="increment" class="btn btn-add pb-3 px-1">
             +
