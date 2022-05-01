@@ -326,6 +326,8 @@
 
             body .resort .content .gradient-travland {
                 background-image: linear-gradient(113.4deg, #7F31FF 0%, #FA7219 100%);
+                max-width: 40px;
+                max-height: 40px;
             }
 
             body .resort .content .popular-card {
@@ -388,7 +390,7 @@
                             <div class="flex flex-col">
                                 <div class="position-absolute z-10 pt-3 ps-3">
                                     <div
-                                        class="p-3 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
+                                        class="d-flex p-3 font-semibold text-white text-center justify-content-center align-items-center rounded-circle badge-rating gradient-travland">
                                         {{ $pl->stock }}
                                     </div>
                                 </div>
@@ -397,7 +399,7 @@
                                         $property_images = json_decode($pl->images);
                                     @endphp
                                     <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
-                                        alt="GetShayna" class="image-product w-100" height="250px" />
+                                        alt="bertjorak" class="image-product w-100" height="250px" />
                                 </div>
                                 <div class="flex flex-col gap-2 px-4">
                                     <a href="{{ route('detail.show', $pl->id_product) }}" style="text-decoration: none;">
@@ -415,7 +417,7 @@
                         <div class="flex flex-col">
                             <div class="position-absolute z-10 pt-3 ps-3">
                                 <div
-                                    class="p-3 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
+                                    class="d-flex p-3 font-semibold text-white text-center justify-content-center align-items-center rounded-circle badge-rating gradient-travland">
                                     {{ $pl->stock }}
                                 </div>
                             </div>

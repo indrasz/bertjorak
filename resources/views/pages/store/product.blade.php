@@ -12,7 +12,7 @@
             <div class="caption-related-product ps-3">
                 Explore Our Product
             </div>
-           <div class="row">
+            <div class="row">
                 <div class="col-12 col-lg-4">
                     <div class="card-related-carousel">
                         <div class="image-placeholder">
@@ -85,9 +85,7 @@
                    load more
                </button>
            </div>
-
         </div>
-
     </section>
 
     {{-- Footer --}}
