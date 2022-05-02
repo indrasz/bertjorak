@@ -150,7 +150,7 @@ class TransactionController extends Controller
             if (is_null($snapToken)) {
                 // Jika snap token masih NULL, buat token snap dan simpan ke database
 
-                $midtrans = new CreateSnapTokenService($getPay);
+                $midtrans = new CreateSnapTokenService($payment);
                 $snapToken = $midtrans->getSnapToken();
                 //dd($snapToken);
 

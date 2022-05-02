@@ -331,20 +331,6 @@
             }
         }
 
-        .cart-badge {
-            display: inline-block;
-            min-width: 2em;
-            /* em unit */
-            padding: 0.3em;
-            /* em unit */
-            border-radius: 50%;
-            font-size: 10px;
-            text-align: center;
-            background: #29a867;
-            color: #fefefe;
-            margin-left: -10px;
-        }
-
     </style>
     <div class="header-5-1 container  mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -587,7 +573,7 @@
                             </li>
                         </ul>
                         <a class="nav-link" href="{{ route('cart.index') }}">
-                            <img src="{{ asset('frontend/images/icon-cart.svg') }}" alt="" />
+
                             <livewire:cart.count-cart />
                             {{-- <div class="cart-badge">3</div> --}}
                         </a>
