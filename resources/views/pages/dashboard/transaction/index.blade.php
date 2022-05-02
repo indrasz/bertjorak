@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', ' My Order')
+@section('title', ' My Transaction')
 
 @section('content')
 
@@ -9,10 +9,10 @@
             <div class="grid w-full gap-5 px-10 mx-auto md:grid-cols-12">
                 <div class="col-span-8">
                     <h2 class="mt-8 mb-1 text-2xl font-semibold text-gray-700">
-                        My Order
+                        All Customer Transactions
                     </h2>
                     <p class="text-sm text-gray-400">
-                        {{ count($orderData) }} Total Order
+                        {{ count($orderData) }} Total Transactions
                     </p>
                 </div>
                 <div class="col-span-4 lg:text-right">
@@ -29,32 +29,35 @@
                             <table class="w-full" aria-label="Table">
                                 <thead>
                                     <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
-                                        <th class="py-4" scope="">Kode Order</th>
-                                        <th class="py-4" scope="">Nama Pemesan</th>
-                                        <th class="py-4" scope="">Total Jenis Barang</th>
-                                        <th class="py-4" scope="">Tanggal Pemesanan</th>
-                                        <th class="py-4" scope="">Total Harga</th>
+                                        <th class="py-4" scope="">Order Code</th>
+                                        <th class="py-4" scope="">Name</th>
+                                        <th class="py-4" scope="">Date Order</th>
+                                        <th class="py-4" scope="">Total Price</th>
                                         <th class="py-4" scope="">Status</th>
                                         <th class="py-4" scope="">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white">
+                                    {{-- @php
+                                            $joinCart = $o
+                                                ->join('carts', 'orders.id_order', '=', 'carts.id_order')
+                                                ->where('carts.id_order', $o->id_order)
+                                                ->get();
+                                        @endphp --}}
+                                    {{-- @foreach ($cartData as $a)
+                                            {{ $a->title }}
+                                        @endforeach --}}
                                     @foreach ($orderData as $o)
-                                        <tr class="text-gray-700">
+                                        <tr class="text-gray-700 border-b">
                                             <td class="px-1 py-5 text-sm w-2/8">
                                                 <div class="flex items-center text-sm">
                                                     <div>
-                                                        <p class="font-medium text-black">
-                                                            {{ $o->kode_order }}
-                                                        </p>
+                                                        <p class="font-medium text-black">{{ $o->kode_order }}</p>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                {{ $o->name }}
-                                            </td>
-                                            <td class="px-1 py-5 text-sm">
-                                                2 Jenis Barang
+                                                {{ $o->namaPembeli }}
                                             </td>
                                             <td class="px-1 py-5 text-sm">
                                                 @php

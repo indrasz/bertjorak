@@ -11,9 +11,26 @@
                     <h2 class="mt-8 mb-1 text-2xl font-semibold text-gray-700">
                         Edit and show Transaction
                     </h2>
-                    <p class="text-sm text-gray-400">
-                        Nama Pembeli
-                    </p>
+
+                    @php
+                        foreach ($orderShow as $os) {
+                            $ka = $os;
+                        }
+                    @endphp
+                    <ol class="inline-flex py-2 list-none">
+                        <li class="flex items-center">
+                            <a href="{{ route('dashboard.transaction.index') }}" class="text-gray-400">My Transaction</a>
+                            <svg class="w-3 h-3 mx-3 text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 320 512">
+                                <path
+                                    d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                            </svg>
+                        </li>
+                        <li class="flex items-center">
+                            <a href="{{ route('dashboard.transaction.edit', $ka->kode_order) }}"
+                                class="font-medium">{{ $ka->kode_order }}</a>
+                        </li>
+                    </ol>
                 </div>
                 <div class="col-span-4 lg:text-right">
 
@@ -79,7 +96,7 @@
                                     <th class="py-4" scope="">Product Name</th>
                                     <th class="py-4" scope="">Quantity</th>
                                     <th class="py-4" scope="">Total Price</th>
-                                    {{-- <th class="py-4" scope="">Action</th> --}}
+                                    <th class="py-4" scope="">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white">
@@ -124,12 +141,12 @@
                                         <td class="px-1 py-5 text-sm">
                                             @currency($os->price * $os->jumlah)
                                         </td>
-                                        {{-- <td class="px-1 py-5 text-sm">
+                                        <td class="px-1 py-5 text-sm">
                                             <a href="{{ route('detailitem.show', $os->id_cart) }}"
                                                 class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
                                                 Details
                                             </a>
-                                        </td> --}}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

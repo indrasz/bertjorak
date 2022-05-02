@@ -33,7 +33,8 @@
         </div>
         <section class="container px-6 mx-auto mt-5">
             <div class="grid gap-5 md:grid-cols-12">
-                <main class="p-4 lg:col-span-7 md:col-span-12 md:pt-0">
+                <main class="p-4 lg:col-span-12 md:col-span-12 md:pt-0">
+
                     <div class="sm:grid sm:h-32 sm:grid-flow-row sm:gap-4 sm:grid-cols-3">
                         <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
                             <div>
@@ -72,15 +73,32 @@
                             </div>
                         </div>
 
+                        {{-- <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
+                            <div>
+                                <div>
+                                    <img src="{{ asset('/assets/images/services-completed-icon.svg') }}" alt=""
+                                        class="w-8 h-8">
+                                </div>
+
+                                @php
+                                    $pending = $order->where('status', '=', 'Pending');
+                                @endphp
+
+                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($pending) }}</p>
+                                <p class="text-sm text-left text-gray-500">
+                                    Transaction <br class="hidden lg:block">
+                                    Pending
+                                </p>
+                            </div>
+                        </div> --}}
+
                     </div>
-                    <div class="p-6 mt-8 bg-white rounded-xl">
+
+                    <div class="mt-8 p-6 bg-white rounded-xl">
                         <div>
                             <h2 class="mb-1 text-xl font-semibold">
                                 My Address
                             </h2>
-                            <p class="text-sm text-gray-400">
-                                3 Total Address
-                            </p>
                         </div>
                         <table class="w-full mt-4" aria-label="Table">
                             <thead>
@@ -122,6 +140,7 @@
                             </tbody>
                         </table>
                     </div>
+
                 </main>
                 <aside class="p-4 lg:col-span-5 md:col-span-12 md:pt-0">
                     {{-- <div

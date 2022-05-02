@@ -124,12 +124,11 @@
                                                 alt="" loading="lazy" class="w-100">
                                         </div>
                                         <div class="col-4 name-product-preview ms-3">
-                                            {{ $c->title }}
-                                            <div class="size-preview">
-                                                Jumlah item : {{ $c->jumlah }} item
+                                            <div class="font-medium">
+                                                {{ $c->title }}
                                             </div>
                                             <div class="size-preview">
-                                                Size : {{ $c->sizeSelected }}
+                                                Total items : {{ $c->jumlah }} item
                                             </div>
                                             <div class="price-preview">
                                                 @currency($c->price)
@@ -156,6 +155,18 @@
                                         </button>
                                     </span>
                                 </div> --}}
+
+                                            <div class="flex justify-end gap-4 w-full">
+                                                <div class="px-3 py-1 rounded-md text-center text-base text-black font-semibold shadow-md"
+                                                    style="background-color: #bf87ff;">
+                                                    {{ $c->sizeSelected }}
+                                                </div>
+
+                                                <div class="px-3 py-1 rounded-md text-center text-base text-black font-semibold shadow-md"
+                                                    style="background-color: #aaadbe;">
+                                                    {{ $c->pilihanSelected }}
+                                                </div>
+                                            </div>
 
                                         </div>
 
@@ -234,6 +245,14 @@
                                             class="form-control input-shipping-details" required>
                                     </div>
 
+                                    {{-- Email Pembeli --}}
+                                    <label for="emailPembeli" class="mb-1">Email</label>
+                                    <div class="input-group w-100 mx-auto mb-2">
+
+                                        <input type="email" placeholder="john@example.com" name="emailPembeli"
+                                            id="emailPembeli" class="form-control input-shipping-details" required>
+                                    </div>
+
                                     {{-- Nomor Pembeli --}}
                                     <label for="nomorPembeli" class="mb-1">Phone Number</label>
                                     <div class="input-group w-100 mx-auto mb-2">
@@ -267,12 +286,6 @@
                 </div>
             </div>
         </section>
-
-        <form action="{{ url('/cart/payment') }}" id="sumbit_form" method="POST">
-            @csrf
-            <input type="hidden" name="json" id="json_callback">
-        </form>
-
 
     </section>
 

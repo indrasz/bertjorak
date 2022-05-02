@@ -10,9 +10,19 @@ class TransaksiShow extends Controller
 {
     public function show(Request $request, $id)
     {
-        $orderShow = Order::where('id_buyer', Auth::user()->id)->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->where('carts.id_cart', $id)->get();
+        if (Auth::user()) {
+            if (Auth::user()->hasRole('admin')) {
+                $orderShow = Order::join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->where('carts.id_cart', $id)->get();
 
-        return view('pages.detailItems')->with('orderShow', $orderShow);
+                return view('pages.detailItems')->with('orderShow', $orderShow);
+            } else {
+                $orderShow = Order::where('id_buyer', Auth::user()->id)->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->where('carts.id_cart', $id)->get();
+
+                return view('pages.detailItems')->with('orderShow', $orderShow);
+            }
+        } else {
+            return view('errors.404');
+        }
         // foreach ($orderShow as $key) {
         //     if ($key->id_cart == $id) {
         //         return view('pages.detailItems')->with('orderShow', $orderShow);

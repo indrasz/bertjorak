@@ -18,47 +18,6 @@ class CartController extends Controller
                 $authId = Auth::user()->id;
                 $cartList = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->where('status', 'Cart')->get();
 
-                //dd($cartList);
-
-
-
-                // // Midtrans
-                // // Set your Merchant Server Key
-                // \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-                // // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-                // \Midtrans\Config::$isProduction = false;
-                // // Set sanitization on (default)
-                // \Midtrans\Config::$isSanitized = true;
-                // // Set 3DS transaction for credit card to true
-                // \Midtrans\Config::$is3ds = true;
-
-                // foreach ($cartList as $key) {
-                //     $transaction_details[] = array(
-                //         'id' => $key->id_product,
-                //         'price' => $key->price,
-                //         'quantity' => $key->jumlah,
-                //         'name' => $key->title,
-
-                //     );
-                // }
-
-
-
-                // $params = array(
-                //     'transaction_details' => array(
-                //         'order_id' => rand(),
-                //         'gross_amount' => null,
-                //     ),
-                //     'item_details' => $transaction_details,
-                //     'customer_details' => array(
-                //         'first_name' => Auth::user()->name,
-                //         'email' => Auth::user()->email,
-                //         'phone' => Auth::user()->phone_number,
-                //     ),
-                // );
-
-                // $snapToken = \Midtrans\Snap::getSnapToken($params);
-
                 return view('pages.store.cart')->with('carts', $cartList);
             } else {
                 return redirect()->route('dashboard.profile.edit', Auth::user()->id);

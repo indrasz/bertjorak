@@ -108,7 +108,7 @@
         Total Harga Belanja
         @if (!$hargaOngkir == null)
             <span class="float-end">@currency($cartsPrice + $hargaOngkir) </span>
-            <input type="number" name="totalPrice" value="{{ $cartsPrice + $hargaOngkir }}" hidden>
+            <input type="number" name="totalPrice" value="{{ $cartsPrice + $hargaOngkir }}" readonly hidden>
         @else
             <span class="float-end">@currency(0)</span>
         @endif
