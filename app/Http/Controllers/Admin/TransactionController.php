@@ -98,6 +98,16 @@ class TransactionController extends Controller
             $order->date_order = Carbon::now();
 
             if ($order->save()) {
+
+                //dd($order->id);
+                $payment = new Payment();
+
+                $payment->id_order = $order->id;
+                $payment->kode_order = $order->kode_order;
+                $payment->order_id = rand();
+
+                $payment->save();
+
                 foreach ($id_cart as $key => $value) {
                     Cart::where('id_cart', $value)->update([
                         'id_order' => $order->id,
@@ -119,38 +129,43 @@ class TransactionController extends Controller
      */
     public function show(Payment $payment, $id)
     {
-        $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
+        if (Auth::user()->hasRole('buyer')) {
+            $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
-        $province = Province::all();
+            $province = Province::all();
 
-        $city = City::all();
+            $city = City::all();
 
-        $paymentAll = Payment::all();
+            $getPay = Payment::all();
+            // $midtrans = new CreateSnapTokenService($order);
+            // $snapToken = $midtrans->getSnapToken($id);
+            foreach ($getPay as $keyPay) {
+                $valPay = $keyPay->where('kode_order', $id)->get();
+                $as = $valPay;
+                //dd($as);
+            }
 
-        foreach ($paymentAll as $key) {
-            $getToken = $key;
-            //dd($key->snap_token);
+            $snapToken = $payment->snap_token;
+
+            if (is_null($snapToken)) {
+                // Jika snap token masih NULL, buat token snap dan simpan ke database
+
+                $midtrans = new CreateSnapTokenService($getPay);
+                $snapToken = $midtrans->getSnapToken();
+                //dd($snapToken);
+
+                // Payment::where('kode_order', $id)->update([
+                //     'snap_token' => rand(),
+                // ]);
+                $payment->snap_token = $snapToken;
+                $payment->save();
+            }
+
+
+            return view('pages.store.dashboard-user.transaction.detail')->with('orderShow', $orderShow)->with('snap_token', $snapToken)->with('province', $province)->with('city', $city);
+        } else {
+            return redirect()->back();
         }
-
-        // $midtrans = new CreateSnapTokenService($order);
-        // $snapToken = $midtrans->getSnapToken($id);
-
-        $snapToken = $payment->snap_token;
-        //dd($snapToken);
-        if (is_null($snapToken)) {
-            // Jika snap token masih NULL, buat token snap dan simpan ke database
-
-            $midtrans = new CreateSnapTokenService($payment);
-            $snapToken = $midtrans->getSnapToken();
-            //dd($snapToken);
-
-            $payment->order_id = rand();
-            $payment->snap_token = $snapToken;
-            $payment->save();
-        }
-
-
-        return view('pages.store.dashboard-user.transaction.detail')->with('orderShow', $orderShow)->with('snap_token', $snapToken)->with('province', $province)->with('city', $city);
     }
 
     /**

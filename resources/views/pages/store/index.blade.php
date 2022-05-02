@@ -209,7 +209,9 @@
                         GetShayna is a 100% free resource for companies <br class="d-none d-md-block">
                         looking to find remote talent across the globe.
                     </div>
-                    <button class="btn btn-join">Let's Explore</button>
+                    <a href="{{ route('all-product') }}">
+                        <button class="btn btn-join">Let's Explore</button>
+                    </a>
                 </div>
                 <div class="col-md-6 my-auto px-md-0 carousel"
                     data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true, "prevNextButtons": false, "draggable": true, "pageDots" : true, "autoPlay" : 1500, "friction" : 0.4, "selectedAttraction" : 0.01}'>

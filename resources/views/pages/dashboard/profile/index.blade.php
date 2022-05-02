@@ -157,7 +157,11 @@
                                             <div class="col-span-3 mt-3">
                                                 <label class="block mb-3 font-medium text-gray-700 text-md">Username</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
-                                                    {{ '@' . $u->username }}
+                                                    @if ($u->username != null)
+                                                        {{ '@' . $u->username }}
+                                                    @else
+                                                        -
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -166,7 +170,11 @@
                                                     class="block mb-3 font-medium text-gray-700 text-md">Contact
                                                     Number</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
-                                                    {{ $u->phone_number }}
+                                                    @if ($u->phone_number != null)
+                                                        {{ $u->phone_number }}
+                                                    @else
+                                                        -
+                                                    @endif
                                                 </div>
                                             </div>
 

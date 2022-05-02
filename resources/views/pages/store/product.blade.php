@@ -86,19 +86,6 @@
                     </div>
                 </div>
            </div> --}}
-
-            <<<<<<< HEAD {{-- <div class="d-flex justify-content-center align-items-center text-center py-3">
-                <button class="btn btn-primary px-4">
-                    load more
-                </button>
-            </div> --}}=======<div
-                class="d-flex justify-content-center align-items-center text-center py-3">
-                <button class="btn btn-primary px-4">
-                    load more
-                </button>
-        </div>
-        >>>>>>> 84a9b568e3e011d3f903a664ace874b1de1398b6
-        </div>
     </section>
 
     {{-- Footer --}}
