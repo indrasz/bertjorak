@@ -87,11 +87,12 @@
                 </div>
            </div> --}}
 
-            <<<<<<< HEAD {{-- <div class="d-flex justify-content-center align-items-center text-center py-3">
+            {{-- <div class="d-flex justify-content-center align-items-center text-center py-3">
                 <button class="btn btn-primary px-4">
                     load more
                 </button>
-            </div> --}}=======<div
+            </div> --}}
+            <div
                 class="d-flex justify-content-center align-items-center text-center py-3">
                 <button class="btn btn-primary px-4">
                     load more
