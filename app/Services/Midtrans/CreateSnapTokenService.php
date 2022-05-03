@@ -8,36 +8,45 @@ use Illuminate\Support\Facades\Auth;
 
 class CreateSnapTokenService extends Midtrans
 {
-    protected $payment;
+    protected $order;
 
-    public function __construct($payment)
+    public function __construct($order)
     {
         parent::__construct();
 
-        $this->payment = $payment;
+        $this->order = $order;
     }
 
-    public function getSnapToken()
+    public function getSnapToken($id)
     {
-        //dd($this->payment);
-        // $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
+        //dd($id);
+        //dd($this->order);
+        $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
-        // foreach ($orderShow as $key) {
-        //     $transaction_details[] = array(
-        //         'id' => $key->id_product,
-        //         'price' => $key->price,
-        //         'quantity' => $key->jumlah,
-        //         'name' => $key->title,
-        //         'ongkir' => 6000,
-        //     );
-        // }
+        //dd($orderShow);
+
+        foreach ($orderShow as $key) {
+            $transaction_details[] = array(
+                'id' => $key->id_product,
+                'price' => $key->price,
+                'quantity' => $key->jumlah,
+                'name' => $key->title,
+            );
+        }
+
+        $transaction_details[] = array(
+            'id' => $key->id_kurir,
+            'price' => $key->ongkir,
+            'quantity' => 1,
+            'name' => 'Ongkir',
+        );
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => rand(),
-                'gross_amount' => 121,
+                'order_id' => $this->order->kode_order,
+                'gross_amount' => null,
             ),
-            //'item_details' => $transaction_details,
+            'item_details' => $transaction_details,
             // "customer_details" => [
             //     "last_name" => $key->namaPembeli,
             //     "email" => $key->emailPembeli,

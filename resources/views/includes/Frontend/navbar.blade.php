@@ -436,9 +436,9 @@
                                     {{-- Admin --}}
                                 @else
                                     <a href="{{ route('dashboard.index') }}">
-                                        <button type="button" class="btn btn-primary">
+                                        {{-- <button type="button" class="btn btn-primary">
                                             Dashboard
-                                        </button>
+                                        </button> --}}
                                     </a>
                                 @endif
                                 {{-- Belum Login --}}
@@ -581,7 +581,7 @@
                         {{-- Admin --}}
                     @else
                         <a href="{{ route('dashboard.index') }}">
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn">
                                 Dashboard
                             </button>
                         </a>

@@ -14,7 +14,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb ms-4">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('cart.index') }}">Cart</a>
+                    </li>
                 </ol>
             </nav>
         </div>
@@ -26,12 +27,12 @@
                 background-color: #ffffff;
             }
 
-            .card-product-preview .name-product-preview{
+            .card-product-preview .name-product-preview {
                 font: 400 1.40rem/1.90rem "Poppins", sans-serif;
                 color: #ADB2B8;
             }
 
-            .card-product-preview .name-product-preview .price-preview{
+            .card-product-preview .name-product-preview .price-preview {
                 font: 500 1.20rem/1.90rem "Poppins", sans-serif;
                 color: #121213;
             }
@@ -39,7 +40,8 @@
             .card-product-preview .btn-add {
                 display: inline-block;
                 min-width: 2.5em;
-                max-height: 2.5em; /* em unit */
+                max-height: 2.5em;
+                /* em unit */
                 border-radius: 50%;
                 font-size: 11px;
                 text-align: center;
@@ -50,7 +52,8 @@
             .card-product-preview .btn-minus {
                 display: inline-block;
                 min-width: 2.5em;
-                max-height: 2.5em; /* em unit */
+                max-height: 2.5em;
+                /* em unit */
                 border-radius: 50%;
                 font-size: 11px;
                 text-align: center;
@@ -59,94 +62,104 @@
                 font-weight: bold;
             }
 
-        @media (min-width:280px) and (max-width: 576px){
+            @media (min-width:280px) and (max-width: 576px) {
 
-            .card-product-mobile-preview .name-product-preview{
-                font: 400 0.9rem/0.7rem "Poppins", sans-serif;
-                color: #ADB2B8;
+                .card-product-mobile-preview .name-product-preview {
+                    font: 400 0.9rem/0.7rem "Poppins", sans-serif;
+                    color: #ADB2B8;
+                }
+
+                .card-product-mobile-preview .name-product-preview .price-preview {
+                    font: 500 0.8rem/1.4rem "Poppins", sans-serif;
+                    color: #121213;
+                }
+
+                .card-product-mobile-preview .btn-add {
+                    display: inline-block;
+                    min-width: 1em;
+                    max-height: 1em;
+                    /* em unit */
+                    border-radius: 50%;
+                    font-size: 11px;
+                    padding-bottom: 20px;
+                    background: #bf87ff;
+                    color: #fefefe;
+                }
+
+                .card-product-mobile-preview .btn-minus {
+                    display: inline-block;
+                    min-width: 1em;
+                    max-height: 1em;
+                    /* em unit */
+                    border-radius: 50%;
+                    font-size: 11px;
+                    padding-bottom: 20px;
+                    border: 1px solid #ADB2B8;
+                    color: #ADB2B8;
+                    font-weight: bold;
+                }
+
+                .card-product-mobile-preview .input-number {
+                    font-size: 11px;
+                }
             }
 
-            .card-product-mobile-preview .name-product-preview .price-preview{
-                font: 500 0.8rem/1.4rem "Poppins", sans-serif;
+            .card-summary {
+                box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
+                border-radius: 15px;
+                background-color: #ffffff;
+            }
+
+            .card-product-mobile-preview {
+                box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
+                border-radius: 15px;
+                background-color: #ffffff;
+            }
+
+            .card-summary .caption-summary {
+                font: 500 1.20rem/1.90rem "Poppins", sans-serif;
                 color: #121213;
             }
 
-            .card-product-mobile-preview .btn-add {
-                display: inline-block;
-                min-width: 1em;
-                max-height: 1em; /* em unit */
-                border-radius: 50%;
-                font-size: 11px;
-                padding-bottom: 20px;
-                background: #bf87ff;
-                color: #fefefe;
-            }
-
-            .card-product-mobile-preview .btn-minus {
-                display: inline-block;
-                min-width: 1em;
-                max-height: 1em; /* em unit */
-                border-radius: 50%;
-                font-size: 11px;
-                padding-bottom: 20px;
-                border: 1px solid #ADB2B8;
+            .card-summary .preview-summary {
+                font: 400 1rem/1.90rem "Poppins", sans-serif;
                 color: #ADB2B8;
-                font-weight: bold;
             }
 
-            .card-product-mobile-preview .input-number {
-                font-size: 11px;
+            .card-summary .total-summary {
+                font: 500 1rem/1.90rem "Poppins", sans-serif;
+                color: #121213;
             }
-        }
 
-        .card-summary {
-            box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
-            border-radius: 15px;
-            background-color: #ffffff;
-        }
+            .card-summary .input-shipping-details {
+                font: 500 1rem/1.90rem "Poppins", sans-serif;
+                color: #121213;
+                border: 1px solid #020202;
+                box-sizing: border-box;
+                border-radius: 8px;
+            }
 
-        .card-product-mobile-preview {
-            box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
-            border-radius: 15px;
-            background-color: #ffffff;
-        }
+            .card-summary label {
+                font: 500 1rem/1.90rem "Poppins", sans-serif;
+                color: #121213;
+            }
 
-        .card-summary .caption-summary{
-            font: 500 1.20rem/1.90rem "Poppins", sans-serif;
-            color: #121213;
-        }
-
-        .card-summary .preview-summary{
-            font: 400 1rem/1.90rem "Poppins", sans-serif;
-            color: #ADB2B8;
-        }
-
-        .card-summary .total-summary{
-            font: 500 1rem/1.90rem "Poppins", sans-serif;
-            color: #121213;
-        }
-
-        .card-summary .input-shipping-details{
-            font: 500 1rem/1.90rem "Poppins", sans-serif;
-            color: #121213;
-            border: 1px solid #020202;
-            box-sizing: border-box;
-            border-radius: 8px;
-        }
-
-        .card-summary label{
-            font: 500 1rem/1.90rem "Poppins", sans-serif;
-            color: #121213;
-        }
-
-        .card-summary .btn-confirm{
-            background-color: var(--dull-purple);
-            color: #fff;
-            border-radius: 16px;
-            font: 600 1rem/1.90rem "Poppins", sans-serif;
-        }
+            .card-summary .btn-confirm {
+                background-color: var(--dull-purple);
+                color: #fff;
+                border-radius: 16px;
+                font: 600 1rem/1.90rem "Poppins", sans-serif;
+            }
 
         </style>
+
+        @if ($errors->any())
+            <ul class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    <li> {{ $error }} </li>
+                @endforeach
+            </ul>
+        @endif
 
         <section class="cart-checkout w-100 h-100">
             <div class="container p-4">
@@ -213,12 +226,12 @@
                                 <div class="card-product-mobile-preview d-block d-sm-none p-3 mb-3">
                                     <div class="d-flex flex-row">
                                         <div class="col-4">
-                                             <?php $property_images = json_decode($c->images); ?>
+                                            <?php $property_images = json_decode($c->images); ?>
                                             <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
                                                 alt="image" loading="lazy" class="w-100 rounded-3">
                                         </div>
                                         <div class="col-6 name-product-preview ms-3">
-                                             {{ $c->title }}
+                                            {{ $c->title }}
                                             <div class="price-preview">
                                                 @currency($c->price)
                                             </div>
@@ -290,21 +303,19 @@
                             @if (count($carts) >= 1)
                                 <div class="card-summary px-lg-4 px-2 py-3 mb-3">
                                     <div class="caption-summary mb-3">
-                                        Rincian Pengiriman
+                                        Notes (optional)
                                     </div>
                                     @foreach ($carts as $c)
                                         <input type="text" name="idCart[]" value="{{ $c->id_cart }}" hidden>
                                     @endforeach
 
-                                    {{-- Nama Pembeli --}}
-                                    <label for="namaPembeli" class="mb-1">Name</label>
+                                    {{-- <label for="namaPembeli" class="mb-1">Name</label>
                                     <div class="input-group w-100 mx-auto mb-2">
 
                                         <input type="text" placeholder="John Smith" name="namaPembeli" id="namaPembeli"
                                             class="form-control input-shipping-details" required>
                                     </div>
 
-                                    {{-- Email Pembeli --}}
                                     <label for="emailPembeli" class="mb-1">Email</label>
                                     <div class="input-group w-100 mx-auto mb-2">
 
@@ -312,18 +323,17 @@
                                             id="emailPembeli" class="form-control input-shipping-details" required>
                                     </div>
 
-                                    {{-- Nomor Pembeli --}}
                                     <label for="nomorPembeli" class="mb-1">Phone Number</label>
                                     <div class="input-group w-100 mx-auto mb-2">
 
                                         <input type="text" placeholder="08xxxxxxxxxx" name="nomorPembeli" id="nomorPembeli"
                                             class="form-control input-shipping-details" required>
-                                    </div>
+                                    </div> --}}
 
 
 
                                     {{-- Catatan Dari Pembeli --}}
-                                    <label for="notes" class="mb-1">Notes</label>
+                                    {{-- <label for="notes" class="mb-1">Notes</label> --}}
                                     <div class="input-group w-100 mx-auto mb-2">
 
                                         <textarea name="notes" placeholder="Jangan lupa dikirim ya!" id="notes" class="form-control input-shipping-details"

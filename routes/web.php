@@ -41,6 +41,8 @@ Route::resource('cart', CartController::class)->middleware('is_buyer');
 // Transaksi
 Route::resource('detailitem', TransaksiShow::class)->middleware('auth:sanctum');
 
+// Payment
+Route::post('transaction/payment', [TransactionController::class, 'payment_pos']);
 
 
 // Dashboard Admin
@@ -57,9 +59,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::resource('transaction', TransactionController::class)->only([
             'index', 'create', 'store', 'edit', 'destroy', 'show',
         ]);
-
-        // Payment
-        Route::post('transaction/payment', [PushPaymentData::class, 'payment_pos']);
     });
 });
 

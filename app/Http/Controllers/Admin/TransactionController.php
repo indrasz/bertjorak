@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\NotificationController;
 use App\Models\Cart;
 use App\Models\City;
 use App\Models\Order;
@@ -98,16 +99,6 @@ class TransactionController extends Controller
             $order->date_order = Carbon::now();
 
             if ($order->save()) {
-
-                //dd($order->id);
-                $payment = new Payment();
-
-                $payment->id_order = $order->id;
-                $payment->kode_order = $order->kode_order;
-                $payment->order_id = rand();
-
-                $payment->save();
-
                 foreach ($id_cart as $key => $value) {
                     Cart::where('id_cart', $value)->update([
                         'id_order' => $order->id,
@@ -127,40 +118,37 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $payment, $id)
+    public function show($id)
     {
+        // $passNotif = NotificationController();
+        // $passNotif->payment_handler($id);
+
         if (Auth::user()->hasRole('buyer')) {
             $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
+
+            //$orderGetToken = Order::where('kode_order', $id)->get();
+            //dd($orderShow);
 
             $province = Province::all();
 
             $city = City::all();
 
-            $getPay = Payment::all();
-            // $midtrans = new CreateSnapTokenService($order);
-            // $snapToken = $midtrans->getSnapToken($id);
+            $getPay = Order::where('kode_order', $id)->get();
+
             foreach ($getPay as $keyPay) {
-                $valPay = $keyPay->where('kode_order', $id)->get();
-                $as = $valPay;
-                //dd($as);
+                $order = $keyPay;
+                //dd($order);
             }
 
-            $snapToken = $payment->snap_token;
+            $snapToken = $order->snap_token;
 
             if (is_null($snapToken)) {
-                // Jika snap token masih NULL, buat token snap dan simpan ke database
+                $midtrans = new CreateSnapTokenService($order);
+                $snapToken = $midtrans->getSnapToken($id);
 
-                $midtrans = new CreateSnapTokenService($payment);
-                $snapToken = $midtrans->getSnapToken();
-                //dd($snapToken);
-
-                // Payment::where('kode_order', $id)->update([
-                //     'snap_token' => rand(),
-                // ]);
-                $payment->snap_token = $snapToken;
-                $payment->save();
+                $order->snap_token = $snapToken;
+                $order->save();
             }
-
 
             return view('pages.store.dashboard-user.transaction.detail')->with('orderShow', $orderShow)->with('snap_token', $snapToken)->with('province', $province)->with('city', $city);
         } else {
@@ -208,5 +196,29 @@ class TransactionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function payment_pos(Request $request)
+    {
+        $json = json_decode($request->json);
+        //dd($json);
+
+        $payment = new Payment();
+
+        $payment->id_order = $request->idOrder;
+        $payment->status_code = $json->status_code;
+        $payment->status_message = $json->status_message;
+        $payment->transaction_id = $json->transaction_id;
+        $payment->order_id = $json->order_id;
+        $payment->gross_amount = $json->gross_amount;
+        $payment->payment_type = $json->payment_type;
+        $payment->transaction_time = $json->transaction_time;
+        $payment->transaction_status = $json->transaction_status;
+        $payment->payment_code = isset($json->payment_code) ? $json->payment_code : null;
+        $payment->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
+
+        if ($payment->save()) {
+            return redirect()->back();
+        }
     }
 }

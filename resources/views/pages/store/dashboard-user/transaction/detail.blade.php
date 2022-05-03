@@ -364,6 +364,7 @@
                                 {{-- <button class="payButton" style="background-color: blue; width: 100%;" id="pay-button">
                                     Bayar
                                 </button> --}}
+
                             </div>
                         </div>
                     </div>
@@ -375,14 +376,15 @@
             $as = $get->id_order;
         @endphp
 
-
         {{-- <livewire:transaction.push-payment-data :get="$as" /> --}}
 
-        {{-- <form action="" id="submit_form" method="POST">
-            @csrf
-            <input type="hidden" name="idOrder" value="{{ $get->id_order }}">
-            <input type="text" name="json" id="json_callback" hidden>
-        </form> --}}
+        @if ($get->snap_token == null)
+            <form action="/transaction/payment" id="submit_form" method="POST">
+                @csrf
+                <input type="hidden" name="idOrder" value="{{ $get->id_order }}">
+                <input type="text" name="json" id="json_callback" hidden>
+            </form>
+        @endif
 
     </main>
     <script type="text/javascript">
@@ -395,31 +397,30 @@
                 onSuccess: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    console.log(result)
-                    //send_response_to_form(result);
+                    // console.log(result)
+                    send_response_to_form(result);
                 },
                 // Optional
                 onPending: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    console.log(result)
-                    //send_response_to_form(result);
-                    //document.getElementById('json_callback').value = JSON.stringify(result);
+                    // console.log(result)
+                    send_response_to_form(result);
                 },
                 // Optional
                 onError: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    console.log(result)
-                    //send_response_to_form(result);
+                    // console.log(result)
+                    send_response_to_form(result);
                 }
             });
         });
 
 
-        // function send_response_to_form(result) {
-        //     document.getElementById('json_callback').value = JSON.stringify(result);
-        //     $('#submit_form').submit();
-        // }
+        function send_response_to_form(result) {
+            document.getElementById('json_callback').value = JSON.stringify(result);
+            $('#submit_form').submit();
+        }
     </script>
 @endsection
