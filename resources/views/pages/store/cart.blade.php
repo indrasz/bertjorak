@@ -233,21 +233,24 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-2 d-flex justify-content-center align-items-center text-center">
+
+
+                                                <form action="{{ route('cart.destroy', $c->id_cart) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button type="submit" class="btn">
+                                                        <img src="{{ asset('frontend/images/icon-delete.svg') }}" width="15"
+                                                            alt="icon-delete">
+                                                    </button>
+                                                </form>
+                                        </div>
+
+
                                     </div>
 
-                                    <div class="d-flex flex-row float-end mt-3 ">
-                                        <div>
-
-                                            <form action="{{ route('cart.destroy', $c->id_cart) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <button type="submit" class="btn ">
-                                                    <img src="{{ asset('frontend/images/icon-delete.svg') }}" width="15"
-                                                        alt="icon-delete">
-                                                </button>
-                                            </form>
-                                        </div>
+                                    <div class="d-flex flex-row float-end ">
 
 
                                     </div>
@@ -266,7 +269,7 @@
                     <div class="col-12 col-lg-4">
                         <form action="{{ route('dashboard.transaction.store') }}" method="POST">
                             @csrf
-                            <div class="card-summary px-lg-4 py-3 mb-3">
+                            <div class="card-summary px-lg-4 px-3 py-3 mb-3">
                                 <div class="caption-summary mb-3">
                                     Informasi Pembayaran
                                 </div>
@@ -297,7 +300,7 @@
                             </div>
 
                             @if (count($carts) >= 1)
-                                <div class="card-summary px-lg-4 px-2 py-3 mb-3">
+                                <div class="card-summary px-lg-4 px-3 py-3 mb-3">
                                     <div class="caption-summary mb-3">
                                         Notes (optional)
                                     </div>
