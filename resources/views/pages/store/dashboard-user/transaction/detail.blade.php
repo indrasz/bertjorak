@@ -15,6 +15,7 @@
                     @php
                         foreach ($orderShow as $os) {
                             $ka = $os;
+                            //dd($ka);
                         }
                     @endphp
                     <ol class="inline-flex py-2 list-none">
@@ -38,6 +39,10 @@
         <section class="container px-6 mx-auto mt-2">
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="col-span-12 p-4 md:pt-0">
+                    {{-- <div class="px-6 py-2 mt-2 bg-white rounded-xl">
+                        as
+                    </div> --}}
+
                     <div class="px-6 py-2 mt-2 bg-white rounded-xl">
                         <div class="flex justify-between pt-6">
                             <div>
@@ -127,12 +132,7 @@
                             <div class="py-2">
                                 <h3 style="font-size: 1.1rem; font-weight: 800;">Catatan
                                 </h3>
-                                <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Reiciendis
-                                    dolor cum illo distinctio
-                                    nam asperiores soluta ducimus corporis, consequuntur, vero, harum assumenda aut itaque
-                                    odit
-                                    omnis laudantium earum. Vitae, esse.</p>
+                                <p class="text-justify">{{ $get->notes }}</p>
                             </div>
                         @endif
 
@@ -256,24 +256,6 @@
 
                                 <table class="w-full mb-2">
                                     <tr>
-                                        <td class="text-sm text-serv-text">
-                                            Name
-                                        </td>
-                                        <td class="mb-4 text-sm font-semibold text-right text-black">
-                                            {{ $value->namaPembeli }}
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="text-sm leading-7 text-serv-text">
-                                            Phone Number
-                                        </td>
-                                        <td class="mb-4 text-sm font-semibold text-right text-black">
-                                            {{ $value->phonePembeli }}
-                                        </td>
-                                    </tr>
-
-                                    <tr>
                                         <td class="text-sm leading-7 text-serv-text">
                                             Jasa Kurir
                                         </td>
@@ -350,21 +332,16 @@
 
                                 </style>
 
-                                <button class="payButton" style="background-color: blue; width: 100%;" id="pay-button">
-                                    Bayar
-                                </button>
-                                {{-- @if ($value->payment_status == 1)
+
+                                {{-- @if (is_null($pay->first()))
                                     <button class="payButton" style="background-color: blue; width: 100%;"
                                         id="pay-button">
                                         Bayar
                                     </button>
-                                @else
-                                    Pembayaran berhasil
                                 @endif --}}
-                                {{-- <button class="payButton" style="background-color: blue; width: 100%;" id="pay-button">
+                                <button class="payButton" style="background-color: blue; width: 100%;" id="pay-button">
                                     Bayar
-                                </button> --}}
-
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -372,19 +349,14 @@
                 </main>
             </div>
         </section>
-        @php
-            $as = $get->id_order;
-        @endphp
 
         {{-- <livewire:transaction.push-payment-data :get="$as" /> --}}
 
-        @if ($get->snap_token == null)
-            <form action="/transaction/payment" id="submit_form" method="POST">
-                @csrf
-                <input type="hidden" name="idOrder" value="{{ $get->id_order }}">
-                <input type="text" name="json" id="json_callback" hidden>
-            </form>
-        @endif
+        <form action="/transaction/payment" id="submit_form" method="POST">
+            @csrf
+            <input type="hidden" name="idOrder" value="{{ $get->id_order }}">
+            <input type="text" name="json" id="json_callback" hidden>
+        </form>
 
     </main>
     <script type="text/javascript">
@@ -398,21 +370,27 @@
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                     // console.log(result)
+
                     send_response_to_form(result);
+
                 },
                 // Optional
                 onPending: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                     // console.log(result)
+
                     send_response_to_form(result);
+
                 },
                 // Optional
                 onError: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                     // console.log(result)
+
                     send_response_to_form(result);
+
                 }
             });
         });

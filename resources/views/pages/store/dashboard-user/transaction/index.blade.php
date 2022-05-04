@@ -86,6 +86,8 @@
                                 </tbody>
                             </table>
                         </div>
+                        <br>
+                        {{ $orderData->links() }}
                     </main>
                 </div>
             </section>

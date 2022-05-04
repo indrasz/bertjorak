@@ -91,9 +91,7 @@ class TransactionController extends Controller
 
             $order = new Order();
 
-            $time = time();
-            $date = date('d', $time);
-            $order->kode_order = "BRJ-" . $date . rand() . $authId;
+            $order->kode_order = "BRJ-" . time() . $authId;
             $order->id_buyer = $authId;
             $order->id_transaction = $transaction->id_transaction;
             $order->date_order = Carbon::now();
@@ -124,7 +122,7 @@ class TransactionController extends Controller
         // $passNotif->payment_handler($id);
 
         if (Auth::user()->hasRole('buyer')) {
-            $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
+            $orderShow = Order::where('orders.kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
             //$orderGetToken = Order::where('kode_order', $id)->get();
             //dd($orderShow);
