@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::resource('profile', ProfileController::class);
         Route::resource('product', ProductController::class)->middleware('is_admin');
         Route::resource('transaction', TransactionController::class)->only([
-            'index', 'create', 'store', 'edit', 'destroy', 'show',
+            'index', 'create', 'store', 'update', 'edit', 'destroy', 'show',
         ]);
     });
 });
