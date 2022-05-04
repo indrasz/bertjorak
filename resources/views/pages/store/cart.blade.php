@@ -188,11 +188,7 @@
                                         </div>
 
 
-                                        <div
-                                            class="col-4 d-flex text-center align-items-center justify-content-center name-product-preview ms-3">
-
-
-
+                                        <div class="col-4 d-flex text-center align-items-center justify-content-center name-product-preview ms-3">
                                             <div class="flex justify-end gap-4 w-full">
                                                 <div class="px-3 py-1 rounded-md text-center text-base text-black font-semibold shadow-md"
                                                     style="background-color: #bf87ff;">
