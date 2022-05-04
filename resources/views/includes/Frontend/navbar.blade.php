@@ -331,20 +331,6 @@
             }
         }
 
-        .cart-badge {
-            display: inline-block;
-            min-width: 2em;
-            /* em unit */
-            padding: 0.3em;
-            /* em unit */
-            border-radius: 50%;
-            font-size: 10px;
-            text-align: center;
-            background: #29a867;
-            color: #fefefe;
-            margin-left: -10px;
-        }
-
     </style>
     <div class="header-5-1 container  mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -423,11 +409,11 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" href="#">Reviews</a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Pricing</a>
+                                    <a class="nav-link" href="#">About</a>
                                 </li>
                             </ul>
                         </div>
@@ -450,9 +436,9 @@
                                     {{-- Admin --}}
                                 @else
                                     <a href="{{ route('dashboard.index') }}">
-                                        <button type="button" class="btn btn-primary">
+                                        {{-- <button type="button" class="btn btn-primary">
                                             Dashboard
-                                        </button>
+                                        </button> --}}
                                     </a>
                                 @endif
                                 {{-- Belum Login --}}
@@ -531,11 +517,11 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item me-2">
+                    {{-- <li class="nav-item me-2">
                         <a class="nav-link" href="#">Reviews</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="#">About</a>
                     </li>
                 </ul>
 
@@ -587,7 +573,7 @@
                             </li>
                         </ul>
                         <a class="nav-link" href="{{ route('cart.index') }}">
-                            <img src="{{ asset('frontend/images/icon-cart.svg') }}" alt="" />
+
                             <livewire:cart.count-cart />
                             {{-- <div class="cart-badge">3</div> --}}
                         </a>
@@ -595,7 +581,7 @@
                         {{-- Admin --}}
                     @else
                         <a href="{{ route('dashboard.index') }}">
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn">
                                 Dashboard
                             </button>
                         </a>

@@ -40,8 +40,12 @@
                 <main class="col-span-12 p-4 md:pt-0">
                     <div class="px-6 py-2 mt-2 bg-white rounded-xl">
                         <div class="flex justify-between pt-6">
-                            <label for="transaction detail" class="block mb-3 font-medium text-md"
-                                style="font-weight: 700;">Transaction Detail</label>
+                            <div>
+                                <label for="transaction detail" class="block mb-3 font-medium text-md"
+                                    style="font-weight: 700;">Transaction Detail</label>
+                                {{-- <label for="transaction detail" class="block mb-3 font-medium text-sm"
+                                    style="font-weight: 400;">{{ $ka->id_order }}</label> --}}
+                            </div>
                             <span
                                 class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-green-500 rounded-full bg-serv-green-badge">Success</span>
                         </div>
@@ -119,7 +123,7 @@
                             
                         @endphp
 
-                        @if ($get->noted != null)
+                        @if ($get->notes != null)
                             <div class="py-2">
                                 <h3 style="font-size: 1.1rem; font-weight: 800;">Catatan
                                 </h3>
@@ -177,7 +181,13 @@
                                         Province
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
-                                        {{ $value->name_province }}
+                                        @php
+                                            $conProv = $province->where('province_id', $value->id_province);
+                                            foreach ($conProv as $keyProv) {
+                                                $getProv = $keyProv;
+                                            }
+                                        @endphp
+                                        {{ $getProv->name_province }}
                                     </td>
                                 </tr>
 
@@ -186,7 +196,13 @@
                                         City
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
-                                        {{ $value->name_city }}
+                                        @php
+                                            $conCity = $city->where('city_id', $value->id_city);
+                                            foreach ($conCity as $keyCity) {
+                                                $getCity = $keyCity;
+                                            }
+                                        @endphp
+                                        {{ $getCity->name_city }}
                                     </td>
                                 </tr>
 
@@ -218,7 +234,7 @@
                                 <table class="w-full mb-4">
                                     <tr>
                                         <td class="text-sm text-serv-text">
-                                            Kode Order
+                                            Order
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
                                             {{ $value->kode_order }}
@@ -277,6 +293,15 @@
 
                                     <tr>
                                         <td class="text-sm leading-7 text-serv-text">
+                                            Nomor Resi
+                                        </td>
+                                        <td class="mb-4 text-sm font-semibold text-right text-black">
+                                            -
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="text-sm leading-7 text-serv-text">
                                             Ongkos Kirim
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
@@ -289,7 +314,7 @@
                                 <table class="w-full mb-4">
                                     <tr>
                                         <td class="text-sm leading-7 text-serv-text">
-                                            Total Harga:
+                                            Total Pembayaran:
                                         </td>
                                         <td class="mb-4 text-xl font-semibold text-right text-serv-button">
                                             @currency($value->totalCost)
@@ -339,6 +364,7 @@
                                 {{-- <button class="payButton" style="background-color: blue; width: 100%;" id="pay-button">
                                     Bayar
                                 </button> --}}
+
                             </div>
                         </div>
                     </div>
@@ -346,43 +372,49 @@
                 </main>
             </div>
         </section>
+        @php
+            $as = $get->id_order;
+        @endphp
 
-        <form action="/transaction/payment" id="submit_form" method="POST">
-            @csrf
-            <input type="hidden" name="idOrder" value="{{ $get->id_order }}">
-            <input type="hidden" name="json" id="json_callback">
-        </form>
+        {{-- <livewire:transaction.push-payment-data :get="$as" /> --}}
+
+        @if ($get->snap_token == null)
+            <form action="/transaction/payment" id="submit_form" method="POST">
+                @csrf
+                <input type="hidden" name="idOrder" value="{{ $get->id_order }}">
+                <input type="text" name="json" id="json_callback" hidden>
+            </form>
+        @endif
 
     </main>
     <script type="text/javascript">
-        // For example trigger on button clicked, or any time you need
-        var payButton = document.getElementById('pay-button');
-        payButton.addEventListener('click', function() {
-            // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-            window.snap.pay('{{ $snap_token }}', {
+        const payButton = document.querySelector('#pay-button');
+        payButton.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            snap.pay('{{ $snap_token }}', {
+                // Optional
                 onSuccess: function(result) {
-                    /* You may add your own implementation here */
-                    alert("payment success!");
-                    console.log(result);
+                    /* You may add your own js here, this is just example */
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    // console.log(result)
                     send_response_to_form(result);
                 },
+                // Optional
                 onPending: function(result) {
-                    /* You may add your own implementation here */
-                    alert("wating your payment!");
-                    console.log(result);
+                    /* You may add your own js here, this is just example */
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    // console.log(result)
                     send_response_to_form(result);
                 },
+                // Optional
                 onError: function(result) {
-                    /* You may add your own implementation here */
-                    alert("payment failed!");
-                    console.log(result);
+                    /* You may add your own js here, this is just example */
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    // console.log(result)
                     send_response_to_form(result);
-                },
-                onClose: function() {
-                    /* You may add your own implementation here */
-                    alert('you closed the popup without finishing the payment');
                 }
-            })
+            });
         });
 
 

@@ -11,12 +11,10 @@
     @include('includes.style')
     @stack('after-style')
 
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="SB-Mid-client-kaa6AvrE4lw2X9z1"></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     @livewireStyles
 </head>
 

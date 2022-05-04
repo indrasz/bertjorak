@@ -19,6 +19,8 @@ class CreateSnapTokenService extends Midtrans
 
     public function getSnapToken($id)
     {
+        //dd($id);
+        //dd($this->order);
         $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
         //dd($orderShow);
@@ -36,26 +38,41 @@ class CreateSnapTokenService extends Midtrans
             'id' => $key->id_kurir,
             'price' => $key->ongkir,
             'quantity' => 1,
-            'name' => $key->id_kurir,
+            'name' => 'Ongkir',
         );
 
         $params = array(
-            /**
-             * 'order_id' => id order unik yang akan digunakan sebagai "primary key" oleh Midtrans untuk
-             *                  membedakan order satu dengan order lain. Key ini harus unik (tidak boleh ada duplikat).
-             * 'gross_amount' => merupakan total harga yang harus dibayar customer.
-             */
             'transaction_details' => array(
-                'order_id' => rand(),
+                'order_id' => $this->order->kode_order,
                 'gross_amount' => null,
             ),
-            /**
-             * 'item_details' bisa diisi dengan detail item dalam order.
-             * Umumnya, data ini diambil dari tabel `order_items`.
-             */
             'item_details' => $transaction_details,
+            // "customer_details" => [
+            //     "last_name" => $key->namaPembeli,
+            //     "email" => $key->emailPembeli,
+            //     "phone" => $key->phonePembeli,
+            //     "billing_address" => [
+            //         "first_name" => "TEST",
+            //         "last_name" => "MIDTRANSER",
+            //         "email" => "test@midtrans.com",
+            //         "phone" => "081 2233 44-55",
+            //         "address" => "Sudirman",
+            //         "city" => "Jakarta",
+            //         "postal_code" => "12190",
+            //         "country_code" => "IDN"
+            //     ],
+            //     "shipping_address" => [
+            //         "first_name" => "TEST",
+            //         "last_name" => "MIDTRANSER",
+            //         "email" => "test@midtrans.com",
+            //         "phone" => "0 8128-75 7-9338",
+            //         "address" => "Sudirman",
+            //         "city" => "Jakarta",
+            //         "postal_code" => "12190",
+            //         "country_code" => "IDN"
+            //     ]
+            // ],
             'customer_details' => array(
-                // Key `customer_details` dapat diisi dengan data customer yang melakukan order.
                 'first_name' => Auth::user()->name,
                 'email' => Auth::user()->email,
                 'phone' => Auth::user()->phone_number,

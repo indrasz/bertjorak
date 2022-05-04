@@ -14,7 +14,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb ms-4">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('cart.index') }}">Cart</a>
+                    </li>
                 </ol>
             </nav>
         </div>
@@ -34,11 +35,6 @@
             .card-product-preview .name-product-preview .price-preview {
                 font: 500 1.20rem/1.90rem "Poppins", sans-serif;
                 color: #121213;
-            }
-
-            .card-product-preview .name-product-preview .size-preview {
-                font: 400 1.20rem/1.70rem "Poppins", sans-serif;
-                color: #222222;
             }
 
             .card-product-preview .btn-add {
@@ -66,7 +62,55 @@
                 font-weight: bold;
             }
 
+            @media (min-width:280px) and (max-width: 576px) {
+
+                .card-product-mobile-preview .name-product-preview {
+                    font: 400 0.9rem/0.7rem "Poppins", sans-serif;
+                    color: #ADB2B8;
+                }
+
+                .card-product-mobile-preview .name-product-preview .price-preview {
+                    font: 500 0.8rem/1.4rem "Poppins", sans-serif;
+                    color: #121213;
+                }
+
+                .card-product-mobile-preview .btn-add {
+                    display: inline-block;
+                    min-width: 1em;
+                    max-height: 1em;
+                    /* em unit */
+                    border-radius: 50%;
+                    font-size: 11px;
+                    padding-bottom: 20px;
+                    background: #bf87ff;
+                    color: #fefefe;
+                }
+
+                .card-product-mobile-preview .btn-minus {
+                    display: inline-block;
+                    min-width: 1em;
+                    max-height: 1em;
+                    /* em unit */
+                    border-radius: 50%;
+                    font-size: 11px;
+                    padding-bottom: 20px;
+                    border: 1px solid #ADB2B8;
+                    color: #ADB2B8;
+                    font-weight: bold;
+                }
+
+                .card-product-mobile-preview .input-number {
+                    font-size: 11px;
+                }
+            }
+
             .card-summary {
+                box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
+                border-radius: 15px;
+                background-color: #ffffff;
+            }
+
+            .card-product-mobile-preview {
                 box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
                 border-radius: 15px;
                 background-color: #ffffff;
@@ -109,6 +153,14 @@
 
         </style>
 
+        @if ($errors->any())
+            <ul class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    <li> {{ $error }} </li>
+                @endforeach
+            </ul>
+        @endif
+
         <section class="cart-checkout w-100 h-100">
             <div class="container p-4">
 
@@ -116,7 +168,7 @@
                     <div class="col-12 col-lg-8">
                         @if (count($carts) >= 1)
                             @foreach ($carts as $c)
-                                <div class="card-product-preview p-3 mb-3">
+                                <div class="card-product-preview d-none d-sm-block p-3 mb-3">
                                     <div class="d-flex flex-row">
                                         <div class="col-2">
                                             <?php $property_images = json_decode($c->images); ?>
@@ -124,12 +176,11 @@
                                                 alt="" loading="lazy" class="w-100">
                                         </div>
                                         <div class="col-4 name-product-preview ms-3">
-                                            {{ $c->title }}
-                                            <div class="size-preview">
-                                                Jumlah item : {{ $c->jumlah }} item
+                                            <div class="font-medium">
+                                                {{ $c->title }}
                                             </div>
                                             <div class="size-preview">
-                                                Size : {{ $c->sizeSelected }}
+                                                Total items : {{ $c->jumlah }} item
                                             </div>
                                             <div class="price-preview">
                                                 @currency($c->price)
@@ -140,22 +191,19 @@
                                         <div
                                             class="col-4 d-flex text-center align-items-center justify-content-center name-product-preview ms-3">
 
-                                            {{-- <livewire:cart.counter-barang /> --}}
 
-                                            {{-- <div class="input-group border p-2 w-50 mx-auto" style="border-radius: 10px;">
-                                    <span class="input-group-btn">
-                                        <button wire:click="decrement" class="btn btn-minus pb-3 px-1">
-                                            -
-                                        </button>
-                                    </span>
-                                    <input type="text" class="form-control input-number text-center border-0"
-                                        max="100" value="{{ $count }}" />
-                                    <span class="input-group-btn">
-                                        <button wire:click="increment" class="btn btn-add pb-3 px-1">
-                                            +
-                                        </button>
-                                    </span>
-                                </div> --}}
+
+                                            <div class="flex justify-end gap-4 w-full">
+                                                <div class="px-3 py-1 rounded-md text-center text-base text-black font-semibold shadow-md"
+                                                    style="background-color: #bf87ff;">
+                                                    {{ $c->sizeSelected }}
+                                                </div>
+
+                                                <div class="px-3 py-1 rounded-md text-center text-base text-black font-semibold shadow-md"
+                                                    style="background-color: #aaadbe;">
+                                                    {{ $c->pilihanSelected }}
+                                                </div>
+                                            </div>
 
                                         </div>
 
@@ -173,6 +221,41 @@
                                             </form>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="card-product-mobile-preview d-block d-sm-none p-3 mb-3">
+                                    <div class="d-flex flex-row">
+                                        <div class="col-4">
+                                            <?php $property_images = json_decode($c->images); ?>
+                                            <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
+                                                alt="image" loading="lazy" class="w-100 rounded-3">
+                                        </div>
+                                        <div class="col-6 name-product-preview ms-3">
+                                            {{ $c->title }}
+                                            <div class="price-preview">
+                                                @currency($c->price)
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex flex-row float-end mt-3 ">
+                                        <div>
+
+                                            <form action="{{ route('cart.destroy', $c->id_cart) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button type="submit" class="btn ">
+                                                    <img src="{{ asset('frontend/images/icon-delete.svg') }}" width="15"
+                                                        alt="icon-delete">
+                                                </button>
+                                            </form>
+                                        </div>
+
+
+                                    </div>
+
                                 </div>
                             @endforeach
                         @else
@@ -220,32 +303,37 @@
                             @if (count($carts) >= 1)
                                 <div class="card-summary px-lg-4 px-2 py-3 mb-3">
                                     <div class="caption-summary mb-3">
-                                        Rincian Pengiriman
+                                        Notes (optional)
                                     </div>
                                     @foreach ($carts as $c)
                                         <input type="text" name="idCart[]" value="{{ $c->id_cart }}" hidden>
                                     @endforeach
 
-                                    {{-- Nama Pembeli --}}
-                                    <label for="namaPembeli" class="mb-1">Name</label>
+                                    {{-- <label for="namaPembeli" class="mb-1">Name</label>
                                     <div class="input-group w-100 mx-auto mb-2">
 
                                         <input type="text" placeholder="John Smith" name="namaPembeli" id="namaPembeli"
                                             class="form-control input-shipping-details" required>
                                     </div>
 
-                                    {{-- Nomor Pembeli --}}
+                                    <label for="emailPembeli" class="mb-1">Email</label>
+                                    <div class="input-group w-100 mx-auto mb-2">
+
+                                        <input type="email" placeholder="john@example.com" name="emailPembeli"
+                                            id="emailPembeli" class="form-control input-shipping-details" required>
+                                    </div>
+
                                     <label for="nomorPembeli" class="mb-1">Phone Number</label>
                                     <div class="input-group w-100 mx-auto mb-2">
 
                                         <input type="text" placeholder="08xxxxxxxxxx" name="nomorPembeli" id="nomorPembeli"
                                             class="form-control input-shipping-details" required>
-                                    </div>
+                                    </div> --}}
 
 
 
                                     {{-- Catatan Dari Pembeli --}}
-                                    <label for="notes" class="mb-1">Notes</label>
+                                    {{-- <label for="notes" class="mb-1">Notes</label> --}}
                                     <div class="input-group w-100 mx-auto mb-2">
 
                                         <textarea name="notes" placeholder="Jangan lupa dikirim ya!" id="notes" class="form-control input-shipping-details"
@@ -267,12 +355,6 @@
                 </div>
             </div>
         </section>
-
-        <form action="{{ url('/cart/payment') }}" id="sumbit_form" method="POST">
-            @csrf
-            <input type="hidden" name="json" id="json_callback">
-        </form>
-
 
     </section>
 

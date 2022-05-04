@@ -52,6 +52,7 @@ class Calculate extends Component
             $this->getWeight = $keyWeight->weight;
         }
 
+        // Get Cost
         $this->cost = RajaOngkir::ongkosKirim([
             'origin' => $this->getAlamatKantor,
             'originType' => "city",

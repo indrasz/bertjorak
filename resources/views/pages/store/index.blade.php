@@ -209,7 +209,9 @@
                         GetShayna is a 100% free resource for companies <br class="d-none d-md-block">
                         looking to find remote talent across the globe.
                     </div>
-                    <button class="btn btn-join">Let's Explore</button>
+                    <a href="{{ route('all-product') }}">
+                        <button class="btn btn-join">Let's Explore</button>
+                    </a>
                 </div>
                 <div class="col-md-6 my-auto px-md-0 carousel"
                     data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true, "prevNextButtons": false, "draggable": true, "pageDots" : true, "autoPlay" : 1500, "friction" : 0.4, "selectedAttraction" : 0.01}'>
@@ -326,6 +328,8 @@
 
             body .resort .content .gradient-travland {
                 background-image: linear-gradient(113.4deg, #7F31FF 0%, #FA7219 100%);
+                max-width: 40px;
+                max-height: 40px;
             }
 
             body .resort .content .popular-card {
@@ -386,53 +390,30 @@
                     @foreach ($products as $pl)
                         <div class="box-border relative bg-white rounded-2xl popular-card">
                             <div class="flex flex-col">
-                                <div class="position-absolute z-10 pt-3 ps-3">
-                                    <div
-                                        class="p-3 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                        {{ $pl->stock }}
+                                <a href="{{ route('detail.show', $pl->id_product) }}"
+                                    class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 rounded-2xl hover:bg-opacity-20">
+                                    <div class="position-absolute z-10 pt-3 ps-3">
+                                        <div
+                                            class="p-3 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
+                                            {{ $pl->stock }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="relative">
-                                    @php
-                                        $property_images = json_decode($pl->images);
-                                    @endphp
-                                    <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
-                                        alt="GetShayna" class="image-product w-100" height="250px" />
-                                </div>
-                                <div class="flex flex-col gap-2 px-4">
-                                    <a href="{{ route('detail.show', $pl->id_product) }}" style="text-decoration: none;">
+                                    <div class="relative">
+                                        @php
+                                            $property_images = json_decode($pl->images);
+                                        @endphp
+                                        <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
+                                            class="" alt="Image alt text" />
+                                    </div>
+
+                                    <div class="flex flex-col gap-2 px-4 z-10">
                                         <div class="title">{{ $pl->title }}</div>
-                                    </a>
-                                    <div class="price"> @currency($pl->price)</div>
-                                </div>
-                                <a href="#"
-                                    class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
+                                        <div class="price"> @currency($pl->price)</div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     @endforeach
-                @else
-                    <div class="box-border relative bg-white rounded-2xl popular-card">
-                        <div class="flex flex-col">
-                            <div class="position-absolute z-10 pt-3 ps-3">
-                                <div
-                                    class="p-3 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                    {{ $pl->stock }}
-                                </div>
-                            </div>
-                            <div class="relative">
-                                <img src="{{ asset('/frontend/images/product1.jpg') }}" alt="GetShayna"
-                                    class="image-product w-100" height="250px" />
-                            </div>
-                            <div class="flex flex-col gap-2 px-4">
-                                <a href="{{ route('detail.show', $pl->id_product) }}" style="text-decoration: none;">
-                                    <div class="title">{{ $pl->title }}</div>
-                                </a>
-                                <div class="price"> @currency($pl->price)</div>
-                            </div>
-                            <a href="#"
-                                class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
-                        </div>
-                    </div>
                 @endif
 
 
