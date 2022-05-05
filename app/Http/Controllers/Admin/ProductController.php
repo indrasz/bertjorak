@@ -86,9 +86,11 @@ class ProductController extends Controller
         }
         $file->weight = $request->weight;
 
-        $file->save();
-
-        return redirect()->route('dashboard.product.index')->with('success', 'Data Your files has been successfully added');
+        if ($file->save()) {
+            return redirect()->route('dashboard.product.index')->withToastSuccess('Product Created Successfully!');
+        } else {
+            return redirect()->route('dashboard.product.index')->withToastError('Product failed Created');
+        }
     }
 
     /**
@@ -167,16 +169,18 @@ class ProductController extends Controller
         $productUp->desc = $request->desc;
         $productUp->stock = $request->stock;
         if ($pilihanText[0][0] != null) {
-            $file->pilihan = json_encode($pilihanText);
+            $productUp->pilihan = json_encode($pilihanText);
         }
         if ($sizeText[0][0] != null) {
-            $file->size = json_encode($sizeText);
+            $productUp->size = json_encode($sizeText);
         }
         $productUp->weight = $request->weight;
 
-        $productUp->save();
-
-        return redirect()->route('dashboard.product.index');
+        if ($productUp->save()) {
+            return redirect()->route('dashboard.product.index')->withToastSuccess('Product Success edited!');
+        } else {
+            return redirect()->route('dashboard.product.index')->withToastError('Product failed edited!');
+        }
     }
 
     /**
@@ -193,8 +197,10 @@ class ProductController extends Controller
             File::delete(storage_path() . '/app/public/products/images/' . $value);
         }
 
-        $data->delete();
-
-        return redirect()->route('dashboard.product.index');
+        if ($data->delete()) {
+            return redirect()->route('dashboard.product.index')->withToastSuccess('Product deleted successfully');
+        } else {
+            return redirect()->route('dashboard.product.index')->withToastError('Product failed delete');
+        }
     }
 }

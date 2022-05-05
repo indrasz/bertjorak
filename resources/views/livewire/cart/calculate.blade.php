@@ -82,6 +82,7 @@
                                     @else
                                         {{ $hasilKonversi }} hari pengiriman
                                     @endif
+                                    <input type="text" name="durasi" value="{{ $hasilKonversi }}" hidden>
                                 @endforeach
                             @endif
                         @endforeach

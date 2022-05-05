@@ -39,9 +39,14 @@
         <section class="container px-6 mx-auto mt-2">
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="col-span-12 p-4 md:pt-0">
-                    {{-- <div class="px-6 py-2 mt-2 bg-white rounded-xl">
-                        as
-                    </div> --}}
+
+                    @if ($ka->status_transaksi == 'Sedang Dikirim')
+                        <div class="p-4 mb-4 text-sm rounded-lg text-blue-700" style="background-color: #259ed6;"
+                            role="alert">
+                            <span class="font-medium">Perkiraan sampai!</span> Perkiraan paket sampai pada tanggal
+                            <b>{{ date('D, d-M-Y', strtotime($ka->date_end)) }}<b>.
+                        </div>
+                    @endif
 
                     <div class="px-6 py-2 mt-2 bg-white rounded-xl">
                         <div class="flex justify-between pt-6">
@@ -63,7 +68,7 @@
                                 <span
                                     class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
                                     style="background-color: #008bcc;">{{ $ka->status_transaksi }}</span>
-                            @elseif ($ka->status_transaksi == 'Telah Dikirim')
+                            @elseif ($ka->status_transaksi == 'Success')
                                 <span
                                     class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
                                     style="background-color: #17e72f;">{{ $ka->status_transaksi }}</span>
@@ -98,7 +103,15 @@
                                                 </div>
                                                 <div>
                                                     <p class="font-medium text-black">{{ $os->title }}</p>
-                                                    <p class="text-sm text-gray-400">Size : {{ $os->sizeSelected }}</p>
+                                                    @if ($os->pilihanSelected != null)
+                                                        <p class="text-sm text-gray-400">Warna/Tipe :
+                                                            {{ $os->pilihanSelected }}
+                                                        </p>
+                                                    @endif
+                                                    @if ($os->sizeSelected != null)
+                                                        <p class="text-sm text-gray-400">Size : {{ $os->sizeSelected }}
+                                                        </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </td>
@@ -367,14 +380,17 @@
                                         </button>
                                     @endif
                                 @else
-                                    <form action="/update/success" method="POST">
-                                        @csrf
-                                        <input type="text" name="id_sukses" value="{{ $value->id_transaction }}" hidden>
-                                        <button class="payButton"
-                                            style="background-color: rgb(185, 110, 12); width: 100%;">
-                                            Barang Sudah Sampai
-                                        </button>
-                                    </form>
+                                    @if ($value->status_transaksi != 'Success')
+                                        <form action="/update/success" method="POST">
+                                            @csrf
+                                            <input type="text" name="id_sukses" value="{{ $value->id_transaction }}"
+                                                hidden>
+                                            <button class="payButton"
+                                                style="background-color: rgb(185, 110, 12); width: 100%;">
+                                                Barang Sudah Sampai
+                                            </button>
+                                        </form>
+                                    @endif
                                 @endif
                             </div>
                         </div>

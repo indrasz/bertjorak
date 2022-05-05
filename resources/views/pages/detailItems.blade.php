@@ -139,23 +139,26 @@
                                             <div style="padding-top: 5em;" class="pt- pb-2 features-list">
                                                 <table class="w-full mb-2">
 
-                                                    <tr>
-                                                        <td class="text-sm text-serv-text">
-                                                            Warna/Tipe
-                                                        </td>
-                                                        <td class="mb-4 text-sm font-semibold text-right text-black">
-                                                            {{ $ka->pilihanSelected }}
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="text-sm text-serv-text">
-                                                            Size
-                                                        </td>
-                                                        <td class="mb-4 text-sm font-semibold text-right text-black">
-                                                            {{ $ka->sizeSelected }}
-                                                        </td>
-                                                    </tr>
+                                                    @if ($ka->sizeSelected != null)
+                                                        <tr>
+                                                            <td class="text-sm text-serv-text">
+                                                                Size
+                                                            </td>
+                                                            <td class="mb-4 text-sm font-semibold text-right text-black">
+                                                                {{ $ka->sizeSelected }}
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                    @if ($ka->pilihanSelected != null)
+                                                        <tr>
+                                                            <td class="text-sm text-serv-text">
+                                                                Warna/Tipe :
+                                                            </td>
+                                                            <td class="mb-4 text-sm font-semibold text-right text-black">
+                                                                {{ $ka->pilihanSelected }}
+                                                            </td>
+                                                        </tr>
+                                                    @endif
 
                                                     <tr>
                                                         <td class="text-sm leading-7 text-serv-text">

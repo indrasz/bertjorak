@@ -35,7 +35,8 @@ class TransactionController extends Controller
             elseif (Auth::user()->hasRole('buyer')) {
                 $authId = Auth::user()->id;
                 // Get Order Data
-                $orderData = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('users', 'orders.id_buyer', '=', 'users.id')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->paginate(5);
+                $orderData = Order::where('id_buyer', $authId)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('users', 'orders.id_buyer', '=', 'users.id')->paginate(5);
+
 
                 $getCart = Cart::join('products', 'carts.id_product', '=', 'products.id_product')->get();
                 foreach ($orderData as $getIdOrder) {
@@ -71,6 +72,12 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+
+        // Convert Durasi
+        $getDurasi = $request->durasi;
+        $conDurasi = strstr($getDurasi, '-', false);
+        $resultDurasi = trim($conDurasi, '-');
+
         $authId = Auth::user()->id;
 
         $id_cart = $request->idCart;
@@ -83,6 +90,7 @@ class TransactionController extends Controller
         $transaction->id_jenisKurir = $request->pilihJenisKurir;
         $transaction->ongkir = $request->ongkir;
         $transaction->totalCost = $request->totalPrice;
+        $transaction->durasi = $resultDurasi;
         $transaction->namaPembeli = $request->namaPembeli;
         $transaction->emailPembeli = $request->emailPembeli;
         $transaction->phonePembeli = $request->nomorPembeli;
@@ -100,7 +108,7 @@ class TransactionController extends Controller
             if ($order->save()) {
                 foreach ($id_cart as $key => $value) {
                     Cart::where('id_cart', $value)->update([
-                        'id_order' => $order->id,
+                        'id_order' => $order->orderID,
                         'status' => 'Sukses',
                     ]);
                 }
@@ -123,7 +131,7 @@ class TransactionController extends Controller
         // $passNotif->payment_handler($id);
 
         if (Auth::user()->hasRole('buyer')) {
-            $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
+            $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.orderID', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
             //$orderGetToken = Order::where('kode_order', $id)->get();
             //dd($orderShow);
@@ -163,11 +171,11 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
         if (Auth::user()) {
             if (Auth::user()->hasRole('admin')) {
-                $orderShow = Order::where('orders.kode_order', $id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
+                $orderShow = Order::where('orders.kode_order', $id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.orderID', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
                 $province = Province::all();
 
@@ -191,9 +199,16 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //($request->all());
+        // Date Convertion
+        $dayExtraTime = $request->durasi + 1;
+        $daySeconds = time() + 86400 * $dayExtraTime;
+        $convertDay = $daySeconds;
+        $resultDate = date('Y-m-d H:i:s', $convertDay);
+
         $upTransaksi = Transaction::find($id);
 
+        $upTransaksi->date_start = Carbon::now();
+        $upTransaksi->date_end = $resultDate;
         $upTransaksi->status_transaksi = 'Sedang Dikirim';
         $upTransaksi->nomorResi = $request->nomorResi;
 
@@ -220,7 +235,7 @@ class TransactionController extends Controller
 
         $payment = new Payment();
 
-        $payment->id_order = $request->idOrder;
+        $payment->id_order = $request->orderID;
         $payment->status_code = $json->status_code;
         $payment->status_message = $json->status_message;
         $payment->transaction_id = $json->transaction_id;
@@ -245,8 +260,8 @@ class TransactionController extends Controller
 
         $upTran->status_transaksi = 'Success';
 
-        $upTran->save();
-
-        return redirect()->back();
+        if ($upTran->save()) {
+            return redirect()->back()->withToastSuccess('Congrats your package has arrived!');
+        }
     }
 }

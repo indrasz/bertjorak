@@ -53,7 +53,8 @@
 
 
                                                         <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
-                                                            alt="image-product" class="object-cover w-full h-full rounded-full" loading="lazy">
+                                                            alt="image-product"
+                                                            class="object-cover w-full h-full rounded-full" loading="lazy">
 
                                                         {{-- <div class="absolute inset-0 rounded-full shadow-inner"
                                                             aria-hidden="true">

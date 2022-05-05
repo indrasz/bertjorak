@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->id('orderID');
             $table->string('kode_order')->nullable();
             $table->foreignId('id_buyer')->constrained('users', 'id');
             $table->foreignId('id_transaction')->constrained('transactions', 'id_transaction');
+            $table->string('snap_token')->nullable();
             $table->timestamp('date_order')->nullable();
             $table->timestamps();
         });

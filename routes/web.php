@@ -36,7 +36,7 @@ Route::get('product', [HomeController::class, 'allProduct'])->name('all-product'
 Route::resource('product/detail', DetailController::class);
 
 // Cart
-Route::resource('cart', CartController::class)->middleware('is_buyer');
+Route::resource('cart', CartController::class);
 
 // Transaksi
 Route::resource('detailitem', TransaksiShow::class)->middleware('auth:sanctum');

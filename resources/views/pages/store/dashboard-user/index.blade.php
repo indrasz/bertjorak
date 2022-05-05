@@ -32,6 +32,16 @@
             </div>
         </div>
         <section class="container px-6 mx-auto mt-5">
+            @if (Auth::user()->type_addres == null && Auth::user()->id_province == null && Auth::user()->id_city == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
+                <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                    role="alert">
+                    <span class="font-medium">Peringatan!</span> Anda belum memasukkan alamat, harap mengisi alamat
+                    terlebih
+                    dahulu <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
+                        style="text-decoration: underline; color: blue;">disini</a>.
+                </div>
+            @endif
+
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="p-4 lg:col-span-10 md:col-span-12 md:pt-0">
 

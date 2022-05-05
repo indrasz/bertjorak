@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', ' My Transaction')
+@section('title', ' Transaction')
 
 @section('content')
 
@@ -56,41 +56,30 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="px-1 py-5 text-sm">
-                                                @php
-                                                    // $getCart = $getCart->where('id_order', $o->id_order);
-                                                    // foreach ($getCart as $keyCart) {
-                                                    //     $as = $keyCart;
-                                                    //     //dd($as);
-                                                    // }
-                                                    
-                                                    // $getCartFirst = $getCart->where('id_order', $o->id_order);
-                                                    // foreach ($getCartFirst as $keyFirst) {
-                                                    //     $first = $keyFirst;
-                                                    // }
-                                                    
-                                                    //dd($first);
-                                                    
-                                                    $property_images = json_decode($o->images);
-                                                    //dd($getCart);
-                                                @endphp
 
+                                            @php
+                                                $getCart = $getCart->where('id_order', $o->idOrder);
+                                                foreach ($getCart as $keyCart) {
+                                                    $as = $keyCart;
+                                                    //dd($as);
+                                                }
+                                            @endphp
+                                            <td class="px-1 py-5 text-sm">
                                                 <div class="flex justify-around items-center">
                                                     <div class="w-12 h-12 overflow-hidden rounded-full">
-                                                        <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
-                                                            alt="product">
+                                                        <img src="{{ asset('/storage/products/images/') }}" alt="product">
                                                     </div>
                                                     <p class="font-medium" style="padding-left: 0.75em;">
-                                                        {{ $o->title }}
+                                                        {{-- {{ $as->title }} --}}
                                                     </p>
                                                 </div>
-                                                @if (count($getCart) >= 2)
-                                                    <p class="pt-4">
+                                                <p class="pt-4">
+                                                    @if (count($getCart) > 1)
                                                         {{ '+' . count($getCart) - 1 . ' Jenis Barang Lainnya' }}
-                                                    </p>
-                                                @endif
-                                                {{-- {{ count($getCart) . ' Jenis Barang' }} --}}
+                                                    @endif
+                                                </p>
                                             </td>
+
                                             <td class="px-1 py-5 text-sm">
                                                 @php
                                                     $date = date_create($o->date_order);
@@ -129,6 +118,29 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @php
+                                $time1 = time();
+                                $time2 = time() + 86400;
+                                $as = date('Y-m-d H:i:s', $time1);
+                                $is = date('Y-m-d H:i:s', $time2);
+                                echo 'Start ' . $as;
+                                echo '<br>';
+                                echo ' End ' . $is;
+                                
+                                echo '<br>';
+                                echo '<br>';
+                                echo '<br>';
+                                
+                                date_default_timezone_set('Asia/Jakarta');
+                                
+                                echo date('Y-m-d H:i:s');
+                                
+                                // $to_date = time(); // Input your date here e.g. strtotime("2014-01-02")
+                                // $from_date = strtotime('2022-05-06');
+                                // $day_diff = $to_date + $from_date;
+                                // echo floor($day_diff / (60 * 60 * 24)) . "\n";
+                                
+                            @endphp
                         </div>
                         <br>
                         {{ $orderData->links() }}

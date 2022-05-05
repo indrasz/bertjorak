@@ -32,8 +32,8 @@ class NotificationController extends Controller
 
             $payment->save();
             if ($payment->save()) {
-                // Settlement
-                if ($payment->transaction_status == 'settlement') {
+                // Settlement // Capture
+                if ($payment->transaction_status == 'settlement' || $payment->transaction_status == 'capture') {
                     foreach ($orderShow as $key) {
                         // Update Stock
                         $getIdProduct = $key->id_product; // Get Id Product
