@@ -18,6 +18,11 @@
     <section class="related-product w-100 h-100">
         <div class="container px-4 mt-4">
 
+            <div class="caption-related-product py-3 text-center">
+                Explore Our Product
+            </div>
+            <br>
+
             <livewire:product.product-list />
     </section>
 

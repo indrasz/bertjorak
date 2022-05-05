@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    //protected $primaryKey = 'id_order';
+    protected $primaryKey = 'orderID';
 
     protected $guarded = [];
 }

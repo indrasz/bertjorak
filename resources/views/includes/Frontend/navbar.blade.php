@@ -569,6 +569,26 @@
                                             </svg>
                                         </a>
                                     </li>
+
+                                    {{-- <li>
+                                        <a href="{{ route('logout') }}"
+                                            class="dropdown-hover d-flex align-items-center justify-content-center text-start text-decoration-none">
+                                            <img class=""
+                                                src="{{ asset('assets/images/logout-svgrepo-com.svg') }}" alt="" />
+                                            <div class="flex-grow-1 ps-4">
+                                                <h2 class="icon-item-title">Logout</h2>
+                                                <p class="icon-item-caption" style="margin-bottom: 0">
+                                                    Logout from account
+                                                </p>
+                                            </div>
+                                            <svg class="dropdown-icon-arrow d-none" width="18" height="18"
+                                                viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M14.5237 9.41999L10.7887 13.17C10.6687 13.29 10.5187 13.35 10.3687 13.35C10.2187 13.35 10.0687 13.29 9.94871 13.17C9.70871 12.93 9.70871 12.555 9.94871 12.315L12.6637 9.58499H3.90371C3.57371 9.58499 3.30371 9.31499 3.30371 8.98499C3.30371 8.65499 3.57371 8.38499 3.90371 8.38499H12.6637L9.94871 5.655C9.70871 5.415 9.70871 5.04 9.94871 4.8C10.1887 4.56 10.5637 4.56 10.8037 4.8L14.5387 8.54999C14.7637 8.80499 14.7637 9.19499 14.5237 9.41999Z"
+                                                    fill="#7F31FF" />
+                                            </svg>
+                                        </a>
+                                    </li> --}}
                                 </ul>
                             </li>
                         </ul>

@@ -44,12 +44,12 @@
     </section>
 
     <section class="h-100 w-100" style="box-sizing: border-box;
-                                                background-image: url('http://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content8/Content-8-3.png');
-                                                background-color: #081b21;
-                                                background-repeat: no-repeat;
-                                                background-position: top;
-                                                background-size: contain;
-                                            ">
+                                                    background-image: url('http://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content8/Content-8-3.png');
+                                                    background-color: #081b21;
+                                                    background-repeat: no-repeat;
+                                                    background-position: top;
+                                                    background-size: contain;
+                                                ">
 
         <div class="content-8-2" style="font-family: 'Inter', sans-serif">
             <div class="main">

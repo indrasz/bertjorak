@@ -13,14 +13,18 @@ class CartController extends Controller
     public function index()
     {
         if (Auth::user()) {
-            if (Auth::user()->id_province != null || Auth::user()->id_city != null || Auth::user()->detail_address != null || Auth::user()->zipcode != null) {
+            if (Auth::user()->hasRole('buyer')) {
+                if (Auth::user()->id_province != null || Auth::user()->id_city != null || Auth::user()->detail_address != null || Auth::user()->zipcode != null) {
 
-                $authId = Auth::user()->id;
-                $cartList = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->where('status', 'Cart')->get();
+                    $authId = Auth::user()->id;
+                    $cartList = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->where('status', 'Cart')->get();
 
-                return view('pages.store.cart')->with('carts', $cartList);
+                    return view('pages.store.cart')->with('carts', $cartList);
+                } else {
+                    return redirect()->route('dashboard.profile.edit', Auth::user()->id);
+                }
             } else {
-                return redirect()->route('dashboard.profile.edit', Auth::user()->id);
+                return redirect()->back();
             }
         } else {
             return route('login');
@@ -41,7 +45,9 @@ class CartController extends Controller
         $cart->sizeSelected = $request->sizeSelected;
 
         if ($cart->save()) {
-            return redirect()->back();
+            return redirect()->back()->withToastSuccess('Product successfully add to cart!');
+        } else {
+            return redirect()->back()->withToastError('Product failed add to cart!');
         }
 
         session()->put('success', 'Item created successfully.');
@@ -55,8 +61,10 @@ class CartController extends Controller
     {
         $this->cartDelete = Cart::where('id_cart', $id);
 
-        $this->cartDelete->delete();
-
-        return redirect()->back();
+        if ($this->cartDelete->delete()) {
+            return redirect()->back()->withToastSuccess('Product Successfully deleted!');
+        } else {
+            return redirect()->back()->withToastSuccess('Product Failed deleted!');
+        }
     }
 }

@@ -17,16 +17,18 @@ return new class extends Migration
             $table->id('id_transaction');
             $table->string('status_transaksi');
             $table->mediumText('notes')->nullable();
-            $table->string('id_kurir');
-            $table->string('id_jenisKurir');
+            $table->string('id_kurir')->nullable();
+            $table->string('id_jenisKurir')->nullable();
             $table->string('nomorResi')->nullable();
-            $table->double('totalCost');
+            $table->double('totalCost')->nullable();
             $table->string('namaPembeli')->nullable();
             $table->string('emailPembeli')->nullable();
             $table->string('phonePembeli')->nullable();
-            $table->double('ongkir');
+            $table->double('ongkir')->nullable();
+            $table->timestamp('date_start')->nullable();
+            $table->timestamp('date_end')->nullable();
+            $table->integer('durasi')->nullable();
             $table->timestamp('date_transaction')->nullable();
-            $table->timestamp('date_payment')->nullable();
             $table->timestamps();
         });
     }

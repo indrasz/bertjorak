@@ -42,11 +42,14 @@
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="col-span-12 p-4 md:pt-0">
                     <div class="px-6 py-2 mt-2 bg-white rounded-xl">
-                        @if ($ka->status_transaksi == 'Pending' || $ka->status_transaksi == 'Waiting')
+                        @if ($ka->status_transaksi == 'Waiting')
                             <form action="{{ route('dashboard.transaction.update', $ka->id_transaction) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
+
+                                {{-- Durasi --}}
+                                <input type="text" name="durasi" value="{{ $ka->durasi }}" hidden>
 
                                 <div class="">
                                     <div class="p-1 mt-5">
@@ -97,7 +100,31 @@
                             </form>
                         @endif
 
-                        <label for="transaction detail" class="block mb-3 font-medium text-md">Transaction Detail</label>
+                        <div class="flex justify-between pt-6">
+                            <div>
+                                <label for="transaction detail" class="block mb-3 font-medium text-md"
+                                    style="font-weight: 700;">Transaction Detail</label>
+                                {{-- <label for="transaction detail" class="block mb-3 font-medium text-sm"
+                                    style="font-weight: 400;">{{ $ka->id_order }}</label> --}}
+                            </div>
+                            @if ($ka->status_transaksi == 'Pending')
+                                <span
+                                    class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
+                                    style="background-color: #80dd07;">{{ $ka->status_transaksi }}</span>
+                            @elseif ($ka->status_transaksi == 'Waiting')
+                                <span
+                                    class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
+                                    style="background-color: #a007dd;">{{ $ka->status_transaksi }}</span>
+                            @elseif ($ka->status_transaksi == 'Sedang Dikirim')
+                                <span
+                                    class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
+                                    style="background-color: #008bcc;">{{ $ka->status_transaksi }}</span>
+                            @elseif ($ka->status_transaksi == 'Success')
+                                <span
+                                    class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
+                                    style="background-color: #17e72f;">{{ $ka->status_transaksi }}</span>
+                            @endif
+                        </div>
                         <table class="w-full" aria-label="Table">
                             <thead>
                                 <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
@@ -125,8 +152,16 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <p class="font-medium text-black">{{ $os->title }}</p>
-                                                    <p class="text-sm text-gray-400">Size Product</p>
+                                                    <p class="font-medium text-black">{{ $ka->title }}</p>
+                                                    @if ($ka->pilihanSelected != null)
+                                                        <p class="text-sm text-gray-400">Warna/Tipe :
+                                                            {{ $ka->pilihanSelected }}
+                                                        </p>
+                                                    @endif
+                                                    @if ($ka->sizeSelected != null)
+                                                        <p class="text-sm text-gray-400">Size : {{ $ka->sizeSelected }}
+                                                        </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </td>

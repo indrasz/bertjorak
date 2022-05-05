@@ -31,7 +31,18 @@
                 </div>
             </div>
         </div>
+
         <section class="container px-6 mx-auto mt-5">
+            @if (Auth::user()->type_addres == null && Auth::user()->id_province == null && Auth::user()->id_city == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
+                <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                    role="alert">
+                    <span class="font-medium">Peringatan!</span> Anda belum memasukkan alamat, harap mengisi alamat
+                    terlebih
+                    dahulu <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
+                        style="text-decoration: underline; color: blue;">disini</a>.
+                </div>
+            @endif
+
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="p-4 lg:col-span-7 md:col-span-12 md:pt-0">
                     <div class="sm:grid sm:h-32 sm:grid-flow-row sm:gap-4 sm:grid-cols-3">
@@ -61,11 +72,18 @@
                                 </div>
 
                                 @php
-                                    $pending = $order->where('status_transaksi', '=', 'Pending');
-                                    $pending = $order->where('status_transaksi', '=', 'Waiting');
+                                    $pending1 = $order->where('status_transaksi', '=', 'Pending');
+                                    $pending2 = $order->where('status_transaksi', '=', 'Waiting');
                                 @endphp
 
-                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($pending) }}</p>
+                                @if ($pending1 || $pending2)
+                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
+                                        {{ count($pending1) + count($pending2) }}
+                                    </p>
+                                @else
+                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">0
+                                    </p>
+                                @endif
                                 <p class="text-sm text-left text-gray-500">
                                     Transaction <br class="hidden lg:block">
                                     Pending
@@ -198,11 +216,11 @@
                             <div class="flex justify-between">
                                 @php
                                     // Succes
-                                    $succesBalance = $order->where('status_transaksi', '=', 'Succes')->sum('totalCost');
+                                    $succesBalance = $order->where('status_transaksi', '=', 'Success')->sum('totalCost');
                                 @endphp
                                 <div class="">
                                     <p class="font-light">
-                                        Succes Balance
+                                        Success Balance
                                         </h1>
                                     <p class="font-medium tracking-widest">
                                         @currency($succesBalance)
@@ -220,16 +238,17 @@
                             <div class="flex justify-between">
                                 @php
                                     // Waiting
-                                    $pendingBalance = $order->where('status_transaksi', '=', 'Waiting')->sum('totalCost');
+                                    $pendingBalance1 = $order->where('status_transaksi', '=', 'Waiting')->sum('totalCost');
                                     // Pending
-                                    $pendingBalance = $order->where('status_transaksi', '=', 'Pending')->sum('totalCost');
+                                    $pendingBalance2 = $order->where('status_transaksi', '=', 'Pending')->sum('totalCost');
+                                    $pendingBalance3 = $order->where('status_transaksi', '=', 'Sedang Dikirim')->sum('totalCost');
                                 @endphp
                                 <div class="">
                                     <p class="font-light">
                                         Pending Balance
                                         </h1>
                                     <p class="font-medium tracking-widest">
-                                        @currency($pendingBalance)
+                                        @currency($pendingBalance1 + $pendingBalance2 + $pendingBalance3)
                                     </p>
                                 </div>
                                 <div class="w-10 h-10 text-white p-2 rounded-full" style="background-color: white;">

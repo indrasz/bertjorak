@@ -26,6 +26,8 @@
     </div>
 
     @livewireScripts
+
+    @include('sweetalert::alert')
 </body>
 
 </html>

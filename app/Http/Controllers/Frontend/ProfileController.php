@@ -83,8 +83,10 @@ class ProfileController extends Controller
         $profile->zipcode = $request->zipCode;
         $profile->detail_address = $request->detailAddress;
 
-        $profile->save();
-
-        return redirect()->route('dashboard.profile.index');
+        if ($profile->save()) {
+            return redirect()->route('dashboard.profile.index')->withToastSuccess('Your profile has been edited!');
+        } else {
+            return redirect()->back()->withToastSuccess('Your profile failed to edit!');
+        }
     }
 }

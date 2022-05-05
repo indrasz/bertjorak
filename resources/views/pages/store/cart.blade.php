@@ -188,17 +188,22 @@
                                         </div>
 
 
-                                        <div class="col-4 d-flex text-center align-items-center justify-content-center name-product-preview ms-3">
+                                        <div
+                                            class="col-4 d-flex text-center align-items-center justify-content-center name-product-preview ms-3">
                                             <div class="flex justify-end gap-4 w-full">
-                                                <div class="px-3 py-1 rounded-md text-center text-base text-black font-semibold shadow-md"
-                                                    style="background-color: #bf87ff;">
-                                                    {{ $c->sizeSelected }}
-                                                </div>
+                                                @if ($c->sizeSelected != null)
+                                                    <div class="px-3 py-1 rounded-md text-center text-base text-black font-semibold shadow-md"
+                                                        style="background-color: #bf87ff;">
+                                                        {{ $c->sizeSelected }}
+                                                    </div>
+                                                @endif
 
-                                                <div class="px-3 py-1 rounded-md text-center text-base text-black font-semibold shadow-md"
-                                                    style="background-color: #aaadbe;">
-                                                    {{ $c->pilihanSelected }}
-                                                </div>
+                                                @if ($c->pilihanSelected != null)
+                                                    <div class="px-3 py-1 rounded-md text-center text-base text-black font-semibold shadow-md"
+                                                        style="background-color: #aaadbe;">
+                                                        {{ $c->pilihanSelected }}
+                                                    </div>
+                                                @endif
                                             </div>
 
                                         </div>
@@ -236,15 +241,15 @@
                                         <div class="col-2 d-flex justify-content-center align-items-center text-center">
 
 
-                                                <form action="{{ route('cart.destroy', $c->id_cart) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
+                                            <form action="{{ route('cart.destroy', $c->id_cart) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
 
-                                                    <button type="submit" class="btn">
-                                                        <img src="{{ asset('frontend/images/icon-delete.svg') }}" width="15"
-                                                            alt="icon-delete">
-                                                    </button>
-                                                </form>
+                                                <button type="submit" class="btn">
+                                                    <img src="{{ asset('frontend/images/icon-delete.svg') }}" width="15"
+                                                        alt="icon-delete">
+                                                </button>
+                                            </form>
                                         </div>
 
 

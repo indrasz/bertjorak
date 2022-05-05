@@ -46,6 +46,8 @@
     @stack('after-script')
 
     @livewireScripts
+
+    @include('sweetalert::alert')
 </body>
 
 </html>
