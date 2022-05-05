@@ -73,10 +73,35 @@
                                     {{ $d->desc }}
                                 </div>
 
-                                <div class="chose-size mt-3 px-3">
+                                {{-- <div class="chose-size mt-3 px-3">
                                     Jumlah Barang :
                                 </div>
-                                <livewire:cart.counter-barang :maxProduct="$d" />
+                                <livewire:cart.counter-barang :maxProduct="$d" /> --}}
+
+                                @if ($d->pilihan != null)
+                                    <div class="chose-size mt-3 px-3">
+                                        Pilih Ukuran :
+                                    </div>
+
+                                    <div class="d-flex flex-row mt-3 px-3">
+                                        @php
+                                            $pilihanConvert = json_decode($d->pilihan);
+                                        @endphp
+                                        @forelse ($pilihanConvert as $p)
+                                            @foreach ($p as $pl)
+                                                <label class="me-3 " for="{{ $pl }}">
+                                                    <input class="d-none b" type="radio" id="{{ $pl }}"
+                                                        name="sizeSelected" value="{{ $pl }}" disabled>
+                                                    <div class="detail-size-card justify-content-center">
+                                                        <div class="text-size m-0">{{ $pl }}</div>
+                                                    </div>
+                                                </label>
+                                            @endforeach
+                                        @empty
+                                            <h5>Tidak ada ukuran yang tersedia</h5>
+                                        @endforelse
+                                    </div>
+                                @endif
 
                                 @if ($d->size != null)
                                     <div class="chose-size mt-3 px-3">
@@ -91,7 +116,7 @@
                                             @foreach ($u as $a)
                                                 <label class="me-3 " for="{{ $a }}">
                                                     <input class="d-none b" type="radio" id="{{ $a }}"
-                                                        name="sizeSelected" value="{{ $a }}">
+                                                        name="sizeSelected" value="{{ $a }}" disabled>
                                                     <div class="detail-size-card justify-content-center">
                                                         <div class="text-size m-0">{{ $a }}</div>
                                                     </div>
@@ -170,7 +195,6 @@
                                 font-size: 17px;
                             }
 
-                            /* .detail-product .detail-size-card #icon-check{
                         </style>
                     </div>
                 </div>
@@ -184,31 +208,34 @@
 
     <section class="related-product w-100 h-100">
         <div class="container px-4">
-            <div class="caption-related-product ps-3">
-                Explore Our Product
-            </div>
-            <div class="carousel pt-2"
-                data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
+            @if (count($dataAll) >= 2)
+                <div class="caption-related-product ps-3">
+                    Explore Our Product
+                </div>
+                <div class="carousel pt-2"
+                    data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
 
-                @foreach ($dataAll as $all)
-                    @if ($all->id_product != $getId)
-                        <div class="card-related-carousel">
-                            @php
-                                $property_images = json_decode($all->images);
-                            @endphp
-                            <div class="image-placeholder">
-                                <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}" alt="images" />
-                            </div>
+                    @foreach ($dataAll as $all)
+                        @if ($all->id_product != $getId)
+                            <div class="card-related-carousel">
+                                @php
+                                    $property_images = json_decode($all->images);
+                                @endphp
+                                <div class="image-placeholder">
+                                    <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
+                                        alt="images" />
+                                </div>
 
-                            <div class="card-details">
-                                <a href="{{ route('detail.show', $all->id_product) }}" style="text-decoration: none;">
-                                    <div class="caption">{{ $all->title }}</div>
-                                </a>
-                                <span class="sub-caption">@currency($all->price)</span>
-                            </div>
+                                <div class="card-details">
+                                    <a href="{{ route('detail.show', $all->id_product) }}"
+                                        style="text-decoration: none;">
+                                        <div class="caption">{{ $all->title }}</div>
+                                    </a>
+                                    <span class="sub-caption">@currency($all->price)</span>
+                                </div>
 
 
-                            {{-- <div class="bottom-text d-flex flex-row justify-content-between">
+                                {{-- <div class="bottom-text d-flex flex-row justify-content-between">
                                 <div class="price-content flex-grow-1">
                                     <span>Start from</span> <span class="price">200k</span>
                                 </div>
@@ -218,12 +245,13 @@
                                     <span>4.8</span>
                                 </div>
                             </div> --}}
-                        </div>
-                    @endif
-                @endforeach
+                            </div>
+                        @endif
+                    @endforeach
 
 
-            </div>
+                </div>
+            @endif
         </div>
 
         <style>

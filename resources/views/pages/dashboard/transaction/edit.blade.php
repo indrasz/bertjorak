@@ -42,20 +42,26 @@
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="col-span-12 p-4 md:pt-0">
                     <div class="px-6 py-2 mt-2 bg-white rounded-xl">
-                        <form action="{{ route('dashboard.transaction.update', $ka->id_transaction) }}" method="POST"
-                            enctype="multipart/form-data">
+                        @if ($ka->status_transaksi == 'Pending' || $ka->status_transaksi == 'Waiting')
+                            <form action="{{ route('dashboard.transaction.update', $ka->id_transaction) }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
 
-                            <div class="">
-                                <div class="p-1 mt-5">
-                                    <div class="grid grid-cols-6 gap-6">
-                                        <div class="col-span-6 ">
-                                            <label for="cityId" class="block mb-3 font-medium text-gray-700 text-md">Nomor
-                                                Resi</label>
-                                            <input type="text" placeholder="Masukkan Nomor Resi Pengiriman" name="nomorResi"
-                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                        </div>
+                                <div class="">
+                                    <div class="p-1 mt-5">
+                                        <div class="grid grid-cols-6 gap-6">
+                                            <div class="col-span-6 ">
+                                                <label for="cityId"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Nomor
+                                                    Resi</label>
+                                                <input type="text" placeholder="Masukkan Nomor Resi Pengiriman"
+                                                    name="nomorResi"
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                    autocomplete="off">
+                                            </div>
 
-                                        {{-- <div class="col-span-6 ">
+                                            {{-- <div class="col-span-6 ">
                                             <label for="cityId"
                                                 class="block mb-3 font-medium text-gray-700 text-md">Transaction
                                                 Status</label>
@@ -66,29 +72,30 @@
                                                 <option value="Cancel" selected>Cancel</option>
                                             </select>
                                         </div> --}}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="px-1 py-4 text-right">
-                                    <a href="{{ route('dashboard.transaction.index') }}" type="button"
-                                        class="inline-flex justify-center px-4 py-2 mr-4 text-sm font-medium text-gray-700 bg-white border border-gray-600 rounded-lg shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300"
-                                        onclick="return confirm('Are you sure want to back? , Any changes you make will not be saved.')">
-                                        Back
-                                    </a>
+                                    <div class="px-1 py-4 text-right">
+                                        <a href="{{ route('dashboard.transaction.index') }}" type="button"
+                                            class="inline-flex justify-center px-4 py-2 mr-4 text-sm font-medium text-gray-700 bg-white border border-gray-600 rounded-lg shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300"
+                                            onclick="return confirm('Are you sure want to back? , Any changes you make will not be saved.')">
+                                            Back
+                                        </a>
 
-                                    {{-- @if (isset($order->file) == false) --}}
-                                    <button type="submit"
-                                        class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                                        onclick="return confirm('Are you sure want to submit this data?')">
-                                        Approve
-                                    </button>
-                                    {{-- @else --}}
-                                    {{-- <button type="submit" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" disabled>
+                                        {{-- @if (isset($order->file) == false) --}}
+                                        <button type="submit"
+                                            class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                            onclick="return confirm('Are you sure want to submit this data?')">
+                                            Approve
+                                        </button>
+                                        {{-- @else --}}
+                                        {{-- <button type="submit" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" disabled>
                                             Approve
                                         </button>
                                     @endif --}}
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        @endif
 
                         <label for="transaction detail" class="block mb-3 font-medium text-md">Transaction Detail</label>
                         <table class="w-full" aria-label="Table">
@@ -310,7 +317,11 @@
                                             Nomor Resi
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
-                                            -
+                                            @if ($value->nomorResi != null)
+                                                {{ $value->nomorResi }}
+                                            @else
+                                                -
+                                            @endif
                                         </td>
                                     </tr>
 

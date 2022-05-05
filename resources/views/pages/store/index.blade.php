@@ -209,9 +209,7 @@
                         GetShayna is a 100% free resource for companies <br class="d-none d-md-block">
                         looking to find remote talent across the globe.
                     </div>
-                    <a href="{{ route('all-product') }}">
-                        <button class="btn btn-join">Let's Explore</button>
-                    </a>
+                    <button class="btn btn-join">Let's Explore</button>
                 </div>
                 <div class="col-md-6 my-auto px-md-0 carousel"
                     data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true, "prevNextButtons": false, "draggable": true, "pageDots" : true, "autoPlay" : 1500, "friction" : 0.4, "selectedAttraction" : 0.01}'>
@@ -378,16 +376,11 @@
 
         </style>
         <div class="content container">
-            <div class="headline">
-                Popular Resorts Close <br class="d-none d-md-block">
-                to Loften Iceland
-            </div>
-            <!-- Flickity HTML init -->
-            <div class="carousel" style="background: #f2f6ff !important;"
-                data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true, "pageDots": true, "prevNextButtons": false, "draggable": true }'>
-                <!-- Card Container 1 -->
-                @if (empty($products))
-                    @foreach ($products as $pl)
+
+            <!-- Card Container -->
+            @if (count($products) >= 1)
+                @foreach ($products as $pl)
+                    @if ($pl->stock >= 0)
                         <div class="box-border relative bg-white rounded-2xl popular-card">
                             <div class="flex flex-col">
                                 <a href="{{ route('detail.show', $pl->id_product) }}"
@@ -413,9 +406,12 @@
                                 </a>
                             </div>
                         </div>
-                    @endforeach
-                @else
-                    {{-- <div class="box-border relative bg-white rounded-2xl popular-card">
+                    @endif
+                @endforeach
+            @else
+                <div class="carousel" style="background: #f2f6ff !important;"
+                    data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true, "pageDots": true, "prevNextButtons": false, "draggable": true }'>
+                    <div class="box-border relative bg-white rounded-2xl popular-card">
                         <div class="flex flex-col">
                             <div class="position-absolute z-10 pt-3 ps-3">
                                 <div
@@ -514,12 +510,13 @@
                             <a href="#"
                                 class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
                         </div>
-                    </div> --}}
-                @endif
+                    </div>
+                </div>
+            @endif
 
 
-                {{-- Dummy Product --}}
-                {{-- <div class="box-border relative bg-white rounded-2xl popular-card">
+            {{-- Dummy Product --}}
+            {{-- <div class="box-border relative bg-white rounded-2xl popular-card">
                     <div class="flex flex-col">
                         <div class="position-absolute z-10 pt-3 ps-3">
                             <div class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
@@ -538,7 +535,7 @@
                             class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
                     </div>
                 </div> --}}
-            </div>
+        </div>
         </div>
     </section>
 

@@ -9,6 +9,9 @@ use App\Models\User;
 use Auth;
 use File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 class ProfileController extends Controller
 {
@@ -27,6 +30,9 @@ class ProfileController extends Controller
 
     public function edit($id)
     {
+        // $daftarProvinsi = RajaOngkir::kota()->all();
+        // dd($daftarProvinsi);
+
         if (Auth::user()->id == $id) {
             $editProfile = User::where('id', $id)->get();
             return view('pages.dashboard.profile.edit')->with('editProfile', $editProfile);
@@ -37,6 +43,21 @@ class ProfileController extends Controller
 
     public function update(Request $request, $id)
     {
+        //dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'username' => 'required',
+            'phoneNumber' => 'required',
+            'provincesId' => 'required',
+            'type_address' => 'required',
+            'cityId' => 'required',
+            'zipCode' => 'required',
+            'detailAddress' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+
         if ($request->hasFile('avatar')) {
             // Delete old image
             $getImage = User::findOrFail($id);

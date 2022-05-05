@@ -27,7 +27,7 @@ class TransactionController extends Controller
         if (Auth::user()) {
             // Admin Transaction
             if (Auth::user()->hasRole('admin')) {
-                $orderData = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
+                $orderData = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('users', 'orders.id_buyer', '=', 'users.id')->paginate(5);
 
                 return view('pages.dashboard.transaction.index')->with('orderData', $orderData);
             }
@@ -35,8 +35,9 @@ class TransactionController extends Controller
             elseif (Auth::user()->hasRole('buyer')) {
                 $authId = Auth::user()->id;
                 // Get Order Data
-                $orderData = Order::where('id_buyer', $authId)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->get();
+                $orderData = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('users', 'orders.id_buyer', '=', 'users.id')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->paginate(5);
 
+                $getCart = Cart::join('products', 'carts.id_product', '=', 'products.id_product')->get();
                 foreach ($orderData as $getIdOrder) {
                     $getIdO = $getIdOrder->id_order;
                 }
@@ -44,7 +45,7 @@ class TransactionController extends Controller
                 // Get Cart Data
                 // $cartData = Cart::where('carts.id_order', $getIdO)->join('orders', 'carts.id_order', '=', 'orders.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->get();
 
-                return view('pages.store.dashboard-user.transaction.index')->with('orderData', $orderData);
+                return view('pages.store.dashboard-user.transaction.index')->with('orderData', $orderData)->with('getCart', $getCart);
             }
         } else {
             return view('errors.404');
@@ -76,7 +77,7 @@ class TransactionController extends Controller
 
         $transaction = new Transaction();
 
-        $transaction->status = "Pending";
+        $transaction->status_transaksi = "Pending";
         $transaction->notes = $request->notes;
         $transaction->id_kurir = $request->pilihKurir;
         $transaction->id_jenisKurir = $request->pilihJenisKurir;
@@ -122,7 +123,7 @@ class TransactionController extends Controller
         // $passNotif->payment_handler($id);
 
         if (Auth::user()->hasRole('buyer')) {
-            $orderShow = Order::where('orders.kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
+            $orderShow = Order::where('kode_order', $id)->where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
             //$orderGetToken = Order::where('kode_order', $id)->get();
             //dd($orderShow);
@@ -130,6 +131,8 @@ class TransactionController extends Controller
             $province = Province::all();
 
             $city = City::all();
+
+            $payment = Payment::all();
 
             $getPay = Order::where('kode_order', $id)->get();
 
@@ -148,7 +151,7 @@ class TransactionController extends Controller
                 $order->save();
             }
 
-            return view('pages.store.dashboard-user.transaction.detail')->with('orderShow', $orderShow)->with('snap_token', $snapToken)->with('province', $province)->with('city', $city);
+            return view('pages.store.dashboard-user.transaction.detail')->with('orderShow', $orderShow)->with('snap_token', $snapToken)->with('province', $province)->with('city', $city)->with('payment', $payment)->with('payment', $payment);
         } else {
             return redirect()->back();
         }
@@ -164,9 +167,15 @@ class TransactionController extends Controller
     {
         if (Auth::user()) {
             if (Auth::user()->hasRole('admin')) {
-                $orderShow = Order::where('kode_order', $id)->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->get();
+                $orderShow = Order::where('orders.kode_order', $id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.id', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
-                return view('pages.dashboard.transaction.edit')->with('orderShow', $orderShow);
+                $province = Province::all();
+
+                $city = City::all();
+
+                //dd($orderShow);
+
+                return view('pages.dashboard.transaction.edit')->with('orderShow', $orderShow)->with('province', $province)->with('city', $city);
             } else {
                 return redirect()->back();
             }
@@ -182,7 +191,15 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //($request->all());
+        $upTransaksi = Transaction::find($id);
+
+        $upTransaksi->status_transaksi = 'Sedang Dikirim';
+        $upTransaksi->nomorResi = $request->nomorResi;
+
+        $upTransaksi->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -218,5 +235,18 @@ class TransactionController extends Controller
         if ($payment->save()) {
             return redirect()->back();
         }
+    }
+
+    public function success(Request $request)
+    {
+        $idTransaction = $request->id_sukses;
+
+        $upTran = Transaction::find($idTransaction);
+
+        $upTran->status_transaksi = 'Success';
+
+        $upTran->save();
+
+        return redirect()->back();
     }
 }

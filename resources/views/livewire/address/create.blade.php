@@ -82,11 +82,7 @@
                         $getProv = $province;
                     }
                 @endphp
-                @if ($edit_data->id_province = $getProv)
-                    <option value="{{ $getProv->province_id }}" selected>{{ $getProv->name_province }}</option>
-                @else
-                    <option value="0" selected>Select Province</option>
-                @endif
+                <option value="" selected disabled>Select Province</option>
                 @foreach ($provinces as $province)
                     <option value="{{ $province->province_id }}">{{ $province->name_province }}</option>
                 @endforeach
@@ -100,7 +96,7 @@
                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                     <option value="" selected>Select City</option>
                     @foreach ($cities as $city)
-                        <option value="{{ $city->city_id }}">{{ $city->name_city }}</option>
+                        <option value="{{ $city->city_id }}">{{ $city->type . ' ' . $city->name_city }}</option>
                     @endforeach
                 </select>
             @endif

@@ -153,22 +153,6 @@ class ProductController extends Controller
             }
         }
 
-        // foreach ($request->photos as $image) {
-        //     ///dd($image);
-        //     $name = time() . rand(1, 100) . ' - ' . $image->getClientOriginalName();
-        //     $image->storeAs('products/images/', $name, 'public');
-        //     $dataNewImages[] = $name;
-        // }
-
-        // if ($request->hasfile('photos')) {
-        //     foreach ($request->photos as $image) {
-        //         ///dd($image);
-        //         $name = time() . rand(1, 100) . ' - ' . $image->getClientOriginalName();
-        //         $image->storeAs('products/images/', $name, 'public');
-        //         $dataNewImages[] = $name;
-        //     }
-        // }
-
         $imageInput[] = $request->photos;
         $pilihanText[] = $request->pilihan;
         $sizeText[] = $request->size;

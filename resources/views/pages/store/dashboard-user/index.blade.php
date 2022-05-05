@@ -9,11 +9,11 @@
             <div class="grid w-full gap-5 px-10 mx-auto md:grid-cols-12">
                 <div class="col-span-8">
                     <h2 class="mt-8 mb-1 text-2xl font-semibold text-gray-700">
-                        Overviews
+                        Dashboard
                     </h2>
-                    <p class="text-sm text-gray-400">
+                    {{-- <p class="text-sm text-gray-400">
                         Monthly Reports
-                    </p>
+                    </p> --}}
                 </div>
                 <div class="col-span-4 text-right">
                     <div @click.away="open = false" class="relative z-10 hidden mt-5 lg:block" x-data="{ open: false }">
@@ -33,43 +33,75 @@
         </div>
         <section class="container px-6 mx-auto mt-5">
             <div class="grid gap-5 md:grid-cols-12">
-                <main class="p-4 lg:col-span-12 md:col-span-12 md:pt-0">
+                <main class="p-4 lg:col-span-10 md:col-span-12 md:pt-0">
 
                     <div class="sm:grid sm:h-32 sm:grid-flow-row sm:gap-4 sm:grid-cols-3">
-                        <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
-                            <div>
+                        @php
+                            // Success
+                            $succes = $order->where('status_transaksi', '=', 'Success');
+                            // Pending / Waiting
+                            $pending = $order->where('status_transaksi', '=', 'Pending');
+                            //$pending = $order->where('status_transaksi', '=', 'Waiting');
+                            // Shipment
+                            $shipment = $order->where('status_transaksi', '=', 'Sedang Dikirim');
+                            // Expired
+                            $expired = $order->where('status_transaksi', '=', 'Expired');
+                        @endphp
+
+                        <div class="flex flex-col justify-center px-2 py-2 mb-6 bg-white rounded-xl">
+                            <div class="flex justify-center items-center">
+                                <img src="{{ asset('/assets/images/services-progress-icon.svg') }}" alt=""
+                                    class="w-16 h-16">
+
                                 <div>
-                                    <img src="{{ asset('/assets/images/services-progress-icon.svg') }}" alt=""
-                                        class="w-8 h-8">
+                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($succes) }}
+                                    </p>
+                                    <p class="text-base text-left text-gray-500">
+                                        Transaction Success
+                                    </p>
                                 </div>
-
-                                @php
-                                    $sukses = $order->where('status', '=', 'Sukses');
-                                @endphp
-
-                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($sukses) }}</p>
-                                <p class="text-sm text-left text-gray-500">
-                                    Transaction <br class="hidden lg:block">
-                                    Success
-                                </p>
                             </div>
                         </div>
-                        <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
-                            <div>
+
+                        <div class="flex flex-col justify-center px-2 py-2 mb-6 bg-white rounded-xl">
+                            <div class="flex justify-center items-center">
+                                <img src="{{ asset('/assets/images/services-completed-icon.svg') }}" alt=""
+                                    class="w-16 h-16">
+
                                 <div>
-                                    <img src="{{ asset('/assets/images/services-completed-icon.svg') }}" alt=""
-                                        class="w-8 h-8">
+                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($pending) }}
+                                    </p>
+                                    <p class="text-base text-left text-gray-500">
+                                        Transaction Pending
+                                    </p>
                                 </div>
+                            </div>
+                        </div>
 
-                                @php
-                                    $pending = $order->where('status', '=', 'Pending');
-                                @endphp
+                        <div class="flex flex-col justify-center px-2 py-2 mb-6 bg-white rounded-xl">
+                            <div class="flex justify-center items-center">
+                                <img src="{{ asset('assets/images/expired.png') }}" alt="" class="w-14 h-14">
 
-                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($pending) }}</p>
-                                <p class="text-sm text-left text-gray-500">
-                                    Transaction <br class="hidden lg:block">
-                                    Pending
-                                </p>
+                                <div>
+                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($expired) }}
+                                    </p>
+                                    <p class="text-base text-left text-gray-500">
+                                        Transaction Expired
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center px-2 py-2 mb-6 bg-white rounded-xl">
+                            <div class="flex justify-center items-center">
+                                <img src="{{ asset('assets/images/delivery.png') }}" alt="" class="w-16 h-16">
+
+                                <div>
+                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($shipment) }}
+                                    </p>
+                                    <p class="text-base text-left text-gray-500">
+                                        Transaction Shipment
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
@@ -94,7 +126,7 @@
 
                     </div>
 
-                    <div class="mt-8 p-6 bg-white rounded-xl">
+                    {{-- <div class="mt-2 p-6 bg-white rounded-xl">
                         <div>
                             <h2 class="mb-1 text-xl font-semibold">
                                 My Address
@@ -139,7 +171,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> --}}
 
                 </main>
                 <aside class="p-4 lg:col-span-5 md:col-span-12 md:pt-0">

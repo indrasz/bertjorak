@@ -51,8 +51,23 @@
                                 {{-- <label for="transaction detail" class="block mb-3 font-medium text-sm"
                                     style="font-weight: 400;">{{ $ka->id_order }}</label> --}}
                             </div>
-                            <span
-                                class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-green-500 rounded-full bg-serv-green-badge">Success</span>
+                            @if ($ka->status_transaksi == 'Pending')
+                                <span
+                                    class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
+                                    style="background-color: #80dd07;">{{ $ka->status_transaksi }}</span>
+                            @elseif ($ka->status_transaksi == 'Waiting')
+                                <span
+                                    class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
+                                    style="background-color: #a007dd;">{{ $ka->status_transaksi }}</span>
+                            @elseif ($ka->status_transaksi == 'Sedang Dikirim')
+                                <span
+                                    class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
+                                    style="background-color: #008bcc;">{{ $ka->status_transaksi }}</span>
+                            @elseif ($ka->status_transaksi == 'Telah Dikirim')
+                                <span
+                                    class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
+                                    style="background-color: #17e72f;">{{ $ka->status_transaksi }}</span>
+                            @endif
                         </div>
                         <table class="w-full" aria-label="Table">
                             <thead>
@@ -202,7 +217,7 @@
                                                 $getCity = $keyCity;
                                             }
                                         @endphp
-                                        {{ $getCity->name_city }}
+                                        {{ $getCity->type . ' ' . $getCity->name_city }}
                                     </td>
                                 </tr>
 
@@ -278,7 +293,11 @@
                                             Nomor Resi
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
-                                            -
+                                            @if ($value->nomorResi != null)
+                                                {{ $value->nomorResi }}
+                                            @else
+                                                -
+                                            @endif
                                         </td>
                                     </tr>
 
@@ -331,21 +350,35 @@
                                     }
 
                                 </style>
-
-
-                                {{-- @if (is_null($pay->first()))
-                                    <button class="payButton" style="background-color: blue; width: 100%;"
-                                        id="pay-button">
-                                        Bayar
-                                    </button>
-                                @endif --}}
-                                <button class="payButton" style="background-color: blue; width: 100%;" id="pay-button">
-                                    Bayar
-                                </button>
+                                @php
+                                    //dd($payment->where('id_order', $value->id_order)->count());
+                                    $getPayCount = $payment->where('id_order', $value->id_order)->count();
+                                @endphp
+                                @if ($value->status_transaksi == 'Pending')
+                                    @if ($getPayCount == 0)
+                                        <button class="payButton" style="background-color: blue; width: 100%;"
+                                            id="pay-button">
+                                            Bayar
+                                        </button>
+                                    @else
+                                        <button class="payButton" style="background-color: yellow; width: 100%;"
+                                            id="pay-button">
+                                            Show
+                                        </button>
+                                    @endif
+                                @else
+                                    <form action="/update/success" method="POST">
+                                        @csrf
+                                        <input type="text" name="id_sukses" value="{{ $value->id_transaction }}" hidden>
+                                        <button class="payButton"
+                                            style="background-color: rgb(185, 110, 12); width: 100%;">
+                                            Barang Sudah Sampai
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     </div>
-
                 </main>
             </div>
         </section>
@@ -365,33 +398,14 @@
             e.preventDefault();
 
             snap.pay('{{ $snap_token }}', {
-                // Optional
-                onSuccess: function(result) {
-                    /* You may add your own js here, this is just example */
-                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    // console.log(result)
-
-                    send_response_to_form(result);
-
-                },
-                // Optional
                 onPending: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                     // console.log(result)
-
-                    send_response_to_form(result);
-
+                    if ('{{ $getPayCount == 0 }}') {
+                        send_response_to_form(result);
+                    }
                 },
-                // Optional
-                onError: function(result) {
-                    /* You may add your own js here, this is just example */
-                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    // console.log(result)
-
-                    send_response_to_form(result);
-
-                }
             });
         });
 

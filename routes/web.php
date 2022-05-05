@@ -44,6 +44,9 @@ Route::resource('detailitem', TransaksiShow::class)->middleware('auth:sanctum');
 // Payment
 Route::post('transaction/payment', [TransactionController::class, 'payment_pos']);
 
+// Update Success
+Route::post('update/success', [TransactionController::class, 'success']);
+
 
 // Dashboard Admin
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
