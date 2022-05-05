@@ -17,6 +17,14 @@
             </div>
         </div>
         <section class="container px-6 mx-auto mt-5">
+            @if ($errors->any())
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                    @foreach ($errors->all() as $error)
+                        <p>{{ '- ' . $error }}</p>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="col-span-12 p-4 md:pt-0">
                     <div class="px-2 py-2 mt-2 bg-white rounded-xl">
@@ -82,7 +90,7 @@
                                                 <label for="username"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Username</label>
                                                 @if (Auth::user()->username == null)
-                                                    <input placeholder="Nama anda" type="text" name="username" id="username"
+                                                    <input placeholder="johnsmith" type="text" name="username" id="username"
                                                         autocomplete="username"
                                                         class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                                 @elseif (Auth::user()->username != null)

@@ -209,6 +209,10 @@
                                                 // Get City
                                                 $getCity = $userCity->where('city_id', $u->id_city);
                                                 foreach ($getCity as $keyCity) {
+                                                    // Type City
+                                                    $valTypeCity = $keyCity->type;
+                                                
+                                                    // Name City
                                                     $valCity = $keyCity->name_city;
                                                 }
                                             @endphp
@@ -229,7 +233,7 @@
                                                     class="block mb-3 font-medium text-gray-700 text-md">City</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
                                                     @if ($u->id_city != null)
-                                                        {{ $valCity }}
+                                                        {{ $valTypeCity . ' ' . $valCity }}
                                                     @else
                                                         -
                                                     @endif

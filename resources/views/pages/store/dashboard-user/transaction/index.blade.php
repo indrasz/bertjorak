@@ -58,8 +58,38 @@
                                             </td>
                                             <td class="px-1 py-5 text-sm">
                                                 @php
-                                                    //dd($o);
+                                                    // $getCart = $getCart->where('id_order', $o->id_order);
+                                                    // foreach ($getCart as $keyCart) {
+                                                    //     $as = $keyCart;
+                                                    //     //dd($as);
+                                                    // }
+                                                    
+                                                    // $getCartFirst = $getCart->where('id_order', $o->id_order);
+                                                    // foreach ($getCartFirst as $keyFirst) {
+                                                    //     $first = $keyFirst;
+                                                    // }
+                                                    
+                                                    //dd($first);
+                                                    
+                                                    $property_images = json_decode($o->images);
+                                                    //dd($getCart);
                                                 @endphp
+
+                                                <div class="flex justify-around items-center">
+                                                    <div class="w-12 h-12 overflow-hidden rounded-full">
+                                                        <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
+                                                            alt="product">
+                                                    </div>
+                                                    <p class="font-medium" style="padding-left: 0.75em;">
+                                                        {{ $o->title }}
+                                                    </p>
+                                                </div>
+                                                @if (count($getCart) >= 2)
+                                                    <p class="pt-4">
+                                                        {{ '+' . count($getCart) - 1 . ' Jenis Barang Lainnya' }}
+                                                    </p>
+                                                @endif
+                                                {{-- {{ count($getCart) . ' Jenis Barang' }} --}}
                                             </td>
                                             <td class="px-1 py-5 text-sm">
                                                 @php
@@ -72,9 +102,23 @@
                                             <td class="px-1 py-5 text-sm">
                                                 @currency($o->totalCost)
                                             </td>
-                                            <td class="px-1 py-5 text-sm text-green-500 text-md">
-                                                {{ $o->status }}
-                                            </td>
+                                            @if ($o->status_transaksi == 'Pending')
+                                                <td class="px-1 py-5 text-sm text-red-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @elseif ($o->status_transaksi == 'Sedang Dikirim')
+                                                <td class="px-1 py-5 text-sm text-blue-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @elseif ($o->status_transaksi == 'Telah Dikirim')
+                                                <td class="px-1 py-5 text-sm text-pink-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @else
+                                                <td class="px-1 py-5 text-sm text-green-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @endif
                                             <td class="px-1 py-5 text-sm">
                                                 <a href="{{ route('dashboard.transaction.show', $o->kode_order) }}"
                                                     class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
@@ -86,6 +130,8 @@
                                 </tbody>
                             </table>
                         </div>
+                        <br>
+                        {{ $orderData->links() }}
                     </main>
                 </div>
             </section>

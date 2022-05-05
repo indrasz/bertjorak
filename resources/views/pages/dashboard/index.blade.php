@@ -9,11 +9,11 @@
             <div class="grid w-full gap-5 px-10 mx-auto md:grid-cols-12">
                 <div class="col-span-8">
                     <h2 class="mt-8 mb-1 text-2xl font-semibold text-gray-700">
-                        Overviews
+                        Dashboard
                     </h2>
-                    <p class="text-sm text-gray-400">
+                    {{-- <p class="text-sm text-gray-400">
                         Monthly Reports
-                    </p>
+                    </p> --}}
                 </div>
                 <div class="col-span-4 text-right">
                     <div @click.away="open = false" class="relative z-10 hidden mt-5 lg:block" x-data="{ open: false }">
@@ -43,7 +43,7 @@
                                 </div>
 
                                 @php
-                                    $sukses = $order->where('status', '=', 'Sukses');
+                                    $sukses = $order->where('status_transaksi', '=', 'Success');
                                 @endphp
 
                                 <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($sukses) }}</p>
@@ -61,13 +61,51 @@
                                 </div>
 
                                 @php
-                                    $pending = $order->where('status', '=', 'Pending');
+                                    $pending = $order->where('status_transaksi', '=', 'Pending');
+                                    $pending = $order->where('status_transaksi', '=', 'Waiting');
                                 @endphp
 
                                 <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($pending) }}</p>
                                 <p class="text-sm text-left text-gray-500">
                                     Transaction <br class="hidden lg:block">
                                     Pending
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
+                            <div>
+                                <div>
+                                    <img src="{{ asset('assets/images/expired.png') }}" alt="" class="w-8 h-8">
+                                </div>
+
+                                @php
+                                    $expired = $order->where('status_transaksi', '=', 'Expired');
+                                @endphp
+
+                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
+                                    {{ count($expired) }}
+                                </p>
+                                <p class="text-sm text-left text-gray-500">
+                                    Transaction <br class="hidden lg:block">
+                                    Expired
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
+                            <div>
+                                <div>
+                                    <img src="{{ asset('assets/images/delivery.png') }}" alt="" class="w-8 h-8">
+                                </div>
+
+                                @php
+                                    $expired = $order->where('status_transaksi', '=', 'Sedang Dikirim');
+                                @endphp
+
+                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
+                                    {{ count($expired) }}
+                                </p>
+                                <p class="text-sm text-left text-gray-500">
+                                    Transaction Shipment
                                 </p>
                             </div>
                         </div>
@@ -81,13 +119,25 @@
                                     {{ count($countCustomer) }}
                                 </p>
                                 <p class="text-sm text-left text-gray-500">
-                                    Customer
-
+                                    Customers
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
+                            <div>
+                                <div>
+                                    <img src="{{ asset('assets/images/product.png') }}" alt="" class="w-8 h-8">
+                                </div>
+                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
+                                    {{ count($products) }}
+                                </p>
+                                <p class="text-sm text-left text-gray-500">
+                                    Products
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="p-6 mt-8 bg-white rounded-xl">
+                    {{-- <div class="p-6 mt-8 bg-white rounded-xl">
                         <div>
                             <h2 class="mb-1 text-xl font-semibold">
                                 My Address
@@ -135,7 +185,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> --}}
                 </main>
                 <aside class="p-4 lg:col-span-5 md:col-span-12 md:pt-0">
                     <div
@@ -144,19 +194,50 @@
                         <img class="relative object-cover w-full h-full rounded-xl"
                             src="{{ asset('/assets/images/card-background.png') }}" alt="">
 
-                        <div class="absolute w-full px-8 top-8">
+                        <div class="absolute w-full px-8 top-8 pt-4">
                             <div class="flex justify-between">
+                                @php
+                                    // Succes
+                                    $succesBalance = $order->where('status_transaksi', '=', 'Succes')->sum('totalCost');
+                                @endphp
                                 <div class="">
                                     <p class="font-light">
-                                        Your Balance
+                                        Succes Balance
                                         </h1>
                                     <p class="font-medium tracking-widest">
-                                        Rp 21.000.000
+                                        @currency($succesBalance)
                                     </p>
                                 </div>
-                                <img class="w-16 h-12" src="{{ asset('/assets/images/visa-icon.svg') }}" alt="" />
+                                <div class="w-10 h-10 text-white p-2 rounded-full" style="background-color: white;">
+                                    <img src="{{ asset('assets/images/succe.png') }}" alt="">
+                                </div>
+                                {{-- <img class="w-16 h-12" src="{{ asset('/assets/images/visa-icon.svg') }}" alt="" /> --}}
                             </div>
-                            <div class="pt-6">
+
+                            <br>
+                            <br>
+
+                            <div class="flex justify-between">
+                                @php
+                                    // Waiting
+                                    $pendingBalance = $order->where('status_transaksi', '=', 'Waiting')->sum('totalCost');
+                                    // Pending
+                                    $pendingBalance = $order->where('status_transaksi', '=', 'Pending')->sum('totalCost');
+                                @endphp
+                                <div class="">
+                                    <p class="font-light">
+                                        Pending Balance
+                                        </h1>
+                                    <p class="font-medium tracking-widest">
+                                        @currency($pendingBalance)
+                                    </p>
+                                </div>
+                                <div class="w-10 h-10 text-white p-2 rounded-full" style="background-color: white;">
+                                    <img src="{{ asset('assets/images/pending.png') }}" alt="">
+                                </div>
+                                {{-- <img class="w-16 h-12" src="{{ asset('/assets/images/visa-icon.svg') }}" alt="" /> --}}
+                            </div>
+                            {{-- <div class="pt-6">
                                 <p class="font-medium tracking-more-wider">
                                     •••• •••• •••• •••• 0903
                                 </p>
@@ -182,7 +263,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>

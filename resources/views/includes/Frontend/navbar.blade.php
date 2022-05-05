@@ -573,8 +573,10 @@
                             </li>
                         </ul>
                         <a class="nav-link" href="{{ route('cart.index') }}">
-
-                            <livewire:cart.count-cart />
+                            <div class="d-flex">
+                                <img src="{{ asset('frontend/images/icon-cart.svg') }}" alt="cart-icon" />
+                                <livewire:cart.count-cart />
+                            </div>
                             {{-- <div class="cart-badge">3</div> --}}
                         </a>
 

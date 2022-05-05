@@ -57,7 +57,7 @@
                                                 </div>
                                             </td>
                                             <td class="px-1 py-5 text-sm">
-                                                {{ $o->namaPembeli }}
+                                                {{ $o->name }}
                                             </td>
                                             <td class="px-1 py-5 text-sm">
                                                 @php
@@ -70,20 +70,53 @@
                                             <td class="px-1 py-5 text-sm">
                                                 @currency($o->totalCost)
                                             </td>
-                                            <td class="px-1 py-5 text-sm text-green-500 text-md">
-                                                {{ $o->status }}
-                                            </td>
-                                            <td class="px-1 py-5 text-sm">
-                                                <a href="{{ route('dashboard.transaction.edit', $o->kode_order) }}"
-                                                    class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
-                                                    Edit
-                                                </a>
-                                            </td>
+
+                                            @if ($o->status_transaksi == 'Pending')
+                                                <td class="px-1 py-5 text-sm text-red-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @elseif ($o->status_transaksi == 'Waiting')
+                                                <td class="px-1 py-5 text-sm text-purple-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @elseif ($o->status_transaksi == 'Sedang Dikirim')
+                                                <td class="px-1 py-5 text-sm text-blue-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @elseif ($o->status_transaksi == 'Telah Dikirim')
+                                                <td class="px-1 py-5 text-sm text-green-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                                @endif@if ($o->status_transaksi == 'Pending')
+                                                    <td class="px-1 py-5 text-sm text-red-500 text-md">
+                                                        {{ $o->status_transaksi }}
+                                                    </td>
+                                                @elseif ($o->status_transaksi == 'Sedang Dikirim')
+                                                    <td class="px-1 py-5 text-sm text-blue-500 text-md">
+                                                        {{ $o->status_transaksi }}
+                                                    </td>
+                                                @elseif ($o->status_transaksi == 'Telah Dikirim')
+                                                    <td class="px-1 py-5 text-sm text-pink-500 text-md">
+                                                        {{ $o->status_transaksi }}
+                                                    </td>
+                                                @else
+                                                    <td class="px-1 py-5 text-sm text-green-500 text-md">
+                                                        {{ $o->status_transaksi }}
+                                                    </td>
+                                                @endif
+                                                <td class="px-1 py-5 text-sm">
+                                                    <a href="{{ route('dashboard.transaction.edit', $o->kode_order) }}"
+                                                        class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
+                                                        Edit
+                                                    </a>
+                                                </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
+                        <br>
+                        {{ $orderData->links() }}
                     </main>
                 </div>
             </section>

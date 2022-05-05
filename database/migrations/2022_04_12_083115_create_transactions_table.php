@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id('id_transaction');
-            $table->string('status');
+            $table->string('status_transaksi');
             $table->mediumText('notes')->nullable();
             $table->string('id_kurir');
             $table->string('id_jenisKurir');
             $table->string('nomorResi')->nullable();
-            $table->double('ongkir');
             $table->double('totalCost');
-            $table->string('namaPembeli');
-            $table->string('emailPembeli');
-            $table->string('phonePembeli');
+            $table->string('namaPembeli')->nullable();
+            $table->string('emailPembeli')->nullable();
+            $table->string('phonePembeli')->nullable();
+            $table->double('ongkir');
             $table->timestamp('date_transaction')->nullable();
             $table->timestamp('date_payment')->nullable();
             $table->timestamps();

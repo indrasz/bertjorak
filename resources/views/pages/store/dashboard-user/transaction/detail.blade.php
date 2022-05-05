@@ -15,6 +15,7 @@
                     @php
                         foreach ($orderShow as $os) {
                             $ka = $os;
+                            //dd($ka);
                         }
                     @endphp
                     <ol class="inline-flex py-2 list-none">
@@ -38,6 +39,10 @@
         <section class="container px-6 mx-auto mt-2">
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="col-span-12 p-4 md:pt-0">
+                    {{-- <div class="px-6 py-2 mt-2 bg-white rounded-xl">
+                        as
+                    </div> --}}
+
                     <div class="px-6 py-2 mt-2 bg-white rounded-xl">
                         <div class="flex justify-between pt-6">
                             <div>
@@ -46,8 +51,23 @@
                                 {{-- <label for="transaction detail" class="block mb-3 font-medium text-sm"
                                     style="font-weight: 400;">{{ $ka->id_order }}</label> --}}
                             </div>
-                            <span
-                                class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-green-500 rounded-full bg-serv-green-badge">Success</span>
+                            @if ($ka->status_transaksi == 'Pending')
+                                <span
+                                    class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
+                                    style="background-color: #80dd07;">{{ $ka->status_transaksi }}</span>
+                            @elseif ($ka->status_transaksi == 'Waiting')
+                                <span
+                                    class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
+                                    style="background-color: #a007dd;">{{ $ka->status_transaksi }}</span>
+                            @elseif ($ka->status_transaksi == 'Sedang Dikirim')
+                                <span
+                                    class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
+                                    style="background-color: #008bcc;">{{ $ka->status_transaksi }}</span>
+                            @elseif ($ka->status_transaksi == 'Telah Dikirim')
+                                <span
+                                    class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
+                                    style="background-color: #17e72f;">{{ $ka->status_transaksi }}</span>
+                            @endif
                         </div>
                         <table class="w-full" aria-label="Table">
                             <thead>
@@ -127,12 +147,7 @@
                             <div class="py-2">
                                 <h3 style="font-size: 1.1rem; font-weight: 800;">Catatan
                                 </h3>
-                                <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Reiciendis
-                                    dolor cum illo distinctio
-                                    nam asperiores soluta ducimus corporis, consequuntur, vero, harum assumenda aut itaque
-                                    odit
-                                    omnis laudantium earum. Vitae, esse.</p>
+                                <p class="text-justify">{{ $get->notes }}</p>
                             </div>
                         @endif
 
@@ -202,7 +217,7 @@
                                                 $getCity = $keyCity;
                                             }
                                         @endphp
-                                        {{ $getCity->name_city }}
+                                        {{ $getCity->type . ' ' . $getCity->name_city }}
                                     </td>
                                 </tr>
 
@@ -256,24 +271,6 @@
 
                                 <table class="w-full mb-2">
                                     <tr>
-                                        <td class="text-sm text-serv-text">
-                                            Name
-                                        </td>
-                                        <td class="mb-4 text-sm font-semibold text-right text-black">
-                                            {{ $value->namaPembeli }}
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="text-sm leading-7 text-serv-text">
-                                            Phone Number
-                                        </td>
-                                        <td class="mb-4 text-sm font-semibold text-right text-black">
-                                            {{ $value->phonePembeli }}
-                                        </td>
-                                    </tr>
-
-                                    <tr>
                                         <td class="text-sm leading-7 text-serv-text">
                                             Jasa Kurir
                                         </td>
@@ -296,7 +293,11 @@
                                             Nomor Resi
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
-                                            -
+                                            @if ($value->nomorResi != null)
+                                                {{ $value->nomorResi }}
+                                            @else
+                                                -
+                                            @endif
                                         </td>
                                     </tr>
 
@@ -349,42 +350,46 @@
                                     }
 
                                 </style>
-
-                                <button class="payButton" style="background-color: blue; width: 100%;" id="pay-button">
-                                    Bayar
-                                </button>
-                                {{-- @if ($value->payment_status == 1)
-                                    <button class="payButton" style="background-color: blue; width: 100%;"
-                                        id="pay-button">
-                                        Bayar
-                                    </button>
+                                @php
+                                    //dd($payment->where('id_order', $value->id_order)->count());
+                                    $getPayCount = $payment->where('id_order', $value->id_order)->count();
+                                @endphp
+                                @if ($value->status_transaksi == 'Pending')
+                                    @if ($getPayCount == 0)
+                                        <button class="payButton" style="background-color: blue; width: 100%;"
+                                            id="pay-button">
+                                            Bayar
+                                        </button>
+                                    @else
+                                        <button class="payButton" style="background-color: yellow; width: 100%;"
+                                            id="pay-button">
+                                            Show
+                                        </button>
+                                    @endif
                                 @else
-                                    Pembayaran berhasil
-                                @endif --}}
-                                {{-- <button class="payButton" style="background-color: blue; width: 100%;" id="pay-button">
-                                    Bayar
-                                </button> --}}
-
+                                    <form action="/update/success" method="POST">
+                                        @csrf
+                                        <input type="text" name="id_sukses" value="{{ $value->id_transaction }}" hidden>
+                                        <button class="payButton"
+                                            style="background-color: rgb(185, 110, 12); width: 100%;">
+                                            Barang Sudah Sampai
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     </div>
-
                 </main>
             </div>
         </section>
-        @php
-            $as = $get->id_order;
-        @endphp
 
         {{-- <livewire:transaction.push-payment-data :get="$as" /> --}}
 
-        @if ($get->snap_token == null)
-            <form action="/transaction/payment" id="submit_form" method="POST">
-                @csrf
-                <input type="hidden" name="idOrder" value="{{ $get->id_order }}">
-                <input type="text" name="json" id="json_callback" hidden>
-            </form>
-        @endif
+        <form action="/transaction/payment" id="submit_form" method="POST">
+            @csrf
+            <input type="hidden" name="idOrder" value="{{ $get->id_order }}">
+            <input type="text" name="json" id="json_callback" hidden>
+        </form>
 
     </main>
     <script type="text/javascript">
@@ -393,27 +398,14 @@
             e.preventDefault();
 
             snap.pay('{{ $snap_token }}', {
-                // Optional
-                onSuccess: function(result) {
-                    /* You may add your own js here, this is just example */
-                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    // console.log(result)
-                    send_response_to_form(result);
-                },
-                // Optional
                 onPending: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                     // console.log(result)
-                    send_response_to_form(result);
+                    if ('{{ $getPayCount == 0 }}') {
+                        send_response_to_form(result);
+                    }
                 },
-                // Optional
-                onError: function(result) {
-                    /* You may add your own js here, this is just example */
-                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    // console.log(result)
-                    send_response_to_form(result);
-                }
             });
         });
 

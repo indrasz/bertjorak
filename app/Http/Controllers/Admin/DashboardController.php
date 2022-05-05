@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
 use Auth;
 
@@ -14,11 +15,13 @@ class DashboardController extends Controller
         if (Auth::user()->hasRole('admin')) {
             $order = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->get();
 
+            $products = Product::all();
+
             $countCustomer = User::whereHas('roles', function ($q) {
                 $q->where('name', 'buyer');
             })->get();
 
-            return view('pages.dashboard.index')->with('countCustomer', $countCustomer)->with('order', $order);
+            return view('pages.dashboard.index')->with('countCustomer', $countCustomer)->with('order', $order)->with('products', $products);
         } elseif (Auth::user()->hasRole('buyer')) {
             $authId = Auth::user()->id;
             $order = Order::where('id_buyer', $authId)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->get();

@@ -134,8 +134,8 @@
 
 
                                         <div class="col-span-6">
-                                            <label for="weight"
-                                                class="block mb-3 font-medium text-gray-700 text-md">Berat</label>
+                                            <label for="weight" class="block mb-3 font-medium text-gray-700 text-md">Berat
+                                                (gram)</label>
                                             <input placeholder="Berat Barang" type="number" name="weight" id="weight"
                                                 autocomplete="weight"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"

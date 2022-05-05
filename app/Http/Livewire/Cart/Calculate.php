@@ -59,7 +59,7 @@ class Calculate extends Component
             'destination' => $this->getAlamatBuyer,
             'destinationType' => "city",
             'weight' => $this->getWeight,
-            'courier' => 'jne:pos:tiki',
+            'courier' => 'jne:sicepat:anteraja',
         ])->get();
     }
 
