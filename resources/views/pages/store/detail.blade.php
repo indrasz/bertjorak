@@ -105,13 +105,8 @@
                                     <div class="container mt-3 px-3">
                                         @forelse ($pilihan as $pil)
                                             @foreach ($pil as $p)
-<<<<<<< HEAD
-                                                <label class="me-3 " for="{{ $p }}">
-                                                    <input class="d-none px-3" type="radio" id="{{ $p }}"
-=======
                                                 <label class="me-3 col-md mb-2 mr-2" for="{{ $p }}">
                                                     <input class="d-none b" type="radio" id="{{ $p }}"
->>>>>>> 1e80d6b16b2a8eb3ad589ce5d2c6b4f9ed89053e
                                                         name="pilihanSelected" value="{{ $p }}" required>
                                                     <div class="detail-size-card justify-content-center text-center" style="width: 60px">
                                                         <div class="text-size text-center m-0 py-1 ">{{ $p }}</div>
@@ -222,8 +217,6 @@
                                 font-size: 17px;
                             }
 
-<<<<<<< HEAD
-=======
                             /* .detail-product .detail-size-card #icon-check{
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     transition: all 0.1s linear;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     opacity: 0;
@@ -233,7 +226,6 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     opacity: 1;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 } */
 
->>>>>>> 1e80d6b16b2a8eb3ad589ce5d2c6b4f9ed89053e
                         </style>
                     </div>
                 </div>
