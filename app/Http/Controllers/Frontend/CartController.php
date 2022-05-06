@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Payment;
+use App\Models\Product;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -35,22 +36,40 @@ class CartController extends Controller
     {
         $idUser = Auth::user()->id;
 
-        $cart = new Cart();
+        $productExist = Cart::where('id_user', $idUser)->where('id_user', Auth::user()->id)->where('id_product', $request->idProduct)->where('pilihanSelected', $request->pilihanSelected)->where('sizeSelected', $request->sizeSelected)->first();
 
-        $cart->id_user = $idUser;
-        $cart->status = "Cart";
-        $cart->id_product = $request->idProduct;
-        $cart->jumlah = $request->jumlah;
-        $cart->pilihanSelected = $request->pilihanSelected;
-        $cart->sizeSelected = $request->sizeSelected;
+        // Record Exists
+        if ($productExist != null) {
+            $cartExists = Cart::where('id_cart', $productExist->id_cart)->update([
+                'id_user' => $idUser,
+                'status' => "Cart",
+                'id_product' => $request->idProduct,
+                'jumlah' => $productExist->jumlah + $request->jumlah,
+                'pilihanSelected' => $request->pilihanSelected,
+                'sizeSelected' => $request->sizeSelected,
+            ]);
 
-        if ($cart->save()) {
-            return redirect()->back()->withToastSuccess('Product successfully add to cart!');
+            if ($cartExists) {
+                return redirect()->back()->withToastSuccess('Product successfully add to cart!');
+            } else {
+                return redirect()->back()->withToastError('Product failed add to cart!');
+            }
         } else {
-            return redirect()->back()->withToastError('Product failed add to cart!');
-        }
+            $cart = new Cart();
 
-        session()->put('success', 'Item created successfully.');
+            $cart->id_user = $idUser;
+            $cart->status = "Cart";
+            $cart->id_product = $request->idProduct;
+            $cart->jumlah = $request->jumlah;
+            $cart->pilihanSelected = $request->pilihanSelected;
+            $cart->sizeSelected = $request->sizeSelected;
+
+            if ($cart->save()) {
+                return redirect()->back()->withToastSuccess('Product successfully add to cart!');
+            } else {
+                return redirect()->back()->withToastError('Product failed add to cart!');
+            }
+        }
     }
 
     public function show()

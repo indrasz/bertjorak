@@ -70,7 +70,7 @@
                             color: #ADB2B8;
                         }
 
-                        .name-product-preview-size{
+                        .name-product-preview-size {
                             font: 400 0.7rem/0.3rem "Poppins", sans-serif;
                             color: #585858;
                         }
@@ -335,9 +335,6 @@
                                     <button type="submit" class="btn btn-confirm d-inline-block w-100 p-2 mt-4">
                                         Checkout Now
                                     </button>
-                                    {{-- <button class="btn btn-confirm d-inline-block w-100 p-2 mt-4" id="pay-button">
-                                        Checkout Now
-                                    </button> --}}
 
                                 </div>
                             @endif

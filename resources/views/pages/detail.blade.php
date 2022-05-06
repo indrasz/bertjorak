@@ -69,6 +69,10 @@
                                     </div>
                                 @endif
 
+                                <div class="stock-product mt-lg-2 ms-2 ps-2">
+                                    Berat : {{ $d->weight }} gram
+                                </div>
+
                                 <div class="desc-product mt-3 px-3">
                                     {{ $d->desc }}
                                 </div>
@@ -87,19 +91,18 @@
                                         @php
                                             $pilihanConvert = json_decode($d->pilihan);
                                         @endphp
-                                        @forelse ($pilihanConvert as $p)
+                                        @foreach ($pilihanConvert as $p)
                                             @foreach ($p as $pl)
                                                 <label class="col-md mb-2 mr-2" for="{{ $pl }}">
                                                     <input class="d-none b" type="radio" id="{{ $pl }}"
                                                         name="sizeSelected" value="{{ $pl }}" disabled>
                                                     <div class="detail-size-card justify-content-center">
-                                                        <div class="text-size m-0">{{ $pl }}</div>
+                                                        <div class="text-size m-0">{{ $pl }}
+                                                        </div>
                                                     </div>
                                                 </label>
                                             @endforeach
-                                        @empty
-                                            <h5>Tidak ada ukuran yang tersedia</h5>
-                                        @endforelse
+                                        @endforeach
                                     </div>
                                 @endif
 
@@ -108,13 +111,13 @@
                                         Pilih Ukuran :
                                     </div>
 
-                                    <div class="d-flex flex-row mt-3 px-3">
+                                    <div class="container mt-3 px-3">
                                         @php
                                             $ukuranConvert = json_decode($d->size);
                                         @endphp
                                         @forelse ($ukuranConvert as $u)
                                             @foreach ($u as $a)
-                                                <label class="me-3 " for="{{ $a }}">
+                                                <label class="col-md mb-2 mr-2" for="{{ $a }}">
                                                     <input class="d-none b" type="radio" id="{{ $a }}"
                                                         name="sizeSelected" value="{{ $a }}" disabled>
                                                     <div class="detail-size-card justify-content-center">
@@ -182,7 +185,8 @@
                             .detail-product input[type="radio"]:checked+.detail-size-card {
                                 border: 2px solid var(--dull-purple);
                                 color: var(--dull-purple);
-                                width: 5rem;
+                                width: 5em;
+                                padding: 2.5px !important;
                                 text-align: center;
                                 background-color: rgba(0, 186, 255, 0.05);
                             }
@@ -190,7 +194,8 @@
                             .detail-product .detail-size-card {
                                 border: 2px solid #000000;
                                 border-radius: 6px;
-                                width: 5rem;
+                                width: 5em;
+                                padding: 2.5px !important;
                                 text-align: center;
                                 font-size: 17px;
                             }

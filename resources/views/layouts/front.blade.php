@@ -11,6 +11,8 @@
     @include('includes.style')
     @stack('after-style')
 
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/css/bootstrap.min.css') }}">
+
     @livewireStyles
 </head>
 

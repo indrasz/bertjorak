@@ -53,16 +53,21 @@
                                                 <label for="title" class="block mb-3 font-medium text-gray-700 text-md">Nama
                                                     Produk</label>
 
-                                                <input value="{{ $d->title }}" type="text" name="name" id="name"
-                                                    autocomplete="name"
+                                                <input value="{{ $d->title }}" maxlength="100" type="text" name="name"
+                                                    id="name" autocomplete="name"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                     value="{{ old('name') }}" required>
+                                                <div id="the-count" style="float: right; padding-top: 0.5em;">
+                                                    <span id="current">0</span>
+                                                    <span id="maximum">/ 100</span>
+                                                </div>
 
                                                 @if ($errors->has('name'))
                                                     <p class="text-red-500 mb-3 text-sm">{{ $errors->first('name') }}</p>
                                                 @endif
 
                                             </div>
+
 
                                             <div class="col-span-6">
                                                 <label for="price"
@@ -84,27 +89,65 @@
                                                     class="block mb-3 font-medium text-gray-700 text-md">Thumbnail Product
                                                     Feeds</label>
 
+                                                <style>
+                                                    .grid-wrapper {
+                                                        --auto-grid-min-size: 10rem;
+                                                        display: grid;
+                                                        grid-gap: 2rem;
+                                                        grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+                                                        margin: 0;
+                                                        padding: 0;
+                                                        box-sizing: border-box;
+                                                        font-family: 'Montserrat', sans-serif;
+
+                                                    }
+
+                                                    .grid-wrapper li {
+                                                        color: #ffffff;
+                                                        font-size: 24px;
+                                                        list-style-type: none;
+                                                        margin: auto;
+                                                        text-align: center;
+                                                        text-transform: capitalize;
+                                                        font-weight: 600;
+                                                        overflow: hidden;
+
+                                                    }
+
+                                                    .main-container {
+                                                        margin: 0 auto;
+                                                        max-width: 1170px;
+                                                    }
+
+                                                </style>
 
                                                 <div class="p-2">
                                                     <div class="w-50 p-3" style="background-color: #eee;">
                                                         <h5>Gambar yang disimpan:</h5>
                                                         @if ($d->images != null)
-                                                            @foreach (json_decode($d->images, true) as $i)
-                                                                <div class="row">
-                                                                    <div class="col-md-4">
-                                                                        <img src="{{ asset('/storage/products/images/' . $i) }}"
-                                                                            class="w-25 img-thumbnail p-1" alt="">
-                                                                    </div>
+                                                            <div class="row flex">
+                                                                <div class="main-container">
+                                                                    <ul class="grid-wrapper">
+                                                                        @foreach (json_decode($d->images, true) as $i)
+                                                                            <li>
+                                                                                <img src="{{ asset('/storage/products/images/' . $i) }}"
+                                                                                    class="img-thumbnail p-1" alt=""
+                                                                                    style="width: 100%; border-radius: 5%;">
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
                                                                 </div>
-                                                            @endforeach
+
+                                                            </div>
                                                         @endif
                                                     </div>
                                                 </div>
 
 
-
+                                                <img src="{{ asset('assets/images/empty-illustration.svg') }}" id="output"
+                                                    style="width: 25%; padding-top: 1.5%; padding-bottom: 1.5%;" />
                                                 <input placeholder="Thumbnail 1" type="file" name="photos[]" id="photos"
-                                                    autocomplete="photos"
+                                                    autocomplete="photos" onchange="loadFile(event)"
                                                     class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
 
                                                 @if ($errors->has('photos[]'))
@@ -198,7 +241,7 @@
 
                                             <div class="col-span-6">
                                                 <label for="size" class="block mb-3 font-medium text-gray-700 text-md">Size
-                                                    Produk</label>
+                                                    Produk (optional)</label>
 
                                                 @if ($d->size != null)
                                                     <div class="p-2">
@@ -260,6 +303,19 @@
     <script src="{{ url('https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}"></script>
 
     <script type="text/javascript">
+        // Count Char
+        $('#name').keyup(function() {
+
+            var characterCount = $(this).val().length,
+                current = $('#current'),
+                maximum = $('#maximum'),
+                theCount = $('#the-count');
+
+            current.text(characterCount);
+        });
+    </script>
+
+    <script type="text/javascript">
         // add row
         $("#addPilihan").click(function() {
             var html = '';
@@ -280,8 +336,7 @@
         $("#addThumbnailRow").click(function() {
             var html = '';
             html +=
-                '<input placeholder="Keunggulan 3" type="file" name="photos[]" id="photos" autocomplete="photos" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>';
-
+                ' <input placeholder="Keunggulan 3" onchange="loadFile(event)" type="file" name="photos[]" id="photos" autocomplete="photos" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>'
             $('#newThumbnailRow').append(html);
         });
 
@@ -289,5 +344,13 @@
         $(document).on('click', '#removeAdvantagesRow', function() {
             $(this).closest('#inputFormAdvantagesRow').remove();
         });
+
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
     </script>
 @endpush

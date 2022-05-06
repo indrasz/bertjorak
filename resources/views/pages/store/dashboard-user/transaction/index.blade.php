@@ -58,8 +58,8 @@
                                             </td>
 
                                             @php
-                                                $getCart = $getCart->where('id_order', $o->idOrder);
-                                                foreach ($getCart as $keyCart) {
+                                                $a = $getCart->where('id_order', $o->orderID);
+                                                foreach ($a as $keyCart) {
                                                     $as = $keyCart;
                                                     //dd($as);
                                                 }
@@ -67,15 +67,25 @@
                                             <td class="px-1 py-5 text-sm">
                                                 <div class="flex justify-around items-center">
                                                     <div class="w-12 h-12 overflow-hidden rounded-full">
-                                                        <img src="{{ asset('/storage/products/images/') }}" alt="product">
+                                                        @foreach (json_decode($as->images, true) as $ha)
+                                                            <img src="{{ asset('/storage/products/images/' . $ha) }}"
+                                                                alt="product">
+                                                        @endforeach
                                                     </div>
                                                     <p class="font-medium" style="padding-left: 0.75em;">
-                                                        {{-- {{ $as->title }} --}}
+                                                    <div class="flex flex-col">
+                                                        <h5 class="font-bold">
+                                                            {{ $as->title }}
+                                                        </h5>
+                                                        <h5>
+                                                            Qty : {{ $as->jumlah }}
+                                                        </h5>
+                                                    </div>
                                                     </p>
                                                 </div>
                                                 <p class="pt-4">
-                                                    @if (count($getCart) > 1)
-                                                        {{ '+' . count($getCart) - 1 . ' Jenis Barang Lainnya' }}
+                                                    @if (count($a) > 1)
+                                                        {{ '+' . count($a) - 1 . ' Jenis Barang Lainnya' }}
                                                     @endif
                                                 </p>
                                             </td>
@@ -142,7 +152,7 @@
                             @endphp
                         </div>
                         <br>
-                        {{ $orderData->links() }}
+                        {{ $orderData->links('vendor.pagination.simple-tailwind') }}
                     </main>
                 </div>
             </section>

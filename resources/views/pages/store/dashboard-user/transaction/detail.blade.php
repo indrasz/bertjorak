@@ -167,6 +167,7 @@
                         <div class="pt-6">
                             <h3 class="pb-2" style="font-size: 1.1rem; font-weight: 800;">Data Pemesan
                             </h3>
+
                             <table class="w-full mb-2">
                                 <tr>
                                     <td class="text-sm text-serv-text">
@@ -367,31 +368,53 @@
                                     //dd($payment->where('id_order', $value->id_order)->count());
                                     $getPayCount = $payment->where('id_order', $value->id_order)->count();
                                 @endphp
-                                @if ($value->status_transaksi == 'Pending')
-                                    @if ($getPayCount == 0)
-                                        <button class="payButton" style="background-color: blue; width: 100%;"
-                                            id="pay-button">
-                                            Bayar
-                                        </button>
-                                    @else
-                                        <button class="payButton" style="background-color: yellow; width: 100%;"
-                                            id="pay-button">
-                                            Show
-                                        </button>
+
+                                <div class="flex flex-row justify-between">
+                                    <div style="width: 80%;">
+                                        @if ($value->status_transaksi == 'Pending')
+                                            @if ($getPayCount == 0)
+                                                <button class="payButton" style="background-color: blue; width: 100%;"
+                                                    id="pay-button">
+                                                    Bayar
+                                                </button>
+                                            @else
+                                                <button class="payButton"
+                                                    style="background-color: yellow; width: 100%;" id="pay-button">
+                                                    Show
+                                                </button>
+                                            @endif
+                                        @else
+                                            @if ($value->status_transaksi == 'Sedang Dikirim')
+                                                <form action="/update/success" method="POST">
+                                                    @csrf
+                                                    <input type="text" name="id_sukses"
+                                                        value="{{ $value->id_transaction }}" hidden>
+                                                    <button class="payButton"
+                                                        style="background-color: rgb(14, 157, 182); width: 100%; border-color: transparent;">
+                                                        Barang Sudah Sampai
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        @endif
+                                    </div>
+
+                                    @if ($value->status_transaksi != 'Pending')
+                                        <div class="text-right" style="width: 20%;">
+                                            <a href="{{ url('/transaction/download', $get->kode_order) }}"
+                                                target="_blank">
+                                                <button
+                                                    class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center text-white"
+                                                    style="background-color: #F40F02;">
+                                                    <svg class="fill-current w-4 h-4 mr-2"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                        <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                                                    </svg>
+                                                    <span>Download PDF</span>
+                                                </button>
+                                            </a>
+                                        </div>
                                     @endif
-                                @else
-                                    @if ($value->status_transaksi == 'Sedang Dikirim')
-                                        <form action="/update/success" method="POST">
-                                            @csrf
-                                            <input type="text" name="id_sukses" value="{{ $value->id_transaction }}"
-                                                hidden>
-                                            <button class="payButton"
-                                                style="background-color: rgb(185, 110, 12); width: 100%;">
-                                                Barang Sudah Sampai
-                                            </button>
-                                        </form>
-                                    @endif
-                                @endif
+                                </div>
                             </div>
                         </div>
                     </div>

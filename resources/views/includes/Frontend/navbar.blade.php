@@ -33,7 +33,7 @@
                                     <ul class="dropdown-menu" style="cursor: pointer">
 
                                         <li>
-                                            <a href="#"
+                                            <a href="{{ url('/product') }}"
                                                 class="dropdown-hover d-flex align-items-center justify-content-center text-start text-decoration-none">
                                                 <img class=""
                                                     src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header5/Header-5-5.png"
@@ -90,22 +90,33 @@
                             @auth
                                 {{-- Buyer --}}
                                 @if (Auth::user()->hasRole('buyer'))
-                                    <a class="nav-link " href="{{ route('dashboard.index') }}"
-                                        data-bs-toggle="dropdown">
-                                        <img src="{{ asset('frontend/images/icon-user.png') }}" class="me-2"
-                                            alt="icon-user" width="45" height="45">
-                                        Username
-                                    </a>
-                                    <a class="nav-link" href="#">
+                                    @if (Auth::user()->avatar != null)
+                                        <a class="nav-link " href="{{ route('dashboard.index') }}"
+                                            data-bs-toggle="dropdown">
+                                            <img src="{{ asset('/storage/account/' . Auth::user()->id . '/avatar/' . Auth::user()->avatar) }}"
+                                                class="me-2 rounded-full" alt="icon-user" width="45" height="45">
+                                            {{ Auth::user()->name }}
+                                        </a>
+                                    @else
+                                        <a class="nav-link " href="{{ route('dashboard.index') }}"
+                                            data-bs-toggle="dropdown">
+                                            <img src="{{ asset('assets/images/blank-profile-picture.png') }}"
+                                                class="me-2 rounded-full" alt="icon-user" width="45" height="45">
+                                            {{ Auth::user()->name }}
+                                        </a>
+                                    @endif
+                                    <a class="nav-link" href="{{ route('cart.index') }}">
                                         <img src="{{ asset('frontend/images/icon-cart.svg') }}" alt="" />
-                                        <div class="cart-badge">3</div>
+                                        <div class="cart-icon">
+                                            <livewire:cart.count-cart />
+                                        </div>
                                     </a>
                                     {{-- Admin --}}
                                 @else
                                     <a href="{{ route('dashboard.index') }}">
-                                        {{-- <button type="button" class="btn btn-primary">
+                                        <button type="button" class="btn btn-primary">
                                             Dashboard
-                                        </button> --}}
+                                        </button>
                                     </a>
                                 @endif
                                 {{-- Belum Login --}}

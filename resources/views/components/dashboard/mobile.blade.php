@@ -4,24 +4,27 @@
     x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
     @keydown.escape="closeSideMenu" aria-label="aside">
-
     <div class="py-4 text-gray-500 dark:text-gray-400">
 
         <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-            <img src="{{ asset('/assets/images/logo.svg') }}" alt="" class="ml-6">
+            <img src="{{ asset('frontend/images/main-logo.png') }}" alt="" style="width: 35%;" class="ml-6">
         </a>
 
         <div class="flex items-center pt-5 pl-5 mt-10 space-x-2 border-t border-gray-100">
             <!--Author's profile photo-->
-            <img class="object-cover object-center mr-1 rounded-full w-14 h-14"
-                src="{{ url('https://randomuser.me/api/portraits/men/1.jpg') }}" alt="random user" />
+            @if (Auth::user()->avatar == null)
+                <img class="object-cover object-center mr-1 rounded-full w-14 h-14"
+                    src="{{ asset('assets/images/blank-profile-picture.png') }}" alt="random user" />
+            @else
+                <img class="object-cover object-center mr-1 rounded-full w-14 h-14"
+                    src="{{ asset('/storage/account/' . Auth::user()->id . '/avatar/' . Auth::user()->avatar) }}"
+                    alt="random user" />
+            @endif
             <div>
                 <!--Author name-->
                 <p class="font-semibold text-gray-900 text-md">{{ Auth::user()->name }}</p>
-               <p class="text-sm font-light text-serv-text">
-                    @if (Auth::user()->username != null)
-                        {{ '@' . Auth::user()->username }}
-                    @endif
+                <p class="text-sm font-light text-serv-text">
+                    {{ '@' . Auth::user()->username }}
                 </p>
             </div>
         </div>
@@ -164,12 +167,8 @@
 
                         </a>
                     @endif
-
-
                 </li>
             @endif
-
-
 
             {{-- Transaction Nav --}}
             <li class="relative px-6 py-3">
