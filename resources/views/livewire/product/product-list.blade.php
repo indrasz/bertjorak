@@ -1,9 +1,10 @@
 <div>
+
     <div class="flex border-2 rounded mx-4 mb-4">
-        <div class="flex items-center justify-center px-4 border-r">
+        <div class="flex items-center justify-content-center px-4 border-r">
             <span class="fa fa-search form-control-feedback"></span>
         </div>
-        <input type="text" class="px-4 py-2 w-full border-transparent focus:border-transparent focus:ring-0"
+        <input type="text" class="px-4 py-2 w-100 rounded-3"
             style="outline: none;" wire:model="search" placeholder="Search...">
     </div>
 
@@ -11,7 +12,7 @@
         @if (count($products) >= 1)
             @forelse ($products as $p)
                 <div class="col-12 col-lg-4">
-                    <a href="{{ route('detail.show', $p->id_product) }}">
+                    <a href="{{ route('detail.show', $p->id_product) }}" style="text-decoration: none">
                         <div class="card-related-carousel">
                             <div class="image-placeholder">
                                 @php
@@ -21,7 +22,9 @@
                                     class="object-cover img-thumbnail" />
                             </div>
                             <div class="card-details">
-                                <div class="caption">{{ $p->title }}</div>
+                                <div class="caption" style="font-weight: 500; font-size: 24px; color: #080E09; margin-top: 24px;">
+                                    {{ $p->title }}
+                                </div>
                                 {{-- <span class="sub-caption">150m</span> --}}
                             </div>
                             <div class="bottom-text d-flex flex-row justify-content-between">

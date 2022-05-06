@@ -13,7 +13,12 @@
             transition: 1s;
         }
 
+        .caption-related-product{
+            font: 600 1.50rem/1.90rem "Poppins", sans-serif;
+        }
+
     </style>
+
 
     <section class="related-product w-100 h-100">
         <div class="container px-4 mt-4">
