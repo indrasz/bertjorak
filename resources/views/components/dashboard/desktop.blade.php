@@ -45,7 +45,6 @@
                     @if (Auth::user()->username != null)
                         {{ '@' . Auth::user()->username }}
                     @endif
-                    {{-- {{ auth()->user()->detail_user()->first()->role ?? '' }} --}}
                 </p>
             </div>
         </div>

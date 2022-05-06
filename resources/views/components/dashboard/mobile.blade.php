@@ -18,8 +18,10 @@
             <div>
                 <!--Author name-->
                 <p class="font-semibold text-gray-900 text-md">{{ Auth::user()->name }}</p>
-                <p class="text-sm font-light text-serv-text">
-                    Website Developer
+               <p class="text-sm font-light text-serv-text">
+                    @if (Auth::user()->username != null)
+                        {{ '@' . Auth::user()->username }}
+                    @endif
                 </p>
             </div>
         </div>
@@ -82,7 +84,6 @@
                                 stroke="#082431" stroke-width="1.5" />
                         </svg>
 
-
                         <span class="ml-4">Profile</span>
                         {{-- <span class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">
                         {{ auth()->user()->order_buyer()->count() }}
@@ -106,6 +107,7 @@
                                 d="M17 15.5981L15.3333 18.4848C15.117 18.8596 15.028 19.2944 15.0797 19.7241L15.2831 21.4119C15.2911 21.478 15.3603 21.518 15.4217 21.4919L16.985 20.8241C17.383 20.6541 17.715 20.3596 17.9314 19.9848L19.5981 17.0981M17 15.5981L17.75 14.299C18.1642 13.5816 19.0816 13.3358 19.799 13.75V13.75C20.5165 14.1642 20.7623 15.0816 20.3481 15.799L19.5981 17.0981M17 15.5981L19.5981 17.0981"
                                 stroke="#082431" stroke-width="1.5" />
                         </svg>
+
                         <span class="ml-4">Profile</span>
                         {{-- <span class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">
                             {{ auth()->user()->order_buyer()->count() }}
@@ -116,52 +118,58 @@
             </li>
 
             {{-- Product Nav --}}
-            <li class="relative px-6 py-3">
+            @if (Auth::user()->hasRole('admin'))
+                <li class="relative px-6 py-3">
 
-                @if (request()->is('dashboard/product') || request()->is('dashboard/product/*') || request()->is('dashboard/*/product') || request()->is('dashboard/*/product/*'))
-                    <a class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 "
-                        href="{{ route('dashboard.product.index') }}">
+                    @if (request()->is('dashboard/product') || request()->is('dashboard/product/*') || request()->is('dashboard/*/product') || request()->is('dashboard/*/product/*'))
+                        <a class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 "
+                            href="{{ route('dashboard.product.index') }}">
 
 
-                        <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
-                            aria-hidden="true"></span>
-                        <!-- Active Icons -->
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="2.25" y="1.25" width="19.5" height="21.5" rx="4.75" fill="#082431" stroke="#082431"
-                                stroke-width="1.5" />
-                            <rect x="11" y="7" width="2" height="10" rx="1" fill="white" />
-                            <rect x="17" y="11" width="2" height="10" rx="1" transform="rotate(90 17 11)"
-                                fill="white" />
-                        </svg>
+                            <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
+                                aria-hidden="true"></span>
+                            <!-- Active Icons -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2.25" y="1.25" width="19.5" height="21.5" rx="4.75" fill="#082431"
+                                    stroke="#082431" stroke-width="1.5" />
+                                <rect x="11" y="7" width="2" height="10" rx="1" fill="white" />
+                                <rect x="17" y="11" width="2" height="10" rx="1" transform="rotate(90 17 11)"
+                                    fill="white" />
+                            </svg>
 
-                        <span class="ml-4">Product</span>
-                        {{-- <span class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">
+                            <span class="ml-4">Product</span>
+                            {{-- <span class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">
                         {{ auth()->user()->order_buyer()->count() }}
                     </span> --}}
 
-                    </a>
-                @else
-                    <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800"
-                        href="{{ route('dashboard.product.index') }}">
+                        </a>
+                    @else
+                        <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800"
+                            href="{{ route('dashboard.product.index') }}">
 
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="2.25" y="1.25" width="19.5" height="21.5" rx="4.75" stroke="#082431"
-                                stroke-width="1.5" />
-                            <rect x="11.3" y="7" width="1.4" height="10" rx="0.7" fill="#082431" />
-                            <rect x="17" y="11" width="1.4" height="10" rx="0.7" transform="rotate(90 17 11)"
-                                fill="#082431" />
-                        </svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2.25" y="1.25" width="19.5" height="21.5" rx="4.75" stroke="#082431"
+                                    stroke-width="1.5" />
+                                <rect x="11.3" y="7" width="1.4" height="10" rx="0.7" fill="#082431" />
+                                <rect x="17" y="11" width="1.4" height="10" rx="0.7" transform="rotate(90 17 11)"
+                                    fill="#082431" />
+                            </svg>
 
-                        <span class="ml-4">Product</span>
-                        {{-- <span class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">
+                            <span class="ml-4">Product</span>
+                            {{-- <span class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">
                             {{ auth()->user()->order_buyer()->count() }}
                         </span> --}}
 
-                    </a>
-                @endif
+                        </a>
+                    @endif
 
 
-            </li>
+                </li>
+            @endif
+
+
 
             {{-- Transaction Nav --}}
             <li class="relative px-6 py-3">
@@ -210,6 +218,8 @@
 
                     </a>
                 @endif
+
+
             </li>
 
             {{-- Logout Nav --}}

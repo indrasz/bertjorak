@@ -28,11 +28,6 @@
                                 <div class="price-content flex-grow-1">
                                     <span class="price">@currency($p->price)</span>
                                 </div>
-                                {{-- <div class="rating d-flex align-items-center">
-                                <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
-                                    alt="star" />
-                                <span>4.8</span>
-                            </div> --}}
                             </div>
                         </div>
                     </a>

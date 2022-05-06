@@ -22,7 +22,7 @@
     @endif
 
     <section class="w-100 h-100 breadcrumb-section mt-4">
-        <div class="container-xxl font-noto-sans">
+        <div class="container font-noto-sans">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb ms-4">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -45,14 +45,14 @@
             <section class="w-100 h-100 detail-product">
                 <div class="container mt-4 pb-5">
                     <div class="row">
-                        <div class="col-12 col-lg-8 ">
+                        <div class="col-12 col-lg-7 ">
                             <div class="card-product p-4">
 
                                 @php
                                     $property_images = json_decode($d->images);
                                 @endphp
                                 <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
-                                    class="w-75" alt="" id="imgDisp">
+                                    class="w-100" alt="" id="imgDisp">
 
                                 <div class="carousel pt-2"
                                     data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
@@ -68,7 +68,7 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-lg-4">
+                        <div class="col-12 col-lg-5">
                             <div class="card-detail-product py-4 px-4 mt-4">
                                 <div class="product-name ms-2 ps-2 mt-3">
                                     {{ $d->title }}
@@ -104,10 +104,10 @@
                                         @forelse ($pilihan as $pil)
                                             @foreach ($pil as $p)
                                                 <label class="me-3 " for="{{ $p }}">
-                                                    <input class="d-none b" type="radio" id="{{ $p }}"
+                                                    <input class="d-none px-3" type="radio" id="{{ $p }}"
                                                         name="pilihanSelected" value="{{ $p }}" required>
-                                                    <div class="detail-size-card justify-content-center">
-                                                        <div class="text-size m-0">{{ $p }}</div>
+                                                    <div class="detail-size-card justify-content-center text-center" style="width: 60px">
+                                                        <div class="text-size text-center m-0 py-1 ">{{ $p }}</div>
                                                     </div>
                                                 </label>
                                             @endforeach
@@ -130,7 +130,7 @@
                                                 <label class="me-3 " for="{{ $a }}">
                                                     <input class="d-none b" type="radio" id="{{ $a }}"
                                                         name="sizeSelected" value="{{ $a }}" required>
-                                                    <div class="detail-size-card justify-content-center">
+                                                    <div class="detail-size-card justify-content-center" style="width: 50px">
                                                         <div class="text-size m-0">{{ $a }}</div>
                                                     </div>
                                                 </label>
@@ -214,15 +214,6 @@
                                 font-size: 17px;
                             }
 
-                            /* .detail-product .detail-size-card #icon-check{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        transition: all 0.1s linear;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: 0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: 1;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } */
-
                         </style>
                     </div>
                 </div>
@@ -256,20 +247,19 @@
                                 <a href="{{ route('detail.show', $all->id_product) }}" style="text-decoration: none;">
                                     <div class="caption">{{ $all->title }}</div>
                                 </a>
-                                <span class="sub-caption">@currency($all->price)</span>
                             </div>
 
 
-                            {{-- <div class="bottom-text d-flex flex-row justify-content-between">
+                            <div class="bottom-text d-flex flex-row justify-content-between">
                                 <div class="price-content flex-grow-1">
-                                    <span>Start from</span> <span class="price">200k</span>
+                                    <span>Start from</span> <span class="price">@currency($all->price)</span>
                                 </div>
                                 <div class="rating d-flex align-items-center">
                                     <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
                                         alt="star" />
-                                    <span>4.8</span>
+                                    <span></span>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                     @endif
                 @endforeach

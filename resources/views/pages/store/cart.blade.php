@@ -10,7 +10,7 @@
 
     <section class="w-100 h-100 breadcrumb-section mt-4">
 
-        <div class="container-xxl font-noto-sans">
+        <div class="container font-noto-sans">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb ms-4">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -20,138 +20,6 @@
             </nav>
         </div>
 
-        <style>
-            .card-product-preview {
-                box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
-                border-radius: 15px;
-                background-color: #ffffff;
-            }
-
-            .card-product-preview .name-product-preview {
-                font: 400 1.40rem/1.90rem "Poppins", sans-serif;
-                color: #ADB2B8;
-            }
-
-            .card-product-preview .name-product-preview .price-preview {
-                font: 500 1.20rem/1.90rem "Poppins", sans-serif;
-                color: #121213;
-            }
-
-            .card-product-preview .btn-add {
-                display: inline-block;
-                min-width: 2.5em;
-                max-height: 2.5em;
-                /* em unit */
-                border-radius: 50%;
-                font-size: 11px;
-                text-align: center;
-                background: #bf87ff;
-                color: #fefefe;
-            }
-
-            .card-product-preview .btn-minus {
-                display: inline-block;
-                min-width: 2.5em;
-                max-height: 2.5em;
-                /* em unit */
-                border-radius: 50%;
-                font-size: 11px;
-                text-align: center;
-                border: 1px solid #ADB2B8;
-                color: #ADB2B8;
-                font-weight: bold;
-            }
-
-            @media (min-width:280px) and (max-width: 576px) {
-
-                .card-product-mobile-preview .name-product-preview {
-                    font: 400 0.9rem/0.7rem "Poppins", sans-serif;
-                    color: #ADB2B8;
-                }
-
-                .card-product-mobile-preview .name-product-preview .price-preview {
-                    font: 500 0.8rem/1.4rem "Poppins", sans-serif;
-                    color: #121213;
-                }
-
-                .card-product-mobile-preview .btn-add {
-                    display: inline-block;
-                    min-width: 1em;
-                    max-height: 1em;
-                    /* em unit */
-                    border-radius: 50%;
-                    font-size: 11px;
-                    padding-bottom: 20px;
-                    background: #bf87ff;
-                    color: #fefefe;
-                }
-
-                .card-product-mobile-preview .btn-minus {
-                    display: inline-block;
-                    min-width: 1em;
-                    max-height: 1em;
-                    /* em unit */
-                    border-radius: 50%;
-                    font-size: 11px;
-                    padding-bottom: 20px;
-                    border: 1px solid #ADB2B8;
-                    color: #ADB2B8;
-                    font-weight: bold;
-                }
-
-                .card-product-mobile-preview .input-number {
-                    font-size: 11px;
-                }
-            }
-
-            .card-summary {
-                box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
-                border-radius: 15px;
-                background-color: #ffffff;
-            }
-
-            .card-product-mobile-preview {
-                box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
-                border-radius: 15px;
-                background-color: #ffffff;
-            }
-
-            .card-summary .caption-summary {
-                font: 500 1.20rem/1.90rem "Poppins", sans-serif;
-                color: #121213;
-            }
-
-            .card-summary .preview-summary {
-                font: 400 1rem/1.90rem "Poppins", sans-serif;
-                color: #ADB2B8;
-            }
-
-            .card-summary .total-summary {
-                font: 500 1rem/1.90rem "Poppins", sans-serif;
-                color: #121213;
-            }
-
-            .card-summary .input-shipping-details {
-                font: 500 1rem/1.90rem "Poppins", sans-serif;
-                color: #121213;
-                border: 1px solid #020202;
-                box-sizing: border-box;
-                border-radius: 8px;
-            }
-
-            .card-summary label {
-                font: 500 1rem/1.90rem "Poppins", sans-serif;
-                color: #121213;
-            }
-
-            .card-summary .btn-confirm {
-                background-color: var(--dull-purple);
-                color: #fff;
-                border-radius: 16px;
-                font: 600 1rem/1.90rem "Poppins", sans-serif;
-            }
-
-        </style>
 
         @if ($errors->any())
             <ul class="alert alert-danger">
@@ -163,9 +31,103 @@
 
         <section class="cart-checkout w-100 h-100">
             <div class="container p-4">
+                <style>
+                    .card-product-preview {
+                        box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
+                        border-radius: 15px;
+                        background-color: #ffffff;
+                    }
 
+                    .card-product-preview .name-product-preview {
+                        font: 400 1rem/1.2rem "Poppins", sans-serif;
+                        color: #ADB2B8;
+                    }
+
+                    .card-product-preview .name-product-preview .price-preview {
+                        font: 500 0.9rem/1.90rem "Poppins", sans-serif;
+                        color: #121213;
+                    }
+
+                    .card-product-preview .name-product-preview .size-preview {
+                        font: 500 0.8rem/1rem "Poppins", sans-serif;
+                        color: #585858;
+                    }
+
+                    @media (min-width:280px) and (max-width: 576px) {
+
+                        .card-product-mobile-preview .name-product-preview {
+                            font: 400 0.9rem/0.7rem "Poppins", sans-serif;
+                            color: #ADB2B8;
+                        }
+
+                        .card-product-mobile-preview .name-product-preview .price-preview {
+                            font: 500 0.8rem/1.4rem "Poppins", sans-serif;
+                            color: #121213;
+                        }
+
+                        .card-product-mobile-preview .name-product-preview .size-preview {
+                            font: 500 0.6rem/0.8rem "Poppins", sans-serif;
+                            color: #ADB2B8;
+                        }
+
+                        .name-product-preview-size{
+                            font: 400 0.7rem/0.3rem "Poppins", sans-serif;
+                            color: #585858;
+                        }
+
+
+                    }
+
+                    .card-summary {
+                        box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
+                        border-radius: 15px;
+                        background-color: #ffffff;
+                    }
+
+                    .card-product-mobile-preview {
+                        box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
+                        border-radius: 15px;
+                        background-color: #ffffff;
+                    }
+
+                    .card-summary .caption-summary {
+                        font: 500 1.20rem/1.90rem "Poppins", sans-serif;
+                        color: #121213;
+                    }
+
+                    .card-summary .preview-summary {
+                        font: 400 1rem/1.90rem "Poppins", sans-serif;
+                        color: #ADB2B8;
+                    }
+
+                    .card-summary .total-summary {
+                        font: 500 1rem/1.90rem "Poppins", sans-serif;
+                        color: #121213;
+                    }
+
+                    .card-summary .input-shipping-details {
+                        font: 500 1rem/1.90rem "Poppins", sans-serif;
+                        color: #121213;
+                        border: 1px solid #020202;
+                        box-sizing: border-box;
+                        border-radius: 8px;
+                    }
+
+                    .card-summary label {
+                        font: 500 1rem/1.90rem "Poppins", sans-serif;
+                        color: #121213;
+                    }
+
+                    .card-summary .btn-confirm {
+                        background-color: var(--dull-purple);
+                        color: #fff;
+                        border-radius: 16px;
+                        font: 600 1rem/1.90rem "Poppins", sans-serif;
+                    }
+
+                </style>
                 <div class="row">
-                    <div class="col-12 col-lg-8">
+                    <div class="col-12 col-lg-7">
                         @if (count($carts) >= 1)
                             @foreach ($carts as $c)
                                 <div class="card-product-preview d-none d-sm-block p-3 mb-3">
@@ -175,12 +137,12 @@
                                             <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
                                                 alt="" loading="lazy" class="w-100">
                                         </div>
-                                        <div class="col-4 name-product-preview ms-3">
+                                        <div class="col-4 name-product-preview ms-3 text-nowrap">
                                             <div class="font-medium">
                                                 {{ $c->title }}
                                             </div>
                                             <div class="size-preview">
-                                                Total items : {{ $c->jumlah }} item
+                                                Quantity : {{ $c->jumlah }}
                                             </div>
                                             <div class="price-preview">
                                                 @currency($c->price)
@@ -189,17 +151,17 @@
 
 
                                         <div
-                                            class="col-4 d-flex text-center align-items-center justify-content-center name-product-preview ms-3">
-                                            <div class="flex justify-end gap-4 w-full">
+                                            class="col-4 d-flex text-center align-items-center justify-content-center name-product-preview ">
+                                            <div class="d-flex justify-content-end gap-4 w-full">
                                                 @if ($c->sizeSelected != null)
-                                                    <div class="px-3 py-1 rounded-md text-center text-base text-black font-semibold shadow-md"
-                                                        style="background-color: #bf87ff;">
+                                                    <div class="px-3 py-1 rounded text-center text-base text-white font-semibold shadow"
+                                                        style="background-color: #b06bff;">
                                                         {{ $c->sizeSelected }}
                                                     </div>
                                                 @endif
 
                                                 @if ($c->pilihanSelected != null)
-                                                    <div class="px-3 py-1 rounded-md text-center text-base text-black font-semibold shadow-md"
+                                                    <div class="px-3 py-1 rounded text-center text-base text-black font-semibold shadow"
                                                         style="background-color: #aaadbe;">
                                                         {{ $c->pilihanSelected }}
                                                     </div>
@@ -224,28 +186,53 @@
                                     </div>
                                 </div>
 
+                                {{-- mobile verse --}}
                                 <div class="card-product-mobile-preview d-block d-sm-none p-3 mb-3">
                                     <div class="d-flex flex-row">
-                                        <div class="col-4">
+                                        <div class="col-3">
                                             <?php $property_images = json_decode($c->images); ?>
                                             <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
                                                 alt="image" loading="lazy" class="w-100 rounded-3">
                                         </div>
-                                        <div class="col-6 name-product-preview ms-3">
+                                        <div class="col-4 name-product-preview ms-3">
+
                                             {{ $c->title }}
+                                            <div class="size-preview mt-1">
+                                                Quantity : {{ $c->jumlah }}
+                                            </div>
                                             <div class="price-preview">
                                                 @currency($c->price)
                                             </div>
                                         </div>
 
-                                        <div class="col-2 d-flex justify-content-center align-items-center text-center">
+                                        <div
+                                            class="col-4 d-flex text-center align-items-center justify-content-center name-product-preview-size ">
+                                            <div class="d-flex justify-content-end gap-1 w-50">
+                                                @if ($c->sizeSelected != null)
+                                                    <div class="px-3 py-2 rounded text-center text-base text-white font-semibold shadow"
+                                                        style="background-color: #b06bff;">
+                                                        {{ $c->sizeSelected }}
+                                                    </div>
+                                                @endif
+
+                                                @if ($c->pilihanSelected != null)
+                                                    <div class="px-3 py-2 rounded text-center text-base text-black font-semibold shadow"
+                                                        style="background-color: #aaadbe;">
+                                                        {{ $c->pilihanSelected }}
+                                                    </div>
+                                                @endif
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-1 d-flex justify-content-center align-items-center text-center">
 
 
                                             <form action="{{ route('cart.destroy', $c->id_cart) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <button type="submit" class="btn">
+                                                <button type="submit" class="btn me-2">
                                                     <img src="{{ asset('frontend/images/icon-delete.svg') }}" width="15"
                                                         alt="icon-delete">
                                                 </button>
@@ -271,7 +258,7 @@
 
                     </div>
 
-                    <div class="col-12 col-lg-4">
+                    <div class="col-12 col-lg-5">
                         <form action="{{ route('dashboard.transaction.store') }}" method="POST">
                             @csrf
                             <div class="card-summary px-lg-4 px-3 py-3 mb-3">
@@ -362,8 +349,6 @@
 
     </section>
 
-    {{-- Footer --}}
-    @include('includes.Frontend.footer')
 @endsection
 
 

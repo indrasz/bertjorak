@@ -10,186 +10,6 @@
 
     <section class="header">
 
-        <style>
-            @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,400&display=swap");
-            @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
-            @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap");
-
-            * {
-                font-family: 'Montserrat', sans-serif;
-            }
-
-            body .header {
-                background: #FFFFFF;
-            }
-
-            @media screen and (min-width: 768px) {
-                body .header nav {
-                    padding-top: 30px;
-                }
-            }
-
-            body .header nav .get-shayna-container {
-                padding: 0px 20px;
-            }
-
-            @media (min-width: 992px) {
-                body .header nav .get-shayna-container {
-                    padding: 0px 60px;
-                }
-            }
-
-            body .header nav a,
-            body .header nav a:hover {
-                color: #111F37 !important;
-            }
-
-            body .header nav .navigation a {
-                font-family: 'Noto Sans';
-                font-style: normal;
-                font-weight: 500;
-                font-size: 16px;
-                line-height: 22px;
-                /* identical to box height */
-                color: #0F1C2D;
-                opacity: 0.6;
-            }
-
-            body .header nav .navigation .active {
-                font-family: 'Noto Sans';
-                font-style: normal;
-                font-weight: bold;
-                font-size: 16px;
-                line-height: 22px;
-                /* identical to box height */
-                color: #101D2E !important;
-            }
-
-            body .header nav .started {
-                border: 1px solid #7F31FF;
-                -webkit-box-sizing: border-box;
-                box-sizing: border-box;
-                border-radius: 50px;
-                -webkit-box-align: center;
-                -ms-flex-align: center;
-                align-items: center;
-                padding: 12px 16px;
-                font-family: 'Noto Sans';
-                font-style: normal;
-                font-weight: normal;
-                font-size: 16px;
-                line-height: 22px;
-                /* identical to box height */
-                color: #7F31FF !important;
-            }
-
-            @media screen and (max-width: 768px) {
-                body .header nav .started {
-                    width: 100% !important;
-                }
-            }
-
-            body .header .content {
-                padding-bottom: 60px;
-            }
-
-            body .header .content .headline {
-                font-style: normal;
-                font-weight: 400;
-                font-size: 3rem;
-                line-height: 60px;
-                /* or 130% */
-                color: #1E2A39;
-            }
-
-            @media screen and (max-width: 768px) {
-                body .header .content .headline {
-                    font-size: 2.25rem;
-                    line-height: 2.5rem;
-                }
-            }
-
-            body .header .content .sub-headline {
-                margin-top: 24px;
-                font-family: 'Noto Sans' !important;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 20px;
-                line-height: 160%;
-                /* or 32px */
-                color: #626A7F;
-            }
-
-            body .header .content .btn-join {
-                margin-top: 54px;
-                background-image: linear-gradient(113.4deg, #7F31FF 0%, #FA7219 100%);
-
-                -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
-                box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
-                border-radius: 50px;
-                padding: 20px 32px 20px 32px;
-                font-family: 'Noto Sans';
-                font-style: normal;
-                font-weight: normal;
-                font-size: 20px;
-                line-height: 28px;
-                /* identical to box height, or 140% */
-                color: #FFFFFF;
-            }
-
-            @media screen and (max-width: 768px) {
-                body .header .content .btn-join {
-                    margin-top: 25px;
-                }
-            }
-
-            body .header .content .partner {
-                margin-top: 25px;
-                margin-bottom: 24px;
-                font-family: 'Noto Sans' !important;
-                font-style: normal;
-                font-weight: 600;
-                font-size: 16px;
-                line-height: 150%;
-                /* identical to box height, or 24px */
-                text-align: center;
-                color: #1E2A39;
-                opacity: 0.6;
-            }
-
-            @media screen and (max-width: 768px) {
-                body .header .content .partner {
-                    font-size: 12px;
-                }
-            }
-
-            body .header .content .partners {
-                font-family: 'Montserrat';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 24px;
-                line-height: 150%;
-                /* identical to box height, or 36px */
-                letter-spacing: -0.02em;
-                color: #1E2A39;
-                opacity: 0.4;
-                margin-right: 60px;
-            }
-
-            @media screen and (max-width: 768px) {
-                body .header .content .partners {
-                    margin-right: 3px;
-                    margin-left: 3px;
-                    font-size: 22px;
-                    line-height: 2rem;
-                }
-            }
-
-            body .header .content .mr-0 {
-                margin-right: 0 !important;
-            }
-
-        </style>
         <div class="content container px-md-4">
             @if (Auth::user())
                 @if (Auth::user()->type_addres == null && Auth::user()->id_province == null && Auth::user()->id_city == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
@@ -339,8 +159,8 @@
 
             body .resort .content .gradient-travland {
                 background-image: linear-gradient(113.4deg, #7F31FF 0%, #FA7219 100%);
-                max-width: 40px;
-                max-height: 40px;
+                min-width: 40px;
+                min-height: 40px;
             }
 
             body .resort .content .popular-card {
@@ -350,8 +170,10 @@
             }
 
             body .resort .content .popular-card .image-product {
-                -o-object-fit: cover;
+                -o-object-fit:cover;
                 object-fit: cover;
+                object-position: center;
+                -o-object-position: center;
             }
 
             body .resort .content .box-border {
@@ -363,6 +185,10 @@
 
             body .resort .content .box-border img {
                 border-radius: 16px 16px 0px 0px;
+            }
+
+             body .resort .content a {
+                text-decoration: none;
             }
 
             body .resort .content .box-border .title {
@@ -389,37 +215,40 @@
 
         </style>
         <div class="content container">
+            <style>
+
+            </style>
             <!-- Card Container -->
             @if (count($products) >= 1)
                 <div class="carousel" style="background: #f2f6ff !important;"
-                    data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true, "pageDots": true, "prevNextButtons": false, "draggable": true }'>
+                    data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "pageDots": false, "prevNextButtons": false, "draggable": true }'>
                     @foreach ($products as $pl)
                         @if ($pl->stock >= 0)
-                            <div class="box-border relative bg-white rounded-2xl popular-card">
-                                <div class="flex flex-col">
-                                    <a href="{{ route('detail.show', $pl->id_product) }}"
-                                        class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 rounded-2xl hover:bg-opacity-20">
-                                        <div class="position-absolute z-10 pt-3 ps-3">
-                                            <div
-                                                class="p-3 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                                {{ $pl->stock }}
+
+                            <a href="{{ route('detail.show', $pl->id_product) }}" >
+                                <div class="box-border relative bg-white rounded-2xl popular-card">
+                                    <div class="flex flex-col">
+                                        <div class="d-flex justify-content-center text-center position-absolute z-10 pt-3 ps-3">
+                                            <div class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
+                                               {{ $pl->stock }}
                                             </div>
                                         </div>
                                         <div class="relative">
+
                                             @php
                                                 $property_images = json_decode($pl->images);
                                             @endphp
                                             <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
-                                                class="" alt="Image alt text" />
+                                                class="image-product w-100" height="250px" alt="Image alt text" />
                                         </div>
-
                                         <div class="flex flex-col gap-2 px-4 z-10">
                                             <div class="title">{{ $pl->title }}</div>
                                             <div class="price"> @currency($pl->price)</div>
                                         </div>
-                                    </a>
+
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         @endif
                     @endforeach
                 </div>
