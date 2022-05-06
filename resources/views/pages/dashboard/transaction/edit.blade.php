@@ -210,9 +210,6 @@
                             </div>
                         @endif
 
-                        <a href="{{ url('/transaction/download') }}" class="btn btn-primary" target="_blank">CETAK
-                            PDF</a>
-
                         <div class="pt-6">
                             <h3 class="pb-2" style="font-size: 1.1rem; font-weight: 800;">Data Pemesan
                             </h3>
@@ -385,6 +382,21 @@
                                     </tr>
 
                                 </table>
+
+                                @if ($value->status_transaksi != 'Pending')
+                                    <a href="{{ url('/transaction/download', $get->kode_order) }}"
+                                        class="btn btn-primary" target="_blank">
+                                        <button
+                                            class="text-white font-bold py-2 px-4 rounded inline-flex items-center justify-center self-center"
+                                            style="background: #F40F02; width: 100%;">
+                                            <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20">
+                                                <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                                            </svg>
+                                            <span>Export PDF</span>
+                                        </button>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>

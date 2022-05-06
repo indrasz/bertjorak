@@ -13,6 +13,7 @@ use Auth;
 use App\Services\Midtrans\CreateSnapTokenService;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 use PDF;
 
@@ -270,12 +271,24 @@ class TransactionController extends Controller
         }
     }
 
-    public function convertPDF()
+    public function convertPDF($id)
     {
-        return view('pdf.transaction');
-        $transaksipdf = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.orderID', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
+        $transaksipdf = Order::where('kode_order', $id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.orderID', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
-        $pdf = PDF::loadview('pdf.transaction', ['transaksi' => $transaksipdf]);
+        $userProv = Province::all();
+
+        $userCity = City::all();
+
+        $admin = User::whereHas(
+            'roles',
+            function ($q) {
+                $q->where('name', 'admin');
+            }
+        )->get();
+
+        //return view('pdf.transaction')->with('transaksipdf', $transaksipdf)->with('userProv', $userProv)->with('userCity', $userCity)->with('admin', $admin);
+
+        $pdf = PDF::loadview('pdf.transaction', ['transaksipdf' => $transaksipdf, 'admin' => $admin, 'userProv' => $userProv, 'userCity' => $userCity]);
         return $pdf->download('laporan-transaksi.pdf');
     }
 }

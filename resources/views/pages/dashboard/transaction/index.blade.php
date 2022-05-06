@@ -104,12 +104,22 @@
                                                     {{ $o->status_transaksi }}
                                                 </td>
                                             @endif
-                                            <td class="px-1 py-5 text-sm">
-                                                <a href="{{ route('dashboard.transaction.edit', $o->kode_order) }}"
-                                                    class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
-                                                    Edit
-                                                </a>
-                                            </td>
+
+                                            @if ($o->status_transaksi == 'Pending')
+                                                <td class="px-1 py-5 text-sm">
+                                                    <a href="{{ route('dashboard.transaction.edit', $o->kode_order) }}"
+                                                        class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
+                                                        Edit
+                                                    </a>
+                                                </td>
+                                            @else
+                                                <td class="px-0 py-5 text-sm">
+                                                    <a href="{{ route('dashboard.transaction.edit', $o->kode_order) }}"
+                                                        class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-email">
+                                                        Show
+                                                    </a>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
