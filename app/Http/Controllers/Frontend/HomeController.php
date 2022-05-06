@@ -15,6 +15,7 @@ class HomeController extends Controller
 
     public function allProduct()
     {
-        return view('pages.store.product');
+        $products = Product::all();
+        return view('pages.store.product')->with('products', $products);
     }
 }

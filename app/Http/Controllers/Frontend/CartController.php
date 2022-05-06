@@ -36,7 +36,7 @@ class CartController extends Controller
     {
         $idUser = Auth::user()->id;
 
-        $productExist = Cart::where('id_user', Auth::user()->id)->where('id_product', $request->idProduct)->where('pilihanSelected', $request->pilihanSelected)->where('sizeSelected', $request->sizeSelected)->first();
+        $productExist = Cart::where('id_user', $idUser)->where('id_user', Auth::user()->id)->where('id_product', $request->idProduct)->where('pilihanSelected', $request->pilihanSelected)->where('sizeSelected', $request->sizeSelected)->first();
 
         // Record Exists
         if ($productExist != null) {

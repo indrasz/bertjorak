@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\NotificationController;
 use App\Models\Cart;
 use App\Models\City;
 use App\Models\Order;
@@ -15,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Validator;
 use PDF;
 
 class TransactionController extends Controller
@@ -37,18 +37,13 @@ class TransactionController extends Controller
             elseif (Auth::user()->hasRole('buyer')) {
                 $authId = Auth::user()->id;
                 // Get Order Data
-                $orderData = Order::where('id_buyer', $authId)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('users', 'orders.id_buyer', '=', 'users.id')->paginate(5);
+                $orderData = Order::where('id_buyer', $authId)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('users', 'orders.id_buyer', '=', 'users.id')->paginate(4);
 
+                $orderShow = Order::where('id_buyer', Auth::user()->id)->join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.orderID', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
                 $getCart = Cart::join('products', 'carts.id_product', '=', 'products.id_product')->get();
-                foreach ($orderData as $getIdOrder) {
-                    $getIdO = $getIdOrder->id_order;
-                }
-                // dd($getIdOrder);
-                // Get Cart Data
-                // $cartData = Cart::where('carts.id_order', $getIdO)->join('orders', 'carts.id_order', '=', 'orders.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->get();
 
-                return view('pages.store.dashboard-user.transaction.index')->with('orderData', $orderData)->with('getCart', $getCart);
+                return view('pages.store.dashboard-user.transaction.index')->with('orderData', $orderData)->with('getCart', $getCart)->with('orderShow', $orderShow);
             }
         } else {
             return view('errors.404');
@@ -73,53 +68,62 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'pilihKurir' => 'required',
+            'pilihJenisKurir' => 'required',
+            'ongkir' => 'required',
+        ]);
 
-        $authId = Auth::user()->id;
-
-        $id_cart = $request->idCart;
-
-        $transaction = new Transaction();
-
-        $transaction->status_transaksi = "Pending";
-        $transaction->notes = $request->notes;
-        $transaction->id_kurir = $request->pilihKurir;
-        $transaction->id_jenisKurir = $request->pilihJenisKurir;
-        $transaction->ongkir = $request->ongkir;
-        $transaction->totalCost = $request->totalPrice;
-        // Convert Durasi
-        $getDurasi = $request->durasi;
-        $contains = str_contains($getDurasi, '-');
-        if ($contains) {
-            $conDurasi = strstr($getDurasi, '-', false);
-            $resultDurasi = trim($conDurasi, '-');
-            $transaction->durasi = $resultDurasi;
+        if ($validator->fails()) {
+            return redirect()->back()->withToastError('Please check your courier or 
+            courier package!');
         } else {
-            $transaction->durasi = $request->durasi + 1;
-        }
-        $transaction->namaPembeli = $request->namaPembeli;
-        $transaction->emailPembeli = $request->emailPembeli;
-        $transaction->phonePembeli = $request->nomorPembeli;
-        $transaction->date_transaction = Carbon::now();
+            $authId = Auth::user()->id;
 
-        if ($transaction->save()) {
+            $id_cart = $request->idCart;
 
-            $order = new Order();
+            $transaction = new Transaction();
 
-            $order->kode_order = "BRJ-" . time() . $authId;
-            $order->id_buyer = $authId;
-            $order->id_transaction = $transaction->id_transaction;
-            $order->date_order = Carbon::now();
+            $transaction->status_transaksi = "Pending";
+            $transaction->notes = $request->notes;
+            $transaction->id_kurir = $request->pilihKurir;
+            $transaction->id_jenisKurir = $request->pilihJenisKurir;
+            $transaction->ongkir = $request->ongkir;
+            $transaction->totalCost = $request->totalPrice;
+            // Convert Durasi
+            $getDurasi = $request->durasi;
+            $contains = str_contains($getDurasi, '-');
+            if ($contains) {
+                $conDurasi = strstr($getDurasi, '-', false);
+                $resultDurasi = trim($conDurasi, '-');
+                $transaction->durasi = $resultDurasi;
+            } else {
+                $transaction->durasi = $request->durasi + 1;
+            }
+            $transaction->namaPembeli = $request->namaPembeli;
+            $transaction->emailPembeli = $request->emailPembeli;
+            $transaction->phonePembeli = $request->nomorPembeli;
+            $transaction->date_transaction = Carbon::now();
 
-            if ($order->save()) {
-                foreach ($id_cart as $key => $value) {
-                    Cart::where('id_cart', $value)->update([
-                        'id_order' => $order->orderID,
-                        'status' => 'Sukses',
-                    ]);
-                }
-                if (Auth::user()->hasRole('buyer')) {
-                    return redirect()->route('dashboard.transaction.show', $order->kode_order);
+            if ($transaction->save()) {
+
+                $order = new Order();
+
+                $order->kode_order = "BRJ-" . time() . $authId;
+                $order->id_buyer = $authId;
+                $order->id_transaction = $transaction->id_transaction;
+                $order->date_order = Carbon::now();
+
+                if ($order->save()) {
+                    foreach ($id_cart as $key => $value) {
+                        Cart::where('id_cart', $value)->update([
+                            'id_order' => $order->orderID,
+                            'status' => 'Sukses',
+                        ]);
+                    }
+                    if (Auth::user()->hasRole('buyer')) {
+                        return redirect()->route('dashboard.transaction.show', $order->kode_order)->withToastSuccess("Let's pay now your order!");
+                    }
                 }
             }
         }
@@ -289,6 +293,6 @@ class TransactionController extends Controller
         //return view('pdf.transaction')->with('transaksipdf', $transaksipdf)->with('userProv', $userProv)->with('userCity', $userCity)->with('admin', $admin);
 
         $pdf = PDF::loadview('pdf.transaction', ['transaksipdf' => $transaksipdf, 'admin' => $admin, 'userProv' => $userProv, 'userCity' => $userCity]);
-        return $pdf->download('laporan-transaksi.pdf');
+        return $pdf->download('invoice ' . $id . '.pdf');
     }
 }

@@ -140,9 +140,13 @@ class ProductController extends Controller
 
         if ($request->hasfile('photos')) {
             // Delete Old Photos
-            foreach ($editData as $key => $value) {
-                foreach (json_decode($value->images, true) as $image) {
-                    File::delete(storage_path() . '/app/public/products/images/' . $value->images);
+            foreach ($editData as $key) {
+                $imageArr = json_decode($key->images, true);
+                $files = array($imageArr);
+                foreach ($files as $image) {
+                    for ($i = 0; $i < count($image); $i++) {
+                        File::delete(storage_path() . '/app/public/products/images/' . $image[$i]);
+                    }
                 }
             }
 

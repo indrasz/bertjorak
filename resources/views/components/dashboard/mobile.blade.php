@@ -4,7 +4,6 @@
     x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
     @keydown.escape="closeSideMenu" aria-label="aside">
-
     <div class="py-4 text-gray-500 dark:text-gray-400">
 
         <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
@@ -88,7 +87,6 @@
                                 stroke="#082431" stroke-width="1.5" />
                         </svg>
 
-
                         <span class="ml-4">Profile</span>
                         {{-- <span class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">
                         {{ auth()->user()->order_buyer()->count() }}
@@ -112,6 +110,7 @@
                                 d="M17 15.5981L15.3333 18.4848C15.117 18.8596 15.028 19.2944 15.0797 19.7241L15.2831 21.4119C15.2911 21.478 15.3603 21.518 15.4217 21.4919L16.985 20.8241C17.383 20.6541 17.715 20.3596 17.9314 19.9848L19.5981 17.0981M17 15.5981L17.75 14.299C18.1642 13.5816 19.0816 13.3358 19.799 13.75V13.75C20.5165 14.1642 20.7623 15.0816 20.3481 15.799L19.5981 17.0981M17 15.5981L19.5981 17.0981"
                                 stroke="#082431" stroke-width="1.5" />
                         </svg>
+
                         <span class="ml-4">Profile</span>
                         {{-- <span class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">
                             {{ auth()->user()->order_buyer()->count() }}
@@ -168,11 +167,8 @@
 
                         </a>
                     @endif
-
-
                 </li>
             @endif
-
 
             {{-- Transaction Nav --}}
             <li class="relative px-6 py-3">
@@ -221,6 +217,8 @@
 
                     </a>
                 @endif
+
+
             </li>
 
             {{-- Logout Nav --}}
