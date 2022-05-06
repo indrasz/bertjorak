@@ -43,7 +43,7 @@
                     @if ($ka->status_transaksi == 'Sedang Dikirim')
                         <div class="p-4 mb-4 text-sm rounded-lg text-blue-700" style="background-color: #259ed6;"
                             role="alert">
-                            <span class="font-medium">Perkiraan sampai!</span> Perkiraan paket sampai pada tanggal
+                            <span class="font-medium">Perkiraan sampai!</span> Perkiraan paket sampai pada
                             <b>{{ date('D, d-M-Y', strtotime($ka->date_end)) }}<b>.
                         </div>
                     @endif
@@ -380,7 +380,7 @@
                                         </button>
                                     @endif
                                 @else
-                                    @if ($value->status_transaksi != 'Success')
+                                    @if ($value->status_transaksi == 'Sedang Dikirim')
                                         <form action="/update/success" method="POST">
                                             @csrf
                                             <input type="text" name="id_sukses" value="{{ $value->id_transaction }}"

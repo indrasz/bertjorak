@@ -14,6 +14,7 @@ use App\Services\Midtrans\CreateSnapTokenService;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use Illuminate\Support\Carbon;
+use PDF;
 
 class TransactionController extends Controller
 {
@@ -73,11 +74,6 @@ class TransactionController extends Controller
     {
         //dd($request->all());
 
-        // Convert Durasi
-        $getDurasi = $request->durasi;
-        $conDurasi = strstr($getDurasi, '-', false);
-        $resultDurasi = trim($conDurasi, '-');
-
         $authId = Auth::user()->id;
 
         $id_cart = $request->idCart;
@@ -90,7 +86,16 @@ class TransactionController extends Controller
         $transaction->id_jenisKurir = $request->pilihJenisKurir;
         $transaction->ongkir = $request->ongkir;
         $transaction->totalCost = $request->totalPrice;
-        $transaction->durasi = $resultDurasi;
+        // Convert Durasi
+        $getDurasi = $request->durasi;
+        $contains = str_contains($getDurasi, '-');
+        if ($contains) {
+            $conDurasi = strstr($getDurasi, '-', false);
+            $resultDurasi = trim($conDurasi, '-');
+            $transaction->durasi = $resultDurasi;
+        } else {
+            $transaction->durasi = $request->durasi + 1;
+        }
         $transaction->namaPembeli = $request->namaPembeli;
         $transaction->emailPembeli = $request->emailPembeli;
         $transaction->phonePembeli = $request->nomorPembeli;
@@ -235,7 +240,7 @@ class TransactionController extends Controller
 
         $payment = new Payment();
 
-        $payment->id_order = $request->orderID;
+        $payment->id_order = $request->idOrder;
         $payment->status_code = $json->status_code;
         $payment->status_message = $json->status_message;
         $payment->transaction_id = $json->transaction_id;
@@ -263,5 +268,14 @@ class TransactionController extends Controller
         if ($upTran->save()) {
             return redirect()->back()->withToastSuccess('Congrats your package has arrived!');
         }
+    }
+
+    public function convertPDF()
+    {
+        return view('pdf.transaction');
+        $transaksipdf = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('carts', 'orders.orderID', '=', 'carts.id_order')->join('products', 'carts.id_product', '=', 'products.id_product')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
+
+        $pdf = PDF::loadview('pdf.transaction', ['transaksi' => $transaksipdf]);
+        return $pdf->download('laporan-transaksi.pdf');
     }
 }

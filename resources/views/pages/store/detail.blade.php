@@ -76,12 +76,14 @@
 
                                 <div class="price-product mt-lg-2 ms-2 ps-2 ">@currency($d->price)</div>
 
-                                @if ($d->stock >= 10)
+                                @if ($d->stock > 10)
                                     <div class="stock-product mt-lg-2 ms-2 ps-2">Stok : {{ $d->stock }}</div>
                                 @else
                                     <div class="stock-product mt-lg-2 ms-2 ps-2 text-danger">Stok : {{ $d->stock }}
                                     </div>
                                 @endif
+
+                                <div class="stock-product mt-lg-2 ms-2 ps-2">Berat : {{ $d->weight }} gram</div>
 
                                 <div class="desc-product mt-3 px-3">
                                     {{ $d->desc }}
@@ -100,10 +102,10 @@
                                         Warna/Tipe :
                                     </div>
 
-                                    <div class="d-flex flex-row mt-3 px-3">
+                                    <div class="container mt-3 px-3">
                                         @forelse ($pilihan as $pil)
                                             @foreach ($pil as $p)
-                                                <label class="me-3 " for="{{ $p }}">
+                                                <label class="me-3 col-md mb-2 mr-2" for="{{ $p }}">
                                                     <input class="d-none b" type="radio" id="{{ $p }}"
                                                         name="pilihanSelected" value="{{ $p }}" required>
                                                     <div class="detail-size-card justify-content-center">
@@ -124,10 +126,11 @@
                                     <div class="chose-size mt-3 px-3">
                                         Pilih Ukuran :
                                     </div>
-                                    <div class="d-flex flex-row mt-3 px-3">
+
+                                    <div class="container mt-3 px-3">
                                         @forelse ($ukuranConvert as $u)
                                             @foreach ($u as $a)
-                                                <label class="me-3 " for="{{ $a }}">
+                                                <label class="me-3 col-md mb-2 mr-2" for="{{ $a }}">
                                                     <input class="d-none b" type="radio" id="{{ $a }}"
                                                         name="sizeSelected" value="{{ $a }}" required>
                                                     <div class="detail-size-card justify-content-center">
@@ -201,7 +204,7 @@
                             .detail-product input[type="radio"]:checked+.detail-size-card {
                                 border: 2px solid var(--dull-purple);
                                 color: var(--dull-purple);
-                                width: 50px;
+                                width: 5rem;
                                 text-align: center;
                                 background-color: rgba(0, 186, 255, 0.05);
                             }
@@ -209,19 +212,19 @@
                             .detail-product .detail-size-card {
                                 border: 2px solid #000000;
                                 border-radius: 6px;
-                                width: 50px;
+                                width: 5rem;
                                 text-align: center;
                                 font-size: 17px;
                             }
 
                             /* .detail-product .detail-size-card #icon-check{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        transition: all 0.1s linear;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: 0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    transition: all 0.1s linear;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: 1;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 1;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                } */
 
                         </style>
                     </div>

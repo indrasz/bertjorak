@@ -210,6 +210,9 @@
                             </div>
                         @endif
 
+                        <a href="{{ url('/transaction/download') }}" class="btn btn-primary" target="_blank">CETAK
+                            PDF</a>
+
                         <div class="pt-6">
                             <h3 class="pb-2" style="font-size: 1.1rem; font-weight: 800;">Data Pemesan
                             </h3>

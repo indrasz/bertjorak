@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $productList = Product::all()->take(8);
+        $productList = Product::limit(8)->get();
         return view('pages.store.index')->with('products', $productList);
     }
 
