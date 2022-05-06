@@ -11,10 +11,6 @@
     @include('includes.style')
     @stack('after-style')
 
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
-
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     @livewireStyles
 </head>
 

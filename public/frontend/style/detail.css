@@ -101,13 +101,15 @@
 .detail-product .detail-size-card {
     border: 2px solid #000000;
     border-radius: 6px;
-    width: 50px;
+    max-width: 100px;
+
+    padding: 20px;
     text-align: center;
     font-size: 17px;
 }
 .related-product .caption-related-product{
     font: 600 1.50rem/1.90rem "Poppins", sans-serif;
-} 
+}
 .related-product .card-related-carousel {
     width: 325px;
     padding: 28px 28px 40px;
