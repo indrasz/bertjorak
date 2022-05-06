@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ProductController;
 // Admin
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\DetailController;
 
@@ -26,6 +27,8 @@ use App\Http\Livewire\Transaction\PushPaymentData;
 | contains the "web" middleware group. Now create something great!
 |
  */
+// Refresh
+Route::get('clear/optimize', [ConfigController::class, 'clearRoute']);
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
