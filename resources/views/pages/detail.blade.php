@@ -80,16 +80,16 @@
 
                                 @if ($d->pilihan != null)
                                     <div class="chose-size mt-3 px-3">
-                                        Pilih Ukuran :
+                                        Warna/Tipe :
                                     </div>
 
-                                    <div class="d-flex flex-row mt-3 px-3">
+                                    <div class="container mt-3 px-3">
                                         @php
                                             $pilihanConvert = json_decode($d->pilihan);
                                         @endphp
                                         @forelse ($pilihanConvert as $p)
                                             @foreach ($p as $pl)
-                                                <label class="me-3 " for="{{ $pl }}">
+                                                <label class="col-md mb-2 mr-2" for="{{ $pl }}">
                                                     <input class="d-none b" type="radio" id="{{ $pl }}"
                                                         name="sizeSelected" value="{{ $pl }}" disabled>
                                                     <div class="detail-size-card justify-content-center">
@@ -182,7 +182,7 @@
                             .detail-product input[type="radio"]:checked+.detail-size-card {
                                 border: 2px solid var(--dull-purple);
                                 color: var(--dull-purple);
-                                width: 50px;
+                                width: 5rem;
                                 text-align: center;
                                 background-color: rgba(0, 186, 255, 0.05);
                             }
@@ -190,7 +190,7 @@
                             .detail-product .detail-size-card {
                                 border: 2px solid #000000;
                                 border-radius: 6px;
-                                width: 50px;
+                                width: 5rem;
                                 text-align: center;
                                 font-size: 17px;
                             }

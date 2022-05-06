@@ -119,27 +119,26 @@
                                 </tbody>
                             </table>
                             @php
-                                $time1 = time();
-                                $time2 = time() + 86400;
-                                $as = date('Y-m-d H:i:s', $time1);
-                                $is = date('Y-m-d H:i:s', $time2);
-                                echo 'Start ' . $as;
-                                echo '<br>';
-                                echo ' End ' . $is;
+                                // $time1 = time();
+                                // $time2 = time() + 86400;
+                                // $as = date('Y-m-d H:i:s', $time1);
+                                // $is = date('Y-m-d H:i:s', $time2);
+                                // echo 'Start ' . $as;
+                                // echo '<br>';
+                                // echo ' End ' . $is;
                                 
-                                echo '<br>';
-                                echo '<br>';
-                                echo '<br>';
+                                // echo '<br>';
+                                // echo '<br>';
+                                // echo '<br>';
                                 
-                                date_default_timezone_set('Asia/Jakarta');
+                                // date_default_timezone_set('Asia/Jakarta');
                                 
-                                echo date('Y-m-d H:i:s');
+                                // echo date('Y-m-d H:i:s');
                                 
                                 // $to_date = time(); // Input your date here e.g. strtotime("2014-01-02")
                                 // $from_date = strtotime('2022-05-06');
                                 // $day_diff = $to_date + $from_date;
                                 // echo floor($day_diff / (60 * 60 * 24)) . "\n";
-                                
                             @endphp
                         </div>
                         <br>

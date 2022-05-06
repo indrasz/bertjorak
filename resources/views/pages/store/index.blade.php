@@ -253,105 +253,111 @@
                     @endforeach
                 </div>
             @else
-                <div class="box-border relative bg-white rounded-2xl popular-card">
-                    <div class="flex flex-col">
-                        <div class="position-absolute z-10 pt-3 ps-3">
-                            <div class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                9.2
+                <div class="carousel" style="background: #f2f6ff !important;"
+                    data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true, "pageDots": true, "prevNextButtons": false, "draggable": true }'>
+                    <div class="box-border relative bg-white rounded-2xl popular-card">
+                        <div class="flex flex-col">
+                            <div class="position-absolute z-10 pt-3 ps-3">
+                                <div
+                                    class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
+                                    9.2
+                                </div>
                             </div>
+                            <div class="relative">
+                                <img src="{{ asset('frontend/images/product1.jpg') }}" alt="GetShayna"
+                                    class="image-product w-100" height="250px" />
+                            </div>
+                            <div class="flex flex-col gap-2 px-4">
+                                <div class="title">Nusfjord Arctic</div>
+                                <div class="price">From $238/week</div>
+                            </div>
+                            <a href="#"
+                                class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
                         </div>
-                        <div class="relative">
-                            <img src="{{ asset('frontend/images/product1.jpg') }}" alt="GetShayna"
-                                class="image-product w-100" height="250px" />
-                        </div>
-                        <div class="flex flex-col gap-2 px-4">
-                            <div class="title">Nusfjord Arctic</div>
-                            <div class="price">From $238/week</div>
-                        </div>
-                        <a href="#"
-                            class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
                     </div>
-                </div>
-                <div class="box-border relative bg-white rounded-2xl popular-card">
-                    <div class="flex flex-col">
-                        <div class="position-absolute z-10 pt-3 ps-3">
-                            <div class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                9.2
+                    <div class="box-border relative bg-white rounded-2xl popular-card">
+                        <div class="flex flex-col">
+                            <div class="position-absolute z-10 pt-3 ps-3">
+                                <div
+                                    class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
+                                    9.2
+                                </div>
                             </div>
+                            <div class="relative">
+                                <img src="{{ asset('frontend/images/product2.jpg') }}" alt="GetShayna"
+                                    class="image-product w-100" height="250px" />
+                            </div>
+                            <div class="flex flex-col gap-2 px-4">
+                                <div class="title">Nusfjord Arctic</div>
+                                <div class="price">From $238/week</div>
+                            </div>
+                            <a href="#"
+                                class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
                         </div>
-                        <div class="relative">
-                            <img src="{{ asset('frontend/images/product2.jpg') }}" alt="GetShayna"
-                                class="image-product w-100" height="250px" />
-                        </div>
-                        <div class="flex flex-col gap-2 px-4">
-                            <div class="title">Nusfjord Arctic</div>
-                            <div class="price">From $238/week</div>
-                        </div>
-                        <a href="#"
-                            class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
                     </div>
-                </div>
-                <div class="box-border relative bg-white rounded-2xl popular-card">
-                    <div class="flex flex-col">
-                        <div class="position-absolute z-10 pt-3 ps-3">
-                            <div class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                9.2
+                    <div class="box-border relative bg-white rounded-2xl popular-card">
+                        <div class="flex flex-col">
+                            <div class="position-absolute z-10 pt-3 ps-3">
+                                <div
+                                    class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
+                                    9.2
+                                </div>
                             </div>
+                            <div class="relative">
+                                <img src="{{ asset('frontend/images/product3.jpg') }}" alt="GetShayna"
+                                    class="image-product w-100" height="250px" />
+                            </div>
+                            <div class="flex flex-col gap-2 px-4">
+                                <div class="title">Nusfjord Arctic</div>
+                                <div class="price">From $238/week</div>
+                            </div>
+                            <a href="#"
+                                class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
                         </div>
-                        <div class="relative">
-                            <img src="{{ asset('frontend/images/product3.jpg') }}" alt="GetShayna"
-                                class="image-product w-100" height="250px" />
-                        </div>
-                        <div class="flex flex-col gap-2 px-4">
-                            <div class="title">Nusfjord Arctic</div>
-                            <div class="price">From $238/week</div>
-                        </div>
-                        <a href="#"
-                            class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
                     </div>
-                </div>
-                <div class="box-border relative bg-white rounded-2xl popular-card">
-                    <div class="flex flex-col">
-                        <div class="position-absolute z-10 pt-3 ps-3">
-                            <div class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                9.2
+                    <div class="box-border relative bg-white rounded-2xl popular-card">
+                        <div class="flex flex-col">
+                            <div class="position-absolute z-10 pt-3 ps-3">
+                                <div
+                                    class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
+                                    9.2
+                                </div>
                             </div>
+                            <div class="relative">
+                                <img src="{{ asset('frontend/images/product4.jpg') }}" alt="GetShayna"
+                                    class="image-product w-100" height="250px" />
+                            </div>
+                            <div class="flex flex-col gap-2 px-4">
+                                <div class="title">Nusfjord Arctic</div>
+                                <div class="price">From $238/week</div>
+                            </div>
+                            <a href="#"
+                                class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
                         </div>
-                        <div class="relative">
-                            <img src="{{ asset('frontend/images/product4.jpg') }}" alt="GetShayna"
-                                class="image-product w-100" height="250px" />
-                        </div>
-                        <div class="flex flex-col gap-2 px-4">
-                            <div class="title">Nusfjord Arctic</div>
-                            <div class="price">From $238/week</div>
-                        </div>
-                        <a href="#"
-                            class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
                     </div>
-                </div>
-                <div class="box-border relative bg-white rounded-2xl popular-card">
-                    <div class="flex flex-col">
-                        <div class="position-absolute z-10 pt-3 ps-3">
-                            <div class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                9.2
+                    <div class="box-border relative bg-white rounded-2xl popular-card">
+                        <div class="flex flex-col">
+                            <div class="position-absolute z-10 pt-3 ps-3">
+                                <div
+                                    class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
+                                    9.2
+                                </div>
                             </div>
+                            <div class="relative">
+                                <img src="{{ asset('frontend/images/product5.jpg') }}" alt="GetShayna"
+                                    class="image-product w-100" height="250px" />
+                            </div>
+                            <div class="flex flex-col gap-2 px-4">
+                                <div class="title">Nusfjord Arctic</div>
+                                <div class="price">From $238/week</div>
+                            </div>
+                            <a href="#"
+                                class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
                         </div>
-                        <div class="relative">
-                            <img src="{{ asset('frontend/images/product5.jpg') }}" alt="GetShayna"
-                                class="image-product w-100" height="250px" />
-                        </div>
-                        <div class="flex flex-col gap-2 px-4">
-                            <div class="title">Nusfjord Arctic</div>
-                            <div class="price">From $238/week</div>
-                        </div>
-                        <a href="#"
-                            class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
                     </div>
                 </div>
             @endif
         </div>
-        </div>
-
         {{-- Dummy Product --}}
         {{-- <div class="box-border relative bg-white rounded-2xl popular-card">
                     <div class="flex flex-col">

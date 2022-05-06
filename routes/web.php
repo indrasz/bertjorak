@@ -50,6 +50,8 @@ Route::post('transaction/payment', [TransactionController::class, 'payment_pos']
 // Update Success
 Route::post('update/success', [TransactionController::class, 'success']);
 
+// Download PDF File
+Route::get('transaction/download', [TransactionController::class, 'convertPDF']);
 
 // Dashboard Admin
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
