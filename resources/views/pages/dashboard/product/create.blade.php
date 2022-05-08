@@ -59,11 +59,11 @@
 
 
                                         <div class="col-span-6">
-                                            <label for="title" class="block mb-3 font-medium text-gray-700 text-md">Nama
-                                                Produk</label>
+                                            <label for="title" class="block mb-3 font-medium text-gray-700 text-md">Name
+                                                Product</label>
 
-                                            <input placeholder="Nama Produk yang ingin ditambahkan" maxlength="100"
-                                                type="text" name="name" id="name" autocomplete="name"
+                                            <input placeholder="Name of product you want" maxlength="100" type="text"
+                                                name="name" id="name" autocomplete="name"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('name') }}" required>
                                             <div id="the-count" style="float: right; padding-top: 0.5em;">
@@ -78,10 +78,10 @@
                                         </div>
 
                                         <div class="col-span-6">
-                                            <label for="price" class="block mb-3 font-medium text-gray-700 text-md">Harga
+                                            <label for="price" class="block mb-3 font-medium text-gray-700 text-md">Price
                                                 Produk</label>
 
-                                            <input placeholder="Total Harga Produk " type="number" name="price" id="price"
+                                            <input placeholder="Price of Produk " type="number" name="price" id="price"
                                                 autocomplete="price"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('price') }}" required>
@@ -134,7 +134,7 @@
 
 
                                         <div class="col-span-6">
-                                            <label for="weight" class="block mb-3 font-medium text-gray-700 text-md">Berat
+                                            <label for="weight" class="block mb-3 font-medium text-gray-700 text-md">Weight
                                                 (gram)</label>
                                             <input placeholder="Berat Barang" type="number" name="weight" id="weight"
                                                 autocomplete="weight"

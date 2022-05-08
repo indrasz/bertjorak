@@ -15,14 +15,14 @@ class CartController extends Controller
     {
         if (Auth::user()) {
             if (Auth::user()->hasRole('buyer')) {
-                if (Auth::user()->id_province != null || Auth::user()->id_city != null || Auth::user()->detail_address != null || Auth::user()->zipcode != null) {
+                if (Auth::user()->id_province != null && Auth::user()->id_city != null && Auth::user()->detail_address != null && Auth::user()->zipcode != null) {
 
                     $authId = Auth::user()->id;
                     $cartList = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->where('status', 'Cart')->get();
 
                     return view('pages.store.cart')->with('carts', $cartList);
                 } else {
-                    return redirect()->route('dashboard.profile.edit', Auth::user()->id);
+                    return redirect()->route('dashboard.profile.edit', Auth::user()->id)->withToastWarning('Please complete your profile');
                 }
             } else {
                 return redirect()->back();

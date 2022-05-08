@@ -48,6 +48,7 @@ class NotificationController extends Controller
                     $upTransaksi->status_transaksi = 'Waiting';
 
                     $upTransaksi->save();
+                    return redirect()->back()->withToastSuccess('Congrats your payment has been received!');
                 }
                 // Cancel
                 elseif ($payment->transaction_status == 'cancel') {
@@ -61,6 +62,7 @@ class NotificationController extends Controller
                     $upTransaksi->status_transaksi = 'Canceled';
 
                     $upTransaksi->save();
+                    return redirect()->back()->withToastWarning('Your payment has been canceled!');
                 }
                 // Expire
                 elseif ($payment->transaction_status == 'expire') {
@@ -68,12 +70,12 @@ class NotificationController extends Controller
                         $upExpire = $key;
                     }
 
-
                     $upTransaksi = Transaction::findOrFail($upExpire->id_transaction);
 
                     $upTransaksi->status_transaksi = 'Expired';
 
                     $upTransaksi->save();
+                    return redirect()->back()->withToastError('Your payment has been expired!');
                 }
             }
         } else {

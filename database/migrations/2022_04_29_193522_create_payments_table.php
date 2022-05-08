@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_order')->constrained('orders', 'orderID');
+            $table->foreignId('id_order')->constrained('orders', 'orderID')->onDelete('cascade')->onUpdate('cascade');
             $table->string('kode_order')->nullable();
             $table->string('status_code')->nullable();
             $table->string('status_message')->nullable();

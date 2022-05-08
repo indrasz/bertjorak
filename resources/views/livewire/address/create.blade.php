@@ -74,35 +74,38 @@
         </div>
 
         <div class="col-span-3">
-            <label for="provincesId" class="block mb-3 font-medium text-gray-700 text-md">Provinsi</label>
-            <select name="provincesId" id="provincesId" wire:model="provinceId"
+            <label for="provincesId" class="block mb-3 font-medium text-gray-700 text-md">Province</label>
+            @php
+                foreach ($user as $keyid) {
+                    $getProv = $keyid->id_province;
+                    $getCity = $keyid->id_city;
+                    //dd($get);
+                }
+            @endphp
+            <select name="provincesId" id="provincesId" wire:click="changeEvent($event.target.value)"
                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                @php
-                    foreach ($provinces as $province) {
-                        $getProv = $province;
-                    }
-                @endphp
-                <option value="" selected disabled>Select Province</option>
+                <option value="" selected>Select Province</option>
                 @foreach ($provinces as $province)
-                    <option value="{{ $province->province_id }}">{{ $province->name_province }}</option>
+                    <option value="{{ $province->province_id }}" @if (old('province') == $province->province_id || $province->province_id == $getProv) selected @endif>
+                        {{ $province->name_province }}
+                    </option>
                 @endforeach
             </select>
         </div>
 
         <div class="col-span-3">
             <label for="cityId" class="block mb-3 font-medium text-gray-700 text-md">City</label>
-            @if (is_array($cities) || is_object($cities))
-                <select name="cityId" id="cityId"
-                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                    <option value="" selected>Select City</option>
-                    @foreach ($cities as $city)
-                        <option value="{{ $city->city_id }}">{{ $city->type . ' ' . $city->name_city }}</option>
-                    @endforeach
-                </select>
-            @endif
+            <select name="cityId" id="cityId"
+                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                <option value="" selected>Select City</option>
+                @foreach ($cities as $city)
+                    <option value="{{ $city->city_id }}" @if (old('city') == $city->city_id || $city->city_id == $getCity) selected @endif>
+                        {{ $city->type . ' ' . $city->name_city }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="col-span-3">
-            <label for="zipCode" class="block mb-3 font-medium text-gray-700 text-md">Zip
+            <label for="zipCode" class="block mb-3 font-medium text-gray-700 text-md">Postal
                 Code</label>
             @if ($edit_data->zipcode == null)
                 <input placeholder="Kode pos" type="text" name="zipCode" id="zipCode" autocomplete="zipCode"
@@ -116,7 +119,7 @@
     </div>
 
     <div class="col-span-3 py-5">
-        <label for="detailAddress" class="block mb-3 font-medium text-gray-700 text-md">Address</label>
+        <label for="detailAddress" class="block mb-3 font-medium text-gray-700 text-md">Detail Address</label>
         @if ($edit_data->detail_address == null)
             <textarea name="detailAddress" id="detailAddress" cols="30" rows="10" autocomplete="detailAddress"
                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"

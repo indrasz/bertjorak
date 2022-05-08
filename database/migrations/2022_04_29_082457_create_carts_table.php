@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id('id_cart');
-            $table->foreignId('id_user')->constrained('users', 'id');
+            $table->foreignId('id_user')->constrained('users', 'id')->onDelete('cascade')->onUpdate('cascade');
             $table->string('status')->nullable();
-            $table->foreignId('id_order')->constrained('orders', 'orderID')->nullable();
-            $table->foreignId('id_product')->constrained('products', 'id_product');
+            $table->foreignId('id_order')->nullable()->constrained('orders', 'orderID')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('id_product')->constrained('products', 'id_product')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('jumlah')->nullable();
             $table->string('pilihanSelected')->nullable();
             $table->string('sizeSelected')->nullable();

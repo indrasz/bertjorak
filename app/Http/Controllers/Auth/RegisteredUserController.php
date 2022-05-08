@@ -46,7 +46,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // Uncomment this to register for admin
         $user->attachRole('buyer');
+
+        // Uncomment this to register for buyer
+        // $user->attachRole('buyer');
 
         event(new Registered($user));
 

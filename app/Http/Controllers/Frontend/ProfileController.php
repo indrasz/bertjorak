@@ -30,9 +30,6 @@ class ProfileController extends Controller
 
     public function edit($id)
     {
-        // $daftarProvinsi = RajaOngkir::kota()->all();
-        // dd($daftarProvinsi);
-
         if (Auth::user()->id == $id) {
             $editProfile = User::where('id', $id)->get();
             return view('pages.dashboard.profile.edit')->with('editProfile', $editProfile);
@@ -74,6 +71,14 @@ class ProfileController extends Controller
         if ($request->hasFile('avatar')) {
             $profile->avatar = json_encode($name);
         }
+
+        // Record Username Exists
+        $usernameExists = User::where('username', $request->username)->first();
+        if ($usernameExists != null && $usernameExists->id != Auth::user()->id) {
+            return redirect()->back()->withToastError('Username already exists!');
+        }
+
+
         $profile->name = $request->name;
         $profile->username = $request->username;
         $profile->phone_number = $request->phoneNumber;
@@ -86,7 +91,7 @@ class ProfileController extends Controller
         if ($profile->save()) {
             return redirect()->route('dashboard.profile.index')->withToastSuccess('Your profile has been edited!');
         } else {
-            return redirect()->back()->withToastSuccess('Your profile failed to edit!');
+            return redirect()->back()->withToastError('Your profile failed to edit!');
         }
     }
 }

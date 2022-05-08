@@ -115,8 +115,10 @@
                                                 @endif
                                             </div>
                                         </div>
-
-                                        <livewire:address.create :edit_data="$edit" />
+                                        {{-- @php
+                                            dd($edit->id_province);
+                                        @endphp --}}
+                                        <livewire:address.create :edit_data="$edit" edit_id="{{ $editProfile }}" />
 
                                     </div>
                                     <div class="px-4 py-3 text-right sm:px-6">

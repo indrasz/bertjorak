@@ -50,11 +50,11 @@
                                         <div class="grid grid-cols-6 gap-6">
 
                                             <div class="col-span-6">
-                                                <label for="title" class="block mb-3 font-medium text-gray-700 text-md">Nama
-                                                    Produk</label>
+                                                <label for="title" class="block mb-3 font-medium text-gray-700 text-md">Name
+                                                    Product</label>
 
                                                 <input value="{{ $d->title }}" maxlength="100" type="text" name="name"
-                                                    id="name" autocomplete="name"
+                                                    id="name" autocomplete="off"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                     value="{{ old('name') }}" required>
                                                 <div id="the-count" style="float: right; padding-top: 0.5em;">
@@ -71,8 +71,7 @@
 
                                             <div class="col-span-6">
                                                 <label for="price"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Harga
-                                                    Produk</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Price</label>
 
                                                 <input value="{{ $d->price }}" type="number" name="price" id="price"
                                                     autocomplete="price"
@@ -178,7 +177,7 @@
 
                                             <div class="col-span-6">
                                                 <label for="weight"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Berat
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Weight
                                                     (gram)</label>
                                                 <input type="number" name="weight" id="weight" autocomplete="weight"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
@@ -192,8 +191,7 @@
 
                                             <div class="col-span-6">
                                                 <label for="stock"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Jumlah
-                                                    Stok</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Stock</label>
                                                 <input placeholder="Tambah Minimum Order" type="number" name="stock"
                                                     id="stock" autocomplete="stock"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
@@ -207,10 +205,10 @@
 
                                             <div class="col-span-6">
                                                 <label for="pilihan"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Pilihan
-                                                    Produk (optional)</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Color /
+                                                    Type (optional)</label>
 
-                                                @if ($d->pilihan != null)
+                                                {{-- @if ($d->pilihan != null)
                                                     <div class="p-2">
                                                         <div class="w-50 p-3" style="background-color: #eee;">
                                                             <h5>Ukuran yang tersedia:</h5>
@@ -223,12 +221,23 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
-                                                @endif
+                                                @endif --}}
 
-                                                <input placeholder="Warna / Tipe" type="text" name="pilihan[]" id="pilihan"
-                                                    autocomplete="pilihan"
-                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                                                    value="{{ old('pilihan[]') }}">
+                                                @if ($d->pilihan != null)
+                                                    @foreach (json_decode($d->pilihan, true) as $p)
+                                                        @for ($i = 0; $i < count($p); $i++)
+                                                            <input placeholder="Warna / Tipe" type="text" name="pilihan[]"
+                                                                id="pilihan" autocomplete="pilihan"
+                                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                                value="{{ $p[$i] }}">
+                                                        @endfor
+                                                    @endforeach
+                                                @else
+                                                    <input placeholder="Warna / Tipe" type="text" name="pilihan[]"
+                                                        id="pilihan" autocomplete="pilihan"
+                                                        class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                        value="">
+                                                @endif
 
                                                 <div id="newPilihan"></div>
 
@@ -241,9 +250,9 @@
 
                                             <div class="col-span-6">
                                                 <label for="size" class="block mb-3 font-medium text-gray-700 text-md">Size
-                                                    Produk (optional)</label>
+                                                    (optional)</label>
 
-                                                @if ($d->size != null)
+                                                {{-- @if ($d->size != null)
                                                     <div class="p-2">
                                                         <div class="w-50 p-3" style="background-color: #eee;">
                                                             <h5>Ukuran yang tersedia:</h5>
@@ -254,13 +263,23 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
+                                                @endif --}}
+
+                                                @if ($d->size != null)
+                                                    @foreach (json_decode($d->size, true) as $u)
+                                                        @for ($i = 0; $i < count($u); $i++)
+                                                            <input placeholder="Size" type="text" name="size[]" id="size"
+                                                                autocomplete="size"
+                                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                                value="{{ $u[$i] }}">
+                                                        @endfor
+                                                    @endforeach
+                                                @else
+                                                    <input placeholder="Size" type="text" name="size[]" id="size"
+                                                        autocomplete="size"
+                                                        class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                        value="">
                                                 @endif
-
-
-                                                <input placeholder="Size" type="text" name="size[]" id="size"
-                                                    autocomplete="size"
-                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                                                    value="">
 
                                                 <div id="newAdvantagesRow"></div>
 
@@ -320,7 +339,7 @@
         $("#addPilihan").click(function() {
             var html = '';
             html +=
-                '<input placeholder="Warna / Tipe" type="text" name="pilihan[]" id="pilihan" autocomplete="pilihan" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>';
+                '<input placeholder="Warna / Tipe" type="text" name="pilihan[]" id="pilihan" autocomplete="pilihan" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" >';
 
             $('#newPilihan').append(html);
         });
@@ -328,7 +347,7 @@
         $("#addAdvantagesRow").click(function() {
             var html = '';
             html +=
-                '<input placeholder="Size" type="text" name="size[]" id="size" autocomplete="size" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>';
+                '<input placeholder="Size" type="text" name="size[]" id="size" autocomplete="size" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">';
 
             $('#newAdvantagesRow').append(html);
         });

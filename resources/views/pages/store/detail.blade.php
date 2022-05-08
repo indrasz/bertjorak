@@ -220,13 +220,13 @@
                             }
 
                             /* .detail-product .detail-size-card #icon-check{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        transition: all 0.1s linear;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: 0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    transition: all 0.1s linear;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        opacity: 1;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 1;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                } */
 
                         </style>
                     </div>
@@ -241,45 +241,47 @@
 
     <section class="related-product w-100 h-100">
         <div class="container px-4">
-            <div class="caption-related-product ps-3">
-                Explore Our Product
-            </div>
-            <div class="carousel pt-2"
-                data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
+            @if (count($dataAll) >= 2)
+                <div class="caption-related-product ps-3">
+                    Explore Our Product
+                </div>
+                <div class="carousel pt-2"
+                    data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
 
-                @foreach ($dataAll as $all)
-                    @if ($all->id_product != $getId)
-                        <div class="card-related-carousel">
-                            @php
-                                $property_images = json_decode($all->images);
-                            @endphp
-                            <div class="image-placeholder">
-                                <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}" alt="images" />
-                            </div>
-
-                            <div class="card-details">
-                                <a href="{{ route('detail.show', $all->id_product) }}" style="text-decoration: none;">
-                                    <div class="caption">{{ $all->title }}</div>
-                                </a>
-                            </div>
-
-
-                            <div class="bottom-text d-flex flex-row justify-content-between">
-                                <div class="price-content flex-grow-1">
-                                    <span class="price">@currency($all->price)</span>
+                    @foreach ($dataAll as $all)
+                        @if ($all->id_product != $getId)
+                            <div class="card-related-carousel">
+                                @php
+                                    $property_images = json_decode($all->images);
+                                @endphp
+                                <div class="image-placeholder">
+                                    <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
+                                        alt="images" />
                                 </div>
-                                {{-- <div class="rating d-flex align-items-center">
+
+                                <div class="card-details">
+                                    <a href="{{ route('detail.show', $all->id_product) }}"
+                                        style="text-decoration: none;">
+                                        <div class="caption">{{ $all->title }}</div>
+                                    </a>
+                                </div>
+
+
+                                <div class="bottom-text d-flex flex-row justify-content-between">
+                                    <div class="price-content flex-grow-1">
+                                        <span class="price">@currency($all->price)</span>
+                                    </div>
+                                    {{-- <div class="rating d-flex align-items-center">
                                     <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
                                         alt="star" />
                                     <span></span>
                                 </div> --}}
+                                </div>
                             </div>
-                        </div>
-                    @endif
-                @endforeach
-
-
-            </div>
+                        @endif
+                    @endforeach
+                </div>
+            @endif
         </div>
 
         <style>

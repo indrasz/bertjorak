@@ -241,7 +241,8 @@
                                             </div>
 
                                             <div class="col-span-3 mt-3">
-                                                <label for="name" class="block mb-3 font-medium text-gray-700 text-md">Zip
+                                                <label for="name"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Postal
                                                     Code</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
                                                     @if ($u->zipcode != null)

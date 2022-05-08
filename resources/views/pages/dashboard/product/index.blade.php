@@ -100,6 +100,8 @@
                     @else
                         <h1>Product Belum ada</h1>
                     @endif
+                    <br>
+                    {{ $data->links('pagination::simple-tailwind') }}
                 </main>
             </div>
         </section>

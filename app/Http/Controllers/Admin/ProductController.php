@@ -20,10 +20,9 @@ class ProductController extends Controller
         if (Auth::user()) {
             if (Auth::user()->hasRole('admin')) {
                 $count = Product::count();
+                $data = Product::paginate(10);
 
-                $data = Product::all();
-
-                return view('pages.dashboard.product.index')->with('count', $count)->with('data', $data);
+                return view('pages.dashboard.product.index')->with('data', $data)->with('count', $count);
             }
         } else {
             return view('errors.404');
