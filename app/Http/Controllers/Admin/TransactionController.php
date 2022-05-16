@@ -290,9 +290,9 @@ class TransactionController extends Controller
             }
         )->get();
 
-        //return view('pdf.transaction')->with('transaksipdf', $transaksipdf)->with('userProv', $userProv)->with('userCity', $userCity)->with('admin', $admin);
+        return view('pdf.transaction')->with('transaksipdf', $transaksipdf)->with('userProv', $userProv)->with('userCity', $userCity)->with('admin', $admin);
 
-        $pdf = PDF::loadview('pdf.transaction', ['transaksipdf' => $transaksipdf, 'admin' => $admin, 'userProv' => $userProv, 'userCity' => $userCity]);
-        return $pdf->download('invoice ' . $id . '.pdf');
+        // $pdf = PDF::loadview('pdf.transaction', ['transaksipdf' => $transaksipdf, 'admin' => $admin, 'userProv' => $userProv, 'userCity' => $userCity]);
+        // return $pdf->download('invoice ' . $id . '.pdf');
     }
 }

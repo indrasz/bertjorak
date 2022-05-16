@@ -251,14 +251,18 @@
             <div class="text-2xl text-right font-medium">@currency($getpdf->totalCost)</div>
         </div>
 
-        <div class="border border-t-2 border-gray-200 mt-4 mb-4 px-3"></div>
-
-        <h1 class="text-xs text-right">
-            @php
-                echo date('d-m-Y');
-            @endphp
-        </h1>
+        <div class="border border-t-2 border-gray-200 mt-4 mb-4 px-3">
+            <h1 style="float: right; font-size: 1.0em; padding-top: 1.0em;">
+                @php
+                    echo date('d-m-Y');
+                @endphp
+            </h1>
+        </div>
     </div>
+
+    <script type="text/javascript">
+        window.print();
+    </script>
 </body>
 
 </html>

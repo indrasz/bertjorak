@@ -17,9 +17,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            Transaction::where('date_end', '<', now())->update([
+            $transactionSche = Transaction::where('date_end', '<', now())->update([
                 'status_transaksi' => 'Success',
             ]);
+
+            if ($transactionSche->status_transaksi == 'Success') {
+                return redirect()->back()->withToastSuccess('Selamat barang anda sudah sampai!');
+            }
         })->everyMinute();
     }
 

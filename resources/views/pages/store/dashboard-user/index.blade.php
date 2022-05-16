@@ -50,8 +50,8 @@
                             // Success
                             $succes = $order->where('status_transaksi', '=', 'Success');
                             // Pending / Waiting
-                            $pending = $order->where('status_transaksi', '=', 'Pending');
-                            //$pending = $order->where('status_transaksi', '=', 'Waiting');
+                            $pending1 = $order->where('status_transaksi', '=', 'Pending');
+                            $pending2 = $order->where('status_transaksi', '=', 'Waiting');
                             // Shipment
                             $shipment = $order->where('status_transaksi', '=', 'Sedang Dikirim');
                             // Expired
@@ -79,8 +79,14 @@
                                     class="w-16 h-16">
 
                                 <div>
-                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($pending) }}
-                                    </p>
+                                    @if ($pending1 || $pending2)
+                                        <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
+                                            {{ count($pending1) + count($pending2) }}
+                                        </p>
+                                    @else
+                                        <p class="mt-2 text-2xl font-semibold text-left text-gray-800">0
+                                        </p>
+                                    @endif
                                     <p class="text-base text-left text-gray-500">
                                         Transaction Pending
                                     </p>
