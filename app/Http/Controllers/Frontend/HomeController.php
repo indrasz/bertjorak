@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $productList = Product::limit(8)->get();
+        $productList = Product::where('unggulan', '=', '1')->get();
         return view('pages.store.index')->with('products', $productList);
     }
 

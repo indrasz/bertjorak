@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiShow;
 use App\Http\Controllers\Admin\LaporanController;
+use App\Http\Controllers\Frontend\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,9 @@ use App\Http\Controllers\Admin\LaporanController;
 
 // Refresh
 Route::get('clear/optimize', [ConfigController::class, 'clearRoute']);
+
+// About
+Route::resource('about', AboutController::class);
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');

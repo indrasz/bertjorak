@@ -80,7 +80,7 @@
                                     <a class="nav-link" href="#">Reviews</a>
                                 </li> --}}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">About</a>
+                                    <a class="nav-link" href="{{ url('/about') }}">About</a>
                                 </li>
                             </ul>
                         </div>
@@ -199,7 +199,7 @@
                         <a class="nav-link" href="#">Reviews</a>
                     </li> --}}
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="{{ url('/about') }}">About</a>
                     </li>
                 </ul>
 
