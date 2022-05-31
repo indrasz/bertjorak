@@ -23,52 +23,61 @@
                 @endif
             @endif
 
-            <div class="row mx-0 text-center text-md-start">
-                <div class="col-md-6 my-auto px-md-0">
+            <div class="row text-center text-md-start">
+                <div class="carousel"
+                data-flickity='{ "cellAlign": "left", "contain": false, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": false, "pageDots" : false, "autoPlay": 1500, "fade" : true}'>
+
+
+                  <div class="col-12 col-md-6 my-auto px-md-0">
                     <div class="headline">
-                        The free way to find <br class="d-none d-md-block">
-                        the world’s best <br class="d-none d-md-block">
-                        remote talent
-                        <span>
-                            <svg class="d-none d-md-inline-block" width="104" height="46" viewBox="0 0 104 46" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M3 20C1.34315 20 0 21.3431 0 23C0 24.6569 1.34315 26 3 26V20ZM103.121 25.1213C104.293 23.9497 104.293 22.0503 103.121 20.8787L84.0294 1.7868C82.8579 0.615224 80.9584 0.615224 79.7868 1.7868C78.6152 2.95837 78.6152 4.85786 79.7868 6.02944L96.7574 23L79.7868 39.9706C78.6152 41.1421 78.6152 43.0416 79.7868 44.2132C80.9584 45.3848 82.8579 45.3848 84.0294 44.2132L103.121 25.1213ZM3 26H101V20H3V26Z"
-                                    fill="#832FC5"></path>
-                            </svg>
-                        </span>
+                        <img src="{{ asset('frontend/images/egocentric.png') }}" alt="egocentric" width="200">
                     </div>
                     <div class="sub-headline">
-                        GetShayna is a 100% free resource for companies <br class="d-none d-md-block">
-                        looking to find remote talent across the globe.
+                      The news perspective of you
                     </div>
                     <button class="btn btn-join">Let's Explore</button>
-                </div>
-                <div class="col-md-6 my-auto px-md-0 carousel"
-                    data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true, "prevNextButtons": false, "draggable": true, "pageDots" : true, "autoPlay" : 1500, "friction" : 0.4, "selectedAttraction" : 0.01}'>
+                  </div>
 
-                    <div class="card w-100 mt-3 me-2 mt-lg-0"
-                        style=" min-height: 500px; background-image: url({{ asset('/frontend/images/banner1.jpg') }}); background-size: cover; background-position: center;">
+                  <div class="col-12 col-md-6 my-auto px-md-0 ">
+
+                      <div class="card w-100 mt-3 me-2 mt-lg-0"
+                      style=" min-height: 500px; background-image: url({{ asset('frontend/images/banner1.jpg') }}); background-size: cover; background-position: center;">
+
+                      </div>
+
+                  </div>
+
+                    <div class="col-12 col-md-6 my-auto px-md-0">
+                      <div class="headline">
+
+                          the world’s best <br class="d-none d-md-block">
+                          remote talent
+                          <span>
+                              <svg class="d-none d-md-inline-block" width="104" height="46"
+                                  viewBox="0 0 104 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path
+                                      d="M3 20C1.34315 20 0 21.3431 0 23C0 24.6569 1.34315 26 3 26V20ZM103.121 25.1213C104.293 23.9497 104.293 22.0503 103.121 20.8787L84.0294 1.7868C82.8579 0.615224 80.9584 0.615224 79.7868 1.7868C78.6152 2.95837 78.6152 4.85786 79.7868 6.02944L96.7574 23L79.7868 39.9706C78.6152 41.1421 78.6152 43.0416 79.7868 44.2132C80.9584 45.3848 82.8579 45.3848 84.0294 44.2132L103.121 25.1213ZM3 26H101V20H3V26Z"
+                                      fill="#832FC5"></path>
+                              </svg>
+                          </span>
+                      </div>
+                      <div class="sub-headline">
+                          GetShayna is a 100% free resource for companies <br class="d-none d-md-block">
+                          looking to find remote talent across the globe.
+                      </div>
+                      <button class="btn btn-join">Let's Explore</button>
+                    </div>
+
+                    <div class="col-12 col-md-6 my-auto px-md-0 ">
+
+                        <div class="card w-100 mt-3 me-2 mt-lg-0"
+                        style=" min-height: 500px; background-image: url({{ asset('frontend/images/banner2.jpg') }}); background-size: cover; background-position: center;">
+
+                        </div>
 
                     </div>
-                    <div class="card w-100 mt-3 me-2 mt-lg-0"
-                        style=" min-height: 500px; background-image: url({{ asset('/frontend/images/banner2.jpg') }}); background-size: cover; background-position: center;">
 
-                    </div>
-
-                    <div class="card w-100 mt-3 me-2 mt-lg-0"
-                        style=" min-height: 500px; background-image: url({{ asset('/frontend/images/banner3.jpg') }}); background-size: cover; background-position: center;">
-
-                    </div>
-                    <div class="card w-100 mt-3 me-2 mt-lg-0"
-                        style=" min-height: 500px; background-image: url({{ asset('/frontend/images/banner4.jpg') }}); background-size: cover; background-position: center;">
-
-                    </div>
-
-                </div>
-
-
-            </div>
+              </div>
         </div>
     </section>
 
@@ -213,11 +222,31 @@
                 color: #A4A7B1;
             }
 
+            .image-product{
+                width: 500px;
+                height: 500px;
+                padding: 100px;
+                border-radius: 12px;
+                overflow: hidden;
+                background: #8f44fd;
+                background-size: cover;
+                background-position: center;
+                object-position: center;
+                animation: morph 3.75s linear infinite;
+            }
+
+            .image-spin img{
+                width: 200px;
+                height: 200px;
+                animation: spin 7s infinite;
+            }
+
+            @keyframes spin {
+                100% {transform: rotate(720deg);}
+            }
+
         </style>
         <div class="content container">
-            <style>
-
-            </style>
             <!-- Card Container -->
             @if (count($products) >= 1)
                 <div class="carousel" style="background: #f2f6ff !important;"
@@ -253,131 +282,45 @@
                     @endforeach
                 </div>
             @else
-                <div class="carousel" style="background: #f2f6ff !important;"
-                    data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true, "pageDots": true, "prevNextButtons": false, "draggable": true }'>
-                    <div class="box-border relative bg-white rounded-2xl popular-card">
-                        <div class="flex flex-col">
-                            <div class="position-absolute z-10 pt-3 ps-3">
-                                <div
-                                    class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                    9.2
+                <div class="carousel" style="background: #f2f6ff !important; "
+                data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true, "pageDots": false, "prevNextButtons": true, "draggable": true }'>
+                <!-- Card Container 1 -->
+                    <div class="headline justify-content-center align-items-center text-center w-100 ">
+                        Popular Resorts Close
+
+                        <div class="image-spin">
+                            <img src="{{ asset('frontend/images/set1@300x.png') }}" />
+                        </div>
+
+                        <div class="mt-5 w-100 ">
+                            <a href="" >
+                                <div class="d-flex text-center align-items-center justify-content-center">
+                                    <div class=" image-product " style="background-image: url({{ asset('frontend/images/product1.jpg') }});"></div>
                                 </div>
-                            </div>
-                            <div class="relative">
-                                <img src="{{ asset('frontend/images/product1.jpg') }}" alt="GetShayna"
-                                    class="image-product w-100" height="250px" />
-                            </div>
-                            <div class="flex flex-col gap-2 px-4">
-                                <div class="title">Nusfjord Arctic</div>
-                                <div class="price">From $238/week</div>
-                            </div>
-                            <a href="#"
-                                class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
+                            </a>
                         </div>
                     </div>
-                    <div class="box-border relative bg-white rounded-2xl popular-card">
-                        <div class="flex flex-col">
-                            <div class="position-absolute z-10 pt-3 ps-3">
-                                <div
-                                    class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                    9.2
+
+                    <div class="headline justify-content-center align-items-center text-center w-100 ">
+                    Popular Resorts Close
+
+                        <div class="image-spin">
+                            <img src="{{ asset('frontend/images/set1@300x.png') }}" />
+                        </div>
+
+                        <div class="mt-5 w-100 ">
+                            <a href="" >
+                                <div class="d-flex text-center align-items-center justify-content-center">
+                                    <div class=" image-product " style="background-image: url({{ asset('frontend/images/product2.jpg') }});"></div>
                                 </div>
-                            </div>
-                            <div class="relative">
-                                <img src="{{ asset('frontend/images/product2.jpg') }}" alt="GetShayna"
-                                    class="image-product w-100" height="250px" />
-                            </div>
-                            <div class="flex flex-col gap-2 px-4">
-                                <div class="title">Nusfjord Arctic</div>
-                                <div class="price">From $238/week</div>
-                            </div>
-                            <a href="#"
-                                class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
+                            </a>
                         </div>
                     </div>
-                    <div class="box-border relative bg-white rounded-2xl popular-card">
-                        <div class="flex flex-col">
-                            <div class="position-absolute z-10 pt-3 ps-3">
-                                <div
-                                    class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                    9.2
-                                </div>
-                            </div>
-                            <div class="relative">
-                                <img src="{{ asset('frontend/images/product3.jpg') }}" alt="GetShayna"
-                                    class="image-product w-100" height="250px" />
-                            </div>
-                            <div class="flex flex-col gap-2 px-4">
-                                <div class="title">Nusfjord Arctic</div>
-                                <div class="price">From $238/week</div>
-                            </div>
-                            <a href="#"
-                                class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
-                        </div>
-                    </div>
-                    <div class="box-border relative bg-white rounded-2xl popular-card">
-                        <div class="flex flex-col">
-                            <div class="position-absolute z-10 pt-3 ps-3">
-                                <div
-                                    class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                    9.2
-                                </div>
-                            </div>
-                            <div class="relative">
-                                <img src="{{ asset('frontend/images/product4.jpg') }}" alt="GetShayna"
-                                    class="image-product w-100" height="250px" />
-                            </div>
-                            <div class="flex flex-col gap-2 px-4">
-                                <div class="title">Nusfjord Arctic</div>
-                                <div class="price">From $238/week</div>
-                            </div>
-                            <a href="#"
-                                class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
-                        </div>
-                    </div>
-                    <div class="box-border relative bg-white rounded-2xl popular-card">
-                        <div class="flex flex-col">
-                            <div class="position-absolute z-10 pt-3 ps-3">
-                                <div
-                                    class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                    9.2
-                                </div>
-                            </div>
-                            <div class="relative">
-                                <img src="{{ asset('frontend/images/product5.jpg') }}" alt="GetShayna"
-                                    class="image-product w-100" height="250px" />
-                            </div>
-                            <div class="flex flex-col gap-2 px-4">
-                                <div class="title">Nusfjord Arctic</div>
-                                <div class="price">From $238/week</div>
-                            </div>
-                            <a href="#"
-                                class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
-                        </div>
-                    </div>
+
                 </div>
             @endif
         </div>
-        {{-- Dummy Product --}}
-        {{-- <div class="box-border relative bg-white rounded-2xl popular-card">
-                    <div class="flex flex-col">
-                        <div class="position-absolute z-10 pt-3 ps-3">
-                            <div class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                9.2
-                            </div>
-                        </div>
-                        <div class="relative">
-                            <img src="{{ asset('/frontend/images/product1.jpg') }}"
-                                alt="GetShayna" class="image-product w-100" height="250px" />
-                        </div>
-                        <div class="flex flex-col gap-2 px-4">
-                            <div class="title">Nusfjord Arctic</div>
-                            <div class="price">From $238/week</div>
-                        </div>
-                        <a href="#"
-                            class="absolute z-40 inset-0 transition duration-300 ease-out hover:bg-gray-900 hover:bg-opacity-20"></a>
-                    </div>
-                </div> --}}
+
     </section>
 
     {{-- Footer --}}
