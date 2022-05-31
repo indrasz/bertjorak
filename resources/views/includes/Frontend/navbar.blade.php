@@ -53,14 +53,15 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#"
+                                            <a href="https://api.whatsapp.com/send?phone=6281320133735&text=Halo selamat pagi/siang/sore/malam"
+                                                target="_blank"
                                                 class="dropdown-hover d-flex align-items-center justify-content-center text-start text-decoration-none">
                                                 <img class=""
                                                     src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header5/Header-5-6.png"
                                                     alt="" />
                                                 <div class="flex-grow-1 ps-4">
                                                     <h2 class="icon-item-title">
-                                                        Ask your questions
+                                                        Ask your quesaations
                                                     </h2>
                                                     <p class="icon-item-caption" style="margin-bottom: 0">
                                                         Ask us about a complaint
@@ -173,7 +174,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#"
+                                <a href="https://api.whatsapp.com/send?phone=6281320133735&text=Halo selamat pagi/siang/sore/malam"
+                                    target="_blank"
                                     class="dropdown-hover d-flex align-items-center justify-content-center text-start text-decoration-none">
                                     <img class=""
                                         src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header5/Header-5-6.png"
