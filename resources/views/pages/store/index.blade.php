@@ -179,7 +179,7 @@
             }
 
             body .resort .content .popular-card .image-product {
-                -o-object-fit:cover;
+                -o-object-fit: cover;
                 object-fit: cover;
                 object-position: center;
                 -o-object-position: center;
@@ -196,7 +196,7 @@
                 border-radius: 16px 16px 0px 0px;
             }
 
-             body .resort .content a {
+            body .resort .content a {
                 text-decoration: none;
             }
 
@@ -253,13 +253,14 @@
                     data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "pageDots": false, "prevNextButtons": false, "draggable": true }'>
                     @foreach ($products as $pl)
                         @if ($pl->stock >= 0)
-
-                            <a href="{{ route('detail.show', $pl->id_product) }}" >
+                            <a href="{{ route('detail.show', $pl->id_product) }}">
                                 <div class="box-border relative bg-white rounded-2xl popular-card">
                                     <div class="flex flex-col">
-                                        <div class="d-flex justify-content-center text-center position-absolute z-10 pt-3 ps-3">
-                                            <div class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
-                                               {{ $pl->stock }}
+                                        <div
+                                            class="d-flex justify-content-center text-center position-absolute z-10 pt-3 ps-3">
+                                            <div
+                                                class="p-2 text-sm font-semibold text-white rounded-circle badge-rating gradient-travland">
+                                                {{ $pl->stock }}
                                             </div>
                                         </div>
                                         <div class="relative">

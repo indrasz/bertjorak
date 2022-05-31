@@ -48,19 +48,27 @@
                                                     <div class="relative w-10 h-10 mr-3 rounded-full md:block">
 
                                                         <?php $property_images = json_decode($d->images); ?>
-                                                        {{-- <input type="text" name="photoText"
-                                                            value="{{ $property_images[0] }}"> --}}
+
+                                                        <div class="relative w-14 h-11">
+
+                                                            @if ($d->unggulan == 1)
+                                                                <div class="absolute bottom-0 -ml-12">
+                                                                    <img
+                                                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAB10lEQVQ4jcWTvWtTYRTGf+cmNW1KCRKptdWAVkFodVDp1KQVnIubU1VwEkHERQShiH+DWYqLo4OLdFMUBCcRXKSbUL9RB02aCuaex+HWcJPc3lt06AsH3uF5fu/5emEnjoRJ2Ha0+W0R3+y9gwN8uZUlzXxVL8eLFMI1REDOKzb1tZmmDzKzK4SXcJVx7eY3F7PkqUCJgFBXkUAC13U9IPfvGb4ePQs6jCI60kEmywtpFgPQ6p4R2vmjmMYJ7QAK9+G2H5hHXokBQawhPXP394GCT0jvwD+iXas2+60RTbmdX0TcxQE5CEBxSPxekXTeAEWGzb36dQWoBwA2/bmO6xqSEgCduzwKukMKdduqzXqn5M4QXo0ugt9DDPQClfxQaOKy1RrLXT3shpbP4DxEGvlrVHLp6yY7Z7WfK6lTthPfHyNuppQILsx1oxcGW309DycltuwlEi4OJVkTgRIzacPBwaSZJG9/D5+SV6H0A6nYgaDn0YaoGoO3LNgo2WnacX//TxksHY/BPhh+wWabc8Fcs2ZoAentZqZF2gPHeu39QOck8pa5L1muccSq6/fNolW3+dYjG9yYslBLuFqEnEoqu6fk4TG9GJrI1D0ZmtDK8Fgm8H/PHx9ISJv+0QVkAAAAAElFTkSuQmCC" />
+                                                                </div>
+                                                            @endif
+
+                                                            <div class="m-auto"
+                                                                style="width: 2.5rem; height: 2.5rem;">
+                                                                <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
+                                                                    alt="image-product"
+                                                                    class="object-cover w-full h-full rounded-full">
+                                                            </div>
+                                                        </div>
 
 
-                                                        <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
-                                                            alt="image-product"
-                                                            class="object-cover w-full h-full rounded-full" loading="lazy">
-
-                                                        {{-- <div class="absolute inset-0 rounded-full shadow-inner"
-                                                            aria-hidden="true">
-                                                        </div> --}}
                                                     </div>
-                                                    <div>
+                                                    <div class="ml-2">
                                                         <a href="{{ route('detail.show', $d->id_product) }}"
                                                             class="font-medium text-black">
                                                             {{ $d->title }}
@@ -89,7 +97,8 @@
                                                     @csrf
                                                     @method('DELETE')
 
-                                                    <button class="btn btn-danger" type="submit">Hapus</button>
+                                                    <button class="btn btn-danger show-alert-delete-box"
+                                                        type="submit">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -106,6 +115,30 @@
             </div>
         </section>
     </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $('.show-alert-delete-box').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: "Are you sure you want to delete this record?",
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                type: "warning",
+                buttons: ["Cancel", "Yes!"],
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 
     {{-- <div class="flex h-screen">
         <div class="m-auto text-center">

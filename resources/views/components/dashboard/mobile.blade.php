@@ -11,13 +11,16 @@
         </a>
 
         <div class="flex items-center pt-5 pl-5 mt-10 space-x-2 border-t border-gray-100">
+            @php
+                $convertImg = json_decode(Auth::user()->avatar);
+            @endphp
             <!--Author's profile photo-->
-            @if (Auth::user()->avatar == null)
+            @if ($convertImg == null)
                 <img class="object-cover object-center mr-1 rounded-full w-14 h-14"
                     src="{{ asset('assets/images/blank-profile-picture.png') }}" alt="random user" />
             @else
                 <img class="object-cover object-center mr-1 rounded-full w-14 h-14"
-                    src="{{ asset('/storage/account/' . Auth::user()->id . '/avatar/' . Auth::user()->avatar) }}"
+                    src="{{ asset('/storage/account/' . Auth::user()->id . '/avatar/' . $convertImg) }}"
                     alt="random user" />
             @endif
             <div>
@@ -169,6 +172,39 @@
                     @endif
                 </li>
             @endif
+
+            {{-- Report Nav --}}
+            @if (Auth::user()->hasRole('admin'))
+                <li class="relative px-6 py-3">
+
+                    @if (request()->is('dashboard/laporan') || request()->is('dashboard/laporan/*') || request()->is('dashboard/*/laporan') || request()->is('dashboard/*/laporan/*'))
+                        <a class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 "
+                            href="{{ route('dashboard.laporan.index') }}">
+
+
+                            <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
+                                aria-hidden="true"></span>
+                            <!-- Active Icons -->
+                            <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAACZ0lEQVRIibXU32sWZBQH8E8zGJEXKqaJNbfB1q5iCkFXokU/CAJBL9SLUMwCG4gyvZHS/gK90BsbQdBFmasgDBF1OhpaY2BTmzImOGwzdaWVYE57vXjOuz2+e7fmKx14OM8553nOec75nufwP9MTwWvwNg5gCZor9NeN4+UMP6CAg1gT+0rWfdTmjquCLwh+DnMqfD3cwF+5oliiASm91ajH7AqcF9A/VYAaDFbguEhL8Wup8smSfX0mt2FkGo4X4/USX2NUVU45Ddu0z+VR/0BPJtfEKkfNmBv7TrTgermDOQZXsHfqx47Ru1iGjfgFm9CIa/gCX0mgj9GA/+7xEdzN5Basw72Qc9tn2ePLBhiI1IvyDczDlsxejzshD6IOh7I770wW4DZeQjV2SL+7ATtxNc7sw7bszlZ8hNZMd5SJHdCNV7AcfdKnWYVdsebHud/xbHZvJb7Gv5luQWmAAt6U+roVt7AHl7AWH6IrztZG1kXqwQp0ZLr+ciX6DaPSVH0vdO8HX49vjGNSG7zYAMvwc1aiN8qVaDt6S3QHTKSZeFrCqCANyA68GPYvxdieEYrNUr13SyBfkDAYlTrjGRwLZ6/h87B9INX9tDQgj+C5qMRbaM8/2p/SJ5mKqiUsPpYAP4wNUgN8Ek5/xAvxyIbixSIG/xiv4WT7AvZL2AxJI+Y8/sYZ6W/0SV01hsFPkdbz+BbDkep30gheiO+zTIbRJGHQFcEuSu06JAHcxDgGnZFaL07gFM7GviteeDIut0kA1klDr1EaFy/jJl4NvgifPjQvHpGeksbBrDK2UbTj8mP4nx49ADvo0Ewaou1KAAAAAElFTkSuQmCC" />
+
+                            <span class="ml-4">Reports</span>
+                        </a>
+                    @else
+                        <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800"
+                            href="{{ route('dashboard.laporan.index') }}">
+
+                            <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAACcklEQVRIibXVXWjXZRQH8M98DdF0GssE3zO1XFFmkIiI3uiFd06vTBCKhqgY+HIVBkPC6mIIelGQN6HohV2FojK9URhzIr4MjenabEOhRtpFGWUX5/zd31/7O53twMNznvM7z/k+5/XHEFNV7i+jEQsx7Dns/YavcaD44RC2YApOYT2qB7GmoRnvlwyPyP1dfIjf0YRX0DsID3pxGvNwvhxgGP7BcmzDQXw0CIBJWIulJcGIgsLf+Cb5Wc9ofAl+wjL8XAngbK4STcfwAQz/hS7sRnfyj6gIUE5TcBgjBwD4AyvzYRXz1o4xAxgaiPr1tFjzm/HrU6zLooeqsQ93RXhu4zOM/j88mIBLaMCLmIEaUSQnFULbH0ANxpadF4sqmZrnr/B58mtxHyvyfBT1TwIYh060iPJbjZvYhVGp05mPgCtYJ0JMdHJTJYDX0YpPsQbXxIyZX/DwF32zbCM6sDXPk3G1P4AaPMR2zMR4vIQ3Uu9g2Z3LmJP8d9gjQkOU7feVPKgV/dGIujTyQb62u+zOJhxL+UL8KIbdKFxIkH5H85f6GrAKr4r2L9KB1DuVXq7E22KansNx/tvJtXhLDLoFeAF/Ym7KxuAdkaMjmJ0PmJD6V0SuxmIvdpSS1J7G3yu59gRqwgncEWO9S/RAuwjndbwpwlTK0WM5qC4zNjH3qoKcqJJ9ov734h6+EBX3LX6gLwcd4l+wBD0iaXUpnyHK72oZINErLWKatuIBLoqQXijomp9etOETEctborGa81sDzuDjvHNX1HuPKO/bee7Ea2nrMarHzuR3Y0Py+7EqvT2MRSnfhRsJXlxt4r8+9PQvQWeSzkV5g9YAAAAASUVORK5CYII=" />
+
+                            <span class="ml-4">Reports</span>
+                        </a>
+                    @endif
+
+
+                </li>
+            @endif
+
 
             {{-- Transaction Nav --}}
             <li class="relative px-6 py-3">

@@ -22,7 +22,7 @@
         <nav class="mx-10 mt-8 text-sm" aria-label="Breadcrumb">
             <ol class="inline-flex p-0 list-none">
                 <li class="flex items-center">
-                    <a href="#" class="text-gray-400">Product</a>
+                    <a href="{{ URL('/dashboard/product') }}" class="text-gray-400">Product</a>
                     <svg class="w-3 h-3 mx-3 text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 320 512">
                         <path
@@ -147,9 +147,9 @@
                                         </div>
 
                                         <div class="col-span-6">
-                                            <label for="stock" class="block mb-3 font-medium text-gray-700 text-md">Jumlah
-                                                Stok</label>
-                                            <input placeholder="Tambah Minimum Order" type="number" name="stock" id="stock"
+                                            <label for="stock"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Stock</label>
+                                            <input placeholder="Minimum Stock" type="number" name="stock" id="stock"
                                                 autocomplete="stock"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('stock') }}">
@@ -160,11 +160,10 @@
                                         </div>
 
                                         <div class="col-span-6">
-                                            <label for="pilihan"
-                                                class="block mb-3 font-medium text-gray-700 text-md">Pilihan
-                                                Produk (optional)</label>
+                                            <label for="pilihan" class="block mb-3 font-medium text-gray-700 text-md">Colors
+                                                / Type (optional)</label>
 
-                                            <input placeholder="Warna / Tipe" type="text" name="pilihan[]" id="pilihan"
+                                            <input placeholder="Colors / Type" type="text" name="pilihan[]" id="pilihan"
                                                 autocomplete="pilihan"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('pilihan[]') }}">
@@ -180,9 +179,9 @@
 
                                         <div class="col-span-6">
                                             <label for="size" class="block mb-3 font-medium text-gray-700 text-md">Size
-                                                Produk (optional)</label>
+                                                Product (optional)</label>
 
-                                            <input placeholder="size" type="text" name="size[]" id="size"
+                                            <input placeholder="Size" type="text" name="size[]" id="size"
                                                 autocomplete="size"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('size[]') }}">
@@ -195,8 +194,16 @@
                                                 Tambahkan Size Yang Tersedia +
                                             </button>
                                         </div>
-
                                     </div>
+
+                                    <div class="flex mt-6">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="unggulanCheck" value="1" class="form-checkbox"
+                                                style="border-radius: 20%; outline: none !important; box-shadow:none !important;">
+                                            <span class="ml-2">Jadikan Produk Unggulan</span>
+                                        </label>
+                                    </div>
+
                                 </div>
 
                                 <div class="px-4 py-3 text-right sm:px-6">

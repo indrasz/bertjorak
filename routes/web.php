@@ -14,8 +14,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiShow;
-
-use App\Http\Livewire\Transaction\PushPaymentData;
+use App\Http\Controllers\Admin\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +26,7 @@ use App\Http\Livewire\Transaction\PushPaymentData;
 | contains the "web" middleware group. Now create something great!
 |
  */
+
 // Refresh
 Route::get('clear/optimize', [ConfigController::class, 'clearRoute']);
 
@@ -53,6 +53,10 @@ Route::post('update/success', [TransactionController::class, 'success']);
 // Download PDF File
 Route::get('transaction/download/{id}', [TransactionController::class, 'convertPDF']);
 
+Route::get("/page", function () {
+    return view("pdf.laporan");
+});
+
 // Dashboard Admin
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
@@ -62,6 +66,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         // ]);
 
         // Route::resource('user', UserController::class);
+        // Laporan
+        Route::get('laporan/download', [LaporanController::class, 'convertPDF']);
+        Route::resource('laporan', LaporanController::class);
         Route::resource('profile', ProfileController::class);
         Route::resource('product', ProductController::class)->middleware('is_admin');
         Route::resource('transaction', TransactionController::class)->only([

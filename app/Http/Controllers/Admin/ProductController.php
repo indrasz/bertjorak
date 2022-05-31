@@ -76,6 +76,11 @@ class ProductController extends Controller
         $file->title = $request->name;
         $file->price = $request->price;
         $file->desc = $request->desc;
+        if (isset($request->unggulanCheck)) {
+            $file->unggulan = $request->unggulanCheck;
+        } else {
+            $file->unggulan = null;
+        }
         $file->stock = $request->stock;
         if ($pilihanText[0][0] != null) {
             $file->pilihan = json_encode($pilihanText);
@@ -124,7 +129,6 @@ class ProductController extends Controller
         //$data = Product::findOrFail($id);
 
         $this->validate($request, [
-            'photos' => 'required',
             'photos.*' => 'mimes:png,jpg,jpeg',
 
             'name' => 'required|max:100',
@@ -164,12 +168,17 @@ class ProductController extends Controller
 
         $productUp = Product::find($id);
 
-        if ($imageInput[0][0] != null) {
+        if ($imageInput[0] != null) {
             $productUp->images = json_encode($dataNewImages);
         }
         $productUp->title = $request->name;
         $productUp->price = $request->price;
         $productUp->desc = $request->desc;
+        if (isset($request->unggulanCheck)) {
+            $productUp->unggulan = $request->unggulanCheck;
+        } else {
+            $productUp->unggulan = null;
+        }
         $productUp->stock = $request->stock;
         if ($pilihanText[0][0] != null) {
             $productUp->pilihan = json_encode($pilihanText);
