@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title', 100);
             $table->double('price');
             $table->longText('desc');
+            $table->string('unggulan')->nullable();
             $table->double('weight');
             $table->integer('stock');
             $table->string('pilihan')->nullable();

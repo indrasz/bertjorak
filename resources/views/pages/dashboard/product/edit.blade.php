@@ -22,7 +22,7 @@
         <nav class="mx-10 mt-8 text-sm" aria-label="Breadcrumb">
             <ol class="inline-flex p-0 list-none">
                 <li class="flex items-center">
-                    <a href="#" class="text-gray-400">Product</a>
+                    <a href="{{ URL('/dashboard/product') }}" class="text-gray-400">Product</a>
                     <svg class="w-3 h-3 mx-3 text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 320 512">
                         <path
@@ -145,8 +145,9 @@
 
                                                 <img src="{{ asset('assets/images/empty-illustration.svg') }}" id="output"
                                                     style="width: 25%; padding-top: 1.5%; padding-bottom: 1.5%;" />
-                                                <input placeholder="Thumbnail 1" type="file" name="photos[]" id="photos"
-                                                    autocomplete="photos" onchange="loadFile(event)"
+                                                <input placeholder="Thumbnail 1" value="{{ $d->images }}" type="file"
+                                                    name="photos[]" id="photos" autocomplete="photos"
+                                                    onchange="loadFile(event)"
                                                     class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
 
                                                 @if ($errors->has('photos[]'))
@@ -289,8 +290,21 @@
                                                     Tambahkan Size Yang Tersedia +
                                                 </button>
                                             </div>
-
                                         </div>
+
+                                        {{-- @php
+                                            dd($d->unggulan);
+                                        @endphp --}}
+
+                                        <div class="flex mt-6">
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="unggulanCheck" value="1" class="form-checkbox"
+                                                    style="border-radius: 20%; outline: none !important; box-shadow:none !important;"
+                                                    @if ($d->unggulan != null) checked @endif>
+                                                <span class="ml-2">Jadikan Produk Unggulan</span>
+                                            </label>
+                                        </div>
+
                                     </div>
 
                                     <div class="px-4 py-3 text-right sm:px-6">

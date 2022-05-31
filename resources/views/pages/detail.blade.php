@@ -84,7 +84,7 @@
 
                                 @if ($d->pilihan != null)
                                     <div class="chose-size mt-3 px-3">
-                                        Warna/Tipe :
+                                        Colors/Type :
                                     </div>
 
                                     <div class="container mt-3 px-3">
@@ -108,7 +108,7 @@
 
                                 @if ($d->size != null)
                                     <div class="chose-size mt-3 px-3">
-                                        Pilih Ukuran :
+                                        Size :
                                     </div>
 
                                     <div class="container mt-3 px-3">
