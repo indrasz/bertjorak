@@ -26,14 +26,53 @@
             <div class="row text-center text-md-start">
                 <div class="carousel"
                     data-flickity='{ "cellAlign": "left", "contain": false, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": false, "pageDots" : false, "autoPlay": 1500, "fade" : true}'>
+                    @foreach ($articles as $at)
+                        <div class="col-12 col-md-6 my-auto px-md-4 px-2">
+                            {{-- Logo Header --}}
+                            @if ($at->logo_header != null)
+                                <div class="headline">
+                                    <img src="{{ asset('/storage/articles/logo/' . json_decode($at->logo_header, true)) }}"
+                                        alt="Logo Header" width="200">
+                                </div>
+                            @endif
 
+                            {{-- Title Header --}}
+                            @if ($at->title_header != null)
+                                <div class="headline">
+                                    {{ $at->title_header }}
+                                </div>
+                            @endif
 
-                    <div class="col-12 col-md-6 my-auto px-md-0">
-                        <div class="headline">
-                            <img src="{{ asset('frontend/images/egocentric.png') }}" alt="egocentric" width="200">
+                            <div class="sub-headline " style=" color: #000000;">
+                                {{ $at->desc }}
+                            </div>
+                            <a href="{{ URL('product') }}">
+                                <button class="mb-5 btn btn-join">Let's Explore</button>
+                            </a>
                         </div>
-                        <div class="sub-headline">
-                            The news perspective of you
+
+                        <div class="col-12 col-md-6 my-auto px-md-0 ">
+
+                            @php
+                                $getImage = json_decode($at->image);
+                            @endphp
+
+                            <div class="card w-100 mt-3 me-2 mt-lg-3"
+                                style=" min-height: 500px; background-image: url('{{ asset('/storage/articles/images/' . $getImage) }}'); background-size: cover; ">
+                            </div>
+                        </div>
+                    @endforeach
+
+                    {{-- <div class="col-12 col-md-6 my-auto px-md-4 px-2">
+                        <div class="headline">
+
+                            The New Perspective of You<br class="d-none d-md-block">
+                        </div>
+                        <div class="sub-headline" style=" color: #000000;">
+                            Carrying those full glam power, Bertjorak ready to orbit it all to their new EGOCENTRIC
+                            collection. It’s not just unique, it’s a different perspective of it. Covered in an unusual way
+                            to emblazed the basic pattern, but support you with those usual comfort you’ve always
+                            experience.
                         </div>
                         <button class="btn btn-join">Let's Explore</button>
                     </div>
@@ -41,41 +80,11 @@
                     <div class="col-12 col-md-6 my-auto px-md-0 ">
 
                         <div class="card w-100 mt-3 me-2 mt-lg-0"
-                            style=" min-height: 500px; background-image: url({{ asset('frontend/images/banner1.jpg') }}); background-size: cover; background-position: center;">
+                            style=" min-height: 500px; background-image: url({{ asset('frontend/images/banner2.png') }}); background-size: cover; ">
 
                         </div>
 
-                    </div>
-
-                    <div class="col-12 col-md-6 my-auto px-md-0">
-                        <div class="headline">
-
-                            the world’s best <br class="d-none d-md-block">
-                            remote talent
-                            <span>
-                                <svg class="d-none d-md-inline-block" width="104" height="46" viewBox="0 0 104 46"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M3 20C1.34315 20 0 21.3431 0 23C0 24.6569 1.34315 26 3 26V20ZM103.121 25.1213C104.293 23.9497 104.293 22.0503 103.121 20.8787L84.0294 1.7868C82.8579 0.615224 80.9584 0.615224 79.7868 1.7868C78.6152 2.95837 78.6152 4.85786 79.7868 6.02944L96.7574 23L79.7868 39.9706C78.6152 41.1421 78.6152 43.0416 79.7868 44.2132C80.9584 45.3848 82.8579 45.3848 84.0294 44.2132L103.121 25.1213ZM3 26H101V20H3V26Z"
-                                        fill="#832FC5"></path>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="sub-headline">
-                            GetShayna is a 100% free resource for companies <br class="d-none d-md-block">
-                            looking to find remote talent across the globe.
-                        </div>
-                        <button class="btn btn-join">Let's Explore</button>
-                    </div>
-
-                    <div class="col-12 col-md-6 my-auto px-md-0 ">
-
-                        <div class="card w-100 mt-3 me-2 mt-lg-0"
-                            style=" min-height: 500px; background-image: url({{ asset('frontend/images/banner2.jpg') }}); background-size: cover; background-position: center;">
-
-                        </div>
-
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>
@@ -223,8 +232,8 @@
             }
 
             .image-product {
-                width: 500px;
-                height: 500px;
+                width: 300px;
+                height: 300px;
                 padding: 100px;
                 border-radius: 12px;
                 overflow: hidden;
@@ -236,8 +245,8 @@
             }
 
             .image-spin img {
-                width: 200px;
-                height: 200px;
+                width: 150px;
+                height: 150px;
                 animation: spin 7s infinite;
             }
 
@@ -246,7 +255,6 @@
                     transform: rotate(720deg);
                 }
             }
-
         </style>
         <div class="content container">
             <!-- Card Container -->
@@ -261,9 +269,9 @@
                         @endphp
                         <!-- Card Container 1 -->
                         <div class="headline justify-content-center align-items-center text-center w-100 ">
-                            Popular Resorts Close
+                            Popular Product
 
-                            <div class="image-spin">
+                            <div class="image-spin mt-2">
                                 <img src="{{ asset('frontend/images/set1@300x.png') }}" />
                             </div>
 

@@ -11,9 +11,9 @@
                     <h2 class="mt-8 mb-1 text-2xl font-semibold text-gray-700">
                         Dashboard
                     </h2>
-                    {{-- <p class="text-sm text-gray-400">
-                        Monthly Reports
-                    </p> --}}
+                    <p class="text-sm text-gray-400">
+                        Admin Dashboard
+                    </p>
                 </div>
                 <div class="col-span-4 text-right">
                     <div @click.away="open = false" class="relative z-10 hidden mt-5 lg:block" x-data="{ open: false }">
@@ -45,165 +45,193 @@
 
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="p-4 lg:col-span-7 md:col-span-12 md:pt-0">
-                    <div class="sm:grid sm:h-32 sm:grid-flow-row sm:gap-4 sm:grid-cols-3">
-                        <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
-                            <div>
+                    <div class="flex flex-col w-full">
+                        <div class="sm:grid sm:gap-4 sm:grid-cols-3">
+                            <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
                                 <div>
-                                    <img src="{{ asset('/assets/images/services-progress-icon.svg') }}" alt=""
-                                        class="w-8 h-8">
+                                    <div>
+                                        <img src="{{ asset('/assets/images/services-progress-icon.svg') }}" alt=""
+                                            class="w-8 h-8">
+                                    </div>
+
+                                    @php
+                                        $sukses = $order->where('status_transaksi', '=', 'Success');
+                                    @endphp
+
+                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($sukses) }}
+                                    </p>
+                                    <p class="text-sm text-left text-gray-500">
+                                        Transaction <br class="hidden lg:block">
+                                        Success
+                                    </p>
                                 </div>
-
-                                @php
-                                    $sukses = $order->where('status_transaksi', '=', 'Success');
-                                @endphp
-
-                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($sukses) }}</p>
-                                <p class="text-sm text-left text-gray-500">
-                                    Transaction <br class="hidden lg:block">
-                                    Success
-                                </p>
                             </div>
-                        </div>
-                        <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
-                            <div>
+                            <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
                                 <div>
-                                    <img src="{{ asset('/assets/images/services-completed-icon.svg') }}" alt=""
-                                        class="w-8 h-8">
+                                    <div>
+                                        <img src="{{ asset('/assets/images/services-completed-icon.svg') }}" alt=""
+                                            class="w-8 h-8">
+                                    </div>
+
+                                    @php
+                                        $pending1 = $order->where('status_transaksi', '=', 'Pending');
+                                        $pending2 = $order->where('status_transaksi', '=', 'Waiting');
+                                    @endphp
+
+                                    @if ($pending1 || $pending2)
+                                        <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
+                                            {{ count($pending1) + count($pending2) }}
+                                        </p>
+                                    @else
+                                        <p class="mt-2 text-2xl font-semibold text-left text-gray-800">0
+                                        </p>
+                                    @endif
+                                    <p class="text-sm text-left text-gray-500">
+                                        Transaction <br class="hidden lg:block">
+                                        Pending
+                                    </p>
                                 </div>
+                            </div>
+                            <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
+                                <div>
+                                    <div>
+                                        <img src="{{ asset('assets/images/expired.png') }}" alt="" class="w-8 h-8">
+                                    </div>
 
-                                @php
-                                    $pending1 = $order->where('status_transaksi', '=', 'Pending');
-                                    $pending2 = $order->where('status_transaksi', '=', 'Waiting');
-                                @endphp
+                                    @php
+                                        $expired = $order->where('status_transaksi', '=', 'Expired');
+                                    @endphp
 
-                                @if ($pending1 || $pending2)
                                     <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
-                                        {{ count($pending1) + count($pending2) }}
+                                        {{ count($expired) }}
                                     </p>
-                                @else
-                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">0
+                                    <p class="text-sm text-left text-gray-500">
+                                        Transaction <br class="hidden lg:block">
+                                        Expired
                                     </p>
-                                @endif
-                                <p class="text-sm text-left text-gray-500">
-                                    Transaction <br class="hidden lg:block">
-                                    Pending
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
-                            <div>
-                                <div>
-                                    <img src="{{ asset('assets/images/expired.png') }}" alt="" class="w-8 h-8">
                                 </div>
-
-                                @php
-                                    $expired = $order->where('status_transaksi', '=', 'Expired');
-                                @endphp
-
-                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
-                                    {{ count($expired) }}
-                                </p>
-                                <p class="text-sm text-left text-gray-500">
-                                    Transaction <br class="hidden lg:block">
-                                    Expired
-                                </p>
                             </div>
-                        </div>
-                        <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
-                            <div>
+                            <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
                                 <div>
-                                    <img src="{{ asset('assets/images/delivery.png') }}" alt="" class="w-8 h-8">
-                                </div>
+                                    <div>
+                                        <img src="{{ asset('assets/images/delivery.png') }}" alt=""
+                                            class="w-8 h-8">
+                                    </div>
 
-                                @php
-                                    $expired = $order->where('status_transaksi', '=', 'Sedang Dikirim');
-                                @endphp
+                                    @php
+                                        $expired = $order->where('status_transaksi', '=', 'Sedang Dikirim');
+                                    @endphp
 
-                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
-                                    {{ count($expired) }}
-                                </p>
-                                <p class="text-sm text-left text-gray-500">
-                                    Transaction Shipment
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
-                            <div>
-                                <div>
-                                    <img src="{{ asset('/assets/images/new-freelancer-icon.svg') }}" alt=""
-                                        class="w-8 h-8">
+                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
+                                        {{ count($expired) }}
+                                    </p>
+                                    <p class="text-sm text-left text-gray-500">
+                                        Transaction Shipment
+                                    </p>
                                 </div>
-                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
-                                    {{ count($countCustomer) }}
-                                </p>
-                                <p class="text-sm text-left text-gray-500">
-                                    Customers
-                                </p>
                             </div>
-                        </div>
-                        <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
-                            <div>
+                            <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
                                 <div>
-                                    <img src="{{ asset('assets/images/product.png') }}" alt="" class="w-8 h-8">
+                                    <div>
+                                        <img src="{{ asset('/assets/images/new-freelancer-icon.svg') }}" alt=""
+                                            class="w-8 h-8">
+                                    </div>
+                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
+                                        {{ count($countCustomer) }}
+                                    </p>
+                                    <p class="text-sm text-left text-gray-500">
+                                        Customers
+                                    </p>
                                 </div>
-                                <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
-                                    {{ count($products) }}
-                                </p>
-                                <p class="text-sm text-left text-gray-500">
-                                    Products
-                                </p>
+                            </div>
+                            <div class="flex flex-col justify-center px-4 py-4 mb-4 bg-white rounded-xl">
+                                <div>
+                                    <div>
+                                        <img src="{{ asset('assets/images/product.png') }}" alt=""
+                                            class="w-8 h-8">
+                                    </div>
+                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
+                                        {{ count($products) }}
+                                    </p>
+                                    <p class="text-sm text-left text-gray-500">
+                                        Products
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {{-- <div class="p-6 mt-8 bg-white rounded-xl">
-                        <div>
-                            <h2 class="mb-1 text-xl font-semibold">
-                                My Address
-                            </h2>
-                            <p class="text-sm text-gray-400">
-                                3 Total Address
-                            </p>
-                        </div>
-                        <table class="w-full mt-4" aria-label="Table">
-                            <thead>
-                                <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
-                                    <th class="py-4" scope="">Name</th>
-                                    <th class="py-4" scope="">Address</th>
-                                    <th class="py-4" scope="">Province</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white">
-                                <tr class="text-gray-700">
-                                    <td class="w-1/3 px-1 py-5">
-                                        <div class="flex items-center text-sm">
-                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded-full"
-                                                    src="https://randomuser.me/api/portraits/men/2.jpg" alt=""
-                                                    loading="lazy" />
-                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
+
+                        {{-- <h5 class="text-base font-medium">Latest Transactions</h5>
+                        <div class="px-6 py-2 mt-2 bg-white rounded-xl">
+                            <table class="w-full" aria-label="Table">
+                                <thead>
+                                    <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
+                                        <th class="py-4" scope="">Order Code</th>
+                                        <th class="py-4" scope="">Date Order</th>
+                                        <th class="py-4" scope="">Total Price</th>
+                                        <th class="py-4" scope="">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white">
+                                    @foreach ($orderData as $o)
+                                        <tr class="text-gray-700 border-b">
+                                            <td class="px-1 py-5 text-sm w-2/8">
+                                                <div class="flex items-center text-sm">
+                                                    <div>
+                                                        <p class="font-medium text-black">{{ $o->kode_order }}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <p class="font-medium text-black">Siri Leaf</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="w-2/4 px-1 py-5">
-                                        <div class="flex items-center text-sm">
-                                            <div>
-                                                <p class="font-medium text-black">
-                                                    Design WordPress E-Commerce Modules
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-1 py-5 text-xs text-green-500">
-                                        Kab Bandung
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> --}}
+                                            </td>
+                                            <td class="px-1 py-5 text-sm">
+                                                @php
+                                                    $date = date_create($o->date_order);
+                                                @endphp
+                                                {{ date_format($date, 'D, d/m/y') }}
+                                                <br>
+                                                {{ date_format($date, 'H:i:s') }}
+                                            </td>
+                                            <td class="px-1 py-5 text-sm">
+                                                @currency($o->totalCost)
+                                            </td>
+
+                                            @if ($o->status_transaksi == 'Pending')
+                                                <td class="px-1 py-5 text-sm text-red-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @elseif ($o->status_transaksi == 'Waiting')
+                                                <td class="px-1 py-5 text-sm text-purple-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @elseif ($o->status_transaksi == 'Sedang Dikirim')
+                                                <td class="px-1 py-5 text-sm text-blue-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @elseif ($o->status_transaksi == 'Telah Dikirim')
+                                                <td class="px-1 py-5 text-sm text-green-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @elseif ($o->status_transaksi == 'Pending')
+                                                <td class="px-1 py-5 text-sm text-red-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @elseif ($o->status_transaksi == 'Sedang Dikirim')
+                                                <td class="px-1 py-5 text-sm text-blue-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @elseif ($o->status_transaksi == 'Telah Dikirim')
+                                                <td class="px-1 py-5 text-sm text-pink-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @else
+                                                <td class="px-1 py-5 text-sm text-green-500 text-md">
+                                                    {{ $o->status_transaksi }}
+                                                </td>
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div> --}}
+                    </div>
                 </main>
                 <aside class="p-4 lg:col-span-5 md:col-span-12 md:pt-0">
                     <div
@@ -256,6 +284,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </aside>
             </div>
         </section>

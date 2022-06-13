@@ -53,7 +53,10 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="https://api.whatsapp.com/send?phone=6281320133735&text=Halo selamat pagi/siang/sore/malam"
+                                            <a href="https://api.whatsapp.com/send?phone=6281222331598&text=Greetings gorg' human. 
+You've reached Bertjorak chit-chat space. 
+
+Have anything in mind? Just simply ask us any of your curiosity."
                                                 target="_blank"
                                                 class="dropdown-hover d-flex align-items-center justify-content-center text-start text-decoration-none">
                                                 <img class=""
@@ -174,7 +177,10 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="https://api.whatsapp.com/send?phone=6281320133735&text=Halo selamat pagi/siang/sore/malam"
+                                <a href="https://api.whatsapp.com/send?phone=6281222331598&text=Greetings gorg' human. 
+You've reached Bertjorak chit-chat space. 
+
+Have anything in mind? Just simply ask us any of your curiosity."
                                     target="_blank"
                                     class="dropdown-hover d-flex align-items-center justify-content-center text-start text-decoration-none">
                                     <img class=""

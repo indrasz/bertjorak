@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', ' Cart')
+@section('title', ' About')
 
 @section('content')
 
@@ -140,16 +140,18 @@
               <img src="{{ asset('frontend/images/main-logo.png') }}" alt="logo" class="image-logo-about">
             </div>
             <div class="headline">
-              The free way to find the world's best remote talent
+              Stay Stunning and Positive
             </div>
             <div class="mt-3 header-description">
               <p class="text-center">
-                GetShayna is a 100% free resource for companies looking to find
-                remote talent across the globe. No fees, no markups, no middlemen.
+                Bertjorak is an everyday fashion brand with bright and pop colors, while also portraying the essence of quirkiness. Inspired by the diversity of Indonesia’s colors of its cultures, we express a variety of philosophies through different splash of eccentric colors with the intention to spread positive energy and youthfulness across all fashion savvy and people in Indonesia.
               </p>
             </div>
             <div class="d-block">
-              <a href="#" class="btn btn-join"> Contact Us </a>
+              <a href="https://api.whatsapp.com/send?phone=6281222331598&text=Greetings gorg' human. 
+You've reached Bertjorak chit-chat space. 
+
+Have anything in mind? Just simply ask us any of your curiosity." class="btn btn-join"> Contact Us </a>
 
             </div>
 

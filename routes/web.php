@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\DetailController;
+use App\Http\Controllers\Admin\ArticleController;
 
 // Frontend
 use App\Http\Controllers\Frontend\HomeController;
@@ -74,6 +75,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::get('laporan/download', [LaporanController::class, 'convertPDF']);
         Route::resource('laporan', LaporanController::class);
         Route::resource('profile', ProfileController::class);
+        Route::resource('article', ArticleController::class);
         Route::resource('product', ProductController::class)->middleware('is_admin');
         Route::resource('transaction', TransactionController::class)->only([
             'index', 'create', 'store', 'update', 'edit', 'destroy', 'show',

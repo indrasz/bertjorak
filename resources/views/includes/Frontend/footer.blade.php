@@ -23,64 +23,45 @@
                             fill="#9D3AFF" />
                     </svg> --}}
                     <h5 class="caption-font">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br class="d-sm-block d-none" />
-                        Viverra fermentum euismod erat vitae nunc phasellus.<br />
-                        Dui duis tortor, mattis phasellus ullamcorper etiam leo.
+                        Bertjorak is an everyday fashion brand with bright and pop colors, while also portraying the essence of quirkiness. Inspired by the diversity of Indonesia’s colors of its cultures, we express a variety of philosophies through different splash of eccentric colors with the intention to spread positive energy and youthfulness across all fashion savvy and people in Indonesia.
                     </h5>
                 </div>
                 <div class="right-col">
                     <div class="d-flex row gap-lg-0 gap-4">
-                        <div class="col-lg-4">
-                            <h5 class="title-font">Plans</h5>
-                            <nav class="list-unstyled list-footer d-grid gap-2">
-                                <li>
-                                    <a href="#" class="text-decoration-none">Student Solution</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-decoration-none">Teacher Solution</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-decoration-none">Pricing</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-decoration-none">Working NeoClass</a>
-                                </li>
-                            </nav>
-                        </div>
-                        <div class="col-lg-4">
-                            <h5 class="title-font">About Us</h5>
-                            <nav class="list-unstyled list-footer d-grid gap-2">
-                                <li>
-                                    <a href="#" class="text-decoration-none">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-decoration-none">Careers</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-decoration-none">Teams</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-decoration-none">Affiliate</a>
-                                </li>
-                            </nav>
-                        </div>
-                        <div class="col-lg-4">
-                            <h5 class="title-font">Support</h5>
-                            <nav class="list-unstyled list-footer d-grid gap-2">
-                                <li>
-                                    <a href="#" class="text-decoration-none">Contact Support</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-decoration-none">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-decoration-none">Site Feedback</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-decoration-none">Expert Help</a>
-                                </li>
-                            </nav>
-                        </div>
+                        <!--<div class="col-lg-4">-->
+                        <!--    <h5 class="title-font">About Us</h5>-->
+                        <!--    <nav class="list-unstyled list-footer d-grid gap-2">-->
+                        <!--        <li>-->
+                        <!--            <a href="#" class="text-decoration-none">Blog</a>-->
+                        <!--        </li>-->
+                        <!--        <li>-->
+                        <!--            <a href="#" class="text-decoration-none">Careers</a>-->
+                        <!--        </li>-->
+                        <!--        <li>-->
+                        <!--            <a href="#" class="text-decoration-none">Teams</a>-->
+                        <!--        </li>-->
+                        <!--        <li>-->
+                        <!--            <a href="#" class="text-decoration-none">Affiliate</a>-->
+                        <!--        </li>-->
+                        <!--    </nav>-->
+                        <!--</div>-->
+                        <!--<div class="col-lg-4">-->
+                        <!--    <h5 class="title-font">Support</h5>-->
+                        <!--    <nav class="list-unstyled list-footer d-grid gap-2">-->
+                        <!--        <li>-->
+                        <!--            <a href="#" class="text-decoration-none">Contact Support</a>-->
+                        <!--        </li>-->
+                        <!--        <li>-->
+                        <!--            <a href="#" class="text-decoration-none">FAQ</a>-->
+                        <!--        </li>-->
+                        <!--        <li>-->
+                        <!--            <a href="#" class="text-decoration-none">Site Feedback</a>-->
+                        <!--        </li>-->
+                        <!--        <li>-->
+                        <!--            <a href="#" class="text-decoration-none">Expert Help</a>-->
+                        <!--        </li>-->
+                        <!--    </nav>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </div>
@@ -91,7 +72,7 @@
                         @php
                             $year = date('Y');
                         @endphp
-                        <p>© {{ $year }} with Bertjorak. All rights reserved.</p>
+                        <b><p>© {{ $year }} with Bertjorak. All rights reserved.</p></b>
                     </nav>
                     <div class="d-flex footer-icon align-items-center mb-2 mb-md-0 gap-4">
                         <a href="">

@@ -79,6 +79,34 @@
         </ul>
 
         <ul>
+            {{-- Article Nav --}}
+            @if (Auth::user()->hasRole('admin'))
+                <li class="relative px-6 py-3">
+
+                    @if (request()->is('dashboard/article') || request()->is('dashboard/article/*') || request()->is('dashboard/*/article') || request()->is('dashboard/*/article/*'))
+                        <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
+                            aria-hidden="true"></span>
+
+                        <a class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 "
+                            href="{{ route('dashboard.article.index') }}">
+
+                            <!-- Active Icons -->
+                            <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABGklEQVRIie3UMU7DUBAE0GeDaOAECAk4ACk4CRQg0XEHKCggoqDnCukiUcBVAlQICRoOEEoQEAr/iB/rJ3acUMFIq7XH1ox31vr8oyYyXOIVgynrCz1sTzLYbSBcrl5KOA99a8qJU0hq5KU+C5IaiwnuBV1FtlXYxH6JO8IqjhXRgXM/WV5hoYY4tIzuIdbaIT3WHj7UW+xthflcsh+HnHo7yHGANUV8z9G7qR2MIGXQwVmJe8MpLnAf8a0mBp+hD5eWRdzdJLEUfnMHYw2Gv2gWKuZaEZ+F+4lIRXSI91CwFDg4MRpTpcEQbbMfdgPFedQN1+14gse6X1KBeLqH+MFyMJnHFAM8YaXsvoEb9GcQ7uMa640z+Hv4Bqv4hrnPeZdbAAAAAElFTkSuQmCC" />
+                            <span class="ml-4">Article</span>
+
+                        </a>
+                    @else
+                        <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800"
+                            href="{{ route('dashboard.article.index') }}">
+                            <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABU0lEQVRIie3VMUscURAH8F/OYJqAnYUIOTFgaSn4JaJNQhA1nyQGYqtfQa00Fop9ugip00YOUwiCVSxsRG8tdtbs7e1tzhc784fHPObNzH92/7Nv+Y8h8QybuESWsC6xEXX6CsMiDvAFvxIabOMdFnBUF/AxOhlJKC7ysqjTg1bF3iYSFHmt6sHzmuApvH1A8X2c/i3ok/wRYTU6GkbcW6xEXqPgZYJUZDjGXuzfUPPO/hFfsRT7Weo1mMT7EnkXuzjDMiYq8VUNegSvI/iAzxXfC6xjDdMlfxfnGkSuIyh8hUhZyfd6UKFBeGwNhiK4CVuMXdnXMXhMa1H3irYxGguuw0euw0ylmW/DEHTDtuTT0nenBLYaanXkYpen757gJOwcvjd11IBiAObD/uTPpLzED4xhBxeJJOPyq+a3/EO7Kh+2cRiHKT+dLHIP8CqxwaeIO8NWa1Vm7ugBAAAAAElFTkSuQmCC" />
+                            <span class="ml-4">Article</span>
+                        </a>
+                    @endif
+                </li>
+            @endif
+
             {{-- Profile Nav --}}
             <li class="relative px-6 py-3">
 
@@ -197,25 +225,22 @@
                                 aria-hidden="true"></span>
                             <!-- Active Icons -->
                             <img
-                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAACZ0lEQVRIibXU32sWZBQH8E8zGJEXKqaJNbfB1q5iCkFXokU/CAJBL9SLUMwCG4gyvZHS/gK90BsbQdBFmasgDBF1OhpaY2BTmzImOGwzdaWVYE57vXjOuz2+e7fmKx14OM8553nOec75nufwP9MTwWvwNg5gCZor9NeN4+UMP6CAg1gT+0rWfdTmjquCLwh+DnMqfD3cwF+5oliiASm91ajH7AqcF9A/VYAaDFbguEhL8Wup8smSfX0mt2FkGo4X4/USX2NUVU45Ddu0z+VR/0BPJtfEKkfNmBv7TrTgermDOQZXsHfqx47Ru1iGjfgFm9CIa/gCX0mgj9GA/+7xEdzN5Basw72Qc9tn2ePLBhiI1IvyDczDlsxejzshD6IOh7I770wW4DZeQjV2SL+7ATtxNc7sw7bszlZ8hNZMd5SJHdCNV7AcfdKnWYVdsebHud/xbHZvJb7Gv5luQWmAAt6U+roVt7AHl7AWH6IrztZG1kXqwQp0ZLr+ciX6DaPSVH0vdO8HX49vjGNSG7zYAMvwc1aiN8qVaDt6S3QHTKSZeFrCqCANyA68GPYvxdieEYrNUr13SyBfkDAYlTrjGRwLZ6/h87B9INX9tDQgj+C5qMRbaM8/2p/SJ5mKqiUsPpYAP4wNUgN8Ek5/xAvxyIbixSIG/xiv4WT7AvZL2AxJI+Y8/sYZ6W/0SV01hsFPkdbz+BbDkep30gheiO+zTIbRJGHQFcEuSu06JAHcxDgGnZFaL07gFM7GviteeDIut0kA1klDr1EaFy/jJl4NvgifPjQvHpGeksbBrDK2UbTj8mP4nx49ADvo0Ewaou1KAAAAAElFTkSuQmCC" />
-
-                            <span class="ml-4">Reports</span>
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABIklEQVRIie3VQSsFURQH8N+bJpFS2PkIL8qSZCcWvoNsrbGWndjbCEuU76Cs7CzICh9AUain9MJiZjT03rvTc9/Ov04z/c+c859z7r3n8o8AaqX3TSxGyvuGBTTSEnmM60gCr2hAWeAN95EE3tGXPw3iDJ+R7QGzsNaD5IVdpaiXStvBI0ax/udGUU/83EkFWnHdIIFD1co9woys4lW8VIyrJLDb4u+m0Ywh8ISRNi04CAkknRqY4zQXaYX9UHAVgbsOvtsYAv0dfAMxBKa69H0jtMgfbRIluAzEVlrkGvYw9iv5NiZDwWnogxzjuJHtqGfM51wlVD3JIdvCsGyOnRd8KrsHYmAFc7L2TeRcg+ya7NW4Pimm5hKWMRSpmiYusPEFEl++fmXudZkAAAAASUVORK5CYII=" />
+                            <span class="ml-4">Report</span>
                         </a>
                     @else
                         <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800"
                             href="{{ route('dashboard.laporan.index') }}">
-
                             <img
-                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAACcklEQVRIibXVXWjXZRQH8M98DdF0GssE3zO1XFFmkIiI3uiFd06vTBCKhqgY+HIVBkPC6mIIelGQN6HohV2FojK9URhzIr4MjenabEOhRtpFGWUX5/zd31/7O53twMNznvM7z/k+5/XHEFNV7i+jEQsx7Dns/YavcaD44RC2YApOYT2qB7GmoRnvlwyPyP1dfIjf0YRX0DsID3pxGvNwvhxgGP7BcmzDQXw0CIBJWIulJcGIgsLf+Cb5Wc9ofAl+wjL8XAngbK4STcfwAQz/hS7sRnfyj6gIUE5TcBgjBwD4AyvzYRXz1o4xAxgaiPr1tFjzm/HrU6zLooeqsQ93RXhu4zOM/j88mIBLaMCLmIEaUSQnFULbH0ANxpadF4sqmZrnr/B58mtxHyvyfBT1TwIYh060iPJbjZvYhVGp05mPgCtYJ0JMdHJTJYDX0YpPsQbXxIyZX/DwF32zbCM6sDXPk3G1P4AaPMR2zMR4vIQ3Uu9g2Z3LmJP8d9gjQkOU7feVPKgV/dGIujTyQb62u+zOJhxL+UL8KIbdKFxIkH5H85f6GrAKr4r2L9KB1DuVXq7E22KansNx/tvJtXhLDLoFeAF/Ym7KxuAdkaMjmJ0PmJD6V0SuxmIvdpSS1J7G3yu59gRqwgncEWO9S/RAuwjndbwpwlTK0WM5qC4zNjH3qoKcqJJ9ov734h6+EBX3LX6gLwcd4l+wBD0iaXUpnyHK72oZINErLWKatuIBLoqQXijomp9etOETEctborGa81sDzuDjvHNX1HuPKO/bee7Ea2nrMarHzuR3Y0Py+7EqvT2MRSnfhRsJXlxt4r8+9PQvQWeSzkV5g9YAAAAASUVORK5CYII=" />
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABhElEQVRIie3Vv0uVURzH8ddzewY1LGxNJIkbUUPQaEulgzSEtEVzWxFStERLLUGD4FpBguAWKP5Y3PwDooYiBCGjJUga4kmltOGcC0+32z2X7jP6gQOH76/3+R7ODw6UUFaaz6FeUd11XIe8ZJzGYEWAT41JA3AIW9itCPA91vyVYRgrGMJ2RYAebGI8wyx2cBN7FQFqeIG8hjNYRC8e4wludAnYwwLO5sJJ2u8g6TjG4nwVnxPx+7G215hIBN9GgbU4CtxK5EzE2knANXzDpZJtNNra5XUEyPAhdtCsO3jvz8v6F6DWZgVwGifxvIXvmXDzT7UrkAKcwEf8aOErom+4G8AO+tv4j0hczhTgDY4J29SsOgbwthvAV8zjUZM9i7ZXwhv23wCYxGW8FFZdxwwu4m4quRPAJi4IW/UujqMYUXqW/6U8FRC1gaul+J8tYmZxRTgY58qAAn0dgloVbugepoRT9QWHUeRYxkPhg6jqPziPB5jJhC7uC+31VATYxhKe/gY7CEzT+6WgsAAAAABJRU5ErkJggg==" />
 
-                            <span class="ml-4">Reports</span>
+                            <span class="ml-4">Report</span>
                         </a>
                     @endif
 
 
                 </li>
             @endif
-
 
             {{-- Transaction Nav --}}
             <li class="relative px-6 py-3">
@@ -254,10 +279,6 @@
                                 stroke-linecap="round" />
                         </svg>
                         <span class="ml-4">Transaction</span>
-                        {{-- <span class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">
-                            {{ auth()->user()->order_freelancer()->count() }}
-                        </span> --}}
-
                     </a>
                 @endif
             </li>

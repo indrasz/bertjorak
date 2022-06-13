@@ -17,7 +17,7 @@
         <main class="container">
             <div class="d-flex flex-column justify-content-center align-items-center">
                 <div class="headline">
-                    The free way to find the world's best remote talent
+                    The New Perspective of You
                 </div>
                 <div class="mt-3 header-description">
                     <p class="text-center">

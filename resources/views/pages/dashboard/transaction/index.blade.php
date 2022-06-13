@@ -47,7 +47,7 @@
                                     {{-- @foreach ($cartData as $a)
                                             {{ $a->title }}
                                         @endforeach --}}
-                                    @foreach ($orderData as $o)
+                                    @foreach ($orderData->first() as $o)
                                         <tr class="text-gray-700 border-b">
                                             <td class="px-1 py-5 text-sm w-2/8">
                                                 <div class="flex items-center text-sm">

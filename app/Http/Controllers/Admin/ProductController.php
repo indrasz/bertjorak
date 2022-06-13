@@ -93,7 +93,7 @@ class ProductController extends Controller
         if ($file->save()) {
             return redirect()->route('dashboard.product.index')->withToastSuccess('Product Created Successfully!');
         } else {
-            return redirect()->route('dashboard.product.index')->withToastError('Product failed Created');
+            return redirect()->back()->withToastError('Product failed Created');
         }
     }
 
@@ -126,8 +126,6 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //$data = Product::findOrFail($id);
-
         $this->validate($request, [
             'photos.*' => 'mimes:png,jpg,jpeg',
 
