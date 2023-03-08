@@ -1,5 +1,5 @@
 <section class="h-100 w-100" style="box-sizing: border-box; background-color: #fcfcff">
-    <div class="header-5-1 container  mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
+    <div class="header-5-1 container mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
         <nav class="navbar navbar-expand-lg navbar-light">
             <a href="/">
                 <img style="margin-right: 0.75rem" src="{{ asset('frontend/images/main-logo.png') }}" alt="main-logo"

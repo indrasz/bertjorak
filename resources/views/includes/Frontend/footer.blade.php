@@ -1,6 +1,6 @@
 <section class="h-100 w-100 bg-white" style="box-sizing: border-box">
     <footer class="footer-3-2 h-100" style="font-family: 'Poppins', sans-serif">
-        <div class="container-xxl mx-auto main">
+        <div class="container-xxxl mx-auto main">
             <div class="d-flex flex-lg-row flex-column" style="margin-bottom: 5rem">
                 <div class="left-col">
                     <a href="/">
@@ -67,12 +67,12 @@
             </div>
             <div class="mx-auto">
                 <div
-                    class="container-xxl p-0 mx-auto d-flex flex-column-reverse flex-lg-row justify-content-between align-items-center gap-lg-0 gap-3">
+                    class="container-xxxl p-0 mx-auto d-flex flex-column-reverse flex-lg-row justify-content-between align-items-center gap-lg-0 gap-3">
                     <nav class="text-lg-start text-center credit-font">
                         @php
                             $year = date('Y');
                         @endphp
-                        <b><p>© {{ $year }} with Bertjorak. All rights reserved.</p></b>
+                        <p>© {{ $year }} with Bertjorak. All rights reserved.</p>
                     </nav>
                     <div class="d-flex footer-icon align-items-center mb-2 mb-md-0 gap-4">
                         <a href="">

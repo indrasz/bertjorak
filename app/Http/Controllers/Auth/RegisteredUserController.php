@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
         ]);
 
         // Uncomment this to register for admin
-        //$user->attachRole('admin');
+        // $user->attachRole('admin');
 
         // Uncomment this to register for buyer
         $user->attachRole('buyer');

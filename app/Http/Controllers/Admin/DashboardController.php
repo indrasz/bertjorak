@@ -21,7 +21,7 @@ class DashboardController extends Controller
                 $q->where('name', 'buyer');
             })->get();
 
-            $orderData = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('users', 'orders.id_buyer', '=', 'users.id')->first()->get();
+            $orderData = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('users', 'orders.id_buyer', '=', 'users.id')->get();
 
             return view('pages.dashboard.index')->with('countCustomer', $countCustomer)->with('order', $order)->with('products', $products)->with('orderData', $orderData);
         } elseif (Auth::user()->hasRole('buyer')) {
