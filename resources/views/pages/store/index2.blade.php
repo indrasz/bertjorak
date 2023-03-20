@@ -6,25 +6,15 @@
 
     {{-- Navigation bar --}}
     @include('includes.Frontend.navbar2')
+`
 
     <section class="header">
+
         <div class="content container px-md-4">
-            <style>
-                body .header {
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                    height: 100vh;
-                    background-image: url('./frontend/images/compro.png');
-                }
-            </style>
             @if (Auth::user())
-                @if (Auth::user()->type_addres == null &&
-                        Auth::user()->id_province == null &&
-                        Auth::user()->id_city == null &&
-                        Auth::user()->detail_address == null &&
-                        Auth::user()->zipcode == null)
-                    <div class="container" role="alert">
+                @if (Auth::user()->type_addres == null && Auth::user()->id_province == null && Auth::user()->id_city == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
+                    <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                        role="alert">
                         <span class="font-medium">Peringatan!</span> Anda belum memasukkan alamat, harap mengisi alamat
                         terlebih
                         dahulu <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
@@ -33,12 +23,12 @@
                 @endif
             @endif
 
-            {{-- <div class="row text-center text-md-start">
+            <div class="row text-center text-md-start">
                 <div class="carousel"
                     data-flickity='{ "cellAlign": "left", "contain": false, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": false, "pageDots" : false, "autoPlay": 1500, "fade" : true}'>
                     @foreach ($articles as $at)
                         <div class="col-12 col-md-6 my-auto px-md-4 px-2">
-                            Logo Header
+                            {{-- Logo Header --}}
                             @if ($at->logo_header != null)
                                 <div class="headline">
                                     <img src="{{ asset('/storage/articles/logo/' . json_decode($at->logo_header, true)) }}"
@@ -46,7 +36,7 @@
                                 </div>
                             @endif
 
-                            Title Header
+                            {{-- Title Header --}}
                             @if ($at->title_header != null)
                                 <div class="headline">
                                     {{ $at->title_header }}
@@ -71,7 +61,7 @@
                                 style=" min-height: 500px; background-image: url('{{ asset('/storage/articles/images/' . $getImage) }}'); background-size: cover; ">
                             </div>
                         </div>
-                    @endforeach --}}
+                    @endforeach
 
                     {{-- <div class="col-12 col-md-6 my-auto px-md-4 px-2">
                         <div class="headline">
@@ -96,8 +86,8 @@
 
                     </div> --}}
 
-                {{-- </div> --}}
-            {{-- </div> --}}
+                </div>
+            </div>
     </section>
 
     <section class="resort">

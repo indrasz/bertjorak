@@ -5,9 +5,12 @@
 @section('content')
 
     {{-- Navigation bar --}}
-    @include('includes.Frontend.navbar')
+    @include('includes.Frontend.navbar2')
 
     <style>
+        .related-product {
+            padding-top: 64px;
+        }
         .card-related-carousel:hover {
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             transition: 1s;

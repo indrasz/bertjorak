@@ -64,7 +64,7 @@ Have anything in mind? Just simply ask us any of your curiosity."
                                                     alt="" />
                                                 <div class="flex-grow-1 ps-4">
                                                     <h2 class="icon-item-title">
-                                                        Ask your quesaations
+                                                        Ask your questions
                                                     </h2>
                                                     <p class="icon-item-caption" style="margin-bottom: 0">
                                                         Ask us about a complaint

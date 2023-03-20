@@ -64,7 +64,8 @@
 
                                         {{-- Title Headline --}}
                                         <div class="col-span-6">
-                                            <label for="title" class="block mb-3 font-medium text-gray-700 text-md">Headline
+                                            <label for="title"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Headline
                                                 Title</label>
 
                                             <input placeholder="Headline your article" maxlength="50" type="text"
@@ -84,7 +85,8 @@
 
                                         {{-- Headline Logo --}}
                                         <div class="col-span-6">
-                                            <label for="logo" class="block mb-3 font-medium text-gray-700 text-md">Headline
+                                            <label for="logo"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Headline
                                                 Logo
                                             </label>
 
@@ -104,8 +106,13 @@
                                             <label for="desc"
                                                 class="block mb-3 font-medium text-gray-700 text-md">Description</label>
                                             <textarea name="desc" id="desc" placeholder="Description of article" cols="30" rows="10"
+                                                maxlength="300"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('desc') }}"></textarea>
+                                            <div id="the-count2" style="float: right; padding-top: 0.5em;">
+                                                <span id="current2">0</span>
+                                                <span id="maximum2">/ 275</span>
+                                            </div>
 
                                             @if ($errors->has('desc'))
                                                 <p class="text-red-500 mb-3 text-sm">{{ $errors->first('desc') }}</p>
@@ -159,6 +166,19 @@
                 current = $('#current'),
                 maximum = $('#maximum'),
                 theCount = $('#the-count');
+
+            current.text(characterCount);
+        });
+    </script>
+
+    <script type="text/javascript">
+        // Count Char
+        $('#desc').keyup(function() {
+
+            var characterCount = $(this).val().length,
+                current = $('#current2'),
+                maximum = $('#maximum2'),
+                theCount = $('#the-count2');
 
             current.text(characterCount);
         });
