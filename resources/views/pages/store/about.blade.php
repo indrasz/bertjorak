@@ -5,7 +5,7 @@
 @section('content')
 
     {{-- Navigation bar --}}
-    @include('includes.Frontend.navbar')
+    @include('includes.Frontend.navbar2')
 
     <section class="shayna-header position-relative overflow-hidden">
         <style>

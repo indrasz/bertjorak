@@ -15,14 +15,14 @@
 <body>
     {{-- nav items --}}
     <header>
-        <div class="navbar-brand absolute">
+        <a class="navbar-brand absolute" href="/" to="/">
             <img src="{{ asset('frontend/images/main-logo.png') }}" class="logo-light img-fluid" width="100" />
             <img src="{{ asset('frontend/images/dark-logo.png') }}" class="logo-dark img-fluid" width="100" />
-        </div>
+        </a>
 
         <ul class="navbar">
             <li class="nav-item">
-                <a href="/" class="nav-link active">
+                <a href="/" class="nav-link">
                     Home
                 </a>
             </li>
@@ -106,13 +106,12 @@
             @endauth
         </div>
     </header>
-
-
     {{-- js link --}}
-
     <script type="text/javascript" src="{{ asset('js/navbar.js') }}"></script>
 
 </body>
+
+
 
 </html>
 

@@ -47,7 +47,13 @@ header.sticky .navbar-brand .logo-light {
     display: block;
 }
 
+header .navbar-brand {
+    min-width: 70px;
+}
 
+header.sticky .navbar-brand {
+    min-width: 70px;
+}
 
 header.sticky {
     padding: 16px 7.5%;
@@ -77,16 +83,15 @@ ul {
     transition: all .50s ease;
 }
 
-.navbar .nav-item .nav-link {
+ul.navbar li.nav-item a.nav-link {
     color: var(--text-color);
 }
 
-
-.navbar .nav-item .nav-link:hover {
+ul.navbar li.nav-item a.nav-link:hover {
     color: var(--secondary-color);
 }
 
-.navbar .nav-item .nav-link.active {
+ul.navbar li.nav-item a.nav-link.active {
     color: var(--secondary-color);
 }
 
