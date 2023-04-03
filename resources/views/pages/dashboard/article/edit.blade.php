@@ -64,13 +64,13 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <input placeholder="Keunggulan 3" type="file" accept="image/*" name="photos"
-                                                    id="photos" autocomplete="off"
+                                                <input placeholder="Keunggulan 3" type="file" accept="image/*"
+                                                    name="photos" id="photos" autocomplete="off"
                                                     class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             </div>
 
                                             {{-- Title Headline --}}
-                                            <div class="col-span-6">
+                                            {{-- <div class="col-span-6">
                                                 <label for="title"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Headline
                                                     Title</label>
@@ -92,10 +92,10 @@
                                                     <p class="text-red-500 mb-3 text-sm">{{ $errors->first('title') }}</p>
                                                 @endif
 
-                                            </div>
+                                            </div> --}}
 
                                             {{-- Headline Logo --}}
-                                            <div class="col-span-6">
+                                            {{-- <div class="col-span-6">
                                                 <label for="logo"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Headline
                                                     Logo
@@ -113,13 +113,13 @@
                                                 <input placeholder="Keunggulan 3" type="file" accept="image/*" name="logo"
                                                     id="imgInp" autocomplete="off"
                                                     class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                            </div>
+                                            </div> --}}
 
-                                            <div class="col-span-6">
+                                            {{-- <div class="col-span-6">
                                                 <label for="desc"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Description</label>
-                                                <textarea name="desc" id="desc" @if ($a->desc == null) placeholder="Description of product" @endif cols="30"
-                                                    rows="10"
+                                                <textarea name="desc" id="desc" @if ($a->desc == null) placeholder="Description of product" @endif
+                                                    cols="30" rows="10"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
 @if ($a->desc != null)
 {{ $a->desc }}
@@ -130,7 +130,7 @@
                                                     <p class="text-red-500 mb-3 text-sm">{{ $errors->first('desc') }}</p>
                                                 @endif
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         {{-- <div class="flex mt-6">
                 <label class="flex items-center">
@@ -170,7 +170,7 @@
 @push('after-script')
     <script src="{{ url('https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}"></script>
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         // Count Char
         $('#headline').keyup(function() {
 
@@ -181,7 +181,7 @@
 
             current.text(characterCount);
         });
-    </script>
+    </script> --}}
 
     <script type="text/javascript">
         imgInp.onchange = evt => {
@@ -191,11 +191,11 @@
             }
         };
 
-        photos.onchange = evt => {
-            const [file] = photos.files
-            if (file) {
-                output.src = URL.createObjectURL(file)
-            }
-        };
+        // photos.onchange = evt => {
+        //     const [file] = photos.files
+        //     if (file) {
+        //         output.src = URL.createObjectURL(file)
+        //     }
+        // };
     </script>
 @endpush

@@ -62,7 +62,7 @@
                                                 class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                         </div>
 
-                                        {{-- Title Headline --}}
+                                        {{-- Title Headline 
                                         <div class="col-span-6">
                                             <label for="title"
                                                 class="block mb-3 font-medium text-gray-700 text-md">Headline
@@ -81,9 +81,9 @@
                                                 <p class="text-red-500 mb-3 text-sm">{{ $errors->first('title') }}</p>
                                             @endif
 
-                                        </div>
+                                        </div> --}}
 
-                                        {{-- Headline Logo --}}
+                                        {{-- Headline Logo 
                                         <div class="col-span-6">
                                             <label for="logo"
                                                 class="block mb-3 font-medium text-gray-700 text-md">Headline
@@ -100,9 +100,9 @@
                                             <input placeholder="Keunggulan 3" type="file" accept="image/*" name="logo"
                                                 id="imgInp" autocomplete="off"
                                                 class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                        </div>
+                                        </div>--}}
 
-                                        <div class="col-span-6">
+                                        {{-- <div class="col-span-6">
                                             <label for="desc"
                                                 class="block mb-3 font-medium text-gray-700 text-md">Description</label>
                                             <textarea name="desc" id="desc" placeholder="Description of article" cols="30" rows="10"
@@ -117,7 +117,7 @@
                                             @if ($errors->has('desc'))
                                                 <p class="text-red-500 mb-3 text-sm">{{ $errors->first('desc') }}</p>
                                             @endif
-                                        </div>
+                                        </div> --}}
                                     </div>
 
                                     {{-- <div class="flex mt-6">
@@ -158,9 +158,9 @@
 @push('after-script')
     <script src="{{ url('https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}"></script>
 
-    <script type="text/javascript">
-        // Count Char
-        $('#headline').keyup(function() {
+    {{-- <script type="text/javascript"> --}}
+        {{-- // Count Char --}}
+        {{-- $('#headline').keyup(function() {
 
             var characterCount = $(this).val().length,
                 current = $('#current'),
@@ -169,9 +169,9 @@
 
             current.text(characterCount);
         });
-    </script>
+    </script> --}}
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         // Count Char
         $('#desc').keyup(function() {
 
@@ -182,7 +182,7 @@
 
             current.text(characterCount);
         });
-    </script>
+    </script> --}}
 
     <script type="text/javascript">
         imgInp.onchange = evt => {
@@ -192,11 +192,11 @@
             }
         };
 
-        photos.onchange = evt => {
-            const [file] = photos.files
-            if (file) {
-                output.src = URL.createObjectURL(file)
-            }
-        };
+        // photos.onchange = evt => {
+        //     const [file] = photos.files
+        //     if (file) {
+        //         output.src = URL.createObjectURL(file)
+        //     }
+        // };
     </script>
 @endpush

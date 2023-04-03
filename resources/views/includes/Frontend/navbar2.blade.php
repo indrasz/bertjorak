@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Navbar</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend/style/navbar_style.css') }}">
 
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -38,7 +37,7 @@
             </li>
         </ul>
 
-        <div class="main">
+        <div class="right-nav-item">
             @auth
                 {{-- Buyer --}}
                 @if (Auth::user()->hasRole('buyer'))
@@ -97,11 +96,19 @@
                     </div>
                     <div class="bx bx-menu" id="menu-icon"></div>
                     {{-- Admin --}}
+                @else
+                    <a href="{{ route('dashboard.index') }}">
+                        <button type="button" class="btn-dashboard">
+                            Dashboard
+                        </button>
+                    </a>
+                    <div class="bx bx-menu" id="menu-icon"></div>
                 @endif
                 {{-- Belum Login --}}
             @else
-                <a href="/login" class="nav-link">Login</a>
-                <a href="/register" class="nav-link">Register</a>
+                <a href="/login" class='bx bxs-user-account' id="user-account-icon"></a>
+                <a href="/login" class="btn-login">Login</a>
+                <a href="/register" class="btn-register">Register</a>
                 <div class="bx bx-menu" id="menu-icon"></div>
             @endauth
         </div>
@@ -114,45 +121,6 @@
 
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

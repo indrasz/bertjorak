@@ -70,16 +70,9 @@ ul {
     justify-content: space-between;
 }
 
-
-.navbar {
-    display: flex; 
-}
-
 .navbar a {
     color: var(--text-color);
     font-size: 1rem;
-    padding: 8px 0;
-    margin: 0px 16px;
     transition: all .50s ease;
 }
 
@@ -96,31 +89,102 @@ ul.navbar li.nav-item a.nav-link.active {
 }
 
 
-.main {
+.right-nav-item {
     display: flex;
     align-items: center;
 }
 
-.main a{
-    padding: 8px 0;
-    margin-right: 16px;
-    margin-left: 16px;
+.right-nav-item a{
+    padding: 8px 8px;
+    margin-right: 8px;
+    margin-left: 8px;
     color: var(--text-color);
     font-size: 1rem;
     font-weight: 500 16px/1.5rem;
     transition: all .50s ease;
 }
 
-.main .nav-link:hover {
+.nav-link:hover {
     color: var(--secondary-color);
 }
 
-.main .nav-link {
+.right-nav-item .btn-register {
+    font: 500 12px/1.5rem Poppins, sans-serif;
     color: var(--text-color);
+    border: 1px solid var(--text-color);
+    border-radius: 999px;
+    padding: 0.75rem 3rem;
+        -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+    box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+    text-decoration: none;
 }
 
+.right-nav-item a .btn-dashboard {
+    font: 500 12px/1.5rem Poppins, sans-serif;
+    color: var(--text-color);
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+    border-radius: 999px;
+    padding: 0.75rem 3rem;
+        -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+    box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+    text-decoration: none;
+    transition: .5s;
+}
+
+.right-nav-item a .btn-dashboard:hover {
+    color: #FFFFFF;
+    border: 1px solid var(--secondary-color);
+    background-color: var(--secondary-color);
+        -webkit-box-shadow: 0px 20px 40px rgba(180, 81, 226, 0.18);
+    box-shadow: 0px 20px 40px rgba(182, 84, 228, 0.18);
+}
+
+
+.right-nav-item .btn-register:hover {
+    color: #FFFFFF;
+    border: 1px solid var(--secondary-color);
+    background-color: var(--secondary-color);
+        -webkit-box-shadow: 0px 20px 40px rgba(180, 81, 226, 0.18);
+    box-shadow: 0px 20px 40px rgba(182, 84, 228, 0.18);
+}
+
+.right-nav-item .btn-login {
+    font: 500 12px/1.5rem Poppins, sans-serif;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    border-radius: 999px;
+    padding: 0.75rem 3rem;
+        -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+    box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+    text-decoration: none;
+}
+
+.right-nav-item .btn-login:hover {
+    color: #FFFFFF;
+    border: 1px solid var(--secondary-color);
+    background-color: var(--secondary-color);
+        -webkit-box-shadow: 0px 20px 40px rgba(180, 81, 226, 0.18);
+    box-shadow: 0px 20px 40px rgba(182, 84, 228, 0.18);
+}
+
+#user-account-icon {
+    opacity: 90%;
+    font-size: 30px;
+    color : var(--text-color);
+    cursor: pointer;
+    z-index: 10001;
+    display: none;
+    text-decoration: none;
+}
+
+#user-account-icon:hover {
+    color: var(--secondary-color);
+}
+
+
 #menu-icon {
-    font-size: 35px;
+    font-size: 30px;
     color : var(--text-color);
     cursor: pointer;
     z-index: 10001;
@@ -130,8 +194,12 @@ ul.navbar li.nav-item a.nav-link.active {
 
 @media screen and (max-width: 1280px) {
     header {
-        padding: 16px 7.5%;
+        padding: 8px 7.5%;
         transition: .2s;
+    }
+
+    header.sticky {
+        padding: 8px 7.5%;
     }
 
     .navbar a {
@@ -142,6 +210,15 @@ ul.navbar li.nav-item a.nav-link.active {
 }
 
 @media screen and (max-width: 1090px) {
+    header {
+        padding: 8px 7.5%;
+    }
+    header.sticky {
+        padding: 8px 7.5%;
+    }
+    #user-account-icon {
+        display: block;
+    }
     #menu-icon {
         display: block;
     }
@@ -179,5 +256,14 @@ ul.navbar li.nav-item a.nav-link.active {
     .navbar.open {
         right: 2%;
     }
+
+    .right-nav-item .btn-register {
+        display: none;
+    }
+
+    .right-nav-item  .btn-login {
+        display: none;
+    }
 }
+
     

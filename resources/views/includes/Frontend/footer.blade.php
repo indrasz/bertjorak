@@ -23,7 +23,11 @@
                             fill="#9D3AFF" />
                     </svg> --}}
                     <h5 class="caption-font">
-                        Bertjorak is an everyday fashion brand with bright and pop colors, while also portraying the essence of quirkiness. Inspired by the diversity of Indonesia’s colors of its cultures, we express a variety of philosophies through different splash of eccentric colors with the intention to spread positive energy and youthfulness across all fashion savvy and people in Indonesia.
+                        Bertjorak is an everyday fashion brand with bright and pop colors, while also portraying the
+                        essence of quirkiness. Inspired by the diversity of Indonesia’s colors of its cultures, we
+                        express a variety of philosophies through different splash of eccentric colors with the
+                        intention to spread positive energy and youthfulness across all fashion savvy and people in
+                        Indonesia.
                     </h5>
                 </div>
                 <div class="right-col">
@@ -67,7 +71,7 @@
             </div>
             <div class="mx-auto">
                 <div
-                    class="container-xxxl p-0 mx-auto d-flex flex-column-reverse flex-lg-row justify-content-between align-items-center gap-lg-0 gap-3">
+                    class="container-xxl p-0 mx-auto d-flex flex-column-reverse flex-lg-row justify-content-between align-items-center gap-lg-0 gap-3">
                     <nav class="text-lg-start text-center credit-font">
                         @php
                             $year = date('Y');
@@ -75,7 +79,7 @@
                         <p>© {{ $year }} with Bertjorak. All rights reserved.</p>
                     </nav>
                     <div class="d-flex footer-icon align-items-center mb-2 mb-md-0 gap-4">
-                        <a href="">
+                        <a href="https://www.linkedin.com/company/bertjorak/" target="_blank">
                             <svg class="icon-fill" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -83,31 +87,15 @@
                                     fill="#121212" />
                             </svg>
                         </a>
-                        <a href="">
-                            <svg class="icon-fill" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
+                        <a href="https://vt.tiktok.com/ZSdW8JTew/" target="_blank">
+                            <svg class="icon-fill" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20"
+                                height="20" viewBox="0 0 50 50" style=" fill:#undefined;">
                                 <path
-                                    d="M17.4167 1.66667H2.58332C2.34021 1.66667 2.10705 1.76325 1.93514 1.93516C1.76323 2.10707 1.66666 2.34022 1.66666 2.58334V17.4167C1.66666 17.5371 1.69037 17.6562 1.73643 17.7675C1.7825 17.8787 1.85002 17.9797 1.93514 18.0649C2.02026 18.15 2.12131 18.2175 2.23253 18.2636C2.34375 18.3096 2.46294 18.3333 2.58332 18.3333H10.5667V11.875H8.39999V9.37501H10.5667V7.50001C10.5218 7.0598 10.5737 6.61511 10.7189 6.19712C10.8641 5.77913 11.099 5.39796 11.407 5.08035C11.7151 4.76274 12.089 4.51637 12.5023 4.35854C12.9157 4.2007 13.3586 4.13522 13.8 4.16667C14.4486 4.16268 15.0969 4.19607 15.7417 4.26667V6.51667H14.4167C13.3667 6.51667 13.1667 7.01667 13.1667 7.74167V9.35001H15.6667L15.3417 11.85H13.1667V18.3333H17.4167C17.537 18.3333 17.6562 18.3096 17.7675 18.2636C17.8787 18.2175 17.9797 18.15 18.0648 18.0649C18.15 17.9797 18.2175 17.8787 18.2635 17.7675C18.3096 17.6562 18.3333 17.5371 18.3333 17.4167V2.58334C18.3333 2.46296 18.3096 2.34376 18.2635 2.23255C18.2175 2.12133 18.15 2.02028 18.0648 1.93516C17.9797 1.85004 17.8787 1.78252 17.7675 1.73645C17.6562 1.69038 17.537 1.66667 17.4167 1.66667Z"
-                                    fill="#121212" />
+                                    d="M41,4H9C6.243,4,4,6.243,4,9v32c0,2.757,2.243,5,5,5h32c2.757,0,5-2.243,5-5V9C46,6.243,43.757,4,41,4z M37.006,22.323 c-0.227,0.021-0.457,0.035-0.69,0.035c-2.623,0-4.928-1.349-6.269-3.388c0,5.349,0,11.435,0,11.537c0,4.709-3.818,8.527-8.527,8.527 s-8.527-3.818-8.527-8.527s3.818-8.527,8.527-8.527c0.178,0,0.352,0.016,0.527,0.027v4.202c-0.175-0.021-0.347-0.053-0.527-0.053 c-2.404,0-4.352,1.948-4.352,4.352s1.948,4.352,4.352,4.352s4.527-1.894,4.527-4.298c0-0.095,0.042-19.594,0.042-19.594h4.016 c0.378,3.591,3.277,6.425,6.901,6.685V22.323z">
+                                </path>
                             </svg>
                         </a>
-                        <a href="">
-                            <svg class="icon-stroke" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0-footer-3-2)">
-                                    <path
-                                        d="M19.1667 2.5C18.3686 3.0629 17.4851 3.49343 16.55 3.775C16.0481 3.19793 15.3811 2.78891 14.6392 2.60327C13.8973 2.41764 13.1162 2.46433 12.4017 2.73705C11.6872 3.00976 11.0737 3.49534 10.6441 4.1281C10.2146 4.76086 9.98974 5.51028 9.99999 6.275V7.10834C8.53552 7.14631 7.08439 6.82151 5.77584 6.16287C4.46728 5.50424 3.34193 4.5322 2.49999 3.33334C2.49999 3.33334 -0.833338 10.8333 6.66666 14.1667C4.95043 15.3316 2.90596 15.9158 0.833328 15.8333C8.33333 20 17.5 15.8333 17.5 6.25C17.4992 6.01788 17.4769 5.78633 17.4333 5.55834C18.2838 4.71958 18.884 3.6606 19.1667 2.5V2.5Z"
-                                        stroke="#121212" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0-footer-3-2">
-                                        <rect width="20" height="20" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </a>
-                        <a href="">
+                        <a href="https://www.instagram.com/bertjorak" target="_blank">
                             <svg class="icon-stroke" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path

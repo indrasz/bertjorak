@@ -406,10 +406,6 @@ body .header nav .started {
     }
 }
 
-body .header .content {
-    padding-bottom: 60px;
-}
-
 body .header .content .headline {
     font-style: normal;
     font-weight: 400;

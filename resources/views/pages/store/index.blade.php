@@ -8,96 +8,148 @@
     @include('includes.Frontend.navbar2')
 
     <section class="header">
-        <div class="content container px-md-4">
+        <div class="cover-wrapper">
             <style>
-                body .header {
+                body .header .content {
+                    position: absolute;
+                    width: 100%;
+                    top: 17%;
+                    left: 50%;
+                    text-align: center;
+                    transform: translate(-50%, -50%);
+                }
+
+                .cover-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    transition: var(--transition-speed-ease)
+                }
+
+                .overlay {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                }
+
+                .cover-wrapper .hero-slider {
+                    overflow: hidden;
+                    width: 100%;
+                    height: 100vh;
+                }
+
+                .cover-wrapper .hero-slider .carousel-cell {
+                    width: 100%;
+                    height: 100%;
                     background-position: center;
                     background-repeat: no-repeat;
                     background-size: cover;
-                    height: 100vh;
-                    background-image: url('./frontend/images/compro.png');
+                }
+
+                .cover-wrapper .hero-slider .carousel-cell:before {
+                    display: block;
+                    text-align: center;
+                    content: "";
+                    line-height: 200px;
+                    font-size: 80px;
+                    color: white;
+                }
+
+                .cover-wrapper .hero-slider .carousel-cell .inner {
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: white;
+                    text-align: center;
+                }
+
+                .hero-slider .carousel-cell .inner .btn {
+                    position: relative;
+                    top: 15em;
+                    font-weight: 600;
+                    font-family: Poppins, sans-serif;
+                    color: var(--text-color);
+                    border: 1px solid var(--text-color);
+                    border-radius: 999px;
+                    padding: 1rem 3rem;
+                    -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+                    box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+                    text-decoration: none;
+                }
+
+                .hero-slider .carousel-cell .inner .btn:hover {
+                    background: var(--secondary-color);
+                    color: #fff;
+                    border: none;
+                }
+
+                .hero-slider .flickity-prev-next-button {
+                    width: 64px;
+                    height: 64px;
+                    background: transparent;
+                }
+
+                .hero-slider .flickity-prev-next-button:hover {
+                    background: transparent;
+                }
+
+                .hero-slider .flickity-prev-next-button .arrow {
+                    fill: black;
+                }
+
+                .hero-slider .flickity-page-dots {
+                    bottom: 30px;
+                }
+
+                .hero-slider .flickity-page-dots .dot {
+                    width: 30px;
+                    height: 4px;
+                    opacity: 1;
+                    background: rgba(255, 255, 255, 0.5);
+                    border: 0 solid white;
+                    border-radius: 0;
+                }
+
+                .hero-slider .flickity-page-dots .dot.is-selected {
+                    background: var(--secondary-color);
                 }
             </style>
-            @if (Auth::user())
-                @if (Auth::user()->type_addres == null &&
-                        Auth::user()->id_province == null &&
-                        Auth::user()->id_city == null &&
-                        Auth::user()->detail_address == null &&
-                        Auth::user()->zipcode == null)
-                    <div class="container" role="alert">
-                        <span class="font-medium">Peringatan!</span> Anda belum memasukkan alamat, harap mengisi alamat
-                        terlebih
-                        dahulu <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
-                            style="text-decoration: underline; color: blue;">disini</a>.
+            <div class="hero-slider" data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": 5000, "fade" : true}'>
+                @foreach ($articles as $at)
+                    @php
+                        $getImage = json_decode($at->image);
+                    @endphp
+                    <div class="carousel-cell"
+                        style="background-image: url('{{ asset('/storage/articles/images/' . $getImage) }}');">
+                        <div class="overlay"></div>
+                        <div class="inner">
+                            <a href="#" class="btn">Let's Explore</a>
+                        </div>
                     </div>
+                @endforeach
+            </div>
+            <div class="content container">
+                @if (Auth::user())
+                    @if (Auth::user()->type_addres == null &&
+                            Auth::user()->id_province == null &&
+                            Auth::user()->id_city == null &&
+                            Auth::user()->detail_address == null &&
+                            Auth::user()->zipcode == null)
+                        <div class="container" role="alert" style="background-color: red; width: 100%;">
+                            <span class="font-medium">Peringatan!</span> Anda belum memasukkan alamat, harap mengisi alamat
+                            terlebih
+                            dahulu <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
+                                style="text-decoration: underline; color: blue;">disini</a>.
+                        </div>
+                    @endif
                 @endif
-            @endif
-
-            {{-- <div class="row text-center text-md-start">
-                <div class="carousel"
-                    data-flickity='{ "cellAlign": "left", "contain": false, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": false, "pageDots" : false, "autoPlay": 1500, "fade" : true}'>
-                    @foreach ($articles as $at)
-                        <div class="col-12 col-md-6 my-auto px-md-4 px-2">
-                            Logo Header
-                            @if ($at->logo_header != null)
-                                <div class="headline">
-                                    <img src="{{ asset('/storage/articles/logo/' . json_decode($at->logo_header, true)) }}"
-                                        alt="Logo Header" width="200">
-                                </div>
-                            @endif
-
-                            Title Header
-                            @if ($at->title_header != null)
-                                <div class="headline">
-                                    {{ $at->title_header }}
-                                </div>
-                            @endif
-
-                            <div class="sub-headline " style=" color: #000000;">
-                                {{ $at->desc }}
-                            </div>
-                            <a href="{{ URL('product') }}">
-                                <button class="mb-5 btn btn-join">Let's Explore</button>
-                            </a>
-                        </div>
-
-                        <div class="col-12 col-md-6 my-auto px-md-0 ">
-
-                            @php
-                                $getImage = json_decode($at->image);
-                            @endphp
-
-                            <div class="card w-100 mt-3 me-2 mt-lg-3"
-                                style=" min-height: 500px; background-image: url('{{ asset('/storage/articles/images/' . $getImage) }}'); background-size: cover; ">
-                            </div>
-                        </div>
-                    @endforeach --}}
-
-                    {{-- <div class="col-12 col-md-6 my-auto px-md-4 px-2">
-                        <div class="headline">
-
-                            The New Perspective of You<br class="d-none d-md-block">
-                        </div>
-                        <div class="sub-headline" style=" color: #000000;">
-                            Carrying those full glam power, Bertjorak ready to orbit it all to their new EGOCENTRIC
-                            collection. It’s not just unique, it’s a different perspective of it. Covered in an unusual way
-                            to emblazed the basic pattern, but support you with those usual comfort you’ve always
-                            experience.
-                        </div>
-                        <button class="btn btn-join">Let's Explore</button>
-                    </div>
-
-                    <div class="col-12 col-md-6 my-auto px-md-0 ">
-
-                        <div class="card w-100 mt-3 me-2 mt-lg-0"
-                            style=" min-height: 500px; background-image: url({{ asset('frontend/images/banner2.png') }}); background-size: cover; ">
-
-                        </div>
-
-                    </div> --}}
-
-                {{-- </div> --}}
-            {{-- </div> --}}
+            </div>
+        </div>
     </section>
 
     <section class="resort">
@@ -269,8 +321,6 @@
         <div class="content container">
             <!-- Card Container -->
             @if (count($products) >= 1)
-
-
                 <div class="carousel" style="background: #f2f6ff !important; "
                     @if (count($products) >= 2) data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true, "pageDots": false, "prevNextButtons": true, "draggable": true }' @endif>
                     @foreach ($products as $pr)
@@ -297,7 +347,6 @@
                             </div>
                         </div>
                     @endforeach
-
                 </div>
             @else
                 <div class="carousel" style="background: #f2f6ff !important; "
@@ -344,7 +393,71 @@
         </div>
 
     </section>
-
     {{-- Footer --}}
     @include('includes.Frontend.footer')
 @endsection
+
+
+{{-- <div class="carousel"
+                    data-flickity='{ "cellAlign": "left", "contain": false, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": false, "pageDots" : false, "autoPlay": 1500, "fade" : true}'>
+                    @foreach ($articles as $at)
+                         <div class="col-12 col-md-6 my-auto px-md-4 px-2">
+                            Logo Header
+                            @if ($at->logo_header != null)
+                                <div class="headline">
+                                    <img src="{{ asset('/storage/articles/logo/' . json_decode($at->logo_header, true)) }}"
+                                        alt="Logo Header" width="200">
+                                </div>
+                            @endif
+
+                            Title Header
+                            @if ($at->title_header != null)
+                                <div class="headline">
+                                    {{ $at->title_header }}
+                                </div>
+                            @endif
+
+                            <div class="sub-headline " style=" color: #000000;">
+                                {{ $at->desc }}
+                            </div>
+                            <a href="{{ URL('product') }}">
+                                <button class="mb-5 btn btn-join">Let's Explore</button>
+                            </a>
+                        </div> --}}
+
+{{-- <div class="col-12 col-md-6 my-auto px-md-0 ">
+
+                            @php
+                                $getImage = json_decode($at->image);
+                            @endphp
+
+                            <div class="card w-100 mt-3 me-2 mt-lg-3"
+                                style=" min-height: 500px; background-image: url('{{ asset('/storage/articles/images/' . $getImage) }}'); background-size: cover; ">
+                            </div>
+                        </div> 
+                    @endforeach --}}
+
+{{-- <div class="col-12 col-md-6 my-auto px-md-4 px-2"> --}}
+{{-- <div class="headline">
+
+                            The New Perspective of You<br class="d-none d-md-block">
+                        </div>
+                        <div class="sub-headline" style=" color: #000000;">
+                            Carrying those full glam power, Bertjorak ready to orbit it all to their new EGOCENTRIC
+                            collection. It’s not just unique, it’s a different perspective of it. Covered in an unusual way
+                            to emblazed the basic pattern, but support you with those usual comfort you’ve always
+                            experience.
+                        </div>
+                        <button class="btn btn-join">Let's Explore</button>
+                    </div> --}}
+
+{{-- <div class="col-12 col-md-6 my-auto px-md-0 ">
+
+                            <div class="card w-100 mt-3 me-2 mt-lg-0">
+
+                            </div>
+
+                        </div>
+
+                    </div> 
+                </div> --}}
