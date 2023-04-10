@@ -22,16 +22,19 @@
         <ul class="navbar">
             <li class="nav-item">
                 <a href="/" class="nav-link">
+                    <span class="bx bx-home"></span>
                     Home
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/product') }}" class="nav-link">
+                <a href="{{ url('/product') }}" class="nav-link" >
+                    <span class="ri-t-shirt-line"></span>
                     Product
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ url('/about') }}" class="nav-link">
+                    <span class="bx bx-info-circle"></span>
                     About
                 </a>
             </li>
@@ -113,12 +116,26 @@
             @endauth
         </div>
     </header>
+
+    @if (Auth::user())
+        @if (Auth::user()->type_addres == null &&
+                Auth::user()->id_province == null &&
+                Auth::user()->id_city == null &&
+                Auth::user()->detail_address == null &&
+                Auth::user()->zipcode == null)
+            <div class="alert show" role="alert">
+                <span class="ri-error-warning-line"></span>
+                <span class="msg_alert">You have not entered an address, please fill in the address
+                    here <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
+                        style="text-decoration: underline; color: blue;">first</a>.</span>
+                <span class="ri-close-line" id="close-icon"></span>
+            </div>
+        @endif
+    @endif
+
     {{-- js link --}}
     <script type="text/javascript" src="{{ asset('js/navbar.js') }}"></script>
-
 </body>
-
-
 
 </html>
 

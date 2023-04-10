@@ -5,5 +5,4 @@
 <link rel="stylesheet" href="{{ asset('/frontend/style/account.css') }}">
 
 <link rel="stylesheet" href="{{ url('https://unpkg.com/flickity@2/dist/flickity.min.css') }}">
-
 <link rel="stylesheet" href="{{ url('https://unpkg.com/flickity-fade@1/flickity-fade.css') }}">

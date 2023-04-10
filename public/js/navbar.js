@@ -1,5 +1,7 @@
 let menu = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
+let alert = document.querySelector('.alert')
+let xbutton = document.querySelector('#close-icon');
 
 //fungsi untuk navbar responsive
 menu.onclick = () => {
@@ -21,6 +23,11 @@ for (let i=0; i<menuLength; i++){
     if(menuItem[i].href === currentLocation) {
         menuItem[i].className = "nav-link active"
     }
+}
+
+xbutton.onclick = () => {
+    alert.classList.remove('show');
+    alert.classList.add('hide');  
 }
 
 

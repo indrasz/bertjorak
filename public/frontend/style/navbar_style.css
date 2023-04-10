@@ -1,7 +1,7 @@
 * {
     padding: 0px;
     margin: 0px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     font-weight: 500 16px/1.5rem;
     text-decoration: none;
@@ -12,10 +12,11 @@
     --bg-color: #fff;
     --text-color: #000;
     --neutral-color: #fff;
-    --main-color:  #D4B7F9;
+    --main-color: #D4B7F9;
     --secondary-color: #8E80F1;
     --main2-color: #D9DF15;
     --secondary2-color: #E95419;
+    --secondary3-color: #4687ff;
 }
 
 header {
@@ -24,8 +25,8 @@ header {
     top: 0;
     left: 0;
     z-index: 100000;
-    display: flex ;
-    align-items: center ;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
     padding: 16px 7.5%;
     transition: 0.6s;
@@ -80,6 +81,10 @@ ul.navbar li.nav-item a.nav-link {
     color: var(--text-color);
 }
 
+ul.navbar li.nav-item a.nav-link span {
+    display: none;
+}
+
 ul.navbar li.nav-item a.nav-link:hover {
     color: var(--secondary-color);
 }
@@ -94,7 +99,7 @@ ul.navbar li.nav-item a.nav-link.active {
     align-items: center;
 }
 
-.right-nav-item a{
+.right-nav-item a {
     padding: 8px 8px;
     margin-right: 8px;
     margin-left: 8px;
@@ -114,7 +119,7 @@ ul.navbar li.nav-item a.nav-link.active {
     border: 1px solid var(--text-color);
     border-radius: 999px;
     padding: 0.75rem 3rem;
-        -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+    -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
     box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
     text-decoration: none;
 }
@@ -126,7 +131,7 @@ ul.navbar li.nav-item a.nav-link.active {
     border: 1px solid var(--text-color);
     border-radius: 999px;
     padding: 0.75rem 3rem;
-        -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+    -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
     box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
     text-decoration: none;
     transition: .5s;
@@ -136,7 +141,7 @@ ul.navbar li.nav-item a.nav-link.active {
     color: #FFFFFF;
     border: 1px solid var(--secondary-color);
     background-color: var(--secondary-color);
-        -webkit-box-shadow: 0px 20px 40px rgba(180, 81, 226, 0.18);
+    -webkit-box-shadow: 0px 20px 40px rgba(180, 81, 226, 0.18);
     box-shadow: 0px 20px 40px rgba(182, 84, 228, 0.18);
 }
 
@@ -145,7 +150,7 @@ ul.navbar li.nav-item a.nav-link.active {
     color: #FFFFFF;
     border: 1px solid var(--secondary-color);
     background-color: var(--secondary-color);
-        -webkit-box-shadow: 0px 20px 40px rgba(180, 81, 226, 0.18);
+    -webkit-box-shadow: 0px 20px 40px rgba(180, 81, 226, 0.18);
     box-shadow: 0px 20px 40px rgba(182, 84, 228, 0.18);
 }
 
@@ -155,7 +160,7 @@ ul.navbar li.nav-item a.nav-link.active {
     border: 1px solid var(--text-color);
     border-radius: 999px;
     padding: 0.75rem 3rem;
-        -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+    -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
     box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
     text-decoration: none;
 }
@@ -164,14 +169,14 @@ ul.navbar li.nav-item a.nav-link.active {
     color: #FFFFFF;
     border: 1px solid var(--secondary-color);
     background-color: var(--secondary-color);
-        -webkit-box-shadow: 0px 20px 40px rgba(180, 81, 226, 0.18);
+    -webkit-box-shadow: 0px 20px 40px rgba(180, 81, 226, 0.18);
     box-shadow: 0px 20px 40px rgba(182, 84, 228, 0.18);
 }
 
 #user-account-icon {
     opacity: 90%;
     font-size: 30px;
-    color : var(--text-color);
+    color: var(--text-color);
     cursor: pointer;
     z-index: 10001;
     display: none;
@@ -185,10 +190,84 @@ ul.navbar li.nav-item a.nav-link.active {
 
 #menu-icon {
     font-size: 30px;
-    color : var(--text-color);
+    color: var(--text-color);
     cursor: pointer;
     z-index: 10001;
     display: none;
+}
+
+.alert {
+    background-color: rgba(254, 226, 226);
+    color: rgba(185, 28, 28);
+    border-radius: 0;
+    display: flex;
+    position: fixed;
+    overflow: hidden;
+    z-index: 10000;
+    width: 100vw;
+    padding: 0.5rem 0.5rem;
+    top: 103.57px;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 0;
+    transition: .6s;
+}
+
+span.msg_alert {
+    margin: 0 16px;
+}
+
+.alert.hide {
+    animation: show_slide_out 1s ease forwards;
+}
+
+@keyframes show_slide_out {
+    from {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+}
+
+
+.alert.show {
+    animation: show_slide 1s ease forwards;
+}
+
+@keyframes show_slide {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+
+    40% {
+        opacity: 1;
+        transform: translateY(10%);
+    }
+
+    60% {
+        transform: translateY(0%);
+    }
+
+    80% {
+        transform: translateY(10%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+.alert .ri-error-warning-line {
+    font-size: 20px;
+}
+
+.alert .ri-close-line {
+    font-size: 20px;
+    cursor: pointer;
 }
 
 
@@ -207,24 +286,34 @@ ul.navbar li.nav-item a.nav-link.active {
         margin: 0px 16px;
     }
 
+    div.alert {
+        top: 87.57px;
+        transition: .2s;
+    }
+
 }
 
 @media screen and (max-width: 1090px) {
     header {
         padding: 8px 7.5%;
     }
+
     header.sticky {
         padding: 8px 7.5%;
     }
+
     #user-account-icon {
         display: block;
     }
+
     #menu-icon {
         display: block;
     }
+
     #search-icon {
         display: none;
     }
+
     .navbar {
         position: absolute;
         top: 110%;
@@ -237,6 +326,7 @@ ul.navbar li.nav-item a.nav-link.active {
         border-radius: 10px;
         transition: all .50s ease;
     }
+
     .navbar a {
         display: block;
         margin: 12px 0;
@@ -248,7 +338,7 @@ ul.navbar li.nav-item a.nav-link.active {
         color: var(--text-color);
         transform: translateY(5px);
     }
-    
+
     .navbar .nav-item .nav-link.active {
         color: var(--text-color);
     }
@@ -261,9 +351,24 @@ ul.navbar li.nav-item a.nav-link.active {
         display: none;
     }
 
-    .right-nav-item  .btn-login {
+    .right-nav-item .btn-login {
         display: none;
+    }
+
+    ul.navbar li.nav-item a.nav-link span {
+        display: inline-block;
+        font-size: 24px;
+        vertical-align: middle;
+        margin-right: 8px;
     }
 }
 
-    
+@media screen and (max-width: 426px) {
+    header {
+        min-height: 87.54px;
+    }
+
+    header.sticky {
+        min-height: 87.54px;
+    }
+}

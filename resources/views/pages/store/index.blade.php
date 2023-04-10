@@ -7,10 +7,10 @@
     {{-- Navigation bar --}}
     @include('includes.Frontend.navbar2')
 
-    <section class="header">
+    <section class="hero show">
         <div class="cover-wrapper">
             <style>
-                body .header .content {
+                body .hero .container {
                     position: absolute;
                     width: 100%;
                     top: 17%;
@@ -18,6 +18,32 @@
                     text-align: center;
                     transform: translate(-50%, -50%);
                 }
+
+                body .hero.show {
+                    animation: show_slide 2s;
+                }
+
+                @keyframes show_slide {
+                    from {
+                        opacity: 0;
+                        transform: translateY(0%);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0%);
+                    }
+                }
+
+                /* .row-full {
+
+                                                                        width: 99.4vw;
+                                                                        position: relative;
+                                                                        margin-left: -50vw;
+                                                                        margin-right: 0;
+                                                                        height: 28px;
+                                                                        left: 50%;
+                                                                    } */
 
                 .cover-wrapper {
                     display: flex;
@@ -46,6 +72,7 @@
                 .cover-wrapper .hero-slider .carousel-cell {
                     width: 100%;
                     height: 100%;
+                    border-radius: 0%;
                     background-position: center;
                     background-repeat: no-repeat;
                     background-size: cover;
@@ -62,7 +89,7 @@
 
                 .cover-wrapper .hero-slider .carousel-cell .inner {
                     position: relative;
-                    top: 50%;
+                    top: 85%;
                     transform: translateY(-50%);
                     color: white;
                     text-align: center;
@@ -70,15 +97,13 @@
 
                 .hero-slider .carousel-cell .inner .btn {
                     position: relative;
-                    top: 15em;
                     font-weight: 600;
                     font-family: Poppins, sans-serif;
                     color: var(--text-color);
                     border: 1px solid var(--text-color);
                     border-radius: 999px;
                     padding: 1rem 3rem;
-                    -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
-                    box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+                    box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
                     text-decoration: none;
                 }
 
@@ -86,6 +111,8 @@
                     background: var(--secondary-color);
                     color: #fff;
                     border: none;
+                    -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+                    box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
                 }
 
                 .hero-slider .flickity-prev-next-button {
@@ -119,7 +146,8 @@
                     background: var(--secondary-color);
                 }
             </style>
-            <div class="hero-slider" data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": 5000, "fade" : true}'>
+            <div class="hero-slider"
+                data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": 5000, "prevNextButtons":true, "fade" : true}'>
                 @foreach ($articles as $at)
                     @php
                         $getImage = json_decode($at->image);
@@ -133,14 +161,11 @@
                     </div>
                 @endforeach
             </div>
-            <div class="content container">
+
+            {{-- <div class="container">
                 @if (Auth::user())
-                    @if (Auth::user()->type_addres == null &&
-                            Auth::user()->id_province == null &&
-                            Auth::user()->id_city == null &&
-                            Auth::user()->detail_address == null &&
-                            Auth::user()->zipcode == null)
-                        <div class="container" role="alert" style="background-color: red; width: 100%;">
+                    @if (Auth::user()->type_addres == null && Auth::user()->id_province == null && Auth::user()->id_city == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
+                        <div class="alert">
                             <span class="font-medium">Peringatan!</span> Anda belum memasukkan alamat, harap mengisi alamat
                             terlebih
                             dahulu <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
@@ -148,7 +173,78 @@
                         </div>
                     @endif
                 @endif
-            </div>
+            </div> --}}
+        </div>
+    </section>
+
+    <section class="video-campaign">
+        <style>
+            .video-campaign {
+                padding-top: 5rem;
+                padding-bottom: 5rem;
+                transition: 0.5s ease-in;
+            }
+
+            .video-campaign .content.container {
+                overflow: hidden;
+                display: block;
+                padding-left: 1.25rem;
+                padding-right: 1.25rem;
+            }
+
+            #glass {
+                margin-top: -100px;
+                margin-bottom: -100px;
+                animation: zoomInZoomOut 1.5s;
+            }
+
+            @keyframes zoomInZoomOut {
+                from {
+                    opacity: 0;
+                    transform: scale(2, 2);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: scale(1, 1);
+                }
+            }
+
+
+            @media screen and (max-width: 992px) {
+                #glass {
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    transition: 0.5s ease-in;
+                }
+
+                .video-campaign {
+                    padding-top: 3rem;
+                    padding-bottom: 3rem;
+
+                }
+            }
+
+            @media screen and (max-width: 620px) {
+
+                #glass {
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    transition: 0.5s;
+                }
+
+                .video-campaign {
+                    transition: 0.5s;
+                    padding-top: 2rem;
+                    padding-bottom: 2rem;
+                }
+
+            }
+        </style>
+        <div class="content container">
+            <video id="glass" width="100%" height="75%" loop muted autoplay="autoplay">
+                <source src="{{ asset('frontend/videos/teaser.mp4') }}">
+            </video>
         </div>
     </section>
 
@@ -352,24 +448,6 @@
                 <div class="carousel" style="background: #f2f6ff !important; "
                     data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": true, "pageDots": false, "prevNextButtons": true, "draggable": true }'>
                     <!-- Card Container 1 -->
-                    <div class="headline justify-content-center align-items-center text-center w-100 ">
-                        Popular Resorts Close
-
-                        <div class="image-spin">
-                            <img src="{{ asset('frontend/images/set1@300x.png') }}" />
-                        </div>
-
-                        <div class="mt-5 w-100 ">
-                            <a href="">
-                                <div class="d-flex text-center align-items-center justify-content-center">
-                                    <div class=" image-product "
-                                        style="background-image: url({{ asset('frontend/images/product1.jpg') }});">
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
                     <div class="headline justify-content-center align-items-center text-center w-100 ">
                         Popular Resorts Close
 

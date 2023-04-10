@@ -5,3 +5,4 @@
 
 <script src="{{ url('https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js') }}"></script>
 <script src="{{ url('https://unpkg.com/flickity-fade@1/flickity-fade.js') }}"></script>
+
