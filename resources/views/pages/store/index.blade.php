@@ -12,13 +12,11 @@
 
         <div class="content container px-md-4">
             @if (Auth::user())
-                @if (Auth::user()->type_addres == null && Auth::user()->id_province == null && Auth::user()->id_city == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
+                @if (Auth::user()->type_addres == null && Auth::user()->state_name == null && Auth::user()->city_name == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
                     <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                         role="alert">
-                        <span class="font-medium">Peringatan!</span> Anda belum memasukkan alamat, harap mengisi alamat
-                        terlebih
-                        dahulu <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
-                            style="text-decoration: underline; color: blue;">disini</a>.
+                        <span class="font-medium"> Hello! </span> You have not completed your profile, please complete your profile first <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
+                            style="text-decoration: underline; color: blue;">here</a>.
                     </div>
                 @endif
             @endif

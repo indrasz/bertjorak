@@ -251,7 +251,7 @@
                             @endforeach
                         @else
                             <div class="error-details">
-                                Keranjang kamu kosong nih! Ayo belanja dulu
+                                Your cart is empty! Lets explore our product of Bertjorak
                             </div>
                         @endif
 
@@ -263,7 +263,7 @@
                             @csrf
                             <div class="card-summary px-lg-4 px-3 py-3 mb-3">
                                 <div class="caption-summary mb-3">
-                                    Informasi Pembayaran
+                                    Payment Information
                                 </div>
                                 @if (count($carts) >= 1)
                                     @php
@@ -283,7 +283,7 @@
                                         @endphp
                                     @endforeach
                                 @else
-                                    <p class="text-center opacity-50">Belum ada barang ditambahkan.</p>
+                                    <p class="text-center opacity-50"> No items added yet. </p>
                                 @endif
 
                                 @if (count($carts) >= 1)

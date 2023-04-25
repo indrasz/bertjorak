@@ -211,7 +211,7 @@
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
                                         @php
-                                            $conProv = $province->where('province_id', $value->id_province);
+                                            $conProv = $province->where('province_id', $value->state_name);
                                             foreach ($conProv as $keyProv) {
                                                 $getProv = $keyProv;
                                             }
