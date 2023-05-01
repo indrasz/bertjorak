@@ -20,10 +20,10 @@
                 }
 
                 body .hero.show {
-                    animation: show_slide 2s;
+                    animation: fade_slide 2s;
                 }
 
-                @keyframes show_slide {
+                @keyframes fade_slide {
                     from {
                         opacity: 0;
                         transform: translateY(0%);
@@ -37,13 +37,13 @@
 
                 /* .row-full {
 
-                                                                        width: 99.4vw;
-                                                                        position: relative;
-                                                                        margin-left: -50vw;
-                                                                        margin-right: 0;
-                                                                        height: 28px;
-                                                                        left: 50%;
-                                                                    } */
+                                                                                            width: 99.4vw;
+                                                                                            position: relative;
+                                                                                            margin-left: -50vw;
+                                                                                            margin-right: 0;
+                                                                                            height: 28px;
+                                                                                            left: 50%;
+                                                                                        } */
 
                 .cover-wrapper {
                     display: flex;
@@ -125,6 +125,10 @@
                     background: transparent;
                 }
 
+                .hero-slider .flickity-prev-next-button:disabled {
+                    display: none;
+                }
+
                 .hero-slider .flickity-prev-next-button .arrow {
                     fill: black;
                 }
@@ -147,7 +151,7 @@
                 }
             </style>
             <div class="hero-slider"
-                data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": 5000, "prevNextButtons":true, "fade" : true}'>
+                data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": 5000, "prevNextButtons":true, "fade" : true, "pageDots" : false}'>
                 @foreach ($articles as $at)
                     @php
                         $getImage = json_decode($at->image);
@@ -249,6 +253,194 @@
     </section>
 
     <section class="resort">
+        <div class="image-spin mt-2">
+            <img src="{{ asset('frontend/images/set1@300x.png') }}" />
+        </div>
+        <div class="container px-4">
+            @if (count($products) >= 1)
+                <div class="d-flex justify-content-between align-items-center flex-wrap pb-main">
+                    <div class="caption-related-product">
+                        Popular Products
+                    </div>
+                    <a class="btn btn-link align-self-end pb-sm-down-0 small-text scroll-fadeInUp fadeInUp d2"
+                        href="{{ url('/product') }}" style="color:black; font-size: 14px;">
+                        Show All
+                    </a>
+                </div>
+                <hr class="divider" style="border-size: 1px; color:#A4A7B1; margin: 0;">
+
+                <div class="carousel pt-5"
+                    data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
+
+                    @foreach ($products as $pr)
+                        @if ($pr->id_product)
+                            <div class="card-related-carousel">
+                                @php
+                                    $property_images = json_decode($pr->images);
+                                @endphp
+                                <div class="image-placeholder"
+                                    style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');"> 
+                                    <div class="inner-image"
+                                        style="background-image: url('{{ asset('/storage/products/images/' . $property_images[1]) }}');">
+                                    </div>
+                                </div>
+
+                                <div class="card-details">
+                                    <a href="{{ route('detail.show', $pr->id_product) }}" style="text-decoration: none;">
+                                        <div class="caption">{{ $pr->title }}</div>
+                                    </a>
+
+                                    <div class="bottom-text">
+                                        <div class="price-content">
+                                            <span class="price">@currency($pr->price)</span>
+                                        </div>
+                                        {{-- <div class="rating d-flex align-items-center">
+                                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
+                                            alt="star" />
+                                        <span></span>
+                                    </div> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            @endif
+        </div>
+
+        <style>
+            .resort .flickity-slider {
+                animation: slide_image 1s; 
+            }
+
+            @keyframes slide_image {
+                from {
+                    transform: translateY(10%);
+                    opacity: 0;
+                    transition: 5s;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                    transition: 5s;
+                }
+            }
+            .resort .caption-related-product {
+                font: 600 1.50rem/1.90rem "Poppins", sans-serif;
+            }
+
+            .resort .d-flex {
+                padding-bottom: 24px;
+            }
+
+            .resort .card-related-carousel {
+                width: 325px;
+                padding: 28px 28px 40px;
+                border-radius: 28px;
+                background: white;
+            }
+
+            .resort .card-related-carousel .image-placeholder {
+                width: 269px;
+                height: 400px;
+                border-radius: 12px;
+                overflow: hidden;
+                background-size: cover;
+                background-position: center;
+                object-position: center;
+                cursor: pointer; 
+            }
+
+            .resort .card-related-carousel .card-details a {
+                display: flex;
+                justify-content: center;
+            }
+
+            .resort .card-related-carousel .card-details .caption {
+                font-weight: 500;
+                font-size: 18px;
+                color: #080E09;
+                margin-top: 16px;
+                margin-bottom: 4px;
+            }
+
+            .resort .card-related-carousel .card-details .sub-caption {
+                font-weight: 400;
+                color: #ADB2B8;
+            }
+
+            .resort .card-related-carousel .card-details .bottom-text {
+                display: flex;
+                justify-content: center;
+            }
+
+            .resort .card-related-carousel .card-details .bottom-text .price-content {
+                color: #080E09;
+                font-size: 16px;
+            }
+
+            .resort .card-related-carousel .card-details .bottom-text .price-content span {
+                font-weight: 400;
+            }
+
+            .resort .card-related-carousel .card-details .bottom-text .price-content span.price {
+                font-weight: 700;
+            }
+
+            .resort .card-related-carousel .card-details .bottom-text .rating {
+                font-weight: 700;
+                font-size: 16px;
+                color: #FF9900;
+            }
+
+            .resort .card-related-carousel .card-details .bottom-text .rating img {
+                margin-top: -1px;
+                margin-right: 5px;
+            }
+
+            .image-placeholder:hover .inner-image {
+                display: block;
+                transition: 5s ease-in-out;
+            }
+
+            .inner-image {
+                display: none;
+                width: 269px;
+                height: 400px;
+                border-radius: 12px;
+                background-size: cover;
+                background-position: center;
+                object-position: center;
+                animation: fade_image .6s linear;
+            }
+
+            @keyframes fade_image {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
+            .image-spin img {
+                position: absolute;
+                left: -75px;
+                width: 150px;
+                height: 150px;
+                animation: spin 7s infinite;
+            }
+        </style>
+
+        <script>
+            function changeImage(imgName) {
+                image = document.getElementById('imgDisp');
+                image.src = imgName;
+            }
+        </script>
+    </section>
+
+    {{-- <section class="resort">
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;0,800;0,900;1,400&display=swap");
             @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
@@ -390,11 +582,27 @@
             }
 
             .image-product {
-                width: 300px;
-                height: 300px;
-                padding: 100px;
+                width: 250px;
+                height: 400px;
                 border-radius: 12px;
                 overflow: hidden;
+                background: #8f44fd;
+                background-size: cover;
+                background-position: center;
+                object-position: center;
+                animation: morph 3.75s linear infinite;
+            }
+
+            .image-product:hover .inner-image {
+                display: block;
+                transition: 5s ease-in-out;
+            }
+
+            .inner-image {
+                display: none;
+                width: 250px;
+                height: 400px;
+                border-radius: 12px;
                 background: #8f44fd;
                 background-size: cover;
                 background-position: center;
@@ -424,19 +632,21 @@
                             $property_images = json_decode($pr->images);
                         @endphp
                         <!-- Card Container 1 -->
-                        <div class="headline justify-content-center align-items-center text-center w-100 ">
+                        <div class="headline justify-content-center align-items-center text-right w-100 ">
                             Popular Product
 
-                            <div class="image-spin mt-2">
+                            {{-- <div class="image-spin mt-2">
                                 <img src="{{ asset('frontend/images/set1@300x.png') }}" />
-                            </div>
+                            </div> 
 
                             <div class="mt-5 w-100 ">
                                 <div class="d-flex text-center align-items-center justify-content-center">
                                     <a href="{{ route('detail.show', $pr->id_product) }}">
-                                        <div class=" image-product "
+                                        <div class=" image-product"
                                             style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');">
-
+                                            <div class="inner-image"
+                                                style="background-image: url('{{ asset('/storage/products/images/' . $property_images[1]) }}');">
+                                            </div>
                                         </div>
                                     </a>
                                 </div>
@@ -470,7 +680,7 @@
             @endif
         </div>
 
-    </section>
+    </section> --}}
     {{-- Footer --}}
     @include('includes.Frontend.footer')
 @endsection

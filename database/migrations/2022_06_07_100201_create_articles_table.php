@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->binary('logo_header')->nullable();
             $table->string('title_header')->nullable();
+            $table->string('video')->nullable();
             $table->binary('image')->nullable();
             $table->longText('desc')->nullable();
 

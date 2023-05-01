@@ -5,7 +5,7 @@
 @section('content')
 
     {{-- Navigation bar --}}
-    @include('includes.Frontend.navbar')
+    @include('includes.Frontend.navbar2')
 
 
     <section class="w-100 h-100 breadcrumb-section mt-4">

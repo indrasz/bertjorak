@@ -11,6 +11,7 @@
         .related-product {
             padding-top: 64px;
         }
+
         .card-related-carousel:hover {
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             transition: 1s;
@@ -19,12 +20,28 @@
         .caption-related-product {
             font: 600 1.50rem/1.90rem "Poppins", sans-serif;
         }
-
     </style>
 
 
     <section class="related-product w-100 h-100">
         <div class="container px-4 mt-4">
+
+            <style>
+                div.image-placeholder .img-thumbnail {
+                    height: 475px;
+                    width: 100%;
+                    object-position: center center;
+                    background-repeat: no-repeat;
+                    object-fit: cover;
+                }
+
+                @media screen and (max-width: 990px) {
+                    div.image-placeholder .img-thumbnail {
+                        height: auto;
+                        width: 100%;
+                    }
+                }
+            </style>
 
             <div class="caption-related-product py-3 text-center">
                 Explore Our Product

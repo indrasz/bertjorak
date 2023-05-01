@@ -1,15 +1,19 @@
 <div>
 
-    <div class="border rounded">
-        <div class="flex items-center justify-content-center px-4 border-r">
-            <span class="fa fa-search form-control-feedback"></span>
+    <div class="border rounded" style="position: absolute; left: 50%; transform: translateX(-50%); width: 50%;">
+        <div class="flex items-center justify-content-center px-4 border-r" style="display: flex; width: 50vw;">
+            <span class="fa fa-search form-control-feedback" style="width: 50vw;"></span>
         </div>
-        <input type="text" class="px-4 py-2 w-100 rounded-3" style="outline: none; border:none;" wire:model="search"
+        <input type="text" class="px-4 py-2 w-100 rounded-3" style="outline: none; border:none; width: 50vw;" wire:model="search"
             placeholder="Search...">
+    </div>
+
+    <div class="copy-write pt-3 text-center" style="font-size: 18px; font-weight: light; position: relative; top:20px; transform: translateY(20px);">
+        Explore the colorful world of Bertjorak!
     </div>
     <br>
 
-    <div class="row min-h-screen">
+    <div class="row min-h-screen" style="position: relative; top:16px; transform: translateY(16px);">
         @forelse ($products as $p)
             <div class="col-12 col-lg-4">
                 <a href="{{ route('detail.show', $p->id_product) }}" style="text-decoration: none; color: #080E09;">
