@@ -347,6 +347,11 @@ main.sign-up-mode .crsl {
         height: auto;
     }
 
+    .forms-wrap h3 {
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+
     .forms-wrap form {
         transition: 0.4s ease-in-out;
     }
