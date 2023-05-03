@@ -32,13 +32,11 @@
             </div>
         </div>
         <section class="container px-6 mx-auto mt-5">
-            @if (Auth::user()->type_addres == null && Auth::user()->id_province == null && Auth::user()->id_city == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
+            @if (Auth::user()->type_address == null && Auth::user()->state_name == null && Auth::user()->city_name == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
                 <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                     role="alert">
-                    <span class="font-medium">Peringatan!</span> Anda belum memasukkan alamat, harap mengisi alamat
-                    terlebih
-                    dahulu <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
-                        style="text-decoration: underline; color: blue;">disini</a>.
+                    <span class="font-medium"> Hello! </span> You have not completed your profile, please complete your profile first <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
+                        style="text-decoration: underline; color: blue;">here</a>.
                 </div>
             @endif
 
@@ -60,13 +58,13 @@
 
                         <div class="flex flex-col justify-center px-2 py-2 mb-6 bg-white rounded-xl">
                             <div class="flex justify-center items-center">
-                                <img src="{{ asset('/assets/images/services-progress-icon.svg') }}" alt=""
+                                <img src="{{ asset('/assets/images/successful.png') }}" alt=""
                                     class="w-16 h-16">
 
                                 <div>
-                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($succes) }}
+                                    <p class="px-2 mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($succes) }}
                                     </p>
-                                    <p class="text-base text-left text-gray-500">
+                                    <p class="px-2 text-base text-left text-gray-500">
                                         Transaction Success
                                     </p>
                                 </div>
@@ -75,19 +73,19 @@
 
                         <div class="flex flex-col justify-center px-2 py-2 mb-6 bg-white rounded-xl">
                             <div class="flex justify-center items-center">
-                                <img src="{{ asset('/assets/images/services-completed-icon.svg') }}" alt=""
+                                <img src="{{ asset('/assets/images/document.png') }}" alt=""
                                     class="w-16 h-16">
 
                                 <div>
                                     @if ($pending1 || $pending2)
-                                        <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
+                                        <p class="px-2 mt-2 text-2xl font-semibold text-left text-gray-800">
                                             {{ count($pending1) + count($pending2) }}
                                         </p>
                                     @else
-                                        <p class="mt-2 text-2xl font-semibold text-left text-gray-800">0
+                                        <p class="px-2 mt-2 text-2xl font-semibold text-left text-gray-800">0
                                         </p>
                                     @endif
-                                    <p class="text-base text-left text-gray-500">
+                                    <p class="px-2 text-base text-left text-gray-500">
                                         Transaction Pending
                                     </p>
                                 </div>
@@ -96,12 +94,12 @@
 
                         <div class="flex flex-col justify-center px-2 py-2 mb-6 bg-white rounded-xl">
                             <div class="flex justify-center items-center">
-                                <img src="{{ asset('assets/images/expired.png') }}" alt="" class="w-14 h-14">
+                                <img src="{{ asset('assets/images/expired.png') }}" alt="" class="w-16 h-16">
 
                                 <div>
-                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($expired) }}
+                                    <p class="px-2 mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($expired) }}
                                     </p>
-                                    <p class="text-base text-left text-gray-500">
+                                    <p class="px-2 text-base text-left text-gray-500">
                                         Transaction Expired
                                     </p>
                                 </div>
@@ -112,9 +110,9 @@
                                 <img src="{{ asset('assets/images/delivery.png') }}" alt="" class="w-16 h-16">
 
                                 <div>
-                                    <p class="mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($shipment) }}
+                                    <p class="px-2 mt-2 text-2xl font-semibold text-left text-gray-800">{{ count($shipment) }}
                                     </p>
-                                    <p class="text-base text-left text-gray-500">
+                                    <p class="px-2 text-base text-left text-gray-500">
                                         Transaction Shipment
                                     </p>
                                 </div>

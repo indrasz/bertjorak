@@ -333,7 +333,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap");
 
 * {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 body .header {
@@ -547,6 +547,7 @@ body .header .content .mr-0 {
 
 .footer-3-2 .caption-font {
     font-weight: 400;
+    max-width: 565px;
     font-size: 0.875rem;
     line-height: 1.5rem;
     letter-spacing: 1%;
@@ -556,8 +557,9 @@ body .header .content .mr-0 {
 
 .footer-3-2 .title-font {
     font: 600 1.25rem/1.75rem "Poppins", sans-serif;
-    margin-bottom: 1.25rem;
+    text-align: left;
     color: #060c45;
+    text-decoration: none;
 }
 
 .footer-3-2 .credit-font {
@@ -568,7 +570,7 @@ body .header .content .mr-0 {
 
 @media (min-width: 576px) {
     .footer-3-2 .main {
-        background-image: url('http://api.elements.buildwithangga.com/storage/files/2/assets/Footer/Footer3/Footer-3-2.png');
+        background-color:#D4B6F8;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -587,7 +589,7 @@ body .header .content .mr-0 {
 
 @media (min-width: 992px) {
     .footer-3-2 .main {
-        padding: 6rem 8rem;
+        padding: 4rem 6rem;
     }
 
     .footer-3-2 .left-col,

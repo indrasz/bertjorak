@@ -255,13 +255,15 @@
                                         Province
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
-                                        @php
-                                            $conProv = $province->where('province_id', $value->id_province);
+
+                                        {{ $value->state_name }}
+                                        {{-- @php
+                                            $conProv = $province->where('province_id', $value->state_name);
                                             foreach ($conProv as $keyProv) {
                                                 $getProv = $keyProv;
                                             }
                                         @endphp
-                                        {{ $getProv->name_province }}
+                                        {{ $getProv->name_province }} --}}
                                     </td>
                                 </tr>
 
@@ -270,13 +272,14 @@
                                         City
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
-                                        @php
+                                        {{ $value->city_name }}
+                                        {{-- @php
                                             $conCity = $city->where('city_id', $value->id_city);
                                             foreach ($conCity as $keyCity) {
                                                 $getCity = $keyCity;
                                             }
                                         @endphp
-                                        {{ $getCity->name_city }}
+                                        {{ $getCity->name_city }} --}}
                                     </td>
                                 </tr>
 

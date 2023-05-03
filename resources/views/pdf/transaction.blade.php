@@ -170,9 +170,9 @@
                                     <h4 class="font-semibold text-sm">{{ $getpdf->detail_address }}</h4>
                                 </div>
 
-                                @php
+                                {{-- @php
                                     // Get Province
-                                    $getProv = $userProv->where('province_id', $getpdf->id_province);
+                                    $getProv = $userProv->where('province_id', $getpdf->state_name);
                                     foreach ($getProv as $keyProv) {
                                         $valProv = $keyProv->name_province;
                                     }
@@ -186,14 +186,14 @@
                                         // Name City
                                         $valCity = $keyCity->name_city;
                                     }
-                                @endphp
+                                @endphp --}}
                                 <div class="pt-2">
                                     <h4 class="font-medium text-xs">Province:</h4>
-                                    <h4 class="font-semibold text-sm">{{ $valProv }}</h4>
+                                    <h4 class="font-semibold text-sm">{{ $getpdf->state_name }}</h4>
                                 </div>
                                 <div class="pt-2">
                                     <h4 class="font-medium text-xs">City:</h4>
-                                    <h4 class="font-semibold text-sm">{{ $valTypeCity . ' ' . $valCity }}</h4>
+                                    <h4 class="font-semibold text-sm">{{ $getpdf->city_name }}</h4>
                                 </div>
                                 <div class="pt-2">
                                     <h4 class="font-medium text-xs">Postal Code:</h4>

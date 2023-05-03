@@ -35,7 +35,7 @@ class Calculate extends Component
             $q->where('name', 'admin');
         })->get();
         foreach ($this->adminAlamat as $key => $value) {
-            $this->getAlamatKantor = $value->id_city;
+            $this->getAlamatKantor = $value->city_name;
         }
 
         // Get Alamat Buyer
@@ -44,7 +44,7 @@ class Calculate extends Component
             $q->where('name', 'admin');
         })->get();
         foreach ($this->alamatBuyer as $key => $value) {
-            $this->getAlamatBuyer = $value->id_city;
+            $this->getAlamatBuyer = $value->city_name;
         }
 
         // Get Weight

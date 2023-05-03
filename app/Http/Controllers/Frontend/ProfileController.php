@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Countries;
 use App\Models\City;
 use App\Models\Province;
 use App\Models\User;
@@ -20,12 +21,14 @@ class ProfileController extends Controller
         $authId = Auth::user()->id;
         $user = User::where('users.id', $authId)->get();
 
+        $userCountries = Countries::all();
+
         $userProv = Province::all();
 
         $userCity = City::all();
         //dd($userProv->id_province);
 
-        return view('pages.dashboard.profile.index')->with('users', $user)->with('userProv', $userProv)->with('userCity', $userCity);
+        return view('pages.dashboard.profile.index')->with('userCountries', $userCountries)->with('users', $user)->with('userProv', $userProv)->with('userCity', $userCity);
     }
 
     public function edit($id)
@@ -49,6 +52,7 @@ class ProfileController extends Controller
             'cityId' => 'required',
             'zipCode' => 'required',
             'detailAddress' => 'required',
+            'countriesId' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -83,10 +87,16 @@ class ProfileController extends Controller
         $profile->username = $request->username;
         $profile->phone_number = $request->phoneNumber;
         $profile->type_address = $request->type_address;
-        $profile->id_province = $request->provincesId;
-        $profile->id_city = $request->cityId;
+        $profile->state_name = $request->provincesId;
+        $profile->city_name = $request->cityId;
         $profile->zipcode = $request->zipCode;
         $profile->detail_address = $request->detailAddress;
+        $profile->countries_name = $request->countriesId;
+        $profile->area_name = $request->areaId;
+        
+
+        
+
 
         if ($profile->save()) {
             return redirect()->route('dashboard.profile.index')->withToastSuccess('Your profile has been edited!');

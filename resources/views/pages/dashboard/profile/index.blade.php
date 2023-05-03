@@ -103,7 +103,6 @@
                             .w-240 {
                                 width: 240px;
                             }
-
                         </style>
                         <div
                             class="flex flex-col flex-wrap items-start justify-between gap-10 space-y-2 md:flex-row md:gap-0">
@@ -188,8 +187,8 @@
                                             @endphp --}}
 
                                             <div class="col-span-3 mt-3">
-                                                <label for="name" class="block mb-3 font-medium text-gray-700 text-md">Label
-                                                    Address</label>
+                                                <label for="name"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Place Type</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
                                                     @if ($u->type_address != null)
                                                         {{ $u->type_address }}
@@ -198,30 +197,50 @@
                                                     @endif
                                                 </div>
                                             </div>
-
                                             @php
-                                                // Get Province
-                                                $getProv = $userProv->where('province_id', $u->id_province);
-                                                foreach ($getProv as $keyProv) {
-                                                    $valProv = $keyProv->name_province;
+                                                
+                                                // Get Countries
+                                                $getCountries = $userCountries->where('id', $u->countries_name);
+                                                foreach ($getCountries as $keyCountries) {
+                                                    $valCountries = $keyCountries->country_name;
                                                 }
                                                 
-                                                // Get City
-                                                $getCity = $userCity->where('city_id', $u->id_city);
-                                                foreach ($getCity as $keyCity) {
-                                                    // Type City
-                                                    $valTypeCity = $keyCity->type;
+                                                // // Get Province
+                                                // $getProv = $userProv->where('province_id', $u->id_province);
+                                                // foreach ($getProv as $keyProv) {
+                                                //     $valProv = $keyProv->name_province;
+                                                // }
                                                 
-                                                    // Name City
-                                                    $valCity = $keyCity->name_city;
-                                                }
+                                                // // Get City
+                                                // $getCity = $userCity->where('city_id', $u->id_city);
+                                                // foreach ($getCity as $keyCity) {
+                                                //     // Type City
+                                                //     $valTypeCity = $keyCity->type;
+                                                
+                                                //     // Name City
+                                                //     $valCity = $keyCity->name_city;
+                                                // }
                                             @endphp
+
+                                            <div class="col-span-3 mt-3">
+                                                <label for="name"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Country</label>
+                                                <div class="block w-full mt-1 sm:text-sm">
+                                                    @if ($u->countries_name != null)
+                                                        {{ $u->countries_name }}
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </div>
+                                            </div>
+
+
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Province</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
-                                                    @if ($u->id_province != null)
-                                                        {{ $valProv }}
+                                                    @if ($u->state_name != null)
+                                                        {{ $u->state_name }}
                                                     @else
                                                         -
                                                     @endif
@@ -232,13 +251,28 @@
                                                 <label for="name"
                                                     class="block mb-3 font-medium text-gray-700 text-md">City</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
-                                                    @if ($u->id_city != null)
-                                                        {{ $valTypeCity . ' ' . $valCity }}
+                                                    @if ($u->city_name != null)
+                                                        {{ $u->city_name }}
                                                     @else
                                                         -
                                                     @endif
                                                 </div>
                                             </div>
+
+                                            <div class="col-span-3 mt-3">
+                                                <label for="name"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Area /
+                                                    Kecamatan</label>
+                                                <div class="block w-full mt-1 sm:text-sm">
+                                                    @if ($u->area_name != null)
+                                                        {{ $u->area_name }}
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </div>
+                                            </div>
+
+
 
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
@@ -257,8 +291,9 @@
 
                                         </div>
 
-                                        <div class="col-span-3 mt-3">
-                                            <label for="name" class="block mb-3 font-medium text-gray-700 text-md">Detail
+                                        <div class="col-span-3 mt-10">
+                                            <label for="name"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Detail
                                                 Address</label>
                                             <div class="block w-full mt-1 sm:text-sm text-justify">
                                                 @if ($u->detail_address != null)
