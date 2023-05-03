@@ -41,6 +41,7 @@
                 font-family: var(--noto-sans);
                 font-size: 16px;
                 padding-bottom: 64px;
+
             }
 
             .shayna-header .headline {
@@ -127,6 +128,14 @@
                 }
             }
 
+            html {
+                cursor: url('frontend/images/iconmonstr-cursor-31-24.png'), auto;
+                height: 100%;
+            }
+
+
+
+
             /* END:Header */
         </style>
 
@@ -144,6 +153,10 @@
                                 width: 100vw;
                                 height: 375px;
                                 transition: 0.5s ease-in-out;
+                                
+                                
+
+
                             }
                         </style>
                     </div>

@@ -53,8 +53,8 @@
                     }
 
                     .divider {
-                        height: 1px;
-                        width: 750px;
+                        height: 0.5px;
+                        width: 500px;
                         background-color: black;
                         display: inline-block;
                     }
