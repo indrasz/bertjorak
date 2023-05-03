@@ -100,18 +100,21 @@
                     <div class="bx bx-menu" id="menu-icon"></div>
                     {{-- Admin --}}
                 @else
-                    <a href="{{ route('dashboard.index') }}">
+                    <a href="{{ route('dashboard.index') }}" class="btn-db">
                         <button type="button" class="btn-dashboard">
                             Dashboard
                         </button>
+                    </a>
+                    <a href="{{ url('/product') }}" class="nav-db" >
+                        <span class="nav-dashboard"></span>
+                        Dashboard
                     </a>
                     <div class="bx bx-menu" id="menu-icon"></div>
                 @endif
                 {{-- Belum Login --}}
             @else
                 <a href="/login" class='bx bxs-user-account' id="user-account-icon"></a>
-                <a href="/login" class="btn-login">Login</a>
-                <a href="/register" class="btn-register">Register</a>
+                <a href="/login" class="btn-login">Account</a>
                 <div class="bx bx-menu" id="menu-icon"></div>
             @endauth
         </div>

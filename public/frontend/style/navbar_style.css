@@ -124,6 +124,15 @@ ul.navbar li.nav-item a.nav-link.active {
     text-decoration: none;
 }
 
+.right-nav-item a.btn-db {
+    display: block;
+}
+
+.right-nav-item a.nav-db {
+    display: none;
+    text-decoration: none;
+}
+
 .right-nav-item a .btn-dashboard {
     font: 500 12px/1.5rem Poppins, sans-serif;
     color: var(--text-color);
@@ -289,6 +298,14 @@ span.msg_alert {
     div.alert {
         top: 87.57px;
         transition: .2s;
+    }
+
+    .right-nav-item a.btn-db {
+        display: none;
+    }
+    
+    .right-nav-item a.nav-db {
+        display: block;
     }
 
 }
