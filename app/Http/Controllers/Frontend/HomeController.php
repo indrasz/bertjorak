@@ -26,3 +26,17 @@ class HomeController extends Controller
         return view('pages.store.product')->with('products', $products);
     }
 }
+
+// if(Request::get('sort') == 'price_asc') {
+//     $products = Product::orderBy('price','asc');    
+// } elseif(Request::get('sort') == 'price_desc') {
+//     $products = Product::orderBy('price','desc'); 
+// } elseif(Request::get('sort') == 'newest') {
+//     $products = Product::orderBy('created_at','desc'); 
+// } elseif(Request::get('sort') == 'popularity') {
+//     $products = Product::orderBy('unggulan','desc'); 
+// } else {
+//     $products = Product::all();
+// }
+
+// return view('pages.store.product')->with('products', $products);

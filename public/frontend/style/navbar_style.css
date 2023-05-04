@@ -205,6 +205,16 @@ ul.navbar li.nav-item a.nav-link.active {
     display: none;
 }
 
+#search-icon {
+    height: 24px;
+    width: 24px;
+}
+
+#cart-icon {
+    height: 24px;
+    width: 24px;
+}
+
 .alert {
     background-color: rgba(254, 226, 226);
     color: rgba(185, 28, 28);
@@ -341,6 +351,7 @@ span.msg_alert {
         flex-direction: column;
         justify-content: flex-start;
         border-radius: 10px;
+        border: 1px solid #dee2e6;
         transition: all .50s ease;
     }
 

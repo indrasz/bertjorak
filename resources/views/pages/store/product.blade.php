@@ -47,7 +47,7 @@
                 Explore Our Product
             </div>
 
-            @if (count($products) > 0)
+            @if (count(array($products)) > 0)
                 <livewire:product.product-list />
             @else
                 <div class="row mx-auto gap-0">

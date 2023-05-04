@@ -37,13 +37,13 @@
 
                 /* .row-full {
 
-                                                                                            width: 99.4vw;
-                                                                                            position: relative;
-                                                                                            margin-left: -50vw;
-                                                                                            margin-right: 0;
-                                                                                            height: 28px;
-                                                                                            left: 50%;
-                                                                                        } */
+                                                                                                width: 99.4vw;
+                                                                                                position: relative;
+                                                                                                margin-left: -50vw;
+                                                                                                margin-right: 0;
+                                                                                                height: 28px;
+                                                                                                left: 50%;
+                                                                                            } */
 
                 .cover-wrapper {
                     display: flex;
@@ -96,28 +96,33 @@
                 }
 
                 .hero-slider .carousel-cell .inner .btn {
+                    background: var(--secondary-color);
+                    color: white;
+                    border: none;
                     position: relative;
                     font-weight: 600;
                     font-family: Poppins, sans-serif;
-                    color: var(--text-color);
-                    border: 1px solid var(--text-color);
                     border-radius: 999px;
                     padding: 1rem 3rem;
-                    box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
                     text-decoration: none;
                 }
 
                 .hero-slider .carousel-cell .inner .btn:hover {
-                    background: var(--secondary-color);
-                    color: #fff;
+                    position: relative;
+                    font-weight: 600;
+                    font-family: Poppins, sans-serif;
+                    color: whitesmoke;
                     border: none;
+                    border-radius: 999px;
+                    padding: 1rem 3rem;
                     -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
                     box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
+                    text-decoration: none;     
                 }
 
                 .hero-slider .flickity-prev-next-button {
-                    width: 64px;
-                    height: 64px;
+                    width: 32px;
+                    height: 32px;
                     background: transparent;
                 }
 
@@ -130,7 +135,7 @@
                 }
 
                 .hero-slider .flickity-prev-next-button .arrow {
-                    fill: black;
+                    fill: whitesmoke;
                 }
 
                 .hero-slider .flickity-page-dots {
@@ -149,9 +154,15 @@
                 .hero-slider .flickity-page-dots .dot.is-selected {
                     background: var(--secondary-color);
                 }
+
+                @media screen and (max-width: 700px) {
+                    .hero-slider .flickity-prev-next-button {
+                        display: none;
+                    }
+                }
             </style>
             <div class="hero-slider"
-                data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": 5000, "prevNextButtons":true, "fade" : true, "pageDots" : false}'>
+                data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": 4000, "prevNextButtons":true, "fade" : false, "pageDots" : false}'>
                 @foreach ($articles as $at)
                     @php
                         $getImage = json_decode($at->image);
@@ -253,9 +264,7 @@
     </section>
 
     <section class="resort">
-        <div class="image-spin mt-2">
-            <img src="{{ asset('frontend/images/set1@300x.png') }}" />
-        </div>
+        <img src="{{ asset('frontend/images/set1@300x.png') }}" class="image-spin" />
         <div class="container px-4">
             @if (count($products) >= 1)
                 <div class="d-flex justify-content-between align-items-center flex-wrap pb-main">
@@ -279,7 +288,7 @@
                                     $property_images = json_decode($pr->images);
                                 @endphp
                                 <div class="image-placeholder"
-                                    style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');"> 
+                                    style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');">
                                     <div class="inner-image"
                                         style="background-image: url('{{ asset('/storage/products/images/' . $property_images[1]) }}');">
                                     </div>
@@ -310,7 +319,7 @@
 
         <style>
             .resort .flickity-slider {
-                animation: slide_image 1s; 
+                animation: slide_image 1s;
             }
 
             @keyframes slide_image {
@@ -319,12 +328,14 @@
                     opacity: 0;
                     transition: 5s;
                 }
+
                 to {
                     transform: translateY(0);
                     opacity: 1;
                     transition: 5s;
                 }
             }
+
             .resort .caption-related-product {
                 font: 600 1.50rem/1.90rem "Poppins", sans-serif;
             }
@@ -348,7 +359,7 @@
                 background-size: cover;
                 background-position: center;
                 object-position: center;
-                cursor: pointer; 
+                cursor: pointer;
             }
 
             .resort .card-related-carousel .card-details a {
@@ -418,17 +429,24 @@
                 from {
                     opacity: 0;
                 }
+
                 to {
                     opacity: 1;
                 }
             }
 
-            .image-spin img {
+            .image-spin {
                 position: absolute;
                 left: -75px;
                 width: 150px;
                 height: 150px;
                 animation: spin 7s infinite;
+            }
+
+            @media screen and (max-width: 700px) {
+                .image-spin {
+                    display: none;
+                }
             }
         </style>
 

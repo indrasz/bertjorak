@@ -44,7 +44,7 @@
             @auth
                 {{-- Buyer --}}
                 @if (Auth::user()->hasRole('buyer'))
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{{ url('/product') }}">
                         <div class="d-flex">
                             <img src="{{ asset('frontend/images/icon-search.svg') }}" alt="search-icon" id="search-icon" />
                         </div>
@@ -52,7 +52,7 @@
 
                     <a class="nav-link" href="{{ route('cart.index') }}">
                         <div class="d-flex">
-                            <img src="{{ asset('frontend/images/icon-cart.svg') }}" alt="cart-icon" />
+                            <img src="{{ asset('frontend/images/icon-cart.svg') }}" alt="cart-icon" id="cart-icon" />
                             <livewire:cart.count-cart />
                         </div>
                         {{-- <div class="cart-badge">3</div> --}}
@@ -105,7 +105,7 @@
                             Dashboard
                         </button>
                     </a>
-                    <a href="{{ url('/product') }}" class="nav-db" >
+                    <a href="{{ route('dashboard.index') }}" class="nav-db" >
                         <span class="nav-dashboard"></span>
                         Dashboard
                     </a>
