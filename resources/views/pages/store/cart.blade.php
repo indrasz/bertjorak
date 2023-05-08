@@ -32,6 +32,11 @@
         <section class="cart-checkout w-100 h-100">
             <div class="container p-4">
                 <style>
+                    body {
+                        position: relative; 
+                        top:104.57px;
+                    }
+                    
                     .card-product-preview {
                         box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
                         border-radius: 15px;

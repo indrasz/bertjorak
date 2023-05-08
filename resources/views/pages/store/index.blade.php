@@ -36,14 +36,13 @@
                 }
 
                 /* .row-full {
-
-                                                                                                width: 99.4vw;
-                                                                                                position: relative;
-                                                                                                margin-left: -50vw;
-                                                                                                margin-right: 0;
-                                                                                                height: 28px;
-                                                                                                left: 50%;
-                                                                                            } */
+                            width: 99.4vw;
+                            position: relative;
+                            margin-left: -50vw;
+                            margin-right: 0;
+                            height: 28px;
+                            left: 50%;
+                        } */
 
                 .cover-wrapper {
                     display: flex;
@@ -117,7 +116,7 @@
                     padding: 1rem 3rem;
                     -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
                     box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
-                    text-decoration: none;     
+                    text-decoration: none;
                 }
 
                 .hero-slider .flickity-prev-next-button {
@@ -278,7 +277,7 @@
                 </div>
                 <hr class="divider" style="border-size: 1px; color:#A4A7B1; margin: 0;">
 
-                <div class="carousel pt-5"
+                <div class="carousel pt-4"
                     data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
 
                     @foreach ($products as $pr)
@@ -287,12 +286,14 @@
                                 @php
                                     $property_images = json_decode($pr->images);
                                 @endphp
-                                <div class="image-placeholder"
-                                    style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');">
-                                    <div class="inner-image"
-                                        style="background-image: url('{{ asset('/storage/products/images/' . $property_images[1]) }}');">
+                                <a href="{{ route('detail.show', $pr->id_product) }}">
+                                    <div class="image-placeholder"
+                                        style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');">
+                                        <div class="inner-image"
+                                            style="background-image: url('{{ asset('/storage/products/images/' . $property_images[1]) }}');">
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
 
                                 <div class="card-details">
                                     <a href="{{ route('detail.show', $pr->id_product) }}" style="text-decoration: none;">
@@ -367,6 +368,8 @@
                 justify-content: center;
             }
 
+            
+
             .resort .card-related-carousel .card-details .caption {
                 font-weight: 500;
                 font-size: 18px;
@@ -408,6 +411,8 @@
                 margin-top: -1px;
                 margin-right: 5px;
             }
+
+            
 
             .image-placeholder:hover .inner-image {
                 display: block;

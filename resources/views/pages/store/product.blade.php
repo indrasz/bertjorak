@@ -8,8 +8,8 @@
     @include('includes.Frontend.navbar2')
 
     <style>
-        .related-product {
-            padding-top: 64px;
+        body {
+            padding-top: 100px;
         }
 
         .card-related-carousel:hover {

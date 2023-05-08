@@ -29,13 +29,14 @@
                 <div class="inner-box">
                     <div class="forms-wrap">
                         <form method="POST" action="{{ route('login') }}" autocomplete="off" class="sign-in-form">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <!-- Session Status -->
                             <x-auth-session-status class="session" :status="session('status')" />
 
                             <!-- Validation Errors -->
                             <x-auth-validation-errors class="validation" :errors="$errors" />
 
-                            @csrf
+                           
                             <div class="logo">
                                 <img src="{{ asset('frontend/images/main-logo.png') }}" alt="bertjorak">
                             </div>
@@ -72,9 +73,9 @@
                             </div>   --}}
 
                             <!-- Validation Errors -->
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <x-auth-validation-errors class="validation" :errors="$errors" />
-
-                            @csrf
+                            
                             <div class="heading">
                                 <h6>Already a member ?</h6>
                                 <a href="#" class="toggle">Sign in</a>

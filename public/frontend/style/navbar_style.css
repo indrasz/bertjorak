@@ -188,7 +188,7 @@ ul.navbar li.nav-item a.nav-link.active {
     color: var(--text-color);
     cursor: pointer;
     z-index: 10001;
-    display: none;
+    display: block;
     text-decoration: none;
 }
 
@@ -206,13 +206,23 @@ ul.navbar li.nav-item a.nav-link.active {
 }
 
 #search-icon {
-    height: 24px;
-    width: 24px;
+    opacity: 0.7;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+#search-icon:hover {
+    color: var(--secondary-color);
 }
 
 #cart-icon {
-    height: 24px;
-    width: 24px;
+    opacity: 0.7;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+#cart-icon:hover {
+    color: var(--secondary-color);
 }
 
 .alert {
@@ -327,10 +337,6 @@ span.msg_alert {
 
     header.sticky {
         padding: 8px 7.5%;
-    }
-
-    #user-account-icon {
-        display: block;
     }
 
     #menu-icon {

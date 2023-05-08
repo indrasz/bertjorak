@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/product') }}" class="nav-link" >
+                <a href="{{ url('/product') }}" class="nav-link">
                     <span class="ri-t-shirt-line"></span>
                     Product
                 </a>
@@ -44,18 +44,9 @@
             @auth
                 {{-- Buyer --}}
                 @if (Auth::user()->hasRole('buyer'))
-                    <a class="nav-link" href="{{ url('/product') }}">
-                        <div class="d-flex">
-                            <img src="{{ asset('frontend/images/icon-search.svg') }}" alt="search-icon" id="search-icon" />
-                        </div>
-                    </a>
-
-                    <a class="nav-link" href="{{ route('cart.index') }}">
-                        <div class="d-flex">
-                            <img src="{{ asset('frontend/images/icon-cart.svg') }}" alt="cart-icon" id="cart-icon" />
-                            <livewire:cart.count-cart />
-                        </div>
-                        {{-- <div class="cart-badge">3</div> --}}
+                    <a class='bx bx-search' href="{{ url('/product') }}" id="search-icon"></a>
+                    <a class="ri-shopping-cart-2-line" href="{{ route('cart.index') }}" id="cart-icon">
+                        <livewire:cart.count-cart/>
                     </a>
 
                     <div class="navbar-nav ms-auto mt-lg-0">
@@ -105,7 +96,7 @@
                             Dashboard
                         </button>
                     </a>
-                    <a href="{{ route('dashboard.index') }}" class="nav-db" >
+                    <a href="{{ route('dashboard.index') }}" class="nav-db">
                         <span class="nav-dashboard"></span>
                         Dashboard
                     </a>
@@ -113,8 +104,9 @@
                 @endif
                 {{-- Belum Login --}}
             @else
+                <a href="{{ url('/product') }}" class='bx bx-search' id="search-icon"></a>
+                <a class="ri-shopping-cart-2-line" href="/login" id="cart-icon"></a>
                 <a href="/login" class='bx bxs-user-account' id="user-account-icon"></a>
-                <a href="/login" class="btn-login">Account</a>
                 <div class="bx bx-menu" id="menu-icon"></div>
             @endauth
         </div>

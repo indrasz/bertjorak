@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Article;
+use Request;
 
 class HomeController extends Controller
 {
@@ -22,10 +23,25 @@ class HomeController extends Controller
 
     public function allProduct()
     {
-        $products = Product::all();
+
+        if(Request::get('sort') == 'price_asc') {
+            $products = Product::orderBy('price')->get();     
+        } elseif(Request::get('sort') == 'price_desc') {
+            $products = Product::orderByDesc('price')->get(); 
+        } elseif(Request::get('sort') == 'newest') {
+            $products = Product::orderByDesc('created_at')->get(); 
+        } elseif(Request::get('sort') == 'popularity') {
+            $products = Product::orderByDesc('unggulan')->get(); 
+        } else {
+            $products = Product::all();
+        }
+        
         return view('pages.store.product')->with('products', $products);
+        
     }
 }
+
+// 1
 
 // if(Request::get('sort') == 'price_asc') {
 //     $products = Product::orderBy('price','asc');    
@@ -40,3 +56,6 @@ class HomeController extends Controller
 // }
 
 // return view('pages.store.product')->with('products', $products);
+
+// 2
+

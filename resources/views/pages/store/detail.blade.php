@@ -247,12 +247,15 @@
                                     @php
                                         $property_images = json_decode($all->images);
                                     @endphp
-                                    <div class="image-placeholder"
-                                        style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');">
-                                        <div class="inner-image"
-                                            style="background-image: url('{{ asset('/storage/products/images/' . $property_images[1]) }}');">
+
+                                     <a href="{{ route('detail.show', $all->id_product) }}">
+                                        <div class="image-placeholder"
+                                            style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');">
+                                            <div class="inner-image"
+                                                style="background-image: url('{{ asset('/storage/products/images/' . $property_images[1]) }}');">
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
 
                                     <div class="card-details">
                                         <a href="{{ route('detail.show', $all->id_product) }}"
