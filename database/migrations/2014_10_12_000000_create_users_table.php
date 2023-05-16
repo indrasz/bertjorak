@@ -24,8 +24,6 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             
 
-
-
             // Address
             $table->string('type_address', 25)->nullable();
             $table->string('countries_name')->nullable();

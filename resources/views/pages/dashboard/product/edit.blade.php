@@ -50,11 +50,12 @@
                                         <div class="grid grid-cols-6 gap-6">
 
                                             <div class="col-span-6">
-                                                <label for="title" class="block mb-3 font-medium text-gray-700 text-md">Name
+                                                <label for="title"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Name
                                                     Product</label>
 
-                                                <input value="{{ $d->title }}" maxlength="100" type="text" name="name"
-                                                    id="name" autocomplete="off"
+                                                <input value="{{ $d->title }}" maxlength="100" type="text"
+                                                    name="name" id="name" autocomplete="off"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                     value="{{ old('name') }}" required>
                                                 <div id="the-count" style="float: right; padding-top: 0.5em;">
@@ -68,13 +69,52 @@
 
                                             </div>
 
+                                            {{--Nama Article--}}
+                                            <div class="col-span-6">
+                                                <label for="nama_article" class="block mb-3 font-medium text-gray-700 text-md">Nama Article</label>
+                                                @php
+                                                    $getNamaArticle = old('nama_article');
+                                                @endphp
+                                                <select name="nama_article" id="nama_article" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                    <option value="" @if (old('nama_article') == "") selected @endif>Select Article</option>
+                                                    @foreach ($articles as $article)
+                                                        <option value="{{ $article->nama_article }}" @if (old('nama_article') == $article->nama_article || $getNamaArticle == $article->nama_article) selected @endif>
+                                                            {{ $article->nama_article }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            {{-- <div class="col-span-6">
+                                                <label for="nama_article"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Nama
+                                                    Article</label>
+                                                @php
+                                                    foreach ($articles as $article) {
+                                                        $getNamaArticle = $article->nama_article;
+                                                        //dd($get);
+                                                    }
+                                                @endphp
+                                                <select name="nama_article" id="nama_article"
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                    <option value="{{ $article->nama_article }}" selected>Select Article
+                                                    </option>
+                                                    @foreach ($articles as $article)
+                                                        <option value="{{ $article->nama_article }}"
+                                                            @if (old('article') == $article->id || $article->id == $getNamaArticle) selected @endif>
+                                                            {{ $article->nama_article }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div> --}}
+
 
                                             <div class="col-span-6">
                                                 <label for="price"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Price</label>
 
-                                                <input value="{{ $d->price }}" type="number" name="price" id="price"
-                                                    autocomplete="price"
+                                                <input value="{{ $d->price }}" type="number" name="price"
+                                                    id="price" autocomplete="price"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                     value="{{ old('price') }}" required>
 
@@ -117,7 +157,6 @@
                                                         margin: 0 auto;
                                                         max-width: 1170px;
                                                     }
-
                                                 </style>
 
                                                 <div class="p-2">
@@ -143,7 +182,8 @@
                                                 </div>
 
 
-                                                <img src="{{ asset('assets/images/empty-illustration.svg') }}" id="output"
+                                                <img src="{{ asset('assets/images/empty-illustration.svg') }}"
+                                                    id="output"
                                                     style="width: 25%; padding-top: 1.5%; padding-bottom: 1.5%;" />
                                                 <input placeholder="Thumbnail 1" value="{{ $d->images }}" type="file"
                                                     name="photos[]" id="photos" autocomplete="photos"
@@ -167,7 +207,8 @@
                                             <div class="col-span-6">
                                                 <label for="desc"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Description</label>
-                                                <textarea name="desc" id="desc" cols="30" rows="10" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                <textarea name="desc" id="desc" cols="30" rows="10"
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                     value="{{ old('desc') }}">{{ $d->desc }}</textarea>
 
                                                 @if ($errors->has('desc'))
@@ -180,7 +221,8 @@
                                                 <label for="weight"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Weight
                                                     (gram)</label>
-                                                <input type="number" name="weight" id="weight" autocomplete="weight"
+                                                <input type="number" name="weight" id="weight"
+                                                    autocomplete="weight"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                     value="{{ $d->weight }}">
 
@@ -227,8 +269,8 @@
                                                 @if ($d->pilihan != null)
                                                     @foreach (json_decode($d->pilihan, true) as $p)
                                                         @for ($i = 0; $i < count($p); $i++)
-                                                            <input placeholder="Warna / Tipe" type="text" name="pilihan[]"
-                                                                id="pilihan" autocomplete="pilihan"
+                                                            <input placeholder="Warna / Tipe" type="text"
+                                                                name="pilihan[]" id="pilihan" autocomplete="pilihan"
                                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                                 value="{{ $p[$i] }}">
                                                         @endfor
@@ -250,7 +292,8 @@
                                             </div>
 
                                             <div class="col-span-6">
-                                                <label for="size" class="block mb-3 font-medium text-gray-700 text-md">Size
+                                                <label for="size"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Size
                                                     (optional)</label>
 
                                                 {{-- @if ($d->size != null)
@@ -269,15 +312,15 @@
                                                 @if ($d->size != null)
                                                     @foreach (json_decode($d->size, true) as $u)
                                                         @for ($i = 0; $i < count($u); $i++)
-                                                            <input placeholder="Size" type="text" name="size[]" id="size"
-                                                                autocomplete="size"
+                                                            <input placeholder="Size" type="text" name="size[]"
+                                                                id="size" autocomplete="size"
                                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                                 value="{{ $u[$i] }}">
                                                         @endfor
                                                     @endforeach
                                                 @else
-                                                    <input placeholder="Size" type="text" name="size[]" id="size"
-                                                        autocomplete="size"
+                                                    <input placeholder="Size" type="text" name="size[]"
+                                                        id="size" autocomplete="size"
                                                         class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                         value="">
                                                 @endif
@@ -298,7 +341,8 @@
 
                                         <div class="flex mt-6">
                                             <label class="flex items-center">
-                                                <input type="checkbox" name="unggulanCheck" value="1" class="form-checkbox"
+                                                <input type="checkbox" name="unggulanCheck" value="1"
+                                                    class="form-checkbox"
                                                     style="border-radius: 20%; outline: none !important; box-shadow:none !important;"
                                                     @if ($d->unggulan != null) checked @endif>
                                                 <span class="ml-2">Jadikan Produk Unggulan</span>

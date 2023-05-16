@@ -35,6 +35,7 @@
                                     <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
                                         <th class="py-4" scope="">Product Details</th>
                                         <th class="py-4" scope="">Weight</th>
+                                        <th class="py-4" scope="">Article</th>
                                         <th class="py-4" scope="">Price</th>
                                         <th class="py-4" scope="">Stock</th>
                                         <th class="py-4" scope="">Action</th>
@@ -78,6 +79,9 @@
                                             </td>
                                             <td class="px-1 py-5 text-sm">
                                                 {{ $d->weight }}
+                                            </td>
+                                            <td class="px-1 py-5 text-sm">
+                                                {{ $d->nama_article }}
                                             </td>
                                             <td class="px-1 py-5 text-sm">
                                                 @currency($d->price)

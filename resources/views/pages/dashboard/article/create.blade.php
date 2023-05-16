@@ -62,6 +62,38 @@
                                                 class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                         </div>
 
+                                        <div class="col-span-6">
+                                            <label for="namaArticle"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Article Name</label>
+                                            <input name="nama_article" id="nama_article" placeholder="Article Name" type="text" maxlength="25" autocomplete="nama_article"
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                value="{{ old('nama_article') }}" required>
+                                            <div id="the-count" style="float: right; padding-top: 0.5em;">
+                                                <span id="current">0</span>
+                                                <span id="maximum">/ 25</span>
+                                            </div>
+                                            @if ($errors->has('nama_article'))
+                                                <p class="text-red-500 mb-3 text-sm">{{ $errors->first('nama_article') }}
+                                                </p>
+                                            @endif
+                                        </div>
+
+                                        <div class="col-span-6">
+                                            <label for="desc"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Description</label>
+                                            <input name="desc" id="desc" placeholder="Description of article" type="text" maxlength="25" autocomplete="desc"
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                value="{{ old('desc') }}" required>
+                                            <div id="the-count2" style="float: right; padding-top: 0.5em;">
+                                                <span id="current2">0</span>
+                                                <span id="maximum2">/ 25</span>
+                                            </div>
+                                            @if ($errors->has('desc'))
+                                                <p class="text-red-500 mb-3 text-sm">{{ $errors->first('desc') }}</p>
+                                            @endif
+                                        </div>
+
+
                                         {{-- Title Headline 
                                         <div class="col-span-6">
                                             <label for="title"
@@ -83,7 +115,6 @@
 
                                         </div> --}}
 
-                                        {{-- Headline Logo 
                                         <div class="col-span-6">
                                             <label for="logo"
                                                 class="block mb-3 font-medium text-gray-700 text-md">Headline
@@ -100,34 +131,18 @@
                                             <input placeholder="Keunggulan 3" type="file" accept="image/*" name="logo"
                                                 id="imgInp" autocomplete="off"
                                                 class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                        </div>--}}
+                                        </div>
 
-                                        {{-- <div class="col-span-6">
-                                            <label for="desc"
-                                                class="block mb-3 font-medium text-gray-700 text-md">Description</label>
-                                            <textarea name="desc" id="desc" placeholder="Description of article" cols="30" rows="10"
-                                                maxlength="300"
-                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                                                value="{{ old('desc') }}"></textarea>
-                                            <div id="the-count2" style="float: right; padding-top: 0.5em;">
-                                                <span id="current2">0</span>
-                                                <span id="maximum2">/ 275</span>
-                                            </div>
 
-                                            @if ($errors->has('desc'))
-                                                <p class="text-red-500 mb-3 text-sm">{{ $errors->first('desc') }}</p>
-                                            @endif
-                                        </div> --}}
-                                    </div>
 
-                                    {{-- <div class="flex mt-6">
+                                        {{-- <div class="flex mt-6">
                                         <label class="flex items-center">
                                             <input type="checkbox" name="unggulanCheck" value="1" class="form-checkbox"
                                                 style="border-radius: 20%; outline: none !important; box-shadow:none !important;">
                                             <span class="ml-2">Jadikan Produk Unggulan</span>
                                         </label>
                                     </div> --}}
-
+                                    </div>
                                 </div>
 
                                 <div class="px-4 py-3 text-right sm:px-6">
@@ -158,9 +173,9 @@
 @push('after-script')
     <script src="{{ url('https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}"></script>
 
-    {{-- <script type="text/javascript"> --}}
-        {{-- // Count Char --}}
-        {{-- $('#headline').keyup(function() {
+    <script type="text/javascript">
+        // Count Char
+        $('#nama_article').keyup(function() {
 
             var characterCount = $(this).val().length,
                 current = $('#current'),
@@ -169,9 +184,9 @@
 
             current.text(characterCount);
         });
-    </script> --}}
+    </script>
 
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
         // Count Char
         $('#desc').keyup(function() {
 
@@ -182,7 +197,7 @@
 
             current.text(characterCount);
         });
-    </script> --}}
+    </script>
 
     <script type="text/javascript">
         imgInp.onchange = evt => {
@@ -192,11 +207,11 @@
             }
         };
 
-        // photos.onchange = evt => {
-        //     const [file] = photos.files
-        //     if (file) {
-        //         output.src = URL.createObjectURL(file)
-        //     }
-        // };
+        photos.onchange = evt => {
+            const [file] = photos.files
+            if (file) {
+                output.src = URL.createObjectURL(file)
+            }
+        };
     </script>
 @endpush

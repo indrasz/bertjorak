@@ -1,4 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url(//db.onlinewebfonts.com/c/e70ad914fc86ddb94d838e0ec2a4c5e0?family=RubberNippleFactory);
+
+@font-face {
+    font-family: "RubberNippleFactory"; 
+    src: url("//db.onlinewebfonts.com/t/e70ad914fc86ddb94d838e0ec2a4c5e0.eot"); 
+    src: url("//db.onlinewebfonts.com/t/e70ad914fc86ddb94d838e0ec2a4c5e0.eot?#iefix") 
+    format("embedded-opentype"), 
+    url("//db.onlinewebfonts.com/t/e70ad914fc86ddb94d838e0ec2a4c5e0.woff2") 
+    format("woff2"), url("//db.onlinewebfonts.com/t/e70ad914fc86ddb94d838e0ec2a4c5e0.woff") 
+    format("woff"), url("//db.onlinewebfonts.com/t/e70ad914fc86ddb94d838e0ec2a4c5e0.ttf") 
+    format("truetype"), url("//db.onlinewebfonts.com/t/e70ad914fc86ddb94d838e0ec2a4c5e0.svg#RubberNippleFactory") 
+    format("svg"); 
+}
 
 .header-5-1 .modal-item.modal {
     top: 2rem;

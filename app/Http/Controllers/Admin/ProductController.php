@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Article;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -17,16 +18,20 @@ class ProductController extends Controller
      */
     public function index()
     {
+
         if (Auth::user()) {
             if (Auth::user()->hasRole('admin')) {
                 $count = Product::count();
-                $data = Product::latest()->paginate(10);
 
+                $data = Product::latest()->paginate(10);
                 return view('pages.dashboard.product.index')->with('data', $data)->with('count', $count);
+
             }
         } else {
             return view('errors.404');
         }
+
+
     }
 
     /**
@@ -36,7 +41,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('pages.dashboard.product.create');
+        $articles = Article::where('id', '>', 1)
+            ->get('nama_article');
+        return view('pages.dashboard.product.create')->with('articles', $articles);
     }
 
     /**
@@ -55,6 +62,7 @@ class ProductController extends Controller
             'price' => 'required',
             'desc' => 'required',
             'stock' => 'required',
+            'nama_article' => 'required',
             // 'pilihan' => 'required',
             // 'size' => 'required',
             'weight' => 'required',
@@ -73,6 +81,7 @@ class ProductController extends Controller
 
         $file = new Product();
         $file->images = json_encode($data);
+        $file->nama_article = $request->nama_article;
         $file->title = $request->name;
         $file->price = $request->price;
         $file->desc = $request->desc;
@@ -113,8 +122,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $editData = Product::where('id_product', $id)->get();
-
-        return view('pages.dashboard.product.edit')->with('editData', $editData);
+        $articles = Article::where('id', '>', 1)
+            ->get('nama_article');
+        return view('pages.dashboard.product.edit')->with('articles',$articles)->with('editData', $editData);
     }
 
     /**
@@ -134,10 +144,13 @@ class ProductController extends Controller
             'desc' => 'required',
             'stock' => 'required',
             'size' => 'required',
+            'nama_article' => 'required',
             'weight' => 'required',
         ]);
 
+        
         $editData = Product::where('id_product', $id)->get();
+        
 
         if ($request->hasfile('photos')) {
             // Delete Old Photos
@@ -159,6 +172,7 @@ class ProductController extends Controller
                 $dataNewImages[] = $name;
             }
         }
+        
 
         $imageInput[] = $request->photos;
         $pilihanText[] = $request->pilihan;
@@ -171,6 +185,7 @@ class ProductController extends Controller
         }
         $productUp->title = $request->name;
         $productUp->price = $request->price;
+        $productUp->nama_article = $request->nama_article;
         $productUp->desc = $request->desc;
         if (isset($request->unggulanCheck)) {
             $productUp->unggulan = $request->unggulanCheck;

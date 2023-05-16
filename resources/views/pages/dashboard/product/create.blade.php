@@ -74,15 +74,48 @@
                                             @if ($errors->has('name'))
                                                 <p class="text-red-500 mb-3 text-sm">{{ $errors->first('name') }}</p>
                                             @endif
-
                                         </div>
+
+                                        <div class="col-span-6">
+                                            <label for="nama_article" class="block mb-3 font-medium text-gray-700 text-md">Nama Article</label>
+                                            @php
+                                                $getNamaArticle = old('nama_article');
+                                            @endphp
+                                            <select name="nama_article" id="nama_article" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                <option value="" @if (old('nama_article') == "") selected @endif>Select Article</option>
+                                                @foreach ($articles as $article)
+                                                    <option value="{{ $article->nama_article }}" @if (old('nama_article') == $article->nama_article || $getNamaArticle == $article->nama_article) selected @endif>
+                                                        {{ $article->nama_article }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        {{-- <div class="col-span-6">
+                                            <label for="nama_article" class="block mb-3 font-medium text-gray-700 text-md">Nama Article</label>
+                                            @php
+                                                foreach ($articles as $article) {
+                                                    $getNamaArticle = $article->nama_article;
+                                                    //dd($get);
+                                                }
+                                            @endphp
+                                            <select name="nama_article" id="nama_article" 
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                <option value="{{ $article->nama_article }}" selected>Select Article</option>
+                                                @foreach ($articles as $article)
+                                                    <option value="{{ $article->nama_article }}" @if (old('article') == $article->id || $article->id == $getNamaArticle) selected @endif>
+                                                        {{ $article->nama_article }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div> --}}
 
                                         <div class="col-span-6">
                                             <label for="price" class="block mb-3 font-medium text-gray-700 text-md">Price
                                                 Produk</label>
 
-                                            <input placeholder="Price of Produk " type="number" name="price" id="price"
-                                                autocomplete="price"
+                                            <input placeholder="Price of Produk " type="number" name="price"
+                                                id="price" autocomplete="price"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('price') }}" required>
 
@@ -90,6 +123,22 @@
                                                 <p class="text-red-500 mb-3 text-sm">{{ $errors->first('price') }}</p>
                                             @endif
                                         </div>
+
+
+                                        {{-- <div class="col-span-6">
+                                            <label for="namaArticle"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Article
+                                                Type</label>
+
+                                            <input placeholder="Add Article Type" type="text" name="namaArticle"
+                                                id="namaArticle" autocomplete="namaArticle"
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                value="{{ old('namaArticle') }}" required>
+
+                                            @if ($errors->has('namaArticle'))
+                                                <p class="text-red-500 mb-3 text-sm">{{ $errors->first('namaArticle') }}</p>
+                                            @endif
+                                        </div> --}}
 
                                         <div class="col-span-6">
                                             <label for="thumbnail-service"
@@ -105,7 +154,8 @@
                                                 </div>
                                             </div>
                                             <input placeholder="Keunggulan 3" type="file" accept="image/*"
-                                                onchange="loadFile(event)" name="photos[]" id="photos" autocomplete="photos"
+                                                onchange="loadFile(event)" name="photos[]" id="photos"
+                                                autocomplete="photos"
                                                 class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 required>
 
@@ -134,10 +184,11 @@
 
 
                                         <div class="col-span-6">
-                                            <label for="weight" class="block mb-3 font-medium text-gray-700 text-md">Weight
+                                            <label for="weight"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Weight
                                                 (gram)</label>
-                                            <input placeholder="Berat Barang" type="number" name="weight" id="weight"
-                                                autocomplete="weight"
+                                            <input placeholder="Berat Barang" type="number" name="weight"
+                                                id="weight" autocomplete="weight"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('weight') }}">
 
@@ -149,8 +200,8 @@
                                         <div class="col-span-6">
                                             <label for="stock"
                                                 class="block mb-3 font-medium text-gray-700 text-md">Stock</label>
-                                            <input placeholder="Minimum Stock" type="number" name="stock" id="stock"
-                                                autocomplete="stock"
+                                            <input placeholder="Minimum Stock" type="number" name="stock"
+                                                id="stock" autocomplete="stock"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('stock') }}">
 
@@ -160,11 +211,12 @@
                                         </div>
 
                                         <div class="col-span-6">
-                                            <label for="pilihan" class="block mb-3 font-medium text-gray-700 text-md">Colors
+                                            <label for="pilihan"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Colors
                                                 / Type (optional)</label>
 
-                                            <input placeholder="Colors / Type" type="text" name="pilihan[]" id="pilihan"
-                                                autocomplete="pilihan"
+                                            <input placeholder="Colors / Type" type="text" name="pilihan[]"
+                                                id="pilihan" autocomplete="pilihan"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('pilihan[]') }}">
 
@@ -178,7 +230,8 @@
                                         </div>
 
                                         <div class="col-span-6">
-                                            <label for="size" class="block mb-3 font-medium text-gray-700 text-md">Size
+                                            <label for="size"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Size
                                                 Product (optional)</label>
 
                                             <input placeholder="Size" type="text" name="size[]" id="size"
@@ -198,7 +251,8 @@
 
                                     <div class="flex mt-6">
                                         <label class="flex items-center">
-                                            <input type="checkbox" name="unggulanCheck" value="1" class="form-checkbox"
+                                            <input type="checkbox" name="unggulanCheck" value="1"
+                                                class="form-checkbox"
                                                 style="border-radius: 20%; outline: none !important; box-shadow:none !important;">
                                             <span class="ml-2">Jadikan Produk Unggulan</span>
                                         </label>

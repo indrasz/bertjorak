@@ -36,13 +36,13 @@
                 }
 
                 /* .row-full {
-                            width: 99.4vw;
-                            position: relative;
-                            margin-left: -50vw;
-                            margin-right: 0;
-                            height: 28px;
-                            left: 50%;
-                        } */
+                                                                                            width: 99.4vw;
+                                                                                            position: relative;
+                                                                                            margin-left: -50vw;
+                                                                                            margin-right: 0;
+                                                                                            height: 28px;
+                                                                                            left: 50%;
+                                                                                        } */
 
                 .cover-wrapper {
                     display: flex;
@@ -94,8 +94,13 @@
                     text-align: center;
                 }
 
+                /* .cover-wrapper .hero-slider .carousel-cell .inner h5 {
+                                                                                    margin-bottom: 32px;
+                                                                                    color: black;
+                                                                                } */
+
                 .hero-slider .carousel-cell .inner .btn {
-                    background: var(--secondary-color);
+                    background: transparent;
                     color: white;
                     border: none;
                     position: relative;
@@ -103,16 +108,19 @@
                     font-family: Poppins, sans-serif;
                     border-radius: 999px;
                     padding: 1rem 3rem;
+                    outline: 2px solid white;
                     text-decoration: none;
                 }
 
                 .hero-slider .carousel-cell .inner .btn:hover {
+                    background: var(--secondary-color);
                     position: relative;
                     font-weight: 600;
                     font-family: Poppins, sans-serif;
                     color: whitesmoke;
                     border: none;
                     border-radius: 999px;
+                    outline-offset: 3px;
                     padding: 1rem 3rem;
                     -webkit-box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
                     box-shadow: 0px 20px 40px rgba(132, 51, 170, 0.18);
@@ -168,8 +176,10 @@
                     @endphp
                     <div class="carousel-cell"
                         style="background-image: url('{{ asset('/storage/articles/images/' . $getImage) }}');">
-                        <div class="overlay"></div>
+                        <div class="overlay">
+                        </div>
                         <div class="inner">
+                            {{-- <h5>Stay Stunning and positive</h5> --}}
                             <a href="#" class="btn">Let's Explore</a>
                         </div>
                     </div>
@@ -188,6 +198,254 @@
                     @endif
                 @endif
             </div> --}}
+        </div>
+    </section>
+
+    <section class="latest-article">
+        <style>
+            .latest-article .flickity-slider {
+                animation: slide_image 1s;
+            }
+
+            @keyframes slide_image {
+                from {
+                    transform: translateY(10%);
+                    opacity: 0;
+                    transition: 5s;
+                }
+
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                    transition: 5s;
+                }
+            }
+
+            .latest-article .caption-related-product {
+                font: 600 1.50rem/1.90rem "Poppins", sans-serif;
+            }
+
+            .latest-article .d-flex {
+                padding-bottom: 24px;
+            }
+
+            .latest-article {
+                padding-top: 2rem;
+                transition: 0.5s ease-in;
+            }
+
+            .latest-article .latest-article-img {
+                position: relative;
+                isolation: isolate;
+                background-image: url('./frontend/images/latest_article.jpg');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 100%;
+                height: 400px;
+            }
+
+            .latest-article .latest-article-img::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                /* background: linear-gradient(91.7deg, rgb(50, 25, 79) -4.3%, rgb(122, 101, 149) 101.8%); */
+                background: linear-gradient(178.6deg, rgb(20, 36, 50) 11.8%, rgb(124, 143, 161) 83.8%);
+                opacity: .5;
+                z-index: -1;
+            }
+
+            .latest-article .latest-article-img {
+                overflow: hidden;
+                display: block;
+            }
+
+            .latest-article .latest-article-img div.inner-wrap {
+                font-family: 'RubberNippleFactory';
+                min-height: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                align-content: center;
+                justify-content: center;
+                position: relative;
+                color: white;
+                text-align: center;
+            }
+
+            .latest-article .card-related-carousel {
+                width: 325px;
+                padding: 28px 28px 40px;
+                border-radius: 28px;
+                background: white;
+            }
+
+            .latest-article .card-related-carousel .image-placeholder {
+                width: 269px;
+                height: 400px;
+                border-radius: 12px;
+                overflow: hidden;
+                background-size: cover;
+                background-position: center;
+                object-position: center;
+                cursor: pointer;
+            }
+
+            .latest-article .card-related-carousel .card-details a {
+                display: flex;
+                justify-content: center;
+            }
+
+            .latest-article .card-related-carousel .card-details .caption {
+                font-weight: 500;
+                font-size: 18px;
+                color: #080E09;
+                margin-top: 16px;
+                margin-bottom: 4px;
+            }
+
+            .latest-article .card-related-carousel .card-details .sub-caption {
+                font-weight: 400;
+                color: #ADB2B8;
+            }
+
+            .latest-article .card-related-carousel .card-details .bottom-text {
+                display: flex;
+                justify-content: center;
+            }
+
+            .latest-article .card-related-carousel .card-details .bottom-text .price-content {
+                color: #080E09;
+                font-size: 16px;
+            }
+
+            .latest-article .card-related-carousel .card-details .bottom-text .price-content span {
+                font-weight: 400;
+            }
+
+            .latest-article .card-related-carousel .card-details .bottom-text .price-content span.price {
+                font-weight: 700;
+            }
+
+            .latest-article .card-related-carousel .card-details .bottom-text .rating {
+                font-weight: 700;
+                font-size: 16px;
+                color: #FF9900;
+            }
+
+            .latest-article .card-related-carousel .card-details .bottom-text .rating img {
+                margin-top: -1px;
+                margin-right: 5px;
+            }
+
+            .image-placeholder:hover .inner-image {
+                display: block;
+                transition: 5s ease-in-out;
+            }
+
+            .inner-image {
+                display: none;
+                width: 269px;
+                height: 400px;
+                border-radius: 12px;
+                background-size: cover;
+                background-position: center;
+                object-position: center;
+                animation: fade_image .6s linear;
+            }
+
+            @keyframes fade_image {
+                from {
+                    opacity: 0;
+                }
+
+                to {
+                    opacity: 1;
+                }
+            }
+        </style>
+        <div class="container px-4">
+            <div class="latest-article-img">
+                <div class="inner-wrap">
+                    @php
+                        //sorting desc article dan meretrieve data nya
+                        $orderedArticlesDesc = $articles->sortByDesc('created_at');
+                        $latestArticleDesc = $orderedArticlesDesc->first();
+                        $getDesc = $latestArticleDesc->desc;
+                        
+                        //sorting nama article dan meretrieve data nya
+                        $orderedArticlesName = $articles->sortByDesc('created_at');
+                        $latestArticleName = $orderedArticlesName->first();
+                        $getNamaArticle = $latestArticleName->nama_article;
+                    @endphp
+                    <p class="mb-0">Latest Release</p>
+                    <h1 style="margin-bottom: 0;">{{ $getNamaArticle }}</h1>
+                    <h5 style="margin-bottom: 0;">{{ $getDesc }}</h5>
+                    {{-- <a href="#" class="btn">Let's Explore</a> --}}
+                </div>
+            </div>
+        </div>
+        <div class="container px-4" style="padding-top: 2rem;">
+            <div class="d-flex justify-content-between align-items-center flex-wrap pb-main">
+                @foreach ($articles as $at)
+                    {{-- @php
+                        $orderedArticlesLogo = $articles->sortByDesc('created_at');
+                        $latestArticleLogo = $orderedArticlesLogo->first();
+                        $getLogo = $latestArticleDesc->logo_header;
+                    @endphp --}}
+                    @if ($at->logo_header != null)
+                        <div class="caption-related-product">
+                            <img src="{{ asset('/storage/articles/logo/' . json_decode($at->logo_header, true)) }}"
+                                alt="Logo Header" width="200">
+                        </div>
+                    @endif
+                @endforeach
+                <a class="btn btn-link align-self-end pb-sm-down-0 small-text scroll-fadeInUp fadeInUp d2"
+                    href="{{ url('/product') }}" style="color:black; font-size: 14px;">
+                    Show All
+                </a>
+            </div>
+            <hr class="divider" style="border-size: 1px; color:#A4A7B1; margin: 0;">
+            @if (count($products) >= 1)
+                <div class="carousel pt-4"
+                    data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
+
+                    @foreach ($products as $pr)
+                        @if ($pr->id_product)
+                            <div class="card-related-carousel">
+                                @php
+                                    $property_images = json_decode($pr->images);
+                                @endphp
+                                <a href="{{ route('detail.show', $pr->id_product) }}">
+                                    <div class="image-placeholder"
+                                        style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');">
+                                        <div class="inner-image"
+                                            style="background-image: url('{{ asset('/storage/products/images/' . $property_images[1]) }}');">
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <div class="card-details">
+                                    <a href="{{ route('detail.show', $pr->id_product) }}" style="text-decoration: none;">
+                                        <div class="caption">{{ $pr->title }}</div>
+                                    </a>
+
+                                    <div class="bottom-text">
+                                        <div class="price-content">
+                                            <span class="price">@currency($pr->price)</span>
+                                        </div>
+                                        {{-- <div class="rating d-flex align-items-center">
+                                                <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
+                                                    alt="star" />
+                                                <span></span>
+                                            </div> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            @endif
         </div>
     </section>
 
@@ -368,8 +626,6 @@
                 justify-content: center;
             }
 
-            
-
             .resort .card-related-carousel .card-details .caption {
                 font-weight: 500;
                 font-size: 18px;
@@ -411,8 +667,6 @@
                 margin-top: -1px;
                 margin-right: 5px;
             }
-
-            
 
             .image-placeholder:hover .inner-image {
                 display: block;

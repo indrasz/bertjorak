@@ -24,18 +24,18 @@ class HomeController extends Controller
     public function allProduct()
     {
 
-        if(Request::get('sort') == 'price_asc') {
-            $products = Product::orderBy('price')->get();     
-        } elseif(Request::get('sort') == 'price_desc') {
-            $products = Product::orderByDesc('price')->get(); 
-        } elseif(Request::get('sort') == 'newest') {
-            $products = Product::orderByDesc('created_at')->get(); 
-        } elseif(Request::get('sort') == 'popularity') {
-            $products = Product::orderByDesc('unggulan')->get(); 
-        } else {
-            $products = Product::all();
-        }
-        
+        // if(Request::get('sort') == 'price_asc') {
+        //     return $products = Product::orderBy('price')->get();     
+        // } elseif(Request::get('sort') == 'price_desc') {
+        //     $products = Product::orderByDesc('price')->get(); 
+        // } elseif(Request::get('sort') == 'newest') {
+        //     $products = Product::orderByDesc('created_at')->get(); 
+        // } elseif(Request::get('sort') == 'popularity') {
+        //     $products = Product::orderByDesc('unggulan')->get(); 
+        // }   else {
+        //     $products = Product::all();
+        // }
+        $products = Product::all();
         return view('pages.store.product')->with('products', $products);
         
     }

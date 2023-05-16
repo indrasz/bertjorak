@@ -10,4 +10,9 @@ class Product extends Model
     use HasFactory;
     protected $primaryKey = 'id_product';
     protected $guarded = [];
+
+    public function products()
+    {
+        return $this->hasMany(Article::class);
+    }
 }

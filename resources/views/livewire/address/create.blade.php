@@ -69,8 +69,6 @@
             @php
                 foreach ($user as $keyid) {
                     $getCountries = $keyid->countries_name;
-                    
-                    
                     //dd($get);
                 }
             @endphp
