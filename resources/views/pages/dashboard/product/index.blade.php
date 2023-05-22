@@ -59,8 +59,14 @@
                                                                 </div>
                                                             @endif
 
-                                                            <div class="m-auto"
-                                                                style="width: 2.5rem; height: 2.5rem;">
+                                                            @if ($d->latest_article == 1)
+                                                                <div class="absolute bottom-3 -mr-12">
+                                                                    <img
+                                                                        src="{{ asset('dashboard_assets/images/new.png') }}" />
+                                                                </div>
+                                                            @endif
+
+                                                            <div class="m-auto" style="width: 2.5rem; height: 2.5rem;">
                                                                 <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}"
                                                                     alt="image-product"
                                                                     class="object-cover w-full h-full rounded-full">

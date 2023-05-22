@@ -18,20 +18,20 @@ class ProductList extends Component
 
         if (request()->has('sort')) {
             $filter = request('sort');
-            if ($filter == 'price_asc') {
+            if ($filter == 'Lowest-Price') {
                 $productsQuery->orderBy('price');
-            } else if($filter == 'price_desc') {
+            } else if($filter == 'Highest-Price') {
                 $productsQuery->orderByDesc('price');
-            } else if($filter == 'newest') {
+            } else if($filter == 'Newest') {
                 $productsQuery->orderByDesc('created_at');
-            } else if($filter == 'popularity') {
+            } else if($filter == 'Popularity') {
                 $productsQuery->orderByDesc('unggulan');
             } else {
                 $products = Product::all();
             }
         }
 
-        $products = $productsQuery->paginate(10);
+        $products = $productsQuery->paginate(10)->appends(['sort' => request('sort')]);
 
         return view('livewire.product.product-list', compact('products'));
 

@@ -90,6 +90,11 @@ class ProductController extends Controller
         } else {
             $file->unggulan = null;
         }
+        if (isset($request->latestArticleCheck)) {
+            $file->latest_article = $request->latestArticleCheck;
+        } else {
+            $file->latest_article = null;
+        }
         $file->stock = $request->stock;
         if ($pilihanText[0][0] != null) {
             $file->pilihan = json_encode($pilihanText);
@@ -191,6 +196,11 @@ class ProductController extends Controller
             $productUp->unggulan = $request->unggulanCheck;
         } else {
             $productUp->unggulan = null;
+        }
+        if (isset($request->latestArticleCheck)) {
+            $productUp->latest_article = $request->latestArticleCheck;
+        } else {
+            $productUp->latest_article = null;
         }
         $productUp->stock = $request->stock;
         if ($pilihanText[0][0] != null) {

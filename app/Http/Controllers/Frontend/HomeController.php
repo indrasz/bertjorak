@@ -15,10 +15,10 @@ class HomeController extends Controller
         $articleList = Article::all();
 
         // Product List
-        $productList = Product::where('unggulan', '=', '1')->get();
+        $products = Product::all();
 
 
-        return view('pages.store.index')->with('products', $productList)->with('articles', $articleList);
+        return view('pages.store.index')->with('products', $products)->with('articles', $articleList);
     }
 
     public function allProduct()

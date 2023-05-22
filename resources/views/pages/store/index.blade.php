@@ -36,13 +36,13 @@
                 }
 
                 /* .row-full {
-                                                                                            width: 99.4vw;
-                                                                                            position: relative;
-                                                                                            margin-left: -50vw;
-                                                                                            margin-right: 0;
-                                                                                            height: 28px;
-                                                                                            left: 50%;
-                                                                                        } */
+                                                                                                                    width: 99.4vw;
+                                                                                                                    position: relative;
+                                                                                                                    margin-left: -50vw;
+                                                                                                                    margin-right: 0;
+                                                                                                                    height: 28px;
+                                                                                                                    left: 50%;
+                                                                                                                } */
 
                 .cover-wrapper {
                     display: flex;
@@ -95,9 +95,9 @@
                 }
 
                 /* .cover-wrapper .hero-slider .carousel-cell .inner h5 {
-                                                                                    margin-bottom: 32px;
-                                                                                    color: black;
-                                                                                } */
+                                                                                                            margin-bottom: 32px;
+                                                                                                            color: black;
+                                                                                                        } */
 
                 .hero-slider .carousel-cell .inner .btn {
                     background: transparent;
@@ -246,11 +246,11 @@
             }
 
             .latest-article .latest-article-img::after {
+                /* background: linear-gradient(91.7deg, rgb(50, 25, 79) -4.3%, rgb(122, 101, 149) 101.8%); */
+                background: linear-gradient(178.6deg, rgb(20, 36, 50) 11.8%, rgb(124, 143, 161) 83.8%);
                 content: '';
                 position: absolute;
                 inset: 0;
-                /* background: linear-gradient(91.7deg, rgb(50, 25, 79) -4.3%, rgb(122, 101, 149) 101.8%); */
-                background: linear-gradient(178.6deg, rgb(20, 36, 50) 11.8%, rgb(124, 143, 161) 83.8%);
                 opacity: .5;
                 z-index: -1;
             }
@@ -283,7 +283,7 @@
             .latest-article .card-related-carousel .image-placeholder {
                 width: 269px;
                 height: 400px;
-                border-radius: 12px;
+                /* border-radius: 12px; */
                 overflow: hidden;
                 background-size: cover;
                 background-position: center;
@@ -354,6 +354,14 @@
                 animation: fade_image .6s linear;
             }
 
+            .image-spin-article {
+                position: absolute;
+                left: -75px;
+                width: 150px;
+                height: 150px;
+                animation: spin 7s infinite;
+            }
+
             @keyframes fade_image {
                 from {
                     opacity: 0;
@@ -361,6 +369,12 @@
 
                 to {
                     opacity: 1;
+                }
+            }
+
+            @media screen and (max-width: 700px) {
+                .image-spin-article {
+                    display: none;
                 }
             }
         </style>
@@ -385,7 +399,8 @@
                 </div>
             </div>
         </div>
-        <div class="container px-4" style="padding-top: 2rem;">
+        <div class="container px-4 pt-4">
+            <img src="{{ asset('frontend/images/set1@300x.png') }}" class="image-spin-article" />
             <div class="d-flex justify-content-between align-items-center flex-wrap pb-main">
                 @foreach ($articles as $at)
                     {{-- @php
@@ -406,46 +421,50 @@
                 </a>
             </div>
             <hr class="divider" style="border-size: 1px; color:#A4A7B1; margin: 0;">
-            @if (count($products) >= 1)
+            @php
+                // Retrieve the latest articles from the $products collection
+                $latestArticles = $products->where('latest_article', '=', '1');
+            @endphp
+
+            @if (count($latestArticles) >= 1)
                 <div class="carousel pt-4"
                     data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
 
-                    @foreach ($products as $pr)
-                        @if ($pr->id_product)
-                            <div class="card-related-carousel">
-                                @php
-                                    $property_images = json_decode($pr->images);
-                                @endphp
-                                <a href="{{ route('detail.show', $pr->id_product) }}">
-                                    <div class="image-placeholder"
-                                        style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');">
-                                        <div class="inner-image"
-                                            style="background-image: url('{{ asset('/storage/products/images/' . $property_images[1]) }}');">
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <div class="card-details">
-                                    <a href="{{ route('detail.show', $pr->id_product) }}" style="text-decoration: none;">
-                                        <div class="caption">{{ $pr->title }}</div>
-                                    </a>
-
-                                    <div class="bottom-text">
-                                        <div class="price-content">
-                                            <span class="price">@currency($pr->price)</span>
-                                        </div>
-                                        {{-- <div class="rating d-flex align-items-center">
-                                                <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
-                                                    alt="star" />
-                                                <span></span>
-                                            </div> --}}
+                    @foreach ($latestArticles as $la)
+                        <div class="card-related-carousel">
+                            @php
+                                $property_images = json_decode($la->images);
+                            @endphp
+                            <a href="{{ route('detail.show', $la->id_product) }}">
+                                <div class="image-placeholder"
+                                    style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');">
+                                    <div class="inner-image"
+                                        style="background-image: url('{{ asset('/storage/products/images/' . $property_images[1]) }}');">
                                     </div>
                                 </div>
+                            </a>
+
+                            <div class="card-details">
+                                <a href="{{ route('detail.show', $la->id_product) }}" style="text-decoration: none;">
+                                    <div class="caption">{{ $la->title }}</div>
+                                </a>
+
+                                <div class="bottom-text">
+                                    <div class="price-content">
+                                        <span class="price">@currency($la->price)</span>
+                                    </div>
+                                    {{-- <div class="rating d-flex align-items-center">
+                            <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
+                                alt="star" />
+                            <span></span>
+                        </div> --}}
+                                </div>
                             </div>
-                        @endif
+                        </div>
                     @endforeach
                 </div>
             @endif
+            <hr class="divider" style="border-size: 1px; color:#A4A7B1; margin: 0;">
         </div>
     </section>
 
@@ -493,10 +512,9 @@
                 .video-campaign {
                     padding-top: 3rem;
                     padding-bottom: 3rem;
-
                 }
             }
-
+            
             @media screen and (max-width: 620px) {
 
                 #glass {
@@ -521,9 +539,9 @@
     </section>
 
     <section class="resort">
-        <img src="{{ asset('frontend/images/set1@300x.png') }}" class="image-spin" />
+        <img src="{{ asset('frontend/images/set1@300x.png') }}" class="image-spin-resort" />
         <div class="container px-4">
-            @if (count($products) >= 1)
+            {{-- @if (count($products) >= 1)
                 <div class="d-flex justify-content-between align-items-center flex-wrap pb-main">
                     <div class="caption-related-product">
                         Popular Products
@@ -562,21 +580,72 @@
                                         <div class="price-content">
                                             <span class="price">@currency($pr->price)</span>
                                         </div>
-                                        {{-- <div class="rating d-flex align-items-center">
-                                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
-                                            alt="star" />
-                                        <span></span>
-                                    </div> --}}
                                     </div>
                                 </div>
                             </div>
                         @endif
                     @endforeach
                 </div>
+            @endif --}}
+            @php
+                // Retrieve the latest articles from the $products collection
+                $unggulanProducts = $products->where('unggulan', '=', '1');
+            @endphp
+
+            @if (count($unggulanProducts) >= 1)
+                <div class="d-flex justify-content-between align-items-center flex-wrap pb-main">
+                    <div class="caption-related-product">
+                        Popular Products
+                    </div>
+                    <a class="btn btn-link align-self-end pb-sm-down-0 small-text scroll-fadeInUp fadeInUp d2"
+                        href="{{ url('/product') }}" style="color:black; font-size: 14px;">
+                        Show All
+                    </a>
+                </div>
+                <hr class="divider" style="border-size: 1px; color:#A4A7B1; margin: 0;">
+                <div class="carousel pt-4"
+                    data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
+
+                    @foreach ($unggulanProducts as $up)
+                        <div class="card-related-carousel">
+                            @php
+                                $property_images = json_decode($up->images);
+                            @endphp
+                            <a href="{{ route('detail.show', $up->id_product) }}">
+                                <div class="image-placeholder"
+                                    style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');">
+                                    <div class="inner-image"
+                                        style="background-image: url('{{ asset('/storage/products/images/' . $property_images[1]) }}');">
+                                    </div>
+                                </div>
+                            </a>
+
+                            <div class="card-details">
+                                <a href="{{ route('detail.show', $up->id_product) }}" style="text-decoration: none;">
+                                    <div class="caption">{{ $up->title }}</div>
+                                </a>
+
+                                <div class="bottom-text">
+                                    <div class="price-content">
+                                        <span class="price">@currency($up->price)</span>
+                                    </div>
+                                    {{-- <div class="rating d-flex align-items-center">
+                            <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
+                                alt="star" />
+                            <span></span>
+                        </div> --}}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             @endif
         </div>
 
         <style>
+            .resort {
+                padding-bottom: 32px;
+            }
             .resort .flickity-slider {
                 animation: slide_image 1s;
             }
@@ -613,7 +682,7 @@
             .resort .card-related-carousel .image-placeholder {
                 width: 269px;
                 height: 400px;
-                border-radius: 12px;
+                /* border-radius: 12px; */
                 overflow: hidden;
                 background-size: cover;
                 background-position: center;
@@ -694,7 +763,7 @@
                 }
             }
 
-            .image-spin {
+            .image-spin-resort {
                 position: absolute;
                 left: -75px;
                 width: 150px;
@@ -703,7 +772,7 @@
             }
 
             @media screen and (max-width: 700px) {
-                .image-spin {
+                .image-spin-resort {
                     display: none;
                 }
             }

@@ -257,6 +257,14 @@
                                             <span class="ml-2">Jadikan Produk Unggulan</span>
                                         </label>
                                     </div>
+                                    <div class="flex mt-6">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="latestArticleCheck" value="1"
+                                                class="form-checkbox"
+                                                style="border-radius: 20%; outline: none !important; box-shadow:none !important;">
+                                            <span class="ml-2">Jadikan Latest Article</span>
+                                        </label>
+                                    </div>
 
                                 </div>
 

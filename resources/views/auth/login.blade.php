@@ -43,7 +43,7 @@
                             <div class="heading">
                                 <h3>Welcome Back</h3>
                                 <h6>Not Registered Yet?</h6>
-                                <a href="#" class="toggle">Sign Up</a>
+                                <a href="#signup" class="toggle">Sign Up</a>
                             </div>
                             <div class="actual-form">
                                 <div class="input-wrap">
@@ -144,9 +144,6 @@
         </main>
 
     </section>
-
-    {{-- Footer --}}
-    @include('includes.Frontend.footer')
 
     {{-- JS --}}
     <script type="text/javascript" src="{{ asset('js/account.js') }}"></script>
