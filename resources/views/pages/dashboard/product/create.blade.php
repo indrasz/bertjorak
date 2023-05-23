@@ -77,14 +77,18 @@
                                         </div>
 
                                         <div class="col-span-6">
-                                            <label for="nama_article" class="block mb-3 font-medium text-gray-700 text-md">Nama Article</label>
+                                            <label for="nama_article"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Nama Article</label>
                                             @php
                                                 $getNamaArticle = old('nama_article');
                                             @endphp
-                                            <select name="nama_article" id="nama_article" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                <option value="" @if (old('nama_article') == "") selected @endif>Select Article</option>
+                                            <select name="nama_article" id="nama_article"
+                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                <option value="" @if (old('nama_article') == '') selected @endif>
+                                                    Select Article</option>
                                                 @foreach ($articles as $article)
-                                                    <option value="{{ $article->nama_article }}" @if (old('nama_article') == $article->nama_article || $getNamaArticle == $article->nama_article) selected @endif>
+                                                    <option value="{{ $article->nama_article }}"
+                                                        @if (old('nama_article') == $article->nama_article || $getNamaArticle == $article->nama_article) selected @endif>
                                                         {{ $article->nama_article }}
                                                     </option>
                                                 @endforeach
@@ -161,8 +165,6 @@
 
                                             <div id="newThumbnailRow"></div>
 
-
-
                                             <button type="button"
                                                 class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                                                 id="addThumbnailRow">
@@ -187,8 +189,8 @@
                                             <label for="weight"
                                                 class="block mb-3 font-medium text-gray-700 text-md">Weight
                                                 (gram)</label>
-                                            <input placeholder="Berat Barang" type="number" name="weight"
-                                                id="weight" autocomplete="weight"
+                                            <input placeholder="Berat Barang" type="number" name="weight" id="weight"
+                                                autocomplete="weight"
                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                 value="{{ old('weight') }}">
 
@@ -247,6 +249,34 @@
                                                 Tambahkan Size Yang Tersedia +
                                             </button>
                                         </div>
+
+                                        <div class="col-span-6">
+                                            <label for="thumbnail-service"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Thumbnail Size Chart
+                                            </label>
+
+                                            <div class="w-full flex place-content-center place-items-center">
+                                                <div
+                                                    class="border-2 border-gray-400 border-dotted w-80 h-80 overflow-hidden rounded-xl">
+                                                    <img src="{{ asset('assets/images/empty-illustration.svg') }}"
+                                                        id="sizeChartThumbnail" class="w-full h-full bg-cover" />
+                                                </div>
+                                            </div>
+                                            <input placeholder="Size Chart" type="file" accept="image/*"
+                                                onchange="loadSizeChartThumbnail(event)" name="size_photos[]"
+                                                id="size_photos" autocomplete="size_photos"
+                                                class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                required>
+
+                                            <div id="newSizeThumbnailRow"></div>
+
+                                            <button type="button"
+                                                class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                                id="addSizeThumbnailRow">
+                                                Tambahkan Gambar +
+                                            </button>
+                                        </div>
+
                                     </div>
 
                                     <div class="flex mt-6">
@@ -334,6 +364,13 @@
             $('#newThumbnailRow').append(html);
         });
 
+        $("#addSizeThumbnailRow").click(function() {
+            var html = '';
+            html +=
+                ' <input placeholder="Size Chart" type="file" accept="image/*" onchange="loadSizeChartThumbnail(event)" name="size_photos[]" id="size_photos" class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>'
+            $('#newSizeThumbnailRow').append(html);
+        });
+
         // remove row
         $(document).on('click', '#removeAdvantagesRow', function() {
             $(this).closest('#inputFormAdvantagesRow').remove();
@@ -358,5 +395,13 @@
                 URL.revokeObjectURL(output.src) // free memory
             }
         };
+
+        function loadSizeChartThumbnail(event) {
+            var output = document.getElementById('sizeChartThumbnail');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        }
     </script>
 @endpush

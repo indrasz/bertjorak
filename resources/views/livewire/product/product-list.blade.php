@@ -20,10 +20,12 @@
                         <a href="{{ URL::current() . '?sort=Featured' }}" class="option-text">Featured</a>
                     </li>
                     <li class="option">
-                        <a href="{{ URL::current() . '?sort=Lowest-Price' }}" class="option-text">Price - Low to High</a>
+                        <a href="{{ URL::current() . '?sort=Lowest-Price' }}" class="option-text">Price - Low to
+                            High</a>
                     </li>
                     <li class="option">
-                        <a href="{{ URL::current() . '?sort=Highest-Price' }}" class="option-text">Price - High to Low</a>
+                        <a href="{{ URL::current() . '?sort=Highest-Price' }}" class="option-text">Price - High to
+                            Low</a>
                     </li>
                     <li class="option">
                         <a href="{{ URL::current() . '?sort=Newest' }}" class="option-text">Newest</a>
@@ -46,7 +48,7 @@
         .sort.px-4 {
             font-size: 14px;
             position: relative;
-            z-index: 999999;
+            z-index: 1000;
             top: 20px;
             transform: translateY(20px);
         }
@@ -159,16 +161,22 @@
             </div>
         @empty
             <style>
-                .center {
+                img.center {
+                    width: 50%;
                     display: block;
                     margin-left: auto;
                     margin-right: auto;
                     vertical-align: center;
                 }
+
+                @media screen and (max-width: 992px) {
+                    img.center {
+                        width: 100%;
+                    }
+                }
             </style>
             <div style="height: 100vh;">
-                <img src="{{ asset('assets/images/no-product-found.png') }}" style="width: 50%;" class="center"
-                    alt="Not Found">
+                <img src="{{ asset('assets/images/no-product-found.png') }}" class="center" alt="Not Found">
             </div>
         @endforelse
 

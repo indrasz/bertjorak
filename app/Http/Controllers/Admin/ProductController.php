@@ -57,6 +57,8 @@ class ProductController extends Controller
         $this->validate($request, [
             'photos' => 'required',
             'photos.*' => 'mimes:png,jpg,jpeg',
+            'size_photos' => 'required',
+            'size_photos.*' => 'mimes:png,jpg,jpeg',
 
             'name' => 'required|max:100',
             'price' => 'required',
@@ -76,11 +78,21 @@ class ProductController extends Controller
             }
         }
 
+        if ($request->hasfile('size_photos')) {
+            foreach ($request->file('size_photos') as $imageSize) {
+                $nameSize = time() . rand(1, 100) . ' - ' . $imageSize->getClientOriginalName();
+                $imageSize->storeAs('products/size_images/', $nameSize, 'public');
+                $dataSize[] = $nameSize;
+            }
+        }
+
+
         $pilihanText[] = $request->pilihan;
         $sizeText[] = $request->size;
 
         $file = new Product();
         $file->images = json_encode($data);
+        $file->size_charts = json_encode($dataSize);
         $file->nama_article = $request->nama_article;
         $file->title = $request->name;
         $file->price = $request->price;
@@ -129,7 +141,7 @@ class ProductController extends Controller
         $editData = Product::where('id_product', $id)->get();
         $articles = Article::where('id', '>', 1)
             ->get('nama_article');
-        return view('pages.dashboard.product.edit')->with('articles',$articles)->with('editData', $editData);
+        return view('pages.dashboard.product.edit')->with('articles', $articles)->with('editData', $editData);
     }
 
     /**
@@ -143,6 +155,7 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'photos.*' => 'mimes:png,jpg,jpeg',
+            'size_photos.*' => 'mimes:png,jpg,jpeg',
 
             'name' => 'required|max:100',
             'price' => 'required',
@@ -153,9 +166,9 @@ class ProductController extends Controller
             'weight' => 'required',
         ]);
 
-        
+
         $editData = Product::where('id_product', $id)->get();
-        
+
 
         if ($request->hasfile('photos')) {
             // Delete Old Photos
@@ -177,7 +190,30 @@ class ProductController extends Controller
                 $dataNewImages[] = $name;
             }
         }
-        
+
+        $dataNewSize = []; // Declare an empty array
+
+        if ($request->hasfile('size_photos')) {
+            // Delete Old Photos
+            foreach ($editData as $key) {
+                $imageSz = json_decode($key->size_charts, true);
+                $files = array($imageSz);
+                foreach ($files as $imageSize) {
+                    for ($i = 0; $i < count($imageSize); $i++) {
+                        File::delete(storage_path() . '/app/public/products/size_images/' . $imageSize[$i]);
+                    }
+                }
+            }
+
+            // Add new images
+            foreach ($request->size_photos as $imageSize) {
+                $nameSize = time() . rand(1, 100) . ' - ' . $imageSize->getClientOriginalName();
+                $imageSize->storeAs('products/size_images/', $nameSize, 'public');
+                $dataNewSize[] = $nameSize;
+            }
+        }
+
+
 
         $imageInput[] = $request->photos;
         $pilihanText[] = $request->pilihan;
@@ -187,6 +223,9 @@ class ProductController extends Controller
 
         if ($imageInput[0] != null) {
             $productUp->images = json_encode($dataNewImages);
+        }
+        if ($imageInput[0] != null) {
+            $productUp->size_charts = json_encode($dataNewSize);
         }
         $productUp->title = $request->name;
         $productUp->price = $request->price;
@@ -230,6 +269,10 @@ class ProductController extends Controller
 
         foreach (json_decode($data->images, true) as $image => $value) {
             File::delete(storage_path() . '/app/public/products/images/' . $value);
+        }
+
+        foreach (json_decode($data->size_charts, true) as $imageSize => $value) {
+            File::delete(storage_path() . '/app/public/products/size_images/' . $value);
         }
 
         if ($data->delete()) {

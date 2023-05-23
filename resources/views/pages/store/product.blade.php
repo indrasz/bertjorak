@@ -24,7 +24,7 @@
 
 
     <section class="related-product w-100 h-100">
-        <div class="container px-4 mt-4">
+        <div class="container px-4 mt-4 mb-4">
 
             <style>
                 div.image-placeholder .img-thumbnail {

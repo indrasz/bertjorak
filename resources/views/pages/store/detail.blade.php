@@ -8,10 +8,18 @@
     @include('includes.Frontend.navbar2')
 
     <section class="main-detail-product">
-        <section class="w-100 h-100 breadcrumb-section">
+        <section class="w-100 h-100 breadcrumb-section my-2">
             <div class="container font-noto-sans">
+                <style>
+                    @media screen and (max-width: 530px) {
+                        div.container.font-noto-sans {
+                            padding-left: 3rem;
+                            padding-right: 3rem;
+                        }
+                    }
+                </style>
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb ms-4 mt-5 mb-0">
+                    <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Product</li>
                     </ol>
@@ -30,16 +38,17 @@
 
                 <input type="text" name="idProduct" id="idProduct" value="{{ $d->id_product }}" hidden>
                 <section class="w-100 h-100 detail-product">
-                    <div class="container mt-4 pb-5">
-                        <div class="row">
-                            <div class="col-12 col-lg-7 ">
-                                <div class="card-product p-4">
+                    <div class="container">
+                        <div class="row" style="justify-content: space-between;">
+                            <div class="col-12 col-lg-4 my-4">
+                                <style></style>
+                                <div class="card-product">
 
                                     @php
                                         $property_images = json_decode($d->images);
                                     @endphp
-                                    <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}" class="w-100"
-                                        alt="" id="imgDisp">
+                                    <img src="{{ asset('/storage/products/images/' . $property_images[0]) }}" alt=""
+                                        id="imgDisp" style="width: 100%;">
 
                                     <div class="carousel pt-2"
                                         data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
@@ -55,7 +64,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-lg-5">
+                            <div class="col-12 col-lg-8">
                                 <div class="card-detail-product py-4 px-4 mt-4">
                                     <div class="product-name ms-2 ps-2 mt-3">
                                         {{ $d->title }}
@@ -162,8 +171,6 @@
                                 .main-detail-product {
                                     position: relative;
                                     top: 104.57px;
-                                    "
-
                                 }
 
                                 .detail-product .card-detail-product {
@@ -196,15 +203,76 @@
                                 }
 
                                 .detail-product input[type="radio"]:checked+.detail-size-card {
-                                    border: 2px solid var(--dull-purple);
-                                    color: var(--dull-purple);
-                                    min-width: 5rem;
-                                    padding: 2.5px !important;
+                                    border: 1px solid #000000;
+                                    color: #000000;
+                                    min-width: 7rem;
+                                    padding: 5px !important;
                                     text-align: center;
                                     background-color: rgba(0, 186, 255, 0.05);
                                 }
 
                                 .detail-product .detail-size-card {
+                                    border: 1px solid rgba(0, 0, 0, .15);
+                                    border-radius: 6px;
+                                    min-width: 7rem;
+                                    padding: 5px !important;
+                                    text-align: center;
+                                    font-size: 17px;
+                                }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                            </style>
+                        </div>
+                        <hr class="divider" style="border-size: 2px; color:#A4A7B1;">
+                    </div>
+                </section>
+                <section class="w-100 h-100 size-chart">
+                    <div class="container mt-4 pb-2">
+                        <h5 class="size-chart my-2">Size Chart</h5>
+                        <div class="row">
+                            <div class="col-12 col-lg-7 my-4">
+                                <div class="card-size">
+
+                                    @php
+                                        $property_size_images = json_decode($d->size_charts);
+                                    @endphp
+
+                                    <div id="imgSizeDispContainer">
+                                        <img src="{{ asset('/storage/products/size_images/' . $property_size_images[0]) }}"
+                                            alt="" id="imgSizeDisp" style="height: 50%; width: 100%">
+                                    </div>
+
+                                    <div class="carousel-size pt-2"
+                                        data-flickity='{ "cellAlign": "top", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
+                                        @foreach (json_decode($d->size_charts, true) as $size_image)
+                                            <img src="{{ asset('/storage/products/size_images/' . $size_image) }}"
+                                                class="w-25 img-thumbnail"
+                                                onclick="changeSizeImage('{{ asset('/storage/products/size_images/' . $size_image) }}')"
+                                                alt="">
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- <div class="col-md-12 ">
+                            <div class="card-detail-product py-4 px-4 mt-4">
+                                <div class="product-name ms-2 ps-2 mt-3">
+                                    {{ $d->title }}
+                                </div>
+
+                                <button type="submit" class="btn btn-add-cart d-inline-block w-100 p-2 mt-4">
+                                    Add to cart
+                                </button>
+                            </div>
+                        </div> --}}
+
+                            <style>
+                                .size-chart .card-detail-product {
+                                    box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
+                                    border-radius: 15px;
+                                    background-color: #ffffff;
+                                }
+
+                                .size-chart .detail-size-card {
                                     border: 2px solid #000000;
                                     border-radius: 6px;
                                     min-width: 5rem;
@@ -212,17 +280,9 @@
                                     text-align: center;
                                     font-size: 17px;
                                 }
-
-                                /* .detail-product .detail-size-card #icon-check{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    transition: all 0.1s linear;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .detail-product input[type="radio"]:checked+.detail-size-card #icon-check{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 1;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                } */
                             </style>
                         </div>
+                        <hr class="divider" style="border-size: 2px; color:#A4A7B1;">
                     </div>
                 </section>
             </form>
@@ -232,8 +292,8 @@
             @endphp
         @endforeach
 
-        <section class="related-product w-100 h-100">
-            <div class="container px-4">
+        <section class="related-product w-100 h-100 mb-5">
+            <div class="container">
                 @if (count($dataAll) >= 2)
                     <div class="caption-related-product ps-3">
                         Explore Our Product
@@ -248,7 +308,7 @@
                                         $property_images = json_decode($all->images);
                                     @endphp
 
-                                     <a href="{{ route('detail.show', $all->id_product) }}">
+                                    <a href="{{ route('detail.show', $all->id_product) }}">
                                         <div class="image-placeholder"
                                             style="background-image: url('{{ asset('/storage/products/images/' . $property_images[0]) }}');">
                                             <div class="inner-image"
@@ -387,6 +447,10 @@
                 function changeImage(imgName) {
                     image = document.getElementById('imgDisp');
                     image.src = imgName;
+                }
+
+                function changeSizeImage(imageUrl) {
+                    document.getElementById('imgSizeDisp').src = imageUrl;
                 }
             </script>
         </section>

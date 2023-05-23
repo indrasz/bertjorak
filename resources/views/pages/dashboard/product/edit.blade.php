@@ -333,7 +333,90 @@
                                                     Tambahkan Size Yang Tersedia +
                                                 </button>
                                             </div>
+
+                                            <div class="col-span-6">
+                                                <label for="thumbnail-service"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Thumbnail Size
+                                                    Chart</label>
+
+                                                <style>
+                                                    .grid-wrapper {
+                                                        --auto-grid-min-size: 10rem;
+                                                        display: grid;
+                                                        grid-gap: 2rem;
+                                                        grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+                                                        margin: 0;
+                                                        padding: 0;
+                                                        box-sizing: border-box;
+                                                        font-family: 'Montserrat', sans-serif;
+
+                                                    }
+
+                                                    .grid-wrapper li {
+                                                        color: #ffffff;
+                                                        font-size: 24px;
+                                                        list-style-type: none;
+                                                        margin: auto;
+                                                        text-align: center;
+                                                        text-transform: capitalize;
+                                                        font-weight: 600;
+                                                        overflow: hidden;
+
+                                                    }
+
+                                                    .main-container {
+                                                        margin: 0 auto;
+                                                        max-width: 1170px;
+                                                    }
+                                                </style>
+
+                                                <div class="p-2">
+                                                    <div class="w-50 p-3" style="background-color: #eee;">
+                                                        <h5>Gambar yang disimpan:</h5>
+                                                        @if ($d->size_charts != null)
+                                                            <div class="row flex">
+                                                                <div class="main-container">
+                                                                    <ul class="grid-wrapper">
+                                                                        @foreach (json_decode($d->size_charts, true) as $i)
+                                                                            <li>
+                                                                                <img src="{{ asset('/storage/products/size_images/' . $i) }}"
+                                                                                    class="img-thumbnail p-1" alt=""
+                                                                                    style="width: 100%; border-radius: 5%;">
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </div>
+
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+
+                                                <img src="{{ asset('assets/images/empty-illustration.svg') }}"
+                                                    id="sizeChartThumbnail"
+                                                    style="width: 25%; padding-top: 1.5%; padding-bottom: 1.5%;" />
+                                                <input placeholder="Size Charts" value="{{ $d->size_charts }}" type="file"
+                                                    name="size_photos[]" id="size_photos" autocomplete="size_photos"
+                                                    onchange="loadSizeChartThumbnail(event)"
+                                                    class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+
+                                                @if ($errors->has('size_photos[]'))
+                                                    <p class="text-red-500 mb-3 text-sm">{{ $errors->first('size_photos') }}
+                                                    </p>
+                                                @endif
+
+                                                <div id="newSizeThumbnailRow"></div>
+
+                                                <button type="button"
+                                                    class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                                    id="addSizeThumbnailRow">
+                                                    Tambahkan Gambar +
+                                                </button>
+                                            </div>
                                         </div>
+
+                                        
 
                                         {{-- @php
                                             dd($d->unggulan);
@@ -427,6 +510,13 @@
             $('#newThumbnailRow').append(html);
         });
 
+        $("#addSizeThumbnailRow").click(function() {
+            var html = '';
+            html +=
+                ' <input placeholder="Size Charts"  onchange="loadSizeChartThumbnail(event)" type="file" name="size_photos[]" id="size_photos" autocomplete="size_photos" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>'
+            $('#newSizeThumbnailRow').append(html);
+        });
+
         // remove row
         $(document).on('click', '#removeAdvantagesRow', function() {
             $(this).closest('#inputFormAdvantagesRow').remove();
@@ -439,5 +529,13 @@
                 URL.revokeObjectURL(output.src) // free memory
             }
         };
+
+        function loadSizeChartThumbnail(event) {
+            var output = document.getElementById('sizeChartThumbnail');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        }
     </script>
 @endpush
