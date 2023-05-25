@@ -15,7 +15,6 @@
                     @php
                         foreach ($orderShow as $os) {
                             $ka = $os;
-                            //dd($ka);
                         }
                     @endphp
                     <ol class="inline-flex py-2 list-none">
@@ -152,6 +151,8 @@
                         @php
                             foreach ($orderShow as $key => $value) {
                                 $get = $value;
+
+                                $dataUser = App\Models\User::where('id',$value->id_buyer)->first();
                             }
                             
                         @endphp
@@ -210,13 +211,7 @@
                                         Province
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
-                                        @php
-                                            $conProv = $province->where('province_id', $value->state_name);
-                                            foreach ($conProv as $keyProv) {
-                                                $getProv = $keyProv;
-                                            }
-                                        @endphp
-                                        {{ $getProv->name_province }}
+                                        {{ $dataUser->state_name }}
                                     </td>
                                 </tr>
 
@@ -225,13 +220,7 @@
                                         City
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
-                                        @php
-                                            $conCity = $city->where('city_id', $value->id_city);
-                                            foreach ($conCity as $keyCity) {
-                                                $getCity = $keyCity;
-                                            }
-                                        @endphp
-                                        {{ $getCity->type . ' ' . $getCity->name_city }}
+                                        {{ $dataUser->city_name}}
                                     </td>
                                 </tr>
 

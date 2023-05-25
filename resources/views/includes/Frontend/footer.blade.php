@@ -1,3 +1,30 @@
+<style>
+    .news input{
+        font-size: 16px;
+        width: 60%;
+        padding: 10px 15px;
+        margin-right: 10px;
+        border-radius: 5px;
+    }
+
+    .news h5{
+        margin-bottom: 20px;
+    }
+
+    .news button{
+        color: white;
+        font-size: 16px;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        background: rgb(183, 108, 253)
+    }
+    .news button:hover{
+        color: rgb(84, 0, 163);
+    }
+</style>
+
 <section class="h-100 w-100 bg-white" style="box-sizing: border-box">
     <footer class="footer-3-2 h-100" style="font-family: 'Poppins', sans-serif">
         <div class="container-xxxl mx-auto main">
@@ -29,6 +56,11 @@
                         intention to spread positive energy and youthfulness across all fashion savvy and people in
                         Indonesia.
                     </h5>
+                   <div class="news">
+                    <h5>Subscribe Newsletter</h5>
+                    <input type="text" placeholder="Input your email address">
+                    <button type="submit">Subscribe</button>
+                   </div>
                 </div>
                 <div class="right-col">
                     <div class="d-flex row gap-lg-0 gap-4">
@@ -77,7 +109,7 @@
                             $year = date('Y');
                         @endphp
                         <p>© {{ $year }} with Bertjorak. All rights reserved.</p>
-                    </nav>
+                    </nav>              
                     <div class="d-flex footer-icon align-items-center mb-2 mb-md-0 gap-4">
                         <a href="https://www.linkedin.com/company/bertjorak/" target="_blank">
                             <svg class="icon-fill" width="20" height="20" viewBox="0 0 20 20" fill="none"

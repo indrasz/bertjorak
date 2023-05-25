@@ -52,7 +52,7 @@
     <br>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
         <div class="col-span-3">
-            <label for="type_address" class="block mb-3 font-medium text-gray-700 text-md">Place Type </label>
+            <label for="type_address" class="block mb-3 font-medium text-gray-700 text-md">Label Address</label>
             @if ($edit_data->type_address == null)
                 <input placeholder="Appartemen / House / Office" type="text" name="type_address" id="type_address"
                     autocomplete="type_address"
@@ -64,7 +64,28 @@
             @endif
         </div>
 
-        <div class="col-span-3">
+         <div class="col-span-3">
+            <label for="destinationId" class="block mb-3 font-medium text-gray-700 text-md">Country</label>
+            @php
+                foreach ($user as $keyid) {
+                    $getDestinations = $keyid->id_country;
+                    $getProv = $keyid->id_province;
+                    $getCity = $keyid->id_city;
+                    //dd($get);
+                }
+            @endphp
+            <select name="destinationId" id="destinationId" wire:click="changeEvent($event.target.value)"
+                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                <option value="" selected>Select Country</option>
+                @foreach ($international_destinations as $destination)
+                    <option value="{{ $destination->country_id }}" @if (old('destination') == $destination->country_id || $destination->country_id == $getDestinations) selected @endif>
+                        {{ $destination->country_name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        {{-- <div class="col-span-3">
             <label for="countriesId" class="block mb-3 font-medium text-gray-700 text-md">Country</label>
             @php
                 foreach ($user as $keyid) {
@@ -83,7 +104,7 @@
                     </option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
 
         {{-- <div class="col-span-3">
             <label for="countriesId" class="block mb-3 font-medium text-gray-700 text-md">Country</label>
@@ -100,7 +121,7 @@
         <div class="col-span-3">
             <label for="provincesId" class="block mb-3 font-medium text-gray-700 text-md">State / Province</label>
             @if ($edit_data->state_name == null)
-                <input placeholder="State / Province" type="text" name="provincesId" id="provincesId"
+                <input placeholder="Enter your state or province here" type="text" name="provincesId" id="provincesId"
                     autocomplete="provincesId"
                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
             @else
@@ -133,7 +154,7 @@
         <div class="col-span-3">
             <label for="cityId" class="block mb-3 font-medium text-gray-700 text-md">City</label>
             @if ($edit_data->city_name == null)
-                <input placeholder="City" type="text" name="cityId" id="cityId"
+                <input placeholder="Enter your city here" type="text" name="cityId" id="cityId"
                     autocomplete="cityId"
                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
             @else
@@ -158,9 +179,9 @@
 
 
         <div class="col-span-3">
-            <label for="areaId" class="block mb-3 font-medium text-gray-700 text-md">Area / Kecamatan</label>
+            <label for="areaId" class="block mb-3 font-medium text-gray-700 text-md">Subdistrict</label>
             @if ($edit_data->area_name == null)
-                <input placeholder="Area / Kecamatan" type="text" name="areaId" id="areaId"
+                <input placeholder="Enter your subdistrict here" type="text" name="areaId" id="areaId"
                     autocomplete="areaId"
                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
             @else
@@ -173,10 +194,9 @@
 
 
         <div class="col-span-3">
-            <label for="zipCode" class="block mb-3 font-medium text-gray-700 text-md">Postal
-                Code</label>
+            <label for="zipCode" class="block mb-3 font-medium text-gray-700 text-md">Post Code</label>
             @if ($edit_data->zipcode == null)
-                <input placeholder="Post Code" type="text" name="zipCode" id="zipCode" autocomplete="zipCode"
+                <input placeholder=" Enter your post code here" type="text" name="zipCode" id="zipCode" autocomplete="zipCode"
                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
             @else
                 <input value="{{ $edit_data->zipcode }}" type="text" name="zipCode" id="zipCode"
@@ -191,7 +211,7 @@
         @if ($edit_data->detail_address == null)
             <textarea name="detailAddress" id="detailAddress" cols="30" rows="5" autocomplete="detailAddress"
                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                placeholder="Detail Address" style="resize: none;"></textarea>
+                placeholder="Enter your detail address here" style="resize: none;"></textarea>
         @else
             <textarea name="detailAddress" id="detailAddress" cols="30" rows="5" autocomplete="detailAddress"
                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"

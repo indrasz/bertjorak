@@ -28,7 +28,7 @@ return new class extends Migration
 
             // Address
             $table->string('type_address', 25)->nullable();
-            $table->string('countries_name')->nullable();
+            $table->foreignId('id_country')->nullable();
             $table->string('area_name')->nullable();
             // $table->string('country');
             $table->string('state_name')->nullable();

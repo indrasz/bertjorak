@@ -188,7 +188,7 @@
 
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Place Type</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Label Address</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
                                                     @if ($u->type_address != null)
                                                         {{ $u->type_address }}
@@ -200,9 +200,9 @@
                                             @php
                                                 
                                                 // Get Countries
-                                                $getCountries = $userCountries->where('id', $u->countries_name);
-                                                foreach ($getCountries as $keyCountries) {
-                                                    $valCountries = $keyCountries->country_name;
+                                                $getDestination = $userDestination->where('country_id', $u->id_country);
+                                                foreach ($getDestination as $keyDestination) {
+                                                    $valDestination = $keyDestination->country_name;
                                                 }
                                                 
                                                 // // Get Province
@@ -226,8 +226,8 @@
                                                 <label for="name"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Country</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
-                                                    @if ($u->countries_name != null)
-                                                        {{ $u->countries_name }}
+                                                    @if ($u->id_country!= null)
+                                                        {{ $valDestination }}
                                                     @else
                                                         -
                                                     @endif
@@ -237,7 +237,7 @@
 
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Province</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">State / Province</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
                                                     @if ($u->state_name != null)
                                                         {{ $u->state_name }}
@@ -261,8 +261,7 @@
 
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Area /
-                                                    Kecamatan</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Subdistrict</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
                                                     @if ($u->area_name != null)
                                                         {{ $u->area_name }}
@@ -276,8 +275,7 @@
 
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Postal
-                                                    Code</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Post Code</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
                                                     @if ($u->zipcode != null)
                                                         {{ $u->zipcode }}

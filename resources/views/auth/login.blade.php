@@ -107,8 +107,8 @@
 
                                 <p class="text">
                                     By signing up, i agree to
-                                    <a href="">Terms of Services</a> and
-                                    <a href="">Privacy Policy</a>
+                                    <a href="{{ url('/terms') }}">Terms And Conditions</a> and
+                                    <a href="{{ url('/privacy') }}">Privacy Policy</a>
                                 </p>
                             </div>
                         </form>

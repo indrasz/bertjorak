@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\InternationalDestination;
 use App\Models\City;
 use App\Models\Province;
 use Illuminate\Database\Seeder;
@@ -16,6 +16,15 @@ class LocationsSeeder extends Seeder
      */
     public function run()
     {
+        $response = file_get_contents('https://pro.rajaongkir.com/api/v2/internationalDestination?key=cdb09643d78e7b3e6709bca692fa86e3');
+    $data = json_decode($response, true);
+
+    foreach ($data['rajaongkir']['results'] as $destination) {
+        InternationalDestination::create([
+            'country_id' => $destination['country_id'],
+            'country_name' => $destination['country_name'],
+        ]);
+    }
         $daftarProvinsi = RajaOngkir::provinsi()->all();
         foreach ($daftarProvinsi as $provinceRow) {
             Province::create([
