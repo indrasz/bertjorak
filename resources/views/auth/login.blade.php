@@ -36,7 +36,7 @@
                             <!-- Validation Errors -->
                             <x-auth-validation-errors class="validation" :errors="$errors" />
 
-                           
+
                             <div class="logo">
                                 <img src="{{ asset('frontend/images/main-logo.png') }}" alt="bertjorak">
                             </div>
@@ -61,13 +61,16 @@
 
                                 <input type="Submit" value="Sign in" class="sign-in-button">
 
-                                {{-- <p class="text">
+                                <p class="text">
                                     Forgot your password?
-                                    <a href="#">Get Help</a> Signing in
-                                </p> --}}
+                                    @if (Route::has('password.update'))
+                                        <a href="{{ route('password.update') }}">Get Help</a> Signing in
+                                    @endif
+                                </p>
                             </div>
                         </form>
-                        <form method="POST" action="{{ route('register') }}" action="/register" autocomplete="off" class="sign-up-form" >
+                        <form method="POST" action="{{ route('register') }}" action="/register" autocomplete="off"
+                            class="sign-up-form">
                             {{-- <div class="logo">
                                 <img src="{{ asset('frontend/images/main-logo.png') }}" alt="bertjorak">
                             </div>   --}}
@@ -75,32 +78,33 @@
                             <!-- Validation Errors -->
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <x-auth-validation-errors class="validation" :errors="$errors" />
-                            
+
                             <div class="heading">
                                 <h6>Already a member ?</h6>
                                 <a href="#" class="toggle">Sign in</a>
                             </div>
                             <div class="actual-form">
                                 <div class="input-wrap">
-                                    <input type="text" id="name" minlength="4" class="input-field" autocomplete="off" name="name" :value="old('name')"
-                                    required autofocus>
+                                    <input type="text" id="name" minlength="4" class="input-field"
+                                        autocomplete="off" name="name" :value="old('name')" required autofocus>
                                     <label>Username</label>
                                 </div>
 
                                 <div class="input-wrap">
-                                    <input type="email" id="email" class="input-field" autocomplete="off" name="email" :value="old('email')"
-                                    required>
+                                    <input type="email" id="email" class="input-field" autocomplete="off"
+                                        name="email" :value="old('email')" required>
                                     <label>Email</label>
                                 </div>
 
                                 <div class="input-wrap">
-                                    <input type="password" id="password" minlength="4" class="input-field" name="password" required
-                                    autocomplete="new-password">
+                                    <input type="password" id="password" minlength="4" class="input-field" name="password"
+                                        required autocomplete="new-password">
                                     <label>Password</label>
                                 </div>
 
                                 <div class="input-wrap">
-                                    <input type="password" id="password_confirmation" minlength="4" class="input-field" autocomplete="off" name="password_confirmation" required>
+                                    <input type="password" id="password_confirmation" minlength="4" class="input-field"
+                                        autocomplete="off" name="password_confirmation" required>
                                     <label>Confirm Password</label>
                                 </div>
 

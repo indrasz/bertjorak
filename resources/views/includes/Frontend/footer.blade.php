@@ -118,11 +118,14 @@
                     </style>
                     <div class="d-flex gap-lg-0 gap-2" style="flex-direction: column; ">
                         <h6 class="desc-news mt-4 mb-0">Subscribe Newsletter</h6>
-                        <div class="form-control-wrapper">
-                            <input type="text" placeholder="Enter Your Email Adress">
-                            <button type="submit">Submit</button>
+                        <div class="form-control-wrapper" id="n-form">
+                            <input type="email" name="subscriber_email" id="subscriber_email"
+                                placeholder="Enter Your Email Adress" required=""><button type="submit"
+                                id="sub_email">Submit</button>
                         </div>
-                        <p class="small-text mt-3 mb-0">Subscribe now to know about the hottest trends, <br> insider tips, and exclusive offers.</p>
+                        <span class="mt-2 ms-2" id="n-text"></span>
+                        <p class="small-text mt-2 mb-0">Subscribe now to know about the hottest trends, <br> insider
+                            tips, and exclusive offers.</p>
                         <h6 class="desc-contacts mt-4 mb-0">Get Connected with Us</h6>
                         <div class="d-flex footer-icon align-items-start mb-md-0 gap-3">
                             <a href="https://www.linkedin.com/company/bertjorak/" target="_blank">
@@ -157,8 +160,8 @@
                                 </svg>
                             </a>
                             <a href="">
-                                <svg class="icon-fill" width="28" height="28"
-                                    viewBox="0 0 24 24" id="whatsapp" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="icon-fill" width="28" height="28" viewBox="0 0 24 24" id="whatsapp"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M16.6 14c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.2-.5-.5-1-1.1-1.4-1.7-.1-.2 0-.4.1-.5.1-.1.2-.3.4-.4.1-.1.2-.3.2-.4.1-.1.1-.3 0-.4-.1-.1-.6-1.3-.8-1.8-.1-.7-.3-.7-.5-.7h-.5c-.2 0-.5.2-.6.3-.6.6-.9 1.3-.9 2.1.1.9.4 1.8 1 2.6 1.1 1.6 2.5 2.9 4.2 3.7.5.2.9.4 1.4.5.5.2 1 .2 1.6.1.7-.1 1.3-.6 1.7-1.2.2-.4.2-.8.1-1.2l-.4-.2m2.5-9.1C15.2 1 8.9 1 5 4.9c-3.2 3.2-3.8 8.1-1.6 12L2 22l5.3-1.4c1.5.8 3.1 1.2 4.7 1.2 5.5 0 9.9-4.4 9.9-9.9.1-2.6-1-5.1-2.8-7m-2.7 14c-1.3.8-2.8 1.3-4.4 1.3-1.5 0-2.9-.4-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3c-2.4-4-1.2-9 2.7-11.5S16.6 3.7 19 7.5c2.4 3.9 1.3 9-2.6 11.4">
                                     </path>
@@ -170,8 +173,8 @@
             </div>
         </div>
         <div class="below-footer mx-auto">
-            <div
-                class="container-xxxl p-0 mx-auto d-flex flex-column-reverse flex-lg-row justify-content-center align-items-center gap-lg-0 gap-3" style="background-color: black">
+            <div class="container-xxxl p-0 mx-auto d-flex flex-column-reverse flex-lg-row justify-content-center align-items-center gap-lg-0 gap-3"
+                style="background-color: black">
                 <nav class="text-lg-start text-white text-center credit-font">
                     @php
                         $year = date('Y');
@@ -182,3 +185,54 @@
         </div>
     </footer>
 </section>
+
+{{-- js link --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    var csrfToken = '{{ csrf_token() }}';
+</script>
+<script>
+    $(document).ready(function() {
+        $('#sub_email').on('click', function() {
+            var subscriber_email = $('#subscriber_email').val();
+            var n_form = $('#n-form');
+            var n_text = $('#n-text')
+            var regex = /\S+@\S+\.\S+/;
+
+            if (regex.test(subscriber_email) == false) {
+                n_form.removeClass("valid").addClass("invalid");
+                n_text.text("Please Enter Valid Email Address").css("color", "#ff0000");
+                return false;
+            }
+            $.ajax({
+                type: 'post',
+                url: '/add-subscriber-email',
+                data: {
+                    subscriber_email: subscriber_email,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(resp) {
+                    // window.alert(resp);
+                    if (resp == "exists") {
+                        n_form.addClass("valid").removeClass("invalid");
+                        n_text.text("Email Already Exist").css("color", "#ff0000");
+                    } else if (resp == "inserted") {
+                        n_form.addClass("valid").removeClass("invalid");
+                        n_text.text("Thank you for Subscribing");
+                    }
+                },
+                error: function() {
+                    window.alert("Error");
+                }
+            });
+        });
+    });
+
+    //sticky windows
+    $(window).on("scroll", function() {
+        var footer = $("#popup");
+        footer.toggleClass("sticky", $(window).scrollTop() > 0);
+    });
+</script>
+<script type="text/javascript" src="{{ asset('js/footer.js') }}"></script>

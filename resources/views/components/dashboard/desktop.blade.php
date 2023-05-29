@@ -5,8 +5,8 @@
         <div class="">
             {{-- <img src="{{ asset('/assets/images/logo.svg') }}" alt="" class="object-center mx-auto my-8 "> --}}
             <a href="/">
-                <img style="margin: auto;" class="py-10" src="{{ asset('frontend/images/main-logo.png') }}"
-                    alt="main-logo" width="100" />
+                <img style="margin: auto;" class="py-10" src="{{ asset('frontend/images/main-logo.png') }}" alt="main-logo"
+                    width="100" />
             </a>
             {{-- <svg class="object-center mx-auto my-8 " width="163" height="28" viewBox="0 0 163 28" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +57,8 @@
                         aria-hidden="true"></span>
                     <a class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 "
                         href="{{ route('dashboard.index') }}">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M19.5 16V9.02123C19.5 7.75027 18.896 6.55494 17.8728 5.80101L12.3728 1.74838C10.9618 0.708674 9.03823 0.708675 7.6272 1.74838L2.1272 5.80101C1.10401 6.55494 0.5 7.75027 0.5 9.02123V16C0.5 18.2091 2.29086 20 4.5 20H5.75C6.57843 20 7.25 19.3284 7.25 18.5V16C7.25 15.1716 7.92157 14.5 8.75 14.5H11.25C12.0784 14.5 12.75 15.1716 12.75 16V18.5C12.75 19.3284 13.4216 20 14.25 20H15.5C17.7091 20 19.5 18.2091 19.5 16Z"
                                 fill="#082431" />
@@ -67,7 +68,8 @@
                 @else
                     <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800"
                         href="{{ route('dashboard.index') }}">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M19.5 16V9.02123C19.5 7.75027 18.896 6.55494 17.8728 5.80101L12.3728 1.74838C10.9618 0.708674 9.03823 0.708675 7.6272 1.74838L2.1272 5.80101C1.10401 6.55494 0.5 7.75027 0.5 9.02123V16C0.5 18.2091 2.29086 20 4.5 20H5.75C6.57843 20 7.25 19.3284 7.25 18.5V16C7.25 15.1716 7.92157 14.5 8.75 14.5H11.25C12.0784 14.5 12.75 15.1716 12.75 16V18.5C12.75 19.3284 13.4216 20 14.25 20H15.5C17.7091 20 19.5 18.2091 19.5 16Z"
                                 fill="#082431" />
@@ -83,7 +85,10 @@
             @if (Auth::user()->hasRole('admin'))
                 <li class="relative px-6 py-3">
 
-                    @if (request()->is('dashboard/article') || request()->is('dashboard/article/*') || request()->is('dashboard/*/article') || request()->is('dashboard/*/article/*'))
+                    @if (request()->is('dashboard/article') ||
+                            request()->is('dashboard/article/*') ||
+                            request()->is('dashboard/*/article') ||
+                            request()->is('dashboard/*/article/*'))
                         <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
                             aria-hidden="true"></span>
 
@@ -110,7 +115,10 @@
             {{-- Profile Nav --}}
             <li class="relative px-6 py-3">
 
-                @if (request()->is('dashboard/profile') || request()->is('dashboard/profile/*') || request()->is('dashboard/*/profile') || request()->is('dashboard/*/profile/*'))
+                @if (request()->is('dashboard/profile') ||
+                        request()->is('dashboard/profile/*') ||
+                        request()->is('dashboard/*/profile') ||
+                        request()->is('dashboard/*/profile/*'))
                     <a class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 "
                         href="{{ route('dashboard.profile.index') }}">
 
@@ -144,7 +152,8 @@
                     <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800"
                         href="{{ route('dashboard.profile.index') }}">
 
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <rect width="24" height="24" fill="white" />
                             <circle cx="10.5" cy="5.5" r="2.75" stroke="#082431" stroke-width="1.5" />
                             <path
@@ -171,7 +180,10 @@
             @if (Auth::user()->hasRole('admin'))
                 <li class="relative px-6 py-3">
 
-                    @if (request()->is('dashboard/product') || request()->is('dashboard/product/*') || request()->is('dashboard/*/product') || request()->is('dashboard/*/product/*'))
+                    @if (request()->is('dashboard/product') ||
+                            request()->is('dashboard/product/*') ||
+                            request()->is('dashboard/*/product') ||
+                            request()->is('dashboard/*/product/*'))
                         <a class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 "
                             href="{{ route('dashboard.product.index') }}">
 
@@ -181,11 +193,12 @@
                             <!-- Active Icons -->
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <rect x="2.25" y="1.25" width="19.5" height="21.5" rx="4.75" fill="#082431"
-                                    stroke="#082431" stroke-width="1.5" />
-                                <rect x="11" y="7" width="2" height="10" rx="1" fill="white" />
-                                <rect x="17" y="11" width="2" height="10" rx="1" transform="rotate(90 17 11)"
+                                <rect x="2.25" y="1.25" width="19.5" height="21.5" rx="4.75"
+                                    fill="#082431" stroke="#082431" stroke-width="1.5" />
+                                <rect x="11" y="7" width="2" height="10" rx="1"
                                     fill="white" />
+                                <rect x="17" y="11" width="2" height="10" rx="1"
+                                    transform="rotate(90 17 11)" fill="white" />
                             </svg>
 
                             <span class="ml-4">Product</span>
@@ -197,11 +210,12 @@
 
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <rect x="2.25" y="1.25" width="19.5" height="21.5" rx="4.75" stroke="#082431"
-                                    stroke-width="1.5" />
-                                <rect x="11.3" y="7" width="1.4" height="10" rx="0.7" fill="#082431" />
-                                <rect x="17" y="11" width="1.4" height="10" rx="0.7" transform="rotate(90 17 11)"
+                                <rect x="2.25" y="1.25" width="19.5" height="21.5" rx="4.75"
+                                    stroke="#082431" stroke-width="1.5" />
+                                <rect x="11.3" y="7" width="1.4" height="10" rx="0.7"
                                     fill="#082431" />
+                                <rect x="17" y="11" width="1.4" height="10" rx="0.7"
+                                    transform="rotate(90 17 11)" fill="#082431" />
                             </svg>
 
                             <span class="ml-4">Product</span>
@@ -212,11 +226,59 @@
                 </li>
             @endif
 
+            {{-- Newsletter --}}
+            @if (Auth::user()->hasRole('admin'))
+                <li class="relative px-6 py-3">
+
+                    @if (request()->is('dashboard/newsletter') ||
+                            request()->is('dashboard/newsletter/*') ||
+                            request()->is('dashboard/*/newsletter') ||
+                            request()->is('dashboard/*/newsletter/*'))
+                        <a class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 "
+                            href="{{ route('dashboard.newsletter.index') }}">
+
+
+                            <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
+                                aria-hidden="true"></span>
+                            <!-- Active Icons -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                width="24" height="24">
+                                <path fill-rule="evenodd"
+                                    d="M1.5 9.832v1.793c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875V9.832a3 3 0 00-.722-1.952l-3.285-3.832A3 3 0 0016.215 3h-8.43a3 3 0 00-2.278 1.048L2.222 7.88A3 3 0 001.5 9.832zM7.785 4.5a1.5 1.5 0 00-1.139.524L3.881 8.25h3.165a3 3 0 012.496 1.336l.164.246a1.5 1.5 0 001.248.668h2.092a1.5 1.5 0 001.248-.668l.164-.246a3 3 0 012.496-1.336h3.165l-2.765-3.226a1.5 1.5 0 00-1.139-.524h-8.43z"
+                                    clip-rule="evenodd" />
+                                <path
+                                    d="M2.813 15c-.725 0-1.313.588-1.313 1.313V18a3 3 0 003 3h15a3 3 0 003-3v-1.688c0-.724-.588-1.312-1.313-1.312h-4.233a3 3 0 00-2.496 1.336l-.164.246a1.5 1.5 0 01-1.248.668h-2.092a1.5 1.5 0 01-1.248-.668l-.164-.246A3 3 0 007.046 15H2.812z" />
+                            </svg>
+                            
+                            <span class="ml-4">Newsletter</span>
+                        </a>
+                    @else
+                        <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800"
+                            href="{{ route('dashboard.newsletter.index') }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                width="24" height="24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M7.875 14.25l1.214 1.942a2.25 2.25 0 001.908 1.058h2.006c.776 0 1.497-.4 1.908-1.058l1.214-1.942M2.41 9h4.636a2.25 2.25 0 011.872 1.002l.164.246a2.25 2.25 0 001.872 1.002h2.092a2.25 2.25 0 001.872-1.002l.164-.246A2.25 2.25 0 0116.954 9h4.636M2.41 9a2.25 2.25 0 00-.16.832V12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 12V9.832c0-.287-.055-.57-.16-.832M2.41 9a2.25 2.25 0 01.382-.632l3.285-3.832a2.25 2.25 0 011.708-.786h8.43c.657 0 1.281.287 1.709.786l3.284 3.832c.163.19.291.404.382.632M4.5 20.25h15A2.25 2.25 0 0021.75 18v-2.625c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125V18a2.25 2.25 0 002.25 2.25z" />
+                            </svg>
+
+                            <span class="ml-4">Newsletter</span>
+                        </a>
+                    @endif
+                </li>
+
+
+                </li>
+            @endif
+
+
             {{-- Report Nav --}}
             @if (Auth::user()->hasRole('admin'))
                 <li class="relative px-6 py-3">
 
-                    @if (request()->is('dashboard/laporan') || request()->is('dashboard/laporan/*') || request()->is('dashboard/*/laporan') || request()->is('dashboard/*/laporan/*'))
+                    @if (request()->is('dashboard/laporan') ||
+                            request()->is('dashboard/laporan/*') ||
+                            request()->is('dashboard/*/laporan') ||
+                            request()->is('dashboard/*/laporan/*'))
                         <a class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 "
                             href="{{ route('dashboard.laporan.index') }}">
 
@@ -245,7 +307,10 @@
             {{-- Transaction Nav --}}
             <li class="relative px-6 py-3">
 
-                @if (request()->is('dashboard/transaction') || request()->is('dashboard/transaction/*') || request()->is('dashboard/*/transaction') || request()->is('dashboard/*/transaction/*'))
+                @if (request()->is('dashboard/transaction') ||
+                        request()->is('dashboard/transaction/*') ||
+                        request()->is('dashboard/*/transaction') ||
+                        request()->is('dashboard/*/transaction/*'))
                     <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-serv-bg"
                         aria-hidden="true"></span>
 
@@ -253,14 +318,16 @@
                         href="{{ route('dashboard.transaction.index') }}">
 
                         <!-- Active Icons -->
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="3" y="2" width="18" height="20" rx="4" fill="#082431" />
-                            <line x1="7.75" y1="7.25" x2="10.25" y2="7.25" stroke="white" stroke-width="1.5"
-                                stroke-linecap="round" />
-                            <line x1="7.75" y1="11.25" x2="16.25" y2="11.25" stroke="white" stroke-width="1.5"
-                                stroke-linecap="round" />
-                            <line x1="7.75" y1="15.25" x2="16.25" y2="15.25" stroke="white" stroke-width="1.5"
-                                stroke-linecap="round" />
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="2" width="18" height="20" rx="4"
+                                fill="#082431" />
+                            <line x1="7.75" y1="7.25" x2="10.25" y2="7.25" stroke="white"
+                                stroke-width="1.5" stroke-linecap="round" />
+                            <line x1="7.75" y1="11.25" x2="16.25" y2="11.25" stroke="white"
+                                stroke-width="1.5" stroke-linecap="round" />
+                            <line x1="7.75" y1="15.25" x2="16.25" y2="15.25" stroke="white"
+                                stroke-width="1.5" stroke-linecap="round" />
                         </svg>
                         <span class="ml-4">Transaction</span>
 
@@ -268,15 +335,16 @@
                 @else
                     <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800"
                         href="{{ route('dashboard.transaction.index') }}">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="3.25" y="2.25" width="17.5" height="19.5" rx="4.75" stroke="#082431"
-                                stroke-width="1.5" />
-                            <line x1="7.75" y1="7.25" x2="10.25" y2="7.25" stroke="#082431" stroke-width="1.5"
-                                stroke-linecap="round" />
-                            <line x1="7.75" y1="11.25" x2="16.25" y2="11.25" stroke="#082431" stroke-width="1.5"
-                                stroke-linecap="round" />
-                            <line x1="7.75" y1="15.25" x2="16.25" y2="15.25" stroke="#082431" stroke-width="1.5"
-                                stroke-linecap="round" />
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3.25" y="2.25" width="17.5" height="19.5" rx="4.75"
+                                stroke="#082431" stroke-width="1.5" />
+                            <line x1="7.75" y1="7.25" x2="10.25" y2="7.25" stroke="#082431"
+                                stroke-width="1.5" stroke-linecap="round" />
+                            <line x1="7.75" y1="11.25" x2="16.25" y2="11.25" stroke="#082431"
+                                stroke-width="1.5" stroke-linecap="round" />
+                            <line x1="7.75" y1="15.25" x2="16.25" y2="15.25" stroke="#082431"
+                                stroke-width="1.5" stroke-linecap="round" />
                         </svg>
                         <span class="ml-4">Transaction</span>
                     </a>
@@ -289,7 +357,8 @@
                     href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <rect width="24" height="24" fill="white" />
                         <path
                             d="M15 7.5V7C15 4.79086 13.2091 3 11 3H7C4.79086 3 3 4.79086 3 7V17C3 19.2091 4.79086 21 7 21H11C13.2091 21 15 19.2091 15 17V16.5"

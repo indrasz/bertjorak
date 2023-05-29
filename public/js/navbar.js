@@ -1,6 +1,6 @@
 let menu = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
-let alert = document.querySelector('.alert')
+let alert = document.querySelector('.alert');
 let xbutton = document.querySelector('#close-icon');
 
 //fungsi untuk navbar responsive

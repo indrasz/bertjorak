@@ -41,7 +41,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $articles = Article::where('id', '>', 1)
+        $articles = Article::where('id', '>=', 1)
             ->get('nama_article');
         return view('pages.dashboard.product.create')->with('articles', $articles);
     }
@@ -139,7 +139,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $editData = Product::where('id_product', $id)->get();
-        $articles = Article::where('id', '>', 1)
+        $articles = Article::where('id', '>=', 1)
             ->get('nama_article');
         return view('pages.dashboard.product.edit')->with('articles', $articles)->with('editData', $editData);
     }

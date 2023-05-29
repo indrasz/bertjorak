@@ -35,6 +35,14 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.update');
 
+
+
+    // Route::match(['get', 'post'], 'password/reset/{token}', [NewPasswordController::class, 'showResetForm'])
+    //     ->name('password.reset');
+
+    // Route::match(['get', 'post'], 'reset-password', [NewPasswordController::class, 'store'])
+    //     ->name('password.update');
+
     // Admin
     // Route::get('register/admin', [RegisteredAdminController::class, 'create'])
     //     ->name('registerAdmin');

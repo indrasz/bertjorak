@@ -69,16 +69,22 @@
 
                                             </div>
 
-                                            {{--Nama Article--}}
+                                            {{-- Nama Article --}}
                                             <div class="col-span-6">
-                                                <label for="nama_article" class="block mb-3 font-medium text-gray-700 text-md">Nama Article</label>
+                                                <label for="nama_article"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Nama
+                                                    Article</label>
                                                 @php
                                                     $getNamaArticle = old('nama_article');
                                                 @endphp
-                                                <select name="nama_article" id="nama_article" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                    <option value="" @if (old('nama_article') == "") selected @endif>Select Article</option>
+                                                <select name="nama_article" id="nama_article"
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                    <option value=""
+                                                        @if (old('nama_article') == '') selected @endif>Select Article
+                                                    </option>
                                                     @foreach ($articles as $article)
-                                                        <option value="{{ $article->nama_article }}" @if (old('nama_article') == $article->nama_article || $getNamaArticle == $article->nama_article) selected @endif>
+                                                        <option value="{{ $article->nama_article }}"
+                                                            @if (old('nama_article') == $article->nama_article || $getNamaArticle == $article->nama_article) selected @endif>
                                                             {{ $article->nama_article }}
                                                         </option>
                                                     @endforeach
@@ -336,8 +342,7 @@
 
                                             <div class="col-span-6">
                                                 <label for="thumbnail-service"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Thumbnail Size
-                                                    Chart</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Thumbnail Size Chart</label>
 
                                                 <style>
                                                     .grid-wrapper {
@@ -349,7 +354,6 @@
                                                         padding: 0;
                                                         box-sizing: border-box;
                                                         font-family: 'Montserrat', sans-serif;
-
                                                     }
 
                                                     .grid-wrapper li {
@@ -361,7 +365,6 @@
                                                         text-transform: capitalize;
                                                         font-weight: 600;
                                                         overflow: hidden;
-
                                                     }
 
                                                     .main-container {
@@ -380,24 +383,23 @@
                                                                         @foreach (json_decode($d->size_charts, true) as $i)
                                                                             <li>
                                                                                 <img src="{{ asset('/storage/products/size_images/' . $i) }}"
-                                                                                    class="img-thumbnail p-1" alt=""
+                                                                                    class="img-thumbnail p-1"
+                                                                                    alt=""
                                                                                     style="width: 100%; border-radius: 5%;">
                                                                             </li>
                                                                         @endforeach
                                                                     </ul>
                                                                 </div>
-
                                                             </div>
                                                         @endif
                                                     </div>
                                                 </div>
 
-
                                                 <img src="{{ asset('assets/images/empty-illustration.svg') }}"
                                                     id="sizeChartThumbnail"
                                                     style="width: 25%; padding-top: 1.5%; padding-bottom: 1.5%;" />
-                                                <input placeholder="Size Charts" value="{{ $d->size_charts }}" type="file"
-                                                    name="size_photos[]" id="size_photos" autocomplete="size_photos"
+                                                <input placeholder="Thumbnail 1" value="{{ $d->size_charts }}"
+                                                    type="file" name="size_photos[]" id="size_photos" autocomplete="size_photos"
                                                     onchange="loadSizeChartThumbnail(event)"
                                                     class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
 
@@ -416,7 +418,7 @@
                                             </div>
                                         </div>
 
-                                        
+
 
                                         {{-- @php
                                             dd($d->unggulan);

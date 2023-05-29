@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\NewsletterSubscribersExport;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 // Admin
@@ -9,6 +10,7 @@ use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\DetailController;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\NewsletterAdminController;
 
 // Frontend
 use App\Http\Controllers\Frontend\HomeController;
@@ -17,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiShow;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Frontend\AboutController;
+use App\Http\Controllers\NewsletterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +61,9 @@ Route::post('update/success', [TransactionController::class, 'success']);
 // Download PDF File
 Route::get('transaction/download/{id}', [TransactionController::class, 'convertPDF']);
 
+// Add Subscriber Email
+Route::post('/add-subscriber-email', [NewsletterController::class, 'addSubscriber']);
+
 Route::get("/page", function () {
     return view("pdf.laporan");
 });
@@ -73,6 +79,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         // Route::resource('user', UserController::class);
         // Laporan
         Route::get('laporan/download', [LaporanController::class, 'convertPDF']);
+        Route::get('newsletter-subscribers', [NewsletterAdminController::class, 'newsletterSubscriber']);
+        Route::resource('newsletter', NewsletterAdminController::class);
         Route::resource('laporan', LaporanController::class);
         Route::resource('profile', ProfileController::class);
         Route::resource('article', ArticleController::class);
@@ -80,6 +88,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::resource('transaction', TransactionController::class)->only([
             'index', 'create', 'store', 'update', 'edit', 'destroy', 'show',
         ]);
+        Route::post('newsletter/export', [NewsletterSubscribersExport::class, 'export'])->name('newsletter.export');
+   
     });
 });
 

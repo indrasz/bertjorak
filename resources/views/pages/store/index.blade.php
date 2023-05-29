@@ -36,13 +36,13 @@
                 }
 
                 /* .row-full {
-                                                                                                                    width: 99.4vw;
-                                                                                                                    position: relative;
-                                                                                                                    margin-left: -50vw;
-                                                                                                                    margin-right: 0;
-                                                                                                                    height: 28px;
-                                                                                                                    left: 50%;
-                                                                                                                } */
+                                                                                                                                width: 99.4vw;
+                                                                                                                                position: relative;
+                                                                                                                                margin-left: -50vw;
+                                                                                                                                margin-right: 0;
+                                                                                                                                height: 28px;
+                                                                                                                                left: 50%;
+                                                                                                                            } */
 
                 .cover-wrapper {
                     display: flex;
@@ -95,9 +95,9 @@
                 }
 
                 /* .cover-wrapper .hero-slider .carousel-cell .inner h5 {
-                                                                                                            margin-bottom: 32px;
-                                                                                                            color: black;
-                                                                                                        } */
+                                                                                                                        margin-bottom: 32px;
+                                                                                                                        color: black;
+                                                                                                                    } */
 
                 .hero-slider .carousel-cell .inner .btn {
                     background: transparent;
@@ -180,7 +180,7 @@
                         </div>
                         <div class="inner">
                             {{-- <h5>Stay Stunning and positive</h5> --}}
-                            <a href="#" class="btn">Let's Explore</a>
+                            <a href="{{ url('/product')}}" class="btn">Let's Explore</a>
                         </div>
                     </div>
                 @endforeach
@@ -381,40 +381,44 @@
         <div class="container px-4">
             <div class="latest-article-img">
                 <div class="inner-wrap">
-                    @php
-                        //sorting desc article dan meretrieve data nya
-                        $orderedArticlesDesc = $articles->sortByDesc('created_at');
-                        $latestArticleDesc = $orderedArticlesDesc->first();
-                        $getDesc = $latestArticleDesc->desc;
-                        
-                        //sorting nama article dan meretrieve data nya
-                        $orderedArticlesName = $articles->sortByDesc('created_at');
-                        $latestArticleName = $orderedArticlesName->first();
-                        $getNamaArticle = $latestArticleName->nama_article;
-                    @endphp
-                    <p class="mb-0">Latest Release</p>
-                    <h1 style="margin-bottom: 0;">{{ $getNamaArticle }}</h1>
-                    <h5 style="margin-bottom: 0;">{{ $getDesc }}</h5>
-                    {{-- <a href="#" class="btn">Let's Explore</a> --}}
+                    @if (count([$products]) >= 0)
+                        @php
+                            //sorting desc article dan meretrieve data nya
+                            $orderedArticlesDesc = $articles->sortByDesc('created_at');
+                            $latestArticleDesc = $orderedArticlesDesc->first();
+                            $getDesc = $latestArticleDesc->desc;
+                            
+                            //sorting nama article dan meretrieve data nya
+                            $orderedArticlesName = $articles->sortByDesc('created_at');
+                            $latestArticleName = $orderedArticlesName->first();
+                            $getNamaArticle = $latestArticleName->nama_article;
+                        @endphp
+                        <p class="mb-0">Latest Release</p>
+                        <h1 style="margin-bottom: 0;">{{ $getNamaArticle }}</h1>
+                        <h5 style="margin-bottom: 0;">{{ $getDesc }}</h5>
+                        {{-- <a href="#" class="btn">Let's Explore</a> --}}
+                    @else
+                        <p class="mb-0">Latest Release</p>
+                        <h1 style="margin-bottom: 0;">Article Name</h1>
+                        <h5 style="margin-bottom: 0;">Description</h5>
+                    @endif
+
                 </div>
             </div>
         </div>
         <div class="container px-4 pt-4">
             <img src="{{ asset('frontend/images/set1@300x.png') }}" class="image-spin-article" />
             <div class="d-flex justify-content-between align-items-center flex-wrap pb-main">
-                @foreach ($articles as $at)
-                    {{-- @php
-                        $orderedArticlesLogo = $articles->sortByDesc('created_at');
-                        $latestArticleLogo = $orderedArticlesLogo->first();
-                        $getLogo = $latestArticleDesc->logo_header;
-                    @endphp --}}
-                    @if ($at->logo_header != null)
-                        <div class="caption-related-product">
-                            <img src="{{ asset('/storage/articles/logo/' . json_decode($at->logo_header, true)) }}"
-                                alt="Logo Header" width="200">
-                        </div>
-                    @endif
-                @endforeach
+                @php
+                    $latestArticle = $articles->sortByDesc('created_at')->first();
+                @endphp
+
+                @if ($latestArticle && $latestArticle->logo_header != null)
+                    <div class="caption-related-product">
+                        <img src="{{ asset('/storage/articles/logo/' . json_decode($latestArticle->logo_header, true)) }}"
+                            alt="Logo Header" width="200">
+                    </div>
+                @endif
                 <a class="btn btn-link align-self-end pb-sm-down-0 small-text scroll-fadeInUp fadeInUp d2"
                     href="{{ url('/product') }}" style="color:black; font-size: 14px;">
                     Show All
@@ -514,7 +518,7 @@
                     padding-bottom: 3rem;
                 }
             }
-            
+
             @media screen and (max-width: 620px) {
 
                 #glass {
@@ -646,6 +650,7 @@
             .resort {
                 padding-bottom: 32px;
             }
+
             .resort .flickity-slider {
                 animation: slide_image 1s;
             }
