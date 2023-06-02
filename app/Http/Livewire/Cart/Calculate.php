@@ -65,7 +65,7 @@ class Calculate extends Component
     public function getInternationalShippingCost()
     {
         $apiKey = 'cdb09643d78e7b3e6709bca692fa86e3';
-        $origin = 152;
+        $origin = 23;
         $destination = $this->alamatBuyer;
         $weight = round($this->getWeight);
         $courier = 'expedito';

@@ -271,7 +271,7 @@
                                     @endphp
                                     @foreach ($carts as $c)
                                         <div class="preview-summary">
-                                            {{ $c->title }} ({{ $c->jumlah }} item)
+                                            {{ $c->title }} ({{ $c->jumlah }} Item)
 
                                             <span class="float-end">
                                                 @currency($c->price * $c->jumlah)
@@ -327,7 +327,7 @@
                                     {{-- <label for="notes" class="mb-1">Notes</label> --}}
                                     <div class="input-group w-100 mx-auto mb-2">
 
-                                        <textarea name="notes" placeholder="Jangan lupa dikirim ya!" id="notes" class="form-control input-shipping-details"
+                                        <textarea name="notes" placeholder="I want sticker of bertjorak please" id="notes" class="form-control input-shipping-details"
                                             style="resize: none;" cols="10" rows="5"></textarea>
                                     </div>
 

@@ -205,21 +205,6 @@
                                                     $valDestination = $keyDestination->country_name;
                                                 }
                                                 
-                                                // // Get Province
-                                                // $getProv = $userProv->where('province_id', $u->id_province);
-                                                // foreach ($getProv as $keyProv) {
-                                                //     $valProv = $keyProv->name_province;
-                                                // }
-                                                
-                                                // // Get City
-                                                // $getCity = $userCity->where('city_id', $u->id_city);
-                                                // foreach ($getCity as $keyCity) {
-                                                //     // Type City
-                                                //     $valTypeCity = $keyCity->type;
-                                                
-                                                //     // Name City
-                                                //     $valCity = $keyCity->name_city;
-                                                // }
                                             @endphp
 
                                             <div class="col-span-3 mt-3">
@@ -237,10 +222,10 @@
 
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">State / Province</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Subdistrict</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
-                                                    @if ($u->state_name != null)
-                                                        {{ $u->state_name }}
+                                                    @if ($u->subdistrict_name != null)
+                                                        {{ $u->subdistrict_name }}
                                                     @else
                                                         -
                                                     @endif

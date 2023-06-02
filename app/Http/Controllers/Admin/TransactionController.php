@@ -29,7 +29,9 @@ class TransactionController extends Controller
         if (Auth::user()) {
             // Admin Transaction
             if (Auth::user()->hasRole('admin')) {
-                $orderData = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')->join('users', 'orders.id_buyer', '=', 'users.id')->paginate(5);
+                $orderData = Order::join('transactions', 'orders.id_transaction', '=', 'transactions.id_transaction')
+                            ->join('users', 'orders.id_buyer', '=', 'users.id')
+                            ->paginate(5);
 
                 return view('pages.dashboard.transaction.index')->with('orderData', $orderData);
             }
@@ -115,6 +117,12 @@ class TransactionController extends Controller
                 $order->date_order = Carbon::now();
 
                 if ($order->save()) {
+                    
+                    // $idUser             = Auth::user()->id;
+                    // $saveCart           = Cart();
+                    // $saveCart->id_user  = $idUser;
+                    // $saveCart->status   = "Sukses";
+                    // $saveCart->id_order = $order->orderID;
                     foreach ($id_cart as $key => $value) {
                         Cart::where('id_cart', $value)->update([
                             'id_order' => $order->orderID,
@@ -219,7 +227,7 @@ class TransactionController extends Controller
 
         $upTransaksi->date_start = Carbon::now();
         $upTransaksi->date_end = $resultDate;
-        $upTransaksi->status_transaksi = 'Sedang Dikirim';
+        $upTransaksi->status_transaksi = 'On Delivery';
         $upTransaksi->nomorResi = $request->nomorResi;
 
         $upTransaksi->save();

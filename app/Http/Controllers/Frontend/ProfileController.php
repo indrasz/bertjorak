@@ -49,13 +49,13 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(), [
             'username' => 'required',
             'phoneNumber' => 'required',
-            'provincesId' => 'required',
             'type_address' => 'required',
+            'destinationId' => 'required',
             'cityId' => 'required',
+            'subdistrictId' => 'required',
+            'areaId' => 'required',
             'zipCode' => 'required',
             'detailAddress' => 'required',
-            // 'countriesId' => 'required',
-            'destinationId' => '',
         ]);
 
         if ($validator->fails()) {
@@ -90,12 +90,12 @@ class ProfileController extends Controller
         $profile->username = $request->username;
         $profile->phone_number = $request->phoneNumber;
         $profile->type_address = $request->type_address;
-        $profile->state_name = $request->provincesId;
+        $profile->id_country = $request->destinationId;
         $profile->city_name = $request->cityId;
+        $profile->subdistrict_name = $request->subdistrictId;
+        $profile->area_name = $request->areaId;
         $profile->zipcode = $request->zipCode;
         $profile->detail_address = $request->detailAddress;
-        $profile->id_country = $request->destinationId;
-        $profile->area_name = $request->areaId;
         
 
         

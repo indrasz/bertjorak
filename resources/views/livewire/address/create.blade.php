@@ -1,49 +1,3 @@
-{{-- <div class="row">
-    <form action="{{ route('dashboard.address.store') }}" method="POST">
-        @csrf
-        Tipe Tempat
-        <div class="col">
-            <label for="type_address">Tipe Tempat</label>
-            <input type="text" name="type_address" id="type_address" placeholder="Kost / Kantor / Rumah">
-        </div>
-        Province
-        <div class="col">
-            <label for="provincesId">Provinsi</label>
-            <select name="provincesId" id="provincesId" wire:model="provinceId">
-                <option value="">Select Province</option>
-                @foreach ($provinces as $province)
-                    <option value="{{ $province->province_id }}">{{ $province->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        City
-        <div class="col">
-            <label for="cityId">City</label>
-            @if (is_array($cities) || is_object($cities))
-                <select name="cityId" id="cityId">
-                    <option value="" selected>Select City</option>
-                    @foreach ($cities as $city)
-                        <option value="{{ $city->city_id }}">{{ $city->name }}</option>
-                    @endforeach
-                </select>
-            @endif
-        </div>
-        Detail Alamat
-        <div class="col">
-            <label for="detail">Detail</label>
-            <textarea name="detail" id="detail" cols="30" rows="10"></textarea>
-        </div>
-        ZIP CODE
-        <div class="col">
-            <label for="zipCode">Zip Code</label>
-            <input type="text" name="zipCode" id="zipCode">
-        </div>
-        Button
-        <div class="col-md-3">
-            <button type="submit" class="btn btn-primary">Tambah Alamat</button>
-        </div>
-    </form>
-</div> --}}
 <div>
     <br>
     <br>
@@ -69,9 +23,6 @@
             @php
                 foreach ($user as $keyid) {
                     $getDestinations = $keyid->id_country;
-                    $getProv = $keyid->id_province;
-                    $getCity = $keyid->id_city;
-                    //dd($get);
                 }
             @endphp
             <select name="destinationId" id="destinationId" wire:click="changeEvent($event.target.value)"
@@ -85,72 +36,6 @@
             </select>
         </div>
 
-        {{-- <div class="col-span-3">
-            <label for="countriesId" class="block mb-3 font-medium text-gray-700 text-md">Country</label>
-            @php
-                foreach ($user as $keyid) {
-                    $getCountries = $keyid->countries_name;
-                    
-                    
-                    //dd($get);
-                }
-            @endphp
-            <select name="countriesId" id="countriesId" 
-                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                <option value="" selected>Select Country</option>
-                @foreach ($countries as $country)
-                    <option value="{{ $country->country_name }}" @if (old('country') == $country->id || $country->id == $getCountries) selected @endif>
-                        {{ $country->country_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div> --}}
-
-        {{-- <div class="col-span-3">
-            <label for="countriesId" class="block mb-3 font-medium text-gray-700 text-md">Country</label>
-            @if ($edit_data->countries_id == null)
-                <input placeholder="Select your country" type="text" name="countriesId" id="countriesId" autocomplete="countriesId"
-                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-            @else
-                <input value="{{ $edit_data->countries_id }}" type="text" name="countriesId" id="countriesId"
-                    autocomplete="countriesId"
-                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-            @endif
-        </div> --}}
-
-        <div class="col-span-3">
-            <label for="provincesId" class="block mb-3 font-medium text-gray-700 text-md">State / Province</label>
-            @if ($edit_data->state_name == null)
-                <input placeholder="Enter your state or province here" type="text" name="provincesId" id="provincesId"
-                    autocomplete="provincesId"
-                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-            @else
-                <input value="{{ $edit_data->state_name }}" type="text" name="provincesId" id="provincesId"
-                    autocomplete="provincesId"
-                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-            @endif
-        </div>
-
-        {{-- <div class="col-span-3">
-            <label for="provincesId" class="block mb-3 font-medium text-gray-700 text-md">Province</label>
-            @php
-                foreach ($user as $keyid) {
-                    $getProv = $keyid->id_province;
-                    $getCity = $keyid->id_city;
-                    //dd($get);
-                }
-            @endphp
-            <select name="provincesId" id="provincesId" wire:click="changeEvent($event.target.value)"
-                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                <option value="" selected>Select Province</option>
-                @foreach ($provinces as $province)
-                    <option value="{{ $province->province_id }}" @if (old('province') == $province->province_id || $province->province_id == $getProv) selected @endif>
-                        {{ $province->name_province }}
-                    </option>
-                @endforeach
-            </select>
-        </div> --}}
-
         <div class="col-span-3">
             <label for="cityId" class="block mb-3 font-medium text-gray-700 text-md">City</label>
             @if ($edit_data->city_name == null)
@@ -163,25 +48,24 @@
                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
             @endif
         </div>
-
-
-        {{-- <div class="col-span-3">
-            <label for="cityId" class="block mb-3 font-medium text-gray-700 text-md">City</label>
-            <select name="cityId" id="cityId"
-                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                <option value="" selected>Select City</option>
-                @foreach ($cities as $city)
-                    <option value="{{ $city->city_id }}" @if (old('city') == $city->city_id || $city->city_id == $getCity) selected @endif>
-                        {{ $city->type . ' ' . $city->name_city }}</option>
-                @endforeach
-            </select>
-        </div> --}}
-
+        
+        <div class="col-span-3">
+            <label for="subdistrictId" class="block mb-3 font-medium text-gray-700 text-md">Subdicstrict</label>
+            @if ($edit_data->subdistrict_name == null)
+                <input placeholder="Enter your subdistrict here" type="text" name="subdistrictId" id="subdistrictId"
+                    autocomplete="subdistrictId"
+                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+            @else
+                <input value="{{ $edit_data->subdistrict_name }}" type="text" name="subdistrictId" id="subdistrictId"
+                    autocomplete="subdistrictId"
+                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+            @endif
+        </div>
 
         <div class="col-span-3">
-            <label for="areaId" class="block mb-3 font-medium text-gray-700 text-md">Subdistrict</label>
+            <label for="areaId" class="block mb-3 font-medium text-gray-700 text-md">Area</label>
             @if ($edit_data->area_name == null)
-                <input placeholder="Enter your subdistrict here" type="text" name="areaId" id="areaId"
+                <input placeholder="Enter your area here" type="text" name="areaId" id="areaId"
                     autocomplete="areaId"
                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
             @else

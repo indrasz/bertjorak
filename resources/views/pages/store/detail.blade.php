@@ -64,13 +64,13 @@
                                     <div class="price-product mt-lg-2 ms-2 ps-2 ">@currency($d->price)</div>
 
                                     @if ($d->stock > 10)
-                                        <div class="stock-product mt-lg-2 ms-2 ps-2">Stok : {{ $d->stock }}</div>
+                                        <div class="stock-product mt-lg-2 ms-2 ps-2">Stocks : {{ $d->stock }}</div>
                                     @else
-                                        <div class="stock-product mt-lg-2 ms-2 ps-2 text-danger">Stok : {{ $d->stock }}
+                                        <div class="stock-product mt-lg-2 ms-2 ps-2 text-danger">Stocks : {{ $d->stock }}
                                         </div>
                                     @endif
 
-                                    <div class="stock-product mt-lg-2 ms-2 ps-2">Berat : {{ $d->weight }} gram</div>
+                                    <div class="stock-product mt-lg-2 ms-2 ps-2">Weight : {{ $d->weight }} gram</div>
 
                                     <div class="desc-product mt-3 px-3">
                                         {{ $d->desc }}
@@ -86,7 +86,7 @@
                                     @endphp
                                     @if ($pilihan != null)
                                         <div class="chose-size mt-3 px-3">
-                                            Colors/Type :
+                                            Colors / Type :
                                         </div>
 
                                         <div class="container mt-3 px-3">
@@ -101,7 +101,7 @@
                                                     </label>
                                                 @endforeach
                                             @empty
-                                                <h5>Tidak ada ukuran yang tersedia</h5>
+                                                <h5>No size available</h5>
                                             @endforelse
                                         </div>
                                     @endif
@@ -126,7 +126,7 @@
                                                     </label>
                                                 @endforeach
                                             @empty
-                                                <h5>Tidak ada ukuran yang tersedia</h5>
+                                                <h5>No size available</h5>
                                             @endforelse
                                         </div>
                                     @endif
@@ -146,17 +146,6 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="col-md-12 ">
-                            <div class="card-detail-product py-4 px-4 mt-4">
-                                <div class="product-name ms-2 ps-2 mt-3">
-                                    {{ $d->title }}
-                                </div>
-
-                                <button type="submit" class="btn btn-add-cart d-inline-block w-100 p-2 mt-4">
-                                    Add to cart
-                                </button>
-                            </div>
-                        </div> --}}
 
                             <style>
                                 .main-detail-product {

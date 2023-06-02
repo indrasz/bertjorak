@@ -142,7 +142,7 @@
                                                     @if ($ka->sizeSelected != null)
                                                         <tr>
                                                             <td class="text-sm text-serv-text">
-                                                                Size
+                                                                Size : 
                                                             </td>
                                                             <td class="mb-4 text-sm font-semibold text-right text-black">
                                                                 {{ $ka->sizeSelected }}
@@ -152,7 +152,7 @@
                                                     @if ($ka->pilihanSelected != null)
                                                         <tr>
                                                             <td class="text-sm text-serv-text">
-                                                                Warna/Tipe :
+                                                                Color / Type :
                                                             </td>
                                                             <td class="mb-4 text-sm font-semibold text-right text-black">
                                                                 {{ $ka->pilihanSelected }}
@@ -162,16 +162,16 @@
 
                                                     <tr>
                                                         <td class="text-sm leading-7 text-serv-text">
-                                                            Jumlah
+                                                            Total : 
                                                         </td>
                                                         <td class="mb-4 text-sm font-semibold text-right text-black">
-                                                            {{ $ka->jumlah }} Jumlah Barang
+                                                            {{ $ka->jumlah }} Total Item
                                                         </td>
                                                     </tr>
 
                                                     <tr>
                                                         <td class="text-sm leading-7 text-serv-text">
-                                                            Berat Barang
+                                                            Item Weight :
                                                         </td>
                                                         <td class="mb-4 text-sm font-semibold text-right text-black">
                                                             {{ $ka->weight }} gram
@@ -180,7 +180,7 @@
 
                                                     <tr>
                                                         <td class="text-sm leading-7 text-serv-text">
-                                                            Harga Satuan
+                                                            Unit Price : 
                                                         </td>
                                                         <td class="mb-4 text-sm font-semibold text-right text-black">
                                                             @currency($ka->price)
@@ -193,7 +193,7 @@
                                                 <table class="w-full mb-4">
                                                     <tr>
                                                         <td class="text-sm leading-7 text-serv-text">
-                                                            Total Harga:
+                                                            Total Price :
                                                         </td>
                                                         <td class="mb-4 text-xl font-semibold text-right text-serv-button">
                                                             @currency($ka->jumlah * $ka->price)
