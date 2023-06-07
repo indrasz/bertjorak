@@ -31,11 +31,6 @@
                         intention to spread positive energy and youthfulness across all fashion savvy and people in
                         Indonesia.
                     </h5>
-                   <div class="news">
-                    <h5>Subscribe Newsletter</h5>
-                    <input type="text" placeholder="Input your email address">
-                    <button type="submit">Subscribe</button>
-                   </div>
                 </div>
                 <div class="right-col">
                     <style>
@@ -224,7 +219,7 @@
                         n_text.text("Email Already Exist").css("color", "#ff0000");
                     } else if (resp == "inserted") {
                         n_form.addClass("valid").removeClass("invalid");
-                        n_text.text("Thank you for Subscribing");
+                        n_text.text("Thank you for Subscribing").css("color", "#00ff00");;
                     }
                 },
                 error: function() {

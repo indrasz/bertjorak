@@ -8,7 +8,7 @@
         <div class="col-span-3">
             <label for="type_address" class="block mb-3 font-medium text-gray-700 text-md">Label Address</label>
             @if ($edit_data->type_address == null)
-                <input placeholder="Appartemen / House / Office" type="text" name="type_address" id="type_address"
+                <input placeholder="Apartment / House / Office" type="text" name="type_address" id="type_address"
                     autocomplete="type_address"
                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
             @else

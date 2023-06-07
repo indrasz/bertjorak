@@ -114,7 +114,7 @@
                                     <div class="px-8 rounded-10 card-creator pt-60 pb-10 w-full">
                                         <h5 class="font-semibold text-xl">Personal Information</h5>
                                         <br>
-                                        <div class="relative z-10 flex flex-col items-left">
+                                        <div class="relative z-10 flex flex-col items-left mb-4">
                                             @php
                                                 $convertImg = json_decode($u->avatar);
                                             @endphp
@@ -246,7 +246,7 @@
 
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Subdistrict</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Area</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
                                                     @if ($u->area_name != null)
                                                         {{ $u->area_name }}
