@@ -46,7 +46,7 @@
                 @if (Auth::user()->hasRole('buyer'))
                     <a class='bx bx-search' href="{{ url('/product') }}" id="search-icon"></a>
                     <a class="ri-shopping-cart-2-line" href="{{ route('cart.index') }}" id="cart-icon">
-                        <livewire:cart.count-cart/>
+                        <livewire:cart.count-cart />
                     </a>
 
                     <div class="navbar-nav ms-auto mt-lg-0">
@@ -56,14 +56,12 @@
                             @endphp
 
                             @if ($convertImg == null)
-                                <img src="{{ asset('assets/images/blank-profile-picture.png') }}" class="me-2"
-                                    alt="icon-user" width="45" height="45" style="border-radius: 50%;">
+                                <img src="{{ asset('assets/images/blank-profile-picture.png') }}" alt="icon-user"
+                                    width="45" height="45" style="border-radius: 50%;">
                             @elseif ($convertImg != null)
                                 <img src="{{ asset('/storage/account/' . Auth::user()->id . '/avatar/' . $convertImg) }}"
-                                    class="me-2" alt="icon-user" width="45" height="45"
-                                    style="border-radius: 50%;">
+                                    alt="icon-user" width="45" height="45" style="border-radius: 50%;">
                             @endif
-                            {{ Auth::user()->name }}
                         </a>
                         {{-- <ul class="dropdown-menu" style="cursor: pointer"> --}}
                         {{-- <li>

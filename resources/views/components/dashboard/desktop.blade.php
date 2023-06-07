@@ -249,7 +249,7 @@
                                 <path
                                     d="M2.813 15c-.725 0-1.313.588-1.313 1.313V18a3 3 0 003 3h15a3 3 0 003-3v-1.688c0-.724-.588-1.312-1.313-1.312h-4.233a3 3 0 00-2.496 1.336l-.164.246a1.5 1.5 0 01-1.248.668h-2.092a1.5 1.5 0 01-1.248-.668l-.164-.246A3 3 0 007.046 15H2.812z" />
                             </svg>
-                            
+
                             <span class="ml-4">Newsletter</span>
                         </a>
                     @else
@@ -377,6 +377,20 @@
                 </a>
             </li>
 
+            {{-- back --}}
+            <li class="absolute px-6 py-3" style="bottom: 0;">
+                <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800"
+                    href="/">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+                    </svg>
+
+                    <span class="ml-4">Back</span>
+                </a>
+            </li>
         </ul>
 
     </div>

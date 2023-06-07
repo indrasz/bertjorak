@@ -101,7 +101,6 @@ ul.navbar li.nav-item a.nav-link.active {
 
 .right-nav-item a {
     padding: 8px;
-    margin-right: 8px;
     margin-left: 8px;
     color: var(--text-color);
     font-size: 1rem;
@@ -258,6 +257,7 @@ span.msg_alert {
         opacity: 1;
         transform: translateY(0%);
     }
+
     to {
         opacity: 0;
         transform: translateY(-50%);
@@ -326,7 +326,7 @@ span.msg_alert {
     .right-nav-item a.btn-db {
         display: none;
     }
-    
+
     .right-nav-item a.nav-db {
         display: block;
     }
@@ -360,7 +360,9 @@ span.msg_alert {
         flex-direction: column;
         justify-content: flex-start;
         border-radius: 10px;
-        border: 1px solid #dee2e6;
+        box-shadow: 0px 0px 18px 1px rgba(0, 0, 0, 0.26);
+        -webkit-box-shadow: 0px 0px 18px 1px rgba(0, 0, 0, 0.26);
+        -moz-box-shadow: 0px 0px 18px 1px rgba(0, 0, 0, 0.26);
         transition: all .50s ease;
     }
 

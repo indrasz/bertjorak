@@ -235,4 +235,3 @@
         footer.toggleClass("sticky", $(window).scrollTop() > 0);
     });
 </script>
-<script type="text/javascript" src="{{ asset('js/footer.js') }}"></script>

@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', ' Account')
+@section('title', ' Reset Password')
 
 @section('content')
 
@@ -11,7 +11,7 @@
         <style>
             .body::before {
                 content: "";
-                background-image: url('./frontend/images/background.png');
+                background-image: url('./frontend/images/background.png'); 
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: cover;
@@ -28,53 +28,57 @@
             <div class="box">
                 <div class="inner-box">
                     <div class="forms-wrap">
-                        <form method="POST" action="{{ route('login') }}" autocomplete="off" class="sign-in-form">
+                        <form method="POST" action="{{ route('reset.password') }}" autocomplete="off" class="new-password-form">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="token" value="{{ $token }}">
                             <!-- Session Status -->
                             <x-auth-session-status class="session" :status="session('status')" />
 
                             <!-- Validation Errors -->
                             <x-auth-validation-errors class="validation" :errors="$errors" />
 
-
                             <div class="logo">
                                 <img src="{{ asset('frontend/images/main-logo.png') }}" alt="bertjorak">
                             </div>
                             <div class="heading">
-                                <h3>Welcome Back</h3>
-                                <h6>Not Registered Yet?</h6>
-                                <a href="#signup" class="toggle">Sign Up</a>
+                                <h4>Reset Your Password</h4>
+                                <h6>Enter your new Password</h6>
                             </div>
                             <div class="actual-form">
                                 <div class="input-wrap">
                                     <input type="text" id="login" minlength="4" class="input-field"
-                                        autocomplete="off" type="text" name="login" :value="old('login')" required
+                                        autocomplete="off" type="text" name="email" value="{{ $email ?? old('login') }}" required
                                         autofocus>
-                                    <label>Username/Email</label>
+                                    <label>Email</label>
                                 </div>
 
                                 <div class="input-wrap">
                                     <input type="password" id="password" type="password" name="password" minlength="4"
                                         class="input-field" required autocomplete="current-password">
-                                    <label>Password</label>
+                                    <label>New Password</label>
                                 </div>
 
-                                <input type="Submit" value="Sign in" class="sign-in-button">
+                                <div class="input-wrap">
+                                    <input type="password" id="password_confirmation" minlength="4" class="input-field"
+                                        autocomplete="off" name="password_confirmation" value="{{ old('password_confirmation')}}"required>
+                                    <label>Confirm Password</label>
+                                </div>
+
+                                <input type="Submit" value="Reset" class="new-password-button">
 
                                 <p class="text">
-                                    Forgot your password?
-                                    <a href="{{ route('forgot.password.form') }}">Get Help</a> Signing in
+                                    Back to Login
+                                    <a href="{{ route('login') }}">Here</a>
                                 </p>
                             </div>
                         </form>
-                        <form method="POST" action="{{ route('register') }}" action="/register" autocomplete="off"
-                            class="sign-up-form">
+                        {{-- <form method="POST" action="" autocomplete="off"> --}}
                             {{-- <div class="logo">
                                 <img src="{{ asset('frontend/images/main-logo.png') }}" alt="bertjorak">
                             </div>   --}}
 
                             <!-- Validation Errors -->
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <x-auth-validation-errors class="validation" :errors="$errors" />
 
                             <div class="heading">
@@ -113,8 +117,8 @@
                                     <a href="">Terms of Services</a> and
                                     <a href="">Privacy Policy</a>
                                 </p>
-                            </div>
-                        </form>
+                            </div> --}}
+                        {{-- </form> --}}
                     </div>
                     {{-- carousel --}}
                     <div class="crsl">
@@ -150,3 +154,5 @@
     {{-- JS --}}
     <script type="text/javascript" src="{{ asset('js/account.js') }}"></script>
 @endsection
+
+
