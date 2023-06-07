@@ -8,7 +8,8 @@
 4.  run `php artisan migrate`
 5.  run `php artisan db:seed`
 6.  run `php artisan key:generate`
-7.  run `php artisan serve`
+7.  run `php artisan storage:link`
+8.  run `php artisan serve`
 
 ## Plugin/Libraries:
 
