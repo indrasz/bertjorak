@@ -38,16 +38,8 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white">
-                                    {{-- @php
-                                            $joinCart = $o
-                                                ->join('carts', 'orders.id_order', '=', 'carts.id_order')
-                                                ->where('carts.id_order', $o->id_order)
-                                                ->get();
-                                        @endphp --}}
-                                    {{-- @foreach ($cartData as $a)
-                                            {{ $a->title }}
-                                        @endforeach --}}
-                                    @foreach ($orderData->first() as $o)
+                                    @foreach ($orderData as $o)
+                                    {{-- {{dd($o)}} --}}
                                         <tr class="text-gray-700 border-b">
                                             <td class="px-1 py-5 text-sm w-2/8">
                                                 <div class="flex items-center text-sm">
@@ -79,11 +71,11 @@
                                                 <td class="px-1 py-5 text-sm text-purple-500 text-md">
                                                     {{ $o->status_transaksi }}
                                                 </td>
-                                            @elseif ($o->status_transaksi == 'Sedang Dikirim')
+                                            @elseif ($o->status_transaksi == 'On Delivery')
                                                 <td class="px-1 py-5 text-sm text-blue-500 text-md">
                                                     {{ $o->status_transaksi }}
                                                 </td>
-                                            @elseif ($o->status_transaksi == 'Telah Dikirim')
+                                            @elseif ($o->status_transaksi == 'Already Sent')
                                                 <td class="px-1 py-5 text-sm text-green-500 text-md">
                                                     {{ $o->status_transaksi }}
                                                 </td>
@@ -91,11 +83,11 @@
                                                 <td class="px-1 py-5 text-sm text-red-500 text-md">
                                                     {{ $o->status_transaksi }}
                                                 </td>
-                                            @elseif ($o->status_transaksi == 'Sedang Dikirim')
+                                            @elseif ($o->status_transaksi == 'On Delivery')
                                                 <td class="px-1 py-5 text-sm text-blue-500 text-md">
                                                     {{ $o->status_transaksi }}
                                                 </td>
-                                            @elseif ($o->status_transaksi == 'Telah Dikirim')
+                                            @elseif ($o->status_transaksi == 'Already Sent')
                                                 <td class="px-1 py-5 text-sm text-pink-500 text-md">
                                                     {{ $o->status_transaksi }}
                                                 </td>

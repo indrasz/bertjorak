@@ -1,28 +1,42 @@
 <div>
     {{-- Pilih Jasa Pengiriman --}}
     <div class="preview-summary pt-2">
-        Jasa Kirim
+        Delivery Service
     </div>
+    {{-- @php
+        if (is_array($cost) || is_object($cost)) {
+            foreach ($cost as $value) {
+                dd($value['results'][0]);
+            }
+        } else {
+            dd("null");
+        }
+    @endphp --}}
     <select class="form-select" wire:model="pilihKurir" name="pilihKurir" id="cost" required>
+        <option value="none" selected>-- Select Courier --</option>
         @if (is_array($cost) || is_object($cost))
-            <option value="none" selected>-- Pilih Kurir --</option>
-            @foreach ($cost as $k => $value)
-                <option value="{{ $value['name'] }}">{{ $value['name'] }}</option>
+        @foreach ($cost as $k => $value)
+                @if (isset($value['results'][0]['name']))
+                    <option value="{{ $value['results'][0]['name'] }}">{{ $value['results'][0]['name'] }}</option>
+                @else
+                    {{-- <option value="{{ $value['results'][0]['service'] }}">{{ $value['results'][0]['service'] }}</option> --}}
+                @endif
             @endforeach
-
         @endif
     </select>
 
     {{-- Pilih Jenis Pengiriman --}}
     <div class="preview-summary pt-2">
-        Jenis Pengiriman
+        Delivery Type
     </div>
     <select class="form-select" wire:model="jenisKurir" name="pilihJenisKurir" id="cost" required>
-        <option value="none" selected>-- Pilih Jenis --</option>
-        @foreach ($cost as $k => $y)
-            @if ($y['name'] == $pilihKurir)
-                @foreach ($y['costs'] as $p)
-                    <option value="{{ $p['service'] }}">{{ $p['service'] }}</option>
+        <option value="none" selected>-- Select the type of service --</option>
+        @foreach ($cost as $value)
+            @if (isset($value['results'][0]['name']) && isset($value['results'][0]['name']) == $pilihKurir && isset($value['results'][0]['costs']))
+                @foreach ($value['results'][0]['costs'] as $p)
+                    @if (isset($p['service']))
+                        <option value="{{ $p['service'] }}">{{ $p['service'] }}</option>
+                    @endif
                 @endforeach
             @endif
         @endforeach
@@ -32,21 +46,24 @@
     {{-- Ongkos Kirim Display --}}
     <div class="d-flex justify-content-between">
         <div class="preview-summary pt-1">
-            Ongkos Kirim:
+            Shipping Cost :
         </div>
         <span class="p-2" wire:model="ongkirResult">
             @if (!is_array($jenisKurir) || is_object($jenisKurir))
-                @foreach ($cost as $k => $y)
-                    @if ($y['name'] == $pilihKurir)
-                        @foreach ($y['costs'] as $p)
-                            @if ($p['service'] == $jenisKurir)
-                                @foreach ($p['cost'] as $harga)
-                                    @currency($harga['value'])
-                                    @php
-                                        $hargaOngkir = $harga['value'];
-                                    @endphp
-                                    <input type="text" name="ongkir" value="{{ $hargaOngkir }}" hidden>
-                                @endforeach
+                @foreach ($cost as $value)
+                    @if (isset($value['results'][0]['name']) && $value['results'][0]['name'] == $pilihKurir && isset($value['results'][0]['costs']))
+                        @foreach ($value['results'][0]['costs'] as $p)
+                            @if (isset($p['service']) && $p['service'] == $jenisKurir && isset($p['cost']))
+                            {{-- {{dd()}} --}}
+                            @currency($p['cost'])
+                            @php
+                                $hargaOngkir = $p['cost'];
+                            @endphp
+                            <input type="text" name="ongkir" value="{{ $hargaOngkir }}" hidden>
+                                {{-- @foreach ($p['cost'] as $harga)
+                                    @if (isset($harga['value'])) --}}
+                                    {{-- @endif
+                                @endforeach --}}
                             @endif
                         @endforeach
                     @endif
@@ -68,22 +85,23 @@
 
         <span>
             @if (!$hargaOngkir == null)
-                @foreach ($cost as $k => $y)
+                @foreach ($value['results'] as $y)
                     @if ($y['name'] == $pilihKurir)
                         @foreach ($y['costs'] as $p)
                             @if ($p['service'] == $jenisKurir)
-                                @foreach ($p['cost'] as $harga)
+                                {{-- {{dd($p['cost'])}} --}}
+                                {{-- @foreach ($p['cost'] as $harga) --}}
                                     @php
-                                        $convert = $harga['etd'];
+                                        $convert = $p['etd'];
                                         $hasilKonversi = str_replace('HARI', '', $convert);
                                     @endphp
                                     @if ($hasilKonversi == '0' || $hasilKonversi == '1-1')
-                                        1 hari pengiriman
+                                        1 Days Delivery
                                     @else
-                                        {{ $hasilKonversi }} hari pengiriman
+                                        {{ $hasilKonversi }} Days Delivery
                                     @endif
                                     <input type="text" name="durasi" value="{{ $hasilKonversi }}" hidden>
-                                @endforeach
+                                {{-- @endforeach --}}
                             @endif
                         @endforeach
                     @endif
@@ -96,7 +114,7 @@
 
     {{-- Total Harga Barang --}}
     <div class="total-summary mt-1">
-        Total Harga Barang
+        Total item price
         @if (!$hargaOngkir == null)
             <span class="float-end">@currency($cartsPrice) </span>
         @else
@@ -106,7 +124,7 @@
 
     {{-- Total Harga Belanja --}}
     <div class="total-summary mt-1">
-        Total Harga Belanja
+        Total purchase price
         @if (!$hargaOngkir == null)
             <span class="float-end">@currency($cartsPrice + $hargaOngkir) </span>
             <input type="number" name="totalPrice" value="{{ $cartsPrice + $hargaOngkir }}" readonly hidden>

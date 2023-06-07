@@ -25,9 +25,10 @@ class AlamatController extends Controller
 
         $address->id_user = $authId;
         $address->type_address = $request->type_address;
-        $address->countries_name = $request->countriesId;
-        $address->state_name = $request->provincesId;
+        $address->id_country = $request->destinationId;
         $address->city_name = $request->cityId;
+        $address->subdistrict_name = $request->subdistrictId;
+        $address->area_name = $request->areaId;
         $address->detail_address = $request->detail;
         $address->zipcode = $request->zipCode;
 

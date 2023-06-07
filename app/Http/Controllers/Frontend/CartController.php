@@ -15,7 +15,7 @@ class CartController extends Controller
     {
         if (Auth::user()) {
             if (Auth::user()->hasRole('buyer')) {
-                if (Auth::user()->state_name != null && Auth::user()->city_name != null && Auth::user()->detail_address != null && Auth::user()->zipcode != null) {
+                if (Auth::user()->id_country != null && Auth::user()->subdistrict_name != null && Auth::user()->city_name != null && Auth::user()->area_name != null && Auth::user()->detail_address != null && Auth::user()->zipcode != null) {
 
                     $authId = Auth::user()->id;
                     $cartList = Cart::join('users', 'carts.id_user', '=', 'users.id')->join('products', 'carts.id_product', '=', 'products.id_product')->where('id_user', $authId)->where('status', 'Cart')->get();

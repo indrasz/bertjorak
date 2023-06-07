@@ -56,25 +56,12 @@
                                         <div class="grid grid-cols-6 gap-6">
                                             <div class="col-span-6 ">
                                                 <label for="cityId"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Nomor
-                                                    Resi</label>
-                                                <input type="text" placeholder="Masukkan Nomor Resi Pengiriman"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Receipt Number</label>
+                                                <input type="text" placeholder="Enter the delivery receipt number"
                                                     name="nomorResi"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                     autocomplete="off">
                                             </div>
-
-                                            {{-- <div class="col-span-6 ">
-                                            <label for="cityId"
-                                                class="block mb-3 font-medium text-gray-700 text-md">Transaction
-                                                Status</label>
-                                            <select name="cityId" id="cityId"
-                                                class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                <option value="Pending" selected>Pending</option>
-                                                <option value="Succes" selected>Success</option>
-                                                <option value="Cancel" selected>Cancel</option>
-                                            </select>
-                                        </div> --}}
                                         </div>
                                     </div>
                                     <div class="px-1 py-4 text-right">
@@ -90,11 +77,6 @@
                                             onclick="return confirm('Are you sure want to submit this data?')">
                                             Approve
                                         </button>
-                                        {{-- @else --}}
-                                        {{-- <button type="submit" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" disabled>
-                                            Approve
-                                        </button>
-                                    @endif --}}
                                     </div>
                                 </div>
                             </form>
@@ -104,8 +86,6 @@
                             <div>
                                 <label for="transaction detail" class="block mb-3 font-medium text-md"
                                     style="font-weight: 700;">Transaction Detail</label>
-                                {{-- <label for="transaction detail" class="block mb-3 font-medium text-sm"
-                                    style="font-weight: 400;">{{ $ka->id_order }}</label> --}}
                             </div>
                             @if ($ka->status_transaksi == 'Pending')
                                 <span
@@ -115,7 +95,7 @@
                                 <span
                                     class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
                                     style="background-color: #a007dd;">{{ $ka->status_transaksi }}</span>
-                            @elseif ($ka->status_transaksi == 'Sedang Dikirim')
+                            @elseif ($ka->status_transaksi == 'On Delivery')
                                 <span
                                     class="inline-flex items-center justify-center px-4 py-3 mb-4 mr-2 text-sm leading-none text-white font-semibold rounded-md"
                                     style="background-color: #008bcc;">{{ $ka->status_transaksi }}</span>
@@ -142,7 +122,6 @@
                                                 <div class="relative w-10 h-10 mr-3 rounded-full md:block">
                                                     @php
                                                         $img = json_decode($os->images);
-                                                        //dd($img[0]);
                                                     @endphp
                                                     <img class="object-cover w-full h-full rounded-full"
                                                         src="{{ asset('/storage/products/images/' . $img[0]) }}" alt=""
@@ -154,7 +133,7 @@
                                                 <div>
                                                     <p class="font-medium text-black">{{ $ka->title }}</p>
                                                     @if ($ka->pilihanSelected != null)
-                                                        <p class="text-sm text-gray-400">Warna/Tipe :
+                                                        <p class="text-sm text-gray-400">Color / Type :
                                                             {{ $ka->pilihanSelected }}
                                                         </p>
                                                     @endif
@@ -165,19 +144,6 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        {{-- <td class="w-2/6 px-1 py-5">
-                                        <div class="flex items-center text-sm">
-                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                                                <img class="object-cover w-full h-full rounded" src="https://randomuser.me/api/portraits/men/3.jpg" alt="" loading="lazy" />
-                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                            </div>
-                                            <div>
-                                                <p class="font-medium text-black">
-                                                    Design WordPress <br>E-Commerce Modules
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td> --}}
                                         <td class="px-1 py-5 text-sm">
                                             {{ $os->jumlah }}
                                         </td>
@@ -198,25 +164,28 @@
                         @php
                             foreach ($orderShow as $key => $value) {
                                 $get = $value;
+
+                                $dataUser = App\Models\User::where('id',$value->id_buyer)->first();
                             }
                             
                         @endphp
 
                         @if ($get->notes != null)
                             <div class="py-2">
-                                <h3 style="font-size: 1.1rem; font-weight: 800;">Catatan
+                                <h3 style="font-size: 1.1rem; font-weight: 800;">Notes
                                 </h3>
                                 <p class="text-justify">{{ $get->notes }}</p>
                             </div>
                         @endif
 
                         <div class="pt-6">
-                            <h3 class="pb-2" style="font-size: 1.1rem; font-weight: 800;">Data Pemesan
+                            <h3 class="pb-2" style="font-size: 1.1rem; font-weight: 800;">Customer Data
                             </h3>
+
                             <table class="w-full mb-2">
                                 <tr>
                                     <td class="text-sm text-serv-text">
-                                        Name
+                                        Name :
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
                                         {{ $value->name }}
@@ -225,7 +194,7 @@
 
                                 <tr>
                                     <td class="text-sm leading-7 text-serv-text">
-                                        Email
+                                        Email : 
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
                                         {{ $value->email }}
@@ -234,7 +203,7 @@
 
                                 <tr>
                                     <td class="text-sm leading-7 text-serv-text">
-                                        Phone Number
+                                        Phone Number : 
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
                                         {{ $value->phone_number }}
@@ -243,7 +212,7 @@
 
                                 <tr>
                                     <td class="text-sm leading-7 text-serv-text">
-                                        Tipe Alamat
+                                        Label Address : 
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
                                         {{ $value->type_address }}
@@ -252,40 +221,46 @@
 
                                 <tr>
                                     <td class="text-sm leading-7 text-serv-text">
-                                        Province
+                                        Country : 
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
-
-                                        {{ $value->state_name }}
-                                        {{-- @php
-                                            $conProv = $province->where('province_id', $value->state_name);
-                                            foreach ($conProv as $keyProv) {
-                                                $getProv = $keyProv;
-                                            }
+                                        @php
+                                            $countryName = \App\Models\InternationalDestination::where('country_id',$dataUser->id_country)->first();
                                         @endphp
-                                        {{ $getProv->name_province }} --}}
+                                        {{ $countryName->country_name }}
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td class="text-sm leading-7 text-serv-text">
-                                        City
+                                        City : 
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
-                                        {{ $value->city_name }}
-                                        {{-- @php
-                                            $conCity = $city->where('city_id', $value->id_city);
-                                            foreach ($conCity as $keyCity) {
-                                                $getCity = $keyCity;
-                                            }
-                                        @endphp
-                                        {{ $getCity->name_city }} --}}
+                                        {{ $dataUser->city_name}}
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td class="text-sm leading-7 text-serv-text">
-                                        Postal Code
+                                        Subdistrict :
+                                    </td>
+                                    <td class="mb-4 text-sm font-semibold text-right text-black">
+                                        {{ $dataUser->subdistrict_name}}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-sm leading-7 text-serv-text">
+                                        Area :
+                                    </td>
+                                    <td class="mb-4 text-sm font-semibold text-right text-black">
+                                        {{ $dataUser->area_name}}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-sm leading-7 text-serv-text">
+                                        Postal Code :
                                     </td>
                                     <td class="mb-4 text-sm font-semibold text-right text-black">
                                         {{ $value->zipcode }}
@@ -294,7 +269,7 @@
 
                                 <tr>
                                     <td class="text-sm leading-7 text-serv-text">
-                                        Detail Address
+                                        Detail Address :
                                     </td>
                                     <td class="w-1/2 mb-4 text-sm font-semibold text-right text-black">
                                         {{ $value->detail_address }}
@@ -305,13 +280,13 @@
                         </div>
 
                         <div style="padding-top: 2em;">
-                            <h3 style="font-size: 1.1rem; font-weight: 800;">Ringkasan Pemesanan
+                            <h3 style="font-size: 1.1rem; font-weight: 800;">Order Summary
                             </h3>
                             <div style="padding-top: 1em;" class="pt- pb-2 features-list">
                                 <table class="w-full mb-4">
                                     <tr>
                                         <td class="text-sm text-serv-text">
-                                            Order
+                                            Order :
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
                                             {{ $value->kode_order }}
@@ -320,7 +295,7 @@
 
                                     <tr>
                                         <td class="text-sm text-serv-text">
-                                            Tanggal Order
+                                            Order Date :
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
                                             @php
@@ -334,7 +309,7 @@
                                 <table class="w-full mb-2">
                                     <tr>
                                         <td class="text-sm leading-7 text-serv-text">
-                                            Jasa Kurir
+                                            Courier Services :
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
                                             {{ $value->id_kurir }}
@@ -343,7 +318,7 @@
 
                                     <tr>
                                         <td class="text-sm leading-7 text-serv-text">
-                                            Jenis Pengiriman
+                                            Delivery Type :
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
                                             {{ $value->id_jenisKurir }}
@@ -352,7 +327,7 @@
 
                                     <tr>
                                         <td class="text-sm leading-7 text-serv-text">
-                                            Nomor Resi
+                                            Receipt Number :
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
                                             @if ($value->nomorResi != null)
@@ -365,7 +340,7 @@
 
                                     <tr>
                                         <td class="text-sm leading-7 text-serv-text">
-                                            Ongkos Kirim
+                                            Shipping Cost :
                                         </td>
                                         <td class="mb-4 text-sm font-semibold text-right text-black">
                                             @currency($value->ongkir)
@@ -377,7 +352,7 @@
                                 <table class="w-full mb-4">
                                     <tr>
                                         <td class="text-sm leading-7 text-serv-text">
-                                            Total Pembayaran:
+                                            Total Payment :
                                         </td>
                                         <td class="mb-4 text-xl font-semibold text-right text-serv-button">
                                             @currency($value->totalCost)

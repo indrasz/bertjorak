@@ -31,6 +31,11 @@
                         intention to spread positive energy and youthfulness across all fashion savvy and people in
                         Indonesia.
                     </h5>
+                   <div class="news">
+                    <h5>Subscribe Newsletter</h5>
+                    <input type="text" placeholder="Input your email address">
+                    <button type="submit">Subscribe</button>
+                   </div>
                 </div>
                 <div class="right-col">
                     <style>

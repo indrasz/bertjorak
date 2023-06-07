@@ -20,6 +20,8 @@ use App\Http\Controllers\TransaksiShow;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\Frontend\PrivacyController;
+use App\Http\Controllers\Frontend\TermsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,12 @@ Route::get('clear/optimize', [ConfigController::class, 'clearRoute']);
 
 // About
 Route::resource('about', AboutController::class);
+
+// Privacy
+Route::resource('privacy', PrivacyController::class);
+
+// Terms
+Route::resource('terms', TermsController::class);
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');

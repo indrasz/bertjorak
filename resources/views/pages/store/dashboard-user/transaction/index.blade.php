@@ -30,7 +30,7 @@
                                 <thead>
                                     <tr class="text-sm font-normal text-left text-gray-900 border-b border-b-gray-600">
                                         <th class="py-4" scope="">Order Code</th>
-                                        <th class="py-4" scope="">Total Jenis Barang</th>
+                                        <th class="py-4" scope="">Total Product Category</th>
                                         <th class="py-4" scope="">Date Order</th>
                                         <th class="py-4" scope="">Total Price</th>
                                         <th class="py-4" scope="">Status</th>
@@ -38,15 +38,6 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white">
-                                    {{-- @php
-                                            $joinCart = $o
-                                                ->join('carts', 'orders.id_order', '=', 'carts.id_order')
-                                                ->where('carts.id_order', $o->id_order)
-                                                ->get();
-                                        @endphp --}}
-                                    {{-- @foreach ($cartData as $a)
-                                            {{ $a->title }}
-                                        @endforeach --}}
                                     @foreach ($orderData as $o)
                                         <tr class="text-gray-700 border-b">
                                             <td class="px-1 py-5 text-sm w-2/8">
@@ -61,31 +52,35 @@
                                                 $a = $getCart->where('id_order', $o->orderID);
                                                 foreach ($a as $keyCart) {
                                                     $as = $keyCart;
-                                                    //dd($as);
                                                 }
-                                            @endphp
+                                                @endphp
                                             <td class="px-1 py-5 text-sm">
                                                 <div class="flex justify-around items-center">
                                                     <div class="w-12 h-12 overflow-hidden rounded-full">
-                                                        @foreach (json_decode($as->images, true) as $ha)
-                                                            <img src="{{ asset('/storage/products/images/' . $ha) }}"
-                                                                alt="product">
-                                                        @endforeach
+                                                        @if (isset($as))
+                                                        
+                                                            @foreach (json_decode($as->images, true) as $ha)
+                                                                <img src="{{ asset('/storage/products/images/' . $ha) }}"
+                                                                    alt="product">
+                                                            @endforeach
+                                                        @endif
                                                     </div>
                                                     <p class="font-medium" style="padding-left: 0.75em;">
                                                     <div class="flex flex-col">
                                                         <h5 class="font-bold">
-                                                            {{ $as->title }}
+                                                            @if (isset($as))
+                                                                {{ $as->title }}
+                                                            @endif
                                                         </h5>
                                                         <h5>
-                                                            Qty : {{ $as->jumlah }}
+                                                            Qty : {{ isset($as) ? $as->jumlah : "0" }}
                                                         </h5>
                                                     </div>
                                                     </p>
                                                 </div>
                                                 <p class="pt-4">
                                                     @if (count($a) > 1)
-                                                        {{ '+' . count($a) - 1 . ' Jenis Barang Lainnya' }}
+                                                        {{ '+' . count($a) - 1 . ' Other types of product' }}
                                                     @endif
                                                 </p>
                                             </td>
@@ -105,11 +100,11 @@
                                                 <td class="px-1 py-5 text-sm text-red-500 text-md">
                                                     {{ $o->status_transaksi }}
                                                 </td>
-                                            @elseif ($o->status_transaksi == 'Sedang Dikirim')
+                                            @elseif ($o->status_transaksi == 'On Delivery')
                                                 <td class="px-1 py-5 text-sm text-blue-500 text-md">
                                                     {{ $o->status_transaksi }}
                                                 </td>
-                                            @elseif ($o->status_transaksi == 'Telah Dikirim')
+                                            @elseif ($o->status_transaksi == 'Already Sent')
                                                 <td class="px-1 py-5 text-sm text-pink-500 text-md">
                                                     {{ $o->status_transaksi }}
                                                 </td>

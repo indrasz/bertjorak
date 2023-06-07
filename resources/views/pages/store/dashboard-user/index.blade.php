@@ -32,7 +32,7 @@
             </div>
         </div>
         <section class="container px-6 mx-auto mt-5">
-            @if (Auth::user()->type_address == null && Auth::user()->state_name == null && Auth::user()->city_name == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
+            @if (Auth::user()->type_address == null && Auth::user()->id_country == null && Auth::user()->city_name == null && Auth::user()->subdistrict_name == null && Auth::user()->area_name == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
                 <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                     role="alert">
                     <span class="font-medium"> Hello! </span> You have not completed your profile, please complete your profile first <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
@@ -51,7 +51,7 @@
                             $pending1 = $order->where('status_transaksi', '=', 'Pending');
                             $pending2 = $order->where('status_transaksi', '=', 'Waiting');
                             // Shipment
-                            $shipment = $order->where('status_transaksi', '=', 'Sedang Dikirim');
+                            $shipment = $order->where('status_transaksi', '=', 'On Delivery');
                             // Expired
                             $expired = $order->where('status_transaksi', '=', 'Expired');
                         @endphp
