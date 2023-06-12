@@ -90,7 +90,7 @@
 
 
 
-                        <span class="ml-4">Profasaile</span>
+                        <span class="ml-4">Profile</span>
                         {{-- <span class="inline-flex items-center justify-center px-3 py-2 ml-auto text-xs font-bold leading-none text-green-500 rounded-full bg-serv-green-badge">
                             {{ auth()->user()->order_buyer()->count() }}
                         </span> --}}
@@ -151,7 +151,7 @@
             </li>
 
             {{-- Logout Nav --}}
-            <li class="relative px-6 py-3">
+            <li class="absolute px-6 py-3" style="bottom: 0;">
                 <a class="inline-flex items-center w-full text-sm font-light transition-colors duration-150 hover:text-gray-800"
                     href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -174,7 +174,6 @@
 
                 </a>
             </li>
-
         </ul>
 
     </div>

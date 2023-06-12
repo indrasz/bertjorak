@@ -12,6 +12,7 @@
     @stack('after-style')
 
     <link rel="stylesheet" href="{{ asset('frontend/vendor/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
     @livewireStyles
 </head>

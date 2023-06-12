@@ -97,7 +97,6 @@
         .rtl table tr td:nth-child(2) {
             text-align: left;
         }
-
     </style>
 
     @extends('layouts.front')
@@ -123,8 +122,8 @@
                             </td>
 
                             <td>
-                                <h3 class="font-medium text-base">INVOICE</h3>
-                                <h2 class="text-lg" style="font-weight: 700;">{{ $getpdf->kode_order }}</h2>
+                                <h3 class="font-medium text-base">Invoice</h3>
+                                <h2 class="text-lg" style="font-weight: 500;">{{ $getpdf->kode_order }}</h2>
                             </td>
                         </tr>
                     </table>
@@ -134,7 +133,7 @@
             <tr class="information">
                 <td colspan="2">
 
-                    <div class="border border-t-2 border-gray-200 mb-2 px-3"></div>
+                    <div class="border border-t-2 border-gray-200 mb-4 px-3"></div>
 
                     <table>
                         <tr>
@@ -166,38 +165,33 @@
                                     <h4 class="font-semibold text-sm">{{ $getpdf->phone_number }}</h4>
                                 </div>
                                 <div class="pt-2">
-                                    <h4 class="font-medium text-xs">Detail Address:</h4>
-                                    <h4 class="font-semibold text-sm">{{ $getpdf->detail_address }}</h4>
-                                </div>
+                                    <h4 class="font-medium text-xs">Country : </h4>
 
-                                {{-- @php
-                                    // Get Province
-                                    $getProv = $userProv->where('province_id', $getpdf->state_name);
-                                    foreach ($getProv as $keyProv) {
-                                        $valProv = $keyProv->name_province;
-                                    }
-                                    
-                                    // Get City
-                                    $getCity = $userCity->where('city_id', $getpdf->id_city);
-                                    foreach ($getCity as $keyCity) {
-                                        // Type City
-                                        $valTypeCity = $keyCity->type;
-                                    
-                                        // Name City
-                                        $valCity = $keyCity->name_city;
-                                    }
-                                @endphp --}}
-                                <div class="pt-2">
-                                    <h4 class="font-medium text-xs">Province:</h4>
-                                    <h4 class="font-semibold text-sm">{{ $getpdf->state_name }}</h4>
+                                    <h4 class="font-semibold text-sm">@php
+                                        $countryName = \App\Models\InternationalDestination::where('country_id', $getpdf->id_country)->first();
+                                    @endphp
+                                        {{ $countryName->country_name }}</h4>
                                 </div>
                                 <div class="pt-2">
-                                    <h4 class="font-medium text-xs">City:</h4>
+                                    <h4 class="font-medium text-xs">City : </h4>
                                     <h4 class="font-semibold text-sm">{{ $getpdf->city_name }}</h4>
                                 </div>
                                 <div class="pt-2">
-                                    <h4 class="font-medium text-xs">Postal Code:</h4>
+                                    <h4 class="font-medium text-xs">Subdistrict : </h4>
+                                    <h4 class="font-semibold text-sm">{{ $getpdf->subdistrict_name }}</h4>
+                                </div>
+                                <div class="pt-2">
+                                    <h4 class="font-medium text-xs">Area : </h4>
+                                    <h4 class="font-semibold text-sm">{{ $getpdf->area_name }}</h4>
+                                </div>
+
+                                <div class="pt-2">
+                                    <h4 class="font-medium text-xs">Postal Code : </h4>
                                     <h4 class="font-semibold text-sm">{{ $getpdf->zipcode }}</h4>
+                                </div>
+                                <div class="pt-2">
+                                    <h4 class="font-medium text-xs">Detail Address:</h4>
+                                    <h4 class="font-semibold text-sm">{{ $getpdf->detail_address }}</h4>
                                 </div>
                             </td>
                         </tr>

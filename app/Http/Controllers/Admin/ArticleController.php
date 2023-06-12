@@ -62,7 +62,7 @@ class ArticleController extends Controller
                 // Delete Old Photos
                 File::delete(storage_path() . '/app/public/articles/logo/' . json_decode($editData->logo_header, true));
 
-                // Add new images
+                // Add new images   
                 $nameLogo = time() . rand(1, 100) . ' - ' . $request->logo->getClientOriginalName();
                 $request->logo->storeAs('articles/logo/', $nameLogo, 'public');
                 $dataNewLogo = $nameLogo;
@@ -82,6 +82,7 @@ class ArticleController extends Controller
                 }
             }
             $articleUp->desc = $request->desc;
+            $articleUp->nama_article = $request->nama_article;
 
             if ($articleUp->save()) {
                 return redirect()->route('dashboard.article.index')->withToastSuccess('Article Success edited!');
@@ -125,6 +126,7 @@ class ArticleController extends Controller
             } else {
                 $file->logo_header = null;
             }
+            $file->nama_article = $request->nama_article;
             $file->title_header = $request->headline;
             $file->image = json_encode($data);
             $file->desc = $request->desc;

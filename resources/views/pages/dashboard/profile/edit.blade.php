@@ -3,6 +3,89 @@
 @section('title', ' Edit Profile')
 
 @section('content')
+
+    <style>
+        .cont {
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup {
+            width: 500px;
+            background: #000;
+            border-radius: 6px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            padding: 0 30px 30px;
+            color: #333;
+            transition: transform 0.4s, top 0.4s;
+
+        }
+
+        .popup img {
+            width: 100px;
+            text-align: center;
+            align-items: center;
+            margin-top: -50px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .popup h2 {
+            margin: 30px 0 10px;
+            font-size: 30px;
+            color: #fff;
+        }
+
+        .popup p {
+            margin: 30px 0 10px;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .buttons{
+            display: flex;
+            padding: 0 20px;
+            justify-content: space-between;
+        }
+        .btn{
+            height: 35px;
+            margin-top: 10px;
+            width: calc(50% - 6px);
+            border: 0;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 400;
+            color: #fff;
+            transition: .3s linear;
+        }
+
+        .blue-btn{
+            background-color: #d13639;
+        }
+        .gray-btn{
+            background-color: #282828;
+        }
+    </style>
+    {{-- <div class="popup"> --}}
+        {{-- <img src={{ asset('frontend/images/lifes.png') }}> --}}
+        {{-- <h2>Hi welcome to bertjorak!</h2>
+        <p>Do you life in Indonesia?</p>
+        <div class="buttons">
+            <button class="btn blue-btn">Yes</button>
+            <button class="btn gray-btn">No</button>
+        </div>
+
+    </div> --}}
+
     <main class="h-full overflow-y-auto">
         <div class="container mx-auto">
             <div class="grid w-full gap-5 px-10 mx-auto md:grid-cols-12">
@@ -24,6 +107,8 @@
                     @endforeach
                 </div>
             @endif
+
+
 
             <div class="grid gap-5 md:grid-cols-12">
                 <main class="col-span-12 p-4 md:pt-0">
@@ -81,8 +166,8 @@
                                             <div class="col-span-3">
                                                 <label for="name"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Name</label>
-                                                <input value="{{ Auth::user()->name }}" type="text" name="name" id="name"
-                                                    autocomplete="name"
+                                                <input value="{{ Auth::user()->name }}" type="text" name="name"
+                                                    id="name" autocomplete="name"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             </div>
 
@@ -90,8 +175,8 @@
                                                 <label for="username"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Username</label>
                                                 @if (Auth::user()->username == null)
-                                                    <input placeholder="Username" type="text" name="username" id="username"
-                                                        autocomplete="username"
+                                                    <input placeholder="Username" type="text" name="username"
+                                                        id="username" autocomplete="username"
                                                         class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                                 @elseif (Auth::user()->username != null)
                                                     <input value="{{ Auth::user()->username }}" type="text"

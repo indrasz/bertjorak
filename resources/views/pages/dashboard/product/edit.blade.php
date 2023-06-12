@@ -50,11 +50,12 @@
                                         <div class="grid grid-cols-6 gap-6">
 
                                             <div class="col-span-6">
-                                                <label for="title" class="block mb-3 font-medium text-gray-700 text-md">Name
+                                                <label for="title"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Name
                                                     Product</label>
 
-                                                <input value="{{ $d->title }}" maxlength="100" type="text" name="name"
-                                                    id="name" autocomplete="off"
+                                                <input value="{{ $d->title }}" maxlength="100" type="text"
+                                                    name="name" id="name" autocomplete="off"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                     value="{{ old('name') }}" required>
                                                 <div id="the-count" style="float: right; padding-top: 0.5em;">
@@ -68,13 +69,58 @@
 
                                             </div>
 
+                                            {{-- Nama Article --}}
+                                            <div class="col-span-6">
+                                                <label for="nama_article"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Nama
+                                                    Article</label>
+                                                @php
+                                                    $getNamaArticle = old('nama_article');
+                                                @endphp
+                                                <select name="nama_article" id="nama_article"
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                    <option value=""
+                                                        @if (old('nama_article') == '') selected @endif>Select Article
+                                                    </option>
+                                                    @foreach ($articles as $article)
+                                                        <option value="{{ $article->nama_article }}"
+                                                            @if (old('nama_article') == $article->nama_article || $getNamaArticle == $article->nama_article) selected @endif>
+                                                            {{ $article->nama_article }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            {{-- <div class="col-span-6">
+                                                <label for="nama_article"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Nama
+                                                    Article</label>
+                                                @php
+                                                    foreach ($articles as $article) {
+                                                        $getNamaArticle = $article->nama_article;
+                                                        //dd($get);
+                                                    }
+                                                @endphp
+                                                <select name="nama_article" id="nama_article"
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                    <option value="{{ $article->nama_article }}" selected>Select Article
+                                                    </option>
+                                                    @foreach ($articles as $article)
+                                                        <option value="{{ $article->nama_article }}"
+                                                            @if (old('article') == $article->id || $article->id == $getNamaArticle) selected @endif>
+                                                            {{ $article->nama_article }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div> --}}
+
 
                                             <div class="col-span-6">
                                                 <label for="price"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Price</label>
 
-                                                <input value="{{ $d->price }}" type="number" name="price" id="price"
-                                                    autocomplete="price"
+                                                <input value="{{ $d->price }}" type="number" name="price"
+                                                    id="price" autocomplete="price"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                     value="{{ old('price') }}" required>
 
@@ -117,7 +163,6 @@
                                                         margin: 0 auto;
                                                         max-width: 1170px;
                                                     }
-
                                                 </style>
 
                                                 <div class="p-2">
@@ -143,7 +188,8 @@
                                                 </div>
 
 
-                                                <img src="{{ asset('assets/images/empty-illustration.svg') }}" id="output"
+                                                <img src="{{ asset('assets/images/empty-illustration.svg') }}"
+                                                    id="output"
                                                     style="width: 25%; padding-top: 1.5%; padding-bottom: 1.5%;" />
                                                 <input placeholder="Thumbnail 1" value="{{ $d->images }}" type="file"
                                                     name="photos[]" id="photos" autocomplete="photos"
@@ -167,7 +213,8 @@
                                             <div class="col-span-6">
                                                 <label for="desc"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Description</label>
-                                                <textarea name="desc" id="desc" cols="30" rows="10" class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                <textarea name="desc" id="desc" cols="30" rows="10"
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                     value="{{ old('desc') }}">{{ $d->desc }}</textarea>
 
                                                 @if ($errors->has('desc'))
@@ -180,7 +227,8 @@
                                                 <label for="weight"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Weight
                                                     (gram)</label>
-                                                <input type="number" name="weight" id="weight" autocomplete="weight"
+                                                <input type="number" name="weight" id="weight"
+                                                    autocomplete="weight"
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                     value="{{ $d->weight }}">
 
@@ -227,8 +275,8 @@
                                                 @if ($d->pilihan != null)
                                                     @foreach (json_decode($d->pilihan, true) as $p)
                                                         @for ($i = 0; $i < count($p); $i++)
-                                                            <input placeholder="Warna / Tipe" type="text" name="pilihan[]"
-                                                                id="pilihan" autocomplete="pilihan"
+                                                            <input placeholder="Warna / Tipe" type="text"
+                                                                name="pilihan[]" id="pilihan" autocomplete="pilihan"
                                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                                 value="{{ $p[$i] }}">
                                                         @endfor
@@ -250,7 +298,8 @@
                                             </div>
 
                                             <div class="col-span-6">
-                                                <label for="size" class="block mb-3 font-medium text-gray-700 text-md">Size
+                                                <label for="size"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Size
                                                     (optional)</label>
 
                                                 {{-- @if ($d->size != null)
@@ -269,15 +318,15 @@
                                                 @if ($d->size != null)
                                                     @foreach (json_decode($d->size, true) as $u)
                                                         @for ($i = 0; $i < count($u); $i++)
-                                                            <input placeholder="Size" type="text" name="size[]" id="size"
-                                                                autocomplete="size"
+                                                            <input placeholder="Size" type="text" name="size[]"
+                                                                id="size" autocomplete="size"
                                                                 class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                                 value="{{ $u[$i] }}">
                                                         @endfor
                                                     @endforeach
                                                 @else
-                                                    <input placeholder="Size" type="text" name="size[]" id="size"
-                                                        autocomplete="size"
+                                                    <input placeholder="Size" type="text" name="size[]"
+                                                        id="size" autocomplete="size"
                                                         class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
                                                         value="">
                                                 @endif
@@ -290,7 +339,86 @@
                                                     Tambahkan Size Yang Tersedia +
                                                 </button>
                                             </div>
+
+                                            <div class="col-span-6">
+                                                <label for="thumbnail-service"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Thumbnail Size Chart</label>
+
+                                                <style>
+                                                    .grid-wrapper {
+                                                        --auto-grid-min-size: 10rem;
+                                                        display: grid;
+                                                        grid-gap: 2rem;
+                                                        grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+                                                        margin: 0;
+                                                        padding: 0;
+                                                        box-sizing: border-box;
+                                                        font-family: 'Montserrat', sans-serif;
+                                                    }
+
+                                                    .grid-wrapper li {
+                                                        color: #ffffff;
+                                                        font-size: 24px;
+                                                        list-style-type: none;
+                                                        margin: auto;
+                                                        text-align: center;
+                                                        text-transform: capitalize;
+                                                        font-weight: 600;
+                                                        overflow: hidden;
+                                                    }
+
+                                                    .main-container {
+                                                        margin: 0 auto;
+                                                        max-width: 1170px;
+                                                    }
+                                                </style>
+
+                                                <div class="p-2">
+                                                    <div class="w-50 p-3" style="background-color: #eee;">
+                                                        <h5>Gambar yang disimpan:</h5>
+                                                        @if ($d->size_charts != null)
+                                                            <div class="row flex">
+                                                                <div class="main-container">
+                                                                    <ul class="grid-wrapper">
+                                                                        @foreach (json_decode($d->size_charts, true) as $i)
+                                                                            <li>
+                                                                                <img src="{{ asset('/storage/products/size_images/' . $i) }}"
+                                                                                    class="img-thumbnail p-1"
+                                                                                    alt=""
+                                                                                    style="width: 100%; border-radius: 5%;">
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <img src="{{ asset('assets/images/empty-illustration.svg') }}"
+                                                    id="sizeChartThumbnail"
+                                                    style="width: 25%; padding-top: 1.5%; padding-bottom: 1.5%;" />
+                                                <input placeholder="Thumbnail 1" value="{{ $d->size_charts }}"
+                                                    type="file" name="size_photos[]" id="size_photos" autocomplete="size_photos"
+                                                    onchange="loadSizeChartThumbnail(event)"
+                                                    class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+
+                                                @if ($errors->has('size_photos[]'))
+                                                    <p class="text-red-500 mb-3 text-sm">{{ $errors->first('size_photos') }}
+                                                    </p>
+                                                @endif
+
+                                                <div id="newSizeThumbnailRow"></div>
+
+                                                <button type="button"
+                                                    class="inline-flex justify-center px-3 py-2 mt-3 text-xs font-medium text-gray-700 bg-gray-100 border border-transparent rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                                    id="addSizeThumbnailRow">
+                                                    Tambahkan Gambar +
+                                                </button>
+                                            </div>
                                         </div>
+
+
 
                                         {{-- @php
                                             dd($d->unggulan);
@@ -298,10 +426,21 @@
 
                                         <div class="flex mt-6">
                                             <label class="flex items-center">
-                                                <input type="checkbox" name="unggulanCheck" value="1" class="form-checkbox"
+                                                <input type="checkbox" name="unggulanCheck" value="1"
+                                                    class="form-checkbox"
                                                     style="border-radius: 20%; outline: none !important; box-shadow:none !important;"
                                                     @if ($d->unggulan != null) checked @endif>
                                                 <span class="ml-2">Jadikan Produk Unggulan</span>
+                                            </label>
+                                        </div>
+
+                                        <div class="flex mt-6">
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="latestArticleCheck" value="1"
+                                                    class="form-checkbox"
+                                                    style="border-radius: 20%; outline: none !important; box-shadow:none !important;"
+                                                    @if ($d->latest_article != null) checked @endif>
+                                                <span class="ml-2">Jadikan Latest Article</span>
                                             </label>
                                         </div>
 
@@ -373,6 +512,13 @@
             $('#newThumbnailRow').append(html);
         });
 
+        $("#addSizeThumbnailRow").click(function() {
+            var html = '';
+            html +=
+                ' <input placeholder="Size Charts"  onchange="loadSizeChartThumbnail(event)" type="file" name="size_photos[]" id="size_photos" autocomplete="size_photos" class="block w-full py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>'
+            $('#newSizeThumbnailRow').append(html);
+        });
+
         // remove row
         $(document).on('click', '#removeAdvantagesRow', function() {
             $(this).closest('#inputFormAdvantagesRow').remove();
@@ -385,5 +531,13 @@
                 URL.revokeObjectURL(output.src) // free memory
             }
         };
+
+        function loadSizeChartThumbnail(event) {
+            var output = document.getElementById('sizeChartThumbnail');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        }
     </script>
 @endpush

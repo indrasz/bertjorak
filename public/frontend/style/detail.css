@@ -35,6 +35,10 @@
     color: #0c0d36;
 }
 
+.container label {
+    cursor: pointer;;
+}
+
 .carousel-cell {
     width: 28%;
     height: 200px;

@@ -1,5 +1,5 @@
 <section class="h-100 w-100" style="box-sizing: border-box; background-color: #fcfcff">
-    <div class="header-5-1 container  mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
+    <div class="header-5-1 container mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
         <nav class="navbar navbar-expand-lg navbar-light">
             <a href="/">
                 <img style="margin-right: 0.75rem" src="{{ asset('frontend/images/main-logo.png') }}" alt="main-logo"
@@ -64,7 +64,7 @@ Have anything in mind? Just simply ask us any of your curiosity."
                                                     alt="" />
                                                 <div class="flex-grow-1 ps-4">
                                                     <h2 class="icon-item-title">
-                                                        Ask your quesaations
+                                                        Ask your questions
                                                     </h2>
                                                     <p class="icon-item-caption" style="margin-bottom: 0">
                                                         Ask us about a complaint

@@ -1,4 +1,4 @@
-<div class="input-group border p-2 w-50 mx-lg-auto mt-3 mx-3" style="border-radius: 10px;">
+<div class="input-group border p-2 mt-3 mx-3" style="border-radius: 10px; width: 125px;">
     <style>
          .btn-add {
             display: inline-block;
@@ -53,7 +53,7 @@
             }
         }
     </style>
-    <span class="input-group-btn">
+    <span class="input-group-btn d-flex align-items-center">
         <div wire:click="decrement" class="btn btn-minus pb-lg-3 px-lg-1 px-2">
             -
         </div>
@@ -61,7 +61,7 @@
     <input type="text" name="jumlah" class="form-control input-number text-center border-0"
         max="{{ $maxProduct->stock }}" value="{{ $count }}" style="background-color: transparent;"
         autocomplete="off" readonly />
-    <span class="input-group-btn">
+    <span class="input-group-btn d-flex align-items-center">
         <div wire:click="increment" class="btn btn-add pb-lg-3 px-lg-1 px-2">
             +
         </div>

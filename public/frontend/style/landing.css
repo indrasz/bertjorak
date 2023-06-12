@@ -333,7 +333,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap");
 
 * {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body .header {
@@ -404,10 +404,6 @@ body .header nav .started {
     body .header nav .started {
         width: 100% !important;
     }
-}
-
-body .header .content {
-    padding-bottom: 60px;
 }
 
 body .header .content .headline {
@@ -520,7 +516,7 @@ body .header .content .mr-0 {
 }
 
 .footer-3-2 .list-footer li:hover a {
-    color: #FF3EA6;
+    color: #D4B7F9;
     transition: 0.3s;
 }
 
@@ -529,15 +525,16 @@ body .header .content .mr-0 {
 }
 
 .footer-3-2 .footer-icon .icon-fill:hover path {
-    fill: #FF3EA6;
+    fill: #D4B7F9;
 }
 
 .footer-3-2 .footer-icon .icon-stroke:hover path {
-    stroke: #FF3EA6;
+    stroke: #D4B7F9;
 }
 
 .footer-3-2 .main {
-    padding: 6rem 1rem;
+    background-color: #EBEBEB;
+    padding: 3rem 1rem;
 }
 
 .footer-3-2 .left-col,
@@ -545,25 +542,21 @@ body .header .content .mr-0 {
     width: 100%;
 }
 
-.footer-3-2 .left-col {
-    margin-bottom: 40px;
-}
-
 .footer-3-2 .caption-font {
+    display: block;
     font-weight: 400;
-    max-width: 565px;
     font-size: 0.875rem;
     line-height: 1.5rem;
     letter-spacing: 1%;
     color: #121212;
     margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
 }
 
 .footer-3-2 .title-font {
     font: 600 1.25rem/1.75rem "Poppins", sans-serif;
-    text-align: left;
+    margin-bottom: 1.25rem;
     color: #060c45;
-    text-decoration: none;
 }
 
 .footer-3-2 .credit-font {
@@ -572,28 +565,21 @@ body .header .content .mr-0 {
     color: #121212;
 }
 
-@media (min-width: 576px) {
+@media (max-width: 460px) {
     .footer-3-2 .main {
-        background-color:#D4B6F8;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-    }
-
-    .footer-3-2 .main {
-        padding: 6rem 2rem;
+        padding: 4rem 1rem;
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 460px) {
     .footer-3-2 .main {
-        padding: 6rem 4rem;
+        padding: 4rem 4rem;
     }
 }
 
 @media (min-width: 992px) {
     .footer-3-2 .main {
-        padding: 4rem 6rem;
+        padding: 4rem 8rem;
     }
 
     .footer-3-2 .left-col,
@@ -602,7 +588,11 @@ body .header .content .mr-0 {
     }
 
     .footer-3-2 .left-col {
-        margin-bottom: 0rem;
+        margin-bottom: 0;
+        padding-right: 1.25rem;
+    }
+    .footer-3-2 .right-col {
+        padding-left: 1.25rem;
     }
 }
 

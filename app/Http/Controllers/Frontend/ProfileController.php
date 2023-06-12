@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Countries;
+use App\Models\InternationalDestination;
 use App\Models\City;
 use App\Models\Province;
 use App\Models\User;
@@ -21,14 +22,15 @@ class ProfileController extends Controller
         $authId = Auth::user()->id;
         $user = User::where('users.id', $authId)->get();
 
-        $userCountries = Countries::all();
+        // $userCountries = Countries::all();
+        $userDestination = InternationalDestination::all();
 
         $userProv = Province::all();
 
         $userCity = City::all();
         //dd($userProv->id_province);
 
-        return view('pages.dashboard.profile.index')->with('userCountries', $userCountries)->with('users', $user)->with('userProv', $userProv)->with('userCity', $userCity);
+        return view('pages.dashboard.profile.index')->with('userDestination', $userDestination)->with('users', $user)->with('userProv', $userProv)->with('userCity', $userCity);
     }
 
     public function edit($id)
@@ -47,12 +49,13 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(), [
             'username' => 'required',
             'phoneNumber' => 'required',
-            'provincesId' => 'required',
             'type_address' => 'required',
+            'destinationId' => 'required',
             'cityId' => 'required',
+            'subdistrictId' => 'required',
+            'areaId' => 'required',
             'zipCode' => 'required',
             'detailAddress' => 'required',
-            'countriesId' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -87,12 +90,12 @@ class ProfileController extends Controller
         $profile->username = $request->username;
         $profile->phone_number = $request->phoneNumber;
         $profile->type_address = $request->type_address;
-        $profile->state_name = $request->provincesId;
+        $profile->id_country = $request->destinationId;
         $profile->city_name = $request->cityId;
+        $profile->subdistrict_name = $request->subdistrictId;
+        $profile->area_name = $request->areaId;
         $profile->zipcode = $request->zipCode;
         $profile->detail_address = $request->detailAddress;
-        $profile->countries_name = $request->countriesId;
-        $profile->area_name = $request->areaId;
         
 
         

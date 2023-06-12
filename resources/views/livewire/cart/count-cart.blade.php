@@ -12,7 +12,7 @@
                 border-radius: 50%;
                 font-size: 10px;
                 text-align: center;
-                background: #29a867;
+                background: #8E80F1;
                 color: #fefefe;
                 margin-left: -10px;
                 margin-top: 2px;

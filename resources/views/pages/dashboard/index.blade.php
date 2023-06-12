@@ -33,7 +33,7 @@
         </div>
 
         <section class="container px-6 mx-auto mt-5">
-            @if (Auth::user()->type_addres == null && Auth::user()->state_name == null && Auth::user()->city_name == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
+            @if (Auth::user()->type_address == null && Auth::user()->id_country == null && Auth::user()->city_name == null && Auth::user()->subdistrict_name == null && Auth::user()->area_name == null && Auth::user()->detail_address == null && Auth::user()->zipcode == null)
                 <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                     role="alert">
                     <span class="font-medium"> Hello! </span> You have not completed your profile, please complete your profile first <a href="{{ route('dashboard.profile.edit', Auth::user()->id) }}"
@@ -117,7 +117,7 @@
                                     </div>
 
                                     @php
-                                        $expired = $order->where('status_transaksi', '=', 'Sedang Dikirim');
+                                        $expired = $order->where('status_transaksi', '=', 'On Delivery');
                                     @endphp
 
                                     <p class="mt-2 text-2xl font-semibold text-left text-gray-800">
@@ -267,7 +267,7 @@
                                     $pendingBalance1 = $order->where('status_transaksi', '=', 'Waiting')->sum('totalCost');
                                     // Pending
                                     $pendingBalance2 = $order->where('status_transaksi', '=', 'Pending')->sum('totalCost');
-                                    $pendingBalance3 = $order->where('status_transaksi', '=', 'Sedang Dikirim')->sum('totalCost');
+                                    $pendingBalance3 = $order->where('status_transaksi', '=', 'On Delivery')->sum('totalCost');
                                 @endphp
                                 <div class="">
                                     <p class="font-light">

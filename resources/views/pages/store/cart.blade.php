@@ -5,7 +5,7 @@
 @section('content')
 
     {{-- Navigation bar --}}
-    @include('includes.Frontend.navbar')
+    @include('includes.Frontend.navbar2')
 
 
     <section class="w-100 h-100 breadcrumb-section mt-4">
@@ -32,6 +32,11 @@
         <section class="cart-checkout w-100 h-100">
             <div class="container p-4">
                 <style>
+                    body {
+                        position: relative; 
+                        top:104.57px;
+                    }
+                    
                     .card-product-preview {
                         box-shadow: 0px 4px 40px rgba(172, 172, 172, 0.15);
                         border-radius: 15px;
@@ -271,7 +276,7 @@
                                     @endphp
                                     @foreach ($carts as $c)
                                         <div class="preview-summary">
-                                            {{ $c->title }} ({{ $c->jumlah }} item)
+                                            {{ $c->title }} ({{ $c->jumlah }} Item)
 
                                             <span class="float-end">
                                                 @currency($c->price * $c->jumlah)
@@ -327,7 +332,7 @@
                                     {{-- <label for="notes" class="mb-1">Notes</label> --}}
                                     <div class="input-group w-100 mx-auto mb-2">
 
-                                        <textarea name="notes" placeholder="Jangan lupa dikirim ya!" id="notes" class="form-control input-shipping-details"
+                                        <textarea name="notes" placeholder="I want sticker of bertjorak please" id="notes" class="form-control input-shipping-details"
                                             style="resize: none;" cols="10" rows="5"></textarea>
                                     </div>
 

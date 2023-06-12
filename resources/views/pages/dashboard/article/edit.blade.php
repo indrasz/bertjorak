@@ -64,13 +64,44 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <input placeholder="Keunggulan 3" type="file" accept="image/*" name="photos"
-                                                    id="photos" autocomplete="off"
+                                                <input placeholder="Keunggulan 3" type="file" accept="image/*"
+                                                    name="photos" id="photos" autocomplete="off"
                                                     class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             </div>
 
-                                            {{-- Title Headline --}}
                                             <div class="col-span-6">
+                                                <label for="nama_article"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Article Name</label>
+                                                <input value="{{ $a->nama_article }}" maxlength="25" type="text" name="nama_article" id="nama_article" autocomplete="nama_article"
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                    value="{{ old('nama_article') }}" required>
+                                                <div id="the-count" style="float: right; padding-top: 0.5em;">
+                                                    <span id="current">0</span>
+                                                    <span id="maximum">/ 25</span>
+                                                </div>
+                                                @if ($errors->has('nama_article'))
+                                                    <p class="text-red-500 mb-3 text-sm">
+                                                        {{ $errors->first('nama_article') }}</p>
+                                                @endif
+                                            </div>
+
+                                            <div class="col-span-6">
+                                                <label for="desc"
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Description</label>
+                                                <input value="{{ $a->desc }}" maxlength="40" type="text" name="desc" id="desc" autocomplete="desc"
+                                                    class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                                    value="{{ old('desc') }}" required>
+                                                <div id="the-count2" style="float: right; padding-top: 0.5em;">
+                                                    <span id="current2">0</span>
+                                                    <span id="maximum2">/ 40</span>
+                                                </div>
+                                                @if ($errors->has('desc'))
+                                                    <p class="text-red-500 mb-3 text-sm">{{ $errors->first('desc') }}</p>
+                                                @endif
+                                            </div>
+
+                                            {{-- Title Headline --}}
+                                            {{-- <div class="col-span-6">
                                                 <label for="title"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Headline
                                                     Title</label>
@@ -92,7 +123,7 @@
                                                     <p class="text-red-500 mb-3 text-sm">{{ $errors->first('title') }}</p>
                                                 @endif
 
-                                            </div>
+                                            </div> --}}
 
                                             {{-- Headline Logo --}}
                                             <div class="col-span-6">
@@ -115,22 +146,27 @@
                                                     class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                             </div>
 
-                                            <div class="col-span-6">
+                                        </div>
+
+                                        {{-- <div class="col-span-6">
                                                 <label for="desc"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Description</label>
-                                                <textarea name="desc" id="desc" @if ($a->desc == null) placeholder="Description of product" @endif cols="30"
-                                                    rows="10"
+                                                <textarea name="desc" id="desc" maxlength="25" @if ($a->desc == null) placeholder="Description of product" @endif
                                                     class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-@if ($a->desc != null)
-{{ $a->desc }}
-@endif
-</textarea>
+                                                    @if ($a->desc != null)
+                                                        {{ $a->desc }}
+                                                    @endif
+                                                </textarea>
+                                                <div id="the-count2" style="float: right; padding-top: 0.5em;">
+                                                    <span id="current2">0</span>
+                                                    <span id="maximum2">/ 25</span>
+                                                </div>
 
                                                 @if ($errors->has('desc'))
                                                     <p class="text-red-500 mb-3 text-sm">{{ $errors->first('desc') }}</p>
                                                 @endif
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         {{-- <div class="flex mt-6">
                 <label class="flex items-center">
@@ -172,12 +208,25 @@
 
     <script type="text/javascript">
         // Count Char
-        $('#headline').keyup(function() {
+        $('#nama_article').keyup(function() {
 
             var characterCount = $(this).val().length,
                 current = $('#current'),
                 maximum = $('#maximum'),
                 theCount = $('#the-count');
+
+            current.text(characterCount);
+        });
+    </script>
+
+    <script type="text/javascript">
+        // Count Char
+        $('#desc').keyup(function() {
+
+            var characterCount = $(this).val().length,
+                current = $('#current2'),
+                maximum = $('#maximum2'),
+                theCount = $('#the-count2');
 
             current.text(characterCount);
         });

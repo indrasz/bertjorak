@@ -5,13 +5,14 @@ namespace App\Http\Livewire\Address;
 use App\Models\City;
 use App\Models\Countries;
 use App\Models\Province;
+use App\Models\InternationalDestination;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\User;
 
 class Create extends Component
 {
-    public $provinces, $cities, $countries;
+    public $provinces, $cities, $international_destinations;
     public $provinceId = null;
 
     public $edit_data;
@@ -19,7 +20,8 @@ class Create extends Component
 
     public $user;
 
-    public $getCountries;
+    // public $getCountries;
+    public $getDestination;
     public $getCity;
     public $getProvince;
 
@@ -28,12 +30,13 @@ class Create extends Component
         $this->user = User::where('id', Auth::user()->id)->get();
 
         foreach ($this->user as $key) {
-            $this->getCountries = $key->countries_name;
+            $this->getDestination = $key->country_name;
             $this->getProvince = $key->state_name;
             $this->getCity = $key->city_name;
         }
 
-        $this->countries = Countries::orderBy('country_name', 'ASC')->get();
+        // $this->countries = Countries::orderBy('country_name', 'ASC')->get();
+        $this->international_destinations = InternationalDestination::orderBy('country_name', 'ASC')->get();
 
         $this->provinces = Province::orderBy('name_province', 'ASC')->get();
         if ($this->getCity != null) {

@@ -114,7 +114,7 @@
                                     <div class="px-8 rounded-10 card-creator pt-60 pb-10 w-full">
                                         <h5 class="font-semibold text-xl">Personal Information</h5>
                                         <br>
-                                        <div class="relative z-10 flex flex-col items-left">
+                                        <div class="relative z-10 flex flex-col items-left mb-4">
                                             @php
                                                 $convertImg = json_decode($u->avatar);
                                             @endphp
@@ -188,7 +188,7 @@
 
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Place Type</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Label Address</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
                                                     @if ($u->type_address != null)
                                                         {{ $u->type_address }}
@@ -200,34 +200,19 @@
                                             @php
                                                 
                                                 // Get Countries
-                                                $getCountries = $userCountries->where('id', $u->countries_name);
-                                                foreach ($getCountries as $keyCountries) {
-                                                    $valCountries = $keyCountries->country_name;
+                                                $getDestination = $userDestination->where('country_id', $u->id_country);
+                                                foreach ($getDestination as $keyDestination) {
+                                                    $valDestination = $keyDestination->country_name;
                                                 }
                                                 
-                                                // // Get Province
-                                                // $getProv = $userProv->where('province_id', $u->id_province);
-                                                // foreach ($getProv as $keyProv) {
-                                                //     $valProv = $keyProv->name_province;
-                                                // }
-                                                
-                                                // // Get City
-                                                // $getCity = $userCity->where('city_id', $u->id_city);
-                                                // foreach ($getCity as $keyCity) {
-                                                //     // Type City
-                                                //     $valTypeCity = $keyCity->type;
-                                                
-                                                //     // Name City
-                                                //     $valCity = $keyCity->name_city;
-                                                // }
                                             @endphp
 
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
                                                     class="block mb-3 font-medium text-gray-700 text-md">Country</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
-                                                    @if ($u->countries_name != null)
-                                                        {{ $u->countries_name }}
+                                                    @if ($u->id_country!= null)
+                                                        {{ $valDestination }}
                                                     @else
                                                         -
                                                     @endif
@@ -237,10 +222,10 @@
 
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Province</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Subdistrict</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
-                                                    @if ($u->state_name != null)
-                                                        {{ $u->state_name }}
+                                                    @if ($u->subdistrict_name != null)
+                                                        {{ $u->subdistrict_name }}
                                                     @else
                                                         -
                                                     @endif
@@ -261,8 +246,7 @@
 
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Area /
-                                                    Kecamatan</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Area</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
                                                     @if ($u->area_name != null)
                                                         {{ $u->area_name }}
@@ -276,8 +260,7 @@
 
                                             <div class="col-span-3 mt-3">
                                                 <label for="name"
-                                                    class="block mb-3 font-medium text-gray-700 text-md">Postal
-                                                    Code</label>
+                                                    class="block mb-3 font-medium text-gray-700 text-md">Post Code</label>
                                                 <div class="block w-full mt-1 sm:text-sm">
                                                     @if ($u->zipcode != null)
                                                         {{ $u->zipcode }}
