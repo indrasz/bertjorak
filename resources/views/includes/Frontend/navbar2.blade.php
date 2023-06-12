@@ -110,6 +110,22 @@
         </div>
     </header>
 
+    <div class="popup-visitor show" id="popup-visitor">
+        <div class="overlay-visitor"></div>
+        <div class="content d-flex flex-column align-items-center">
+            <div class="content-header">
+                <div class="close-btn-visitor" id="close-icon-visitor">&times;</div>
+                <img src="{{ asset('frontend/images/main-logo.png') }}" class="logo-popup img-fluid mb-4"
+                    width="100" />
+            </div>
+            <p class="popup-desc">Apologies, our website is currently for <b>international purchasers</b> only.
+                We regret to inform you that purchases are temporarily restricted for customers from Indonesia. 
+                Please click this link below.
+            </p>
+            <a href="https://linktr.ee/bertjorak" class="btn">Visit
+                Our E-Commerce</a>
+        </div>
+    </div>
     @if (Auth::user())
         @if (Auth::user()->type_addres == null &&
                 Auth::user()->id_province == null &&
@@ -131,76 +147,3 @@
 </body>
 
 </html>
-
-
-
-
-{{-- <nav class="navbar fixed-top navbar-expand-lg navbar-light">
-    <div class="container mx-auto px-4 py-2 position-relative" >
-        <a href="/">
-            <img style="margin-right: 0.75rem" src="{{ asset('frontend/images/main-logo.png') }}" alt="main-logo"
-                width="100" />
-        </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarScroll">
-        <ul class="navbar-nav mx-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 150px;">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Products
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav> --}}
-
-
-{{-- make navbar color}}
-
-{{-- <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-    <div class="container mx-auto px-4 py-2 position-relative">
-        <a href="/">
-            <img style="margin-right: 0.75rem" src="{{ asset('frontend/images/main-logo.png') }}" alt="main-logo"
-                width="100" />
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
-            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav> --}}

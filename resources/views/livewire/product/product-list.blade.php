@@ -100,6 +100,7 @@
 
         .select-menu-sort-wrap.active ul.options {
             display: block;
+            z-index: 1;
         }
 
         ul.options li.option {

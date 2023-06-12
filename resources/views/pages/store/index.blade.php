@@ -36,13 +36,13 @@
                 }
 
                 /* .row-full {
-                                                                                        width: 99.4vw;
-                                                                                        position: relative;
-                                                                                        margin-left: -50vw;
-                                                                                        margin-right: 0;
-                                                                                        height: 28px;
-                                                                                        left: 50%;
-                                                                                    } */
+                                                                                                                            width: 99.4vw;
+                                                                                                                            position: relative;
+                                                                                                                            margin-left: -50vw;
+                                                                                                                            margin-right: 0;
+                                                                                                                            height: 28px;
+                                                                                                                            left: 50%;
+                                                                                                                        } */
 
                 .cover-wrapper {
                     display: flex;
@@ -62,13 +62,13 @@
                     right: 0;
                 }
 
-                .cover-wrapper .hero-slider {
+                .cover-wrapper .hero-active {
                     overflow: hidden;
                     width: 100%;
                     height: 100vh;
                 }
 
-                .cover-wrapper .hero-slider .hero-cell {
+                .cover-wrapper .hero-active .hero-cell {
                     width: 100%;
                     height: 100%;
                     border-radius: 0%;
@@ -77,7 +77,7 @@
                     background-size: cover;
                 }
 
-                .cover-wrapper .hero-slider .hero-cell:before {
+                .cover-wrapper .hero-active .hero-cell:before {
                     display: block;
                     text-align: center;
                     content: "";
@@ -86,7 +86,7 @@
                     color: white;
                 }
 
-                .cover-wrapper .hero-slider .hero-cell .inner {
+                .cover-wrapper .hero-active .hero-cell .inner {
                     position: relative;
                     top: 85%;
                     transform: translateY(-50%);
@@ -95,11 +95,11 @@
                 }
 
                 /* .cover-wrapper .hero-slider .carousel-cell .inner h5 {
-                                                                                                                                                                                                            margin-bottom: 32px;
-                                                                                                                                                                                                            color: black;
-                                                                                                                                                                                                        } */
+                                                                                                                                                                                                                                                margin-bottom: 32px;
+                                                                                                                                                                                                                                                color: black;
+                                                                                                                                                                                                                                            } */
 
-                .hero-slider .hero-cell .inner .btn {
+                .hero-active .hero-cell .inner .btn {
                     background: transparent;
                     color: white;
                     border: none;
@@ -112,7 +112,7 @@
                     text-decoration: none;
                 }
 
-                .hero-slider .hero-cell .inner .btn:hover {
+                .hero-active .hero-cell .inner .btn:hover {
                     background: var(--secondary-color);
                     position: relative;
                     font-weight: 600;
@@ -128,47 +128,47 @@
                 }
 
                 /* .hero-slider .flickity-prev-next-button {
-                                                                                        width: 32px;
-                                                                                        height: 32px;
-                                                                                        background: transparent;
-                                                                                    }
+                                                                                                                            width: 32px;
+                                                                                                                            height: 32px;
+                                                                                                                            background: transparent;
+                                                                                                                        }
 
-                                                                                    .hero-slider .flickity-prev-next-button:hover {
-                                                                                        background: transparent;
-                                                                                    }
+                                                                                                                        .hero-slider .flickity-prev-next-button:hover {
+                                                                                                                            background: transparent;
+                                                                                                                        }
 
-                                                                                    .hero-slider .flickity-prev-next-button:disabled {
-                                                                                        display: none;
-                                                                                    }
+                                                                                                                        .hero-slider .flickity-prev-next-button:disabled {
+                                                                                                                            display: none;
+                                                                                                                        }
 
-                                                                                    .hero-slider .flickity-prev-next-button .arrow {
-                                                                                        fill: whitesmoke;
-                                                                                    }
+                                                                                                                        .hero-slider .flickity-prev-next-button .arrow {
+                                                                                                                            fill: whitesmoke;
+                                                                                                                        }
 
-                                                                                    .hero-slider .flickity-page-dots {
-                                                                                        bottom: 30px;
-                                                                                    }
+                                                                                                                        .hero-slider .flickity-page-dots {
+                                                                                                                            bottom: 30px;
+                                                                                                                        }
 
-                                                                                    .hero-slider .flickity-page-dots .dot {
-                                                                                        width: 30px;
-                                                                                        height: 4px;
-                                                                                        opacity: 1;
-                                                                                        background: rgba(255, 255, 255, 0.5);
-                                                                                        border: 0 solid white;
-                                                                                        border-radius: 0;
-                                                                                    }
+                                                                                                                        .hero-slider .flickity-page-dots .dot {
+                                                                                                                            width: 30px;
+                                                                                                                            height: 4px;
+                                                                                                                            opacity: 1;
+                                                                                                                            background: rgba(255, 255, 255, 0.5);
+                                                                                                                            border: 0 solid white;
+                                                                                                                            border-radius: 0;
+                                                                                                                        }
 
-                                                                                    .hero-slider .flickity-page-dots .dot.is-selected {
-                                                                                        background: var(--secondary-color);
-                                                                                    }
+                                                                                                                        .hero-slider .flickity-page-dots .dot.is-selected {
+                                                                                                                            background: var(--secondary-color);
+                                                                                                                        }
 
-                                                                                    @media screen and (max-width: 700px) {
-                                                                                        .hero-slider .flickity-prev-next-button {
-                                                                                            display: none;
-                                                                                        }
-                                                                                    } */
+                                                                                                                        @media screen and (max-width: 700px) {
+                                                                                                                            .hero-slider .flickity-prev-next-button {
+                                                                                                                                display: none;
+                                                                                                                            }
+                                                                                                                        } */
             </style>
-            <div class="hero-slider">
+            <div class="hero-active">
                 <div class="hero-cell" style="background-image: url('{{ asset('/frontend/images/background.png') }}');">
                     <div class="overlay">
                     </div>
@@ -369,22 +369,41 @@
                 .image-spin-article {
                     display: none;
                 }
+
+                .latest-article .card-related-carousel .image-placeholder {
+                    width: 200px;
+                    height: 300px;
+                }
+
+                .latest-article .card-related-carousel {
+                    width: 225px;
+                    padding: 12px;
+                    background: white;
+                }
+
+                .latest-article .card-related-carousel .card-details .caption {
+                    font-size: 14px;
+                }
+
+                .latest-article .card-related-carousel .card-details .bottom-text .price-content span.price {
+                    font-size: 14px;
+                }
             }
         </style>
         <div class="container px-4">
             <div class="latest-article-img">
                 <div class="inner-wrap">
-                    @if (count([$products]) >= 0)
+                    @if (count($products) >= 1)
                         @php
-                            //sorting desc article dan meretrieve data nya
+                            // Sorting desc article and retrieving its data
                             $orderedArticlesDesc = $articles->sortByDesc('created_at');
                             $latestArticleDesc = $orderedArticlesDesc->first();
-                            $getDesc = $latestArticleDesc->desc;
+                            $getDesc = $latestArticleDesc->desc ?? 'Default Description';
                             
-                            //sorting nama article dan meretrieve data nya
+                            // Sorting article name and retrieving its data
                             $orderedArticlesName = $articles->sortByDesc('created_at');
                             $latestArticleName = $orderedArticlesName->first();
-                            $getNamaArticle = $latestArticleName->nama_article;
+                            $getNamaArticle = $latestArticleName->nama_article ?? 'Default Article Name';
                         @endphp
                         <p class="mb-0">Latest Release</p>
                         <h1 style="margin-bottom: 0;">{{ $getNamaArticle }}</h1>
@@ -395,7 +414,6 @@
                         <h1 style="margin-bottom: 0;">Article Name</h1>
                         <h5 style="margin-bottom: 0;">Description</h5>
                     @endif
-
                 </div>
             </div>
         </div>
@@ -424,7 +442,7 @@
             @endphp
 
             @if (count($latestArticles) >= 1)
-                <div class="carousel pt-4"
+                <div class="carousel pt-2"
                     data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
                     @foreach ($latestArticles as $la)
                         <div class="card-related-carousel">
@@ -459,6 +477,32 @@
                         </div>
                     @endforeach
                 </div>
+            @elseif (count($latestArticles) < 1)
+                <div class="card-related-carousel">
+                    <a href="">
+                        <div class="image-placeholder"
+                            style="background-image: url('{{ asset('frontend/images/product1.jpg') }}');">
+                            <div class="inner-image"
+                                style="background-image: url('{{ asset('frontend/images/product2.jpg') }}');">
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="card-details">
+                        <div class="caption">Product name</div>
+                        <span class="sub-caption">150m</span>
+                    </div>
+                    <div class="bottom-text d-flex flex-row justify-content-between">
+                        <div class="price-content flex-grow-1">
+                            <span>Start from</span> <span class="price">200k</span>
+                        </div>
+                        <div class="rating d-flex align-items-center">
+                            <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
+                                alt="star" />
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                </div>
             @endif
         </div>
     </section>
@@ -492,13 +536,13 @@
                 }
 
                 /* .row-full {
-                                                                                                    width: 99.4vw;
-                                                                                                    position: relative;
-                                                                                                    margin-left: -50vw;
-                                                                                                    margin-right: 0;
-                                                                                                    height: 28px;
-                                                                                                    left: 50%;
-                                                                                                } */
+                                                                                                                                        width: 99.4vw;
+                                                                                                                                        position: relative;
+                                                                                                                                        margin-left: -50vw;
+                                                                                                                                        margin-right: 0;
+                                                                                                                                        height: 28px;
+                                                                                                                                        left: 50%;
+                                                                                                                                    } */
 
                 .cover-wrapper {
                     display: flex;
@@ -640,24 +684,25 @@
                 @foreach ($articles as $at)
                     @php
                         $getImage = json_decode($at->image);
+                        $hasImage = !empty($getImage);
                     @endphp
                     <div class="carousel-cell"
-                        style="background-image: url('{{ asset('/storage/articles/images/' . $getImage) }}');">
+                        style="background-image: url('{{ $hasImage ? asset('/storage/articles/images/' . $getImage) : asset('/frontend/images/background1.png') }}');">
                         <div class="overlay">
                         </div>
                         <div class="inner">
-                            <h5>Norem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum
-                                est a, mattis tellus.<br>Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin
-                                lacus, ut interdum tellus elit sed risus.<br> Maecenas eget condimentum velit, sit amet
-                                feugiat
-                                lectus. Class aptent taciti sociosqu <br> ad litora torquent per conubia nostra, per
-                                inceptos
-                                himenaeos. Praesent auctor purus luctus enim egestas,<br> ac scelerisque ante pulvinar.
-                                Donec ut
-                                rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.<br> Curabitur vel bibendum lorem.
-                                Morbi
-                                convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
-                            </h5>
+                            {{-- <h5>Norem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum
+                            est a, mattis tellus.<br>Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin
+                            lacus, ut interdum tellus elit sed risus.<br> Maecenas eget condimentum velit, sit amet
+                            feugiat
+                            lectus. Class aptent taciti sociosqu <br> ad litora torquent per conubia nostra, per
+                            inceptos
+                            himenaeos. Praesent auctor purus luctus enim egestas,<br> ac scelerisque ante pulvinar.
+                            Donec ut
+                            rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.<br> Curabitur vel bibendum lorem.
+                            Morbi
+                            convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
+                        </h5> --}}
                             {{-- <a href="{{ url('/product') }}" class="btn">Let's Explore</a> --}}
                         </div>
                     </div>
@@ -811,6 +856,25 @@
                 .image-spin-resort {
                     display: none;
                 }
+
+                .resort .card-related-carousel .image-placeholder {
+                    width: 200px;
+                    height: 300px;
+                }
+
+                .resort .card-related-carousel {
+                    width: 225px;
+                    padding: 12px;
+                    background: white;
+                }
+
+                .resort .card-related-carousel .card-details .caption {
+                    font-size: 14px;
+                }
+
+                .resort .card-related-carousel .card-details .bottom-text .price-content span.price {
+                    font-size: 14px;
+                }
             }
         </style>
         <div class="container px-4 py-4">
@@ -830,7 +894,7 @@
                     </a>
                 </div>
                 <hr class="divider" style="border-size: 1px; color:#A4A7B1; margin: 0;">
-                <div class="carousel pt-4"
+                <div class="carousel pt-2"
                     data-flickity='{ "cellAlign": "left", "contain": true, "groupCells": true, "wrapAround": false, "prevNextButtons": false, "draggable": true, "pageDots" : false}'>
 
                     @foreach ($unggulanProducts as $up)
@@ -866,7 +930,32 @@
                         </div>
                     @endforeach
                 </div>
-                <hr class="divider" style="border-size: 1px; color:#A4A7B1; margin: 0;">
+            @elseif (count($unggulanProducts) < 1)
+                <div class="card-related-carousel">
+                    <a href="">
+                        <div class="image-placeholder"
+                            style="background-image: url('{{ asset('frontend/images/product1.jpg') }}');">
+                            <div class="inner-image"
+                                style="background-image: url('{{ asset('frontend/images/product2.jpg') }}');">
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="card-details">
+                        <div class="caption">Product name</div>
+                        <span class="sub-caption">150m</span>
+                    </div>
+                    <div class="bottom-text d-flex flex-row justify-content-between">
+                        <div class="price-content flex-grow-1">
+                            <span>Start from</span> <span class="price">200k</span>
+                        </div>
+                        <div class="rating d-flex align-items-center">
+                            <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
+                                alt="star" />
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                </div>
             @endif
         </div>
         <script>
@@ -963,23 +1052,23 @@
             }
 
             /* .image-spin-about {
-                        position: relative;
-                        z-index: 999;
-                        right: 200px;
-                        top: 100px;
-                        width: 75px;
-                        height: 75px;
-                        animation: spin 7s infinite;
-                    }
+                                                            position: relative;
+                                                            z-index: 999;
+                                                            right: 200px;
+                                                            top: 100px;
+                                                            width: 75px;
+                                                            height: 75px;
+                                                            animation: spin 7s infinite;
+                                                        }
 
-                    .image-sign-about {
-                        position: relative;
-                        z-index: 999;
-                        right: 375px;
-                        top: 150px;
-                        width: 75px;
-                        height: 75px;
-                    } */
+                                                        .image-sign-about {
+                                                            position: relative;
+                                                            z-index: 999;
+                                                            right: 375px;
+                                                            top: 150px;
+                                                            width: 75px;
+                                                            height: 75px;
+                                                        } */
 
             @media screen and (min-width: 992px) {
                 .about-us .left-col {
@@ -990,13 +1079,25 @@
                     width: 60%;
                 }
             }
+
+            @media screen and (max-width: 616px) {
+                .about-us .right-col .caption-font {
+                    display: block;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 1.5;
+                }
+
+            }
         </style>
 
         <div class="container about">
             <div class="d-flex flex-lg-row flex-column">
                 <div class="left-col">
-                    <img class="img-fluid w-100 d-lg-block d-none scroll-fadeInUp fadeInUp d4" src="./frontend/images/egocentric-bg.png" alt="ego">
-                    <img class="image ratio r-4-3 img-fluid d-block d-lg-none scroll-fadeInUp fadeInUp d4" src="./frontend/images/egocentric-bg.png" alt="ego" >
+                    <img class="img-fluid w-100 d-lg-block d-none scroll-fadeInUp fadeInUp d4"
+                        src="./frontend/images/egocentric-bg.png" alt="ego">
+                    <img class="image ratio r-4-3 img-fluid d-block d-lg-none scroll-fadeInUp fadeInUp d4"
+                        src="./frontend/images/egocentric-bg.png" alt="ego">
                 </div>
                 <div class="offset-lg-1 right-col">
                     {{-- <img src="{{ asset('frontend/images/set1@300x.png') }}" class="image-spin-about" />
@@ -1025,8 +1126,10 @@
     </section>
 
     <section class="img-ran pb-4">
-        <img class="img-fluid w-100 d-lg-block d-none scroll-fadeInUp fadeInUp d4" src="./frontend/images/img-ran.png" alt="flos">
-        <img class="image ratio r-4-3 img-fluid d-block d-lg-none scroll-fadeInUp fadeInUp d4" src="./frontend/images/img-ran.png" alt="flos">
+        <img class="img-fluid w-100 d-lg-block d-none scroll-fadeInUp fadeInUp d4" src="./frontend/images/img-ran.png"
+            alt="flos">
+        <img class="image ratio r-4-3 img-fluid d-block d-lg-none scroll-fadeInUp fadeInUp d4"
+            src="./frontend/images/img-ran.png" alt="flos">
     </section>
 
     @include('includes.Frontend.footer')
