@@ -22,19 +22,19 @@
         <ul class="navbar">
             <li class="nav-item">
                 <a href="/" class="nav-link">
-                    <span class="bx bx-home"></span>
+                    {{-- <span class="bx bx-home"></span> --}}
                     Home
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ url('/product') }}" class="nav-link">
-                    <span class="ri-t-shirt-line"></span>
+                    {{-- <span class="ri-t-shirt-line"></span> --}}
                     Product
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ url('/about') }}" class="nav-link">
-                    <span class="bx bx-info-circle"></span>
+                    {{-- <span class="bx bx-info-circle"></span> --}}
                     About
                 </a>
             </li>

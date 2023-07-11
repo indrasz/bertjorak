@@ -62,6 +62,25 @@
                                                 class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                         </div>
 
+                                        {{-- Article Mobile Image --}}
+                                        <div class="col-span-6">
+                                            <label for="thumbnail-service"
+                                                class="block mb-3 font-medium text-gray-700 text-md">Mobile Article Image
+                                            </label>
+
+                                            <div class="w-full flex place-content-center place-items-center">
+                                                <div
+                                                    class="border-2 border-gray-400 border-dotted w-80 h-80 overflow-hidden rounded-lg">
+                                                    <img src="{{ asset('assets/images/No Image.png ') }}" id="output2"
+                                                        class="w-full h-full bg-cover" />
+                                                </div>
+                                            </div>
+                                            <input placeholder="Keunggulan 3" type="file" accept="image/*" name="mobile_photos"
+                                                id="mobile_photos" autocomplete="off"
+                                                class="block w-25 py-3 pl-5 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                        </div>
+                                        
+
                                         <div class="col-span-6">
                                             <label for="namaArticle"
                                                 class="block mb-3 font-medium text-gray-700 text-md">Article Name</label>
@@ -204,6 +223,13 @@
             const [file] = imgInp.files
             if (file) {
                 view.src = URL.createObjectURL(file)
+            }
+        };
+
+        mobile_photos.onchange = evt => {
+            const [file] = mobile_photos.files
+            if (file) {
+                output2.src = URL.createObjectURL(file)
             }
         };
 

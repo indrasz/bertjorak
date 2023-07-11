@@ -101,6 +101,12 @@
                     font-size: 40px;
                     line-height: 48px;
                 }
+
+                .shayna-header .header-description>p {
+                    padding: 16px 7.5%;
+                    font-size: 14px;
+                    line-height: 24px;
+                }
             }
 
             @media (min-width: 768px) {
@@ -129,24 +135,16 @@
                 }
             }
 
-            html {
-                cursor: url('frontend/images/iconmonstr-cursor-31-24.png'), auto;
-                height: 100%;
-            }
-
-
-
-
             /* END:Header */
         </style>
 
         <!-- HEADER BACKGROUND -->
         <div class="d-flex flex-column justify-content-center align-items-center">
-            <div class="mb-4 mt-4">
+            <div>
                 <div class="first-image">
                     <style>
                         .first-image {
-                            background-image: url('frontend/images/bertjorak-about.png');
+                            background-image: url('frontend/images/about_us.png');
                             background-size: cover;
                             background-repeat: no-repeat;
                             background-position: center;
@@ -167,7 +165,7 @@
                     including 5 cities with the highest demand; Jakarta, Bandung, Bekasi, Tangerang, and Pekanbaru.
                 </p>
             </div>
-            <div class="mb-4 mt-4">
+            <div>
                 <div class="second_image">
                     <style>
                         .second_image {
@@ -217,10 +215,18 @@
             </div>
             <div class="mt-2 mb-2 header-description">
                 <p class="text-center">
-                    Bertjorak is an everyday fashion brand with bright and pop colors, while also portraying the essence
-                    of quirkiness. Inspired by the diversity of Indonesia’s colors of its cultures, we express a variety
-                    of philosophies through different splash of eccentric colors with the intention to spread positive
-                    energy and youthfulness across all fashion savvy and people in Indonesia.
+                    Our pieces is a work of art with colorful
+                    Indonesian designs, presented in
+                    modern form and ready-to-wear clothing for women to men (unisex). We
+                    present creations in eccentric colors
+                    with the philosophy to spread positive
+                    energy among the fashion savvy and
+                    people/society in general. In the manufacture of all of our products, we
+                    always conduct research and exploration regarding our products based on
+                    the latest trend forecasts. Research is
+                    also carried out to meet the needs and
+                    expectations of our market demand
+                    and consumer interest.
                 </p>
             </div>
         </div>

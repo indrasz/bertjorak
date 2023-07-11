@@ -50,7 +50,7 @@
                                     <input type="text" id="login" minlength="4" class="input-field"
                                         autocomplete="off" type="text" name="login" :value="old('login')" required
                                         autofocus>
-                                    <label>Username/Email</label>
+                                    <label>Email</label>
                                 </div>
 
                                 <div class="input-wrap">

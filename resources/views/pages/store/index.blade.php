@@ -36,13 +36,13 @@
                 }
 
                 /* .row-full {
-                                                                                                                            width: 99.4vw;
-                                                                                                                            position: relative;
-                                                                                                                            margin-left: -50vw;
-                                                                                                                            margin-right: 0;
-                                                                                                                            height: 28px;
-                                                                                                                            left: 50%;
-                                                                                                                        } */
+                                                                                                                                                            width: 99.4vw;
+                                                                                                                                                            position: relative;
+                                                                                                                                                            margin-left: -50vw;
+                                                                                                                                                            margin-right: 0;
+                                                                                                                                                            height: 28px;
+                                                                                                                                                            left: 50%;
+                                                                                                                                                        } */
 
                 .cover-wrapper {
                     display: flex;
@@ -95,17 +95,16 @@
                 }
 
                 /* .cover-wrapper .hero-slider .carousel-cell .inner h5 {
-                                                                                                                                                                                                                                                margin-bottom: 32px;
-                                                                                                                                                                                                                                                color: black;
-                                                                                                                                                                                                                                            } */
+                                                                                                                                                                                                                                                                                margin-bottom: 32px;
+                                                                                                                                                                                                                                                                                color: black;
+                                                                                                                                                                                                                                                                            } */
 
                 .hero-active .hero-cell .inner .btn {
                     background: transparent;
                     color: white;
                     border: none;
                     position: relative;
-                    font-weight: 600;
-                    font-family: Poppins, sans-serif;
+                    font-family: 'RubberNippleFactory', sans-serif;
                     border-radius: 999px;
                     padding: 1rem 3rem;
                     outline: 2px solid white;
@@ -115,8 +114,7 @@
                 .hero-active .hero-cell .inner .btn:hover {
                     background: var(--secondary-color);
                     position: relative;
-                    font-weight: 600;
-                    font-family: Poppins, sans-serif;
+                    font-family: 'RubberNippleFactory', sans-serif;
                     color: whitesmoke;
                     border: none;
                     border-radius: 999px;
@@ -127,49 +125,14 @@
                     text-decoration: none;
                 }
 
-                /* .hero-slider .flickity-prev-next-button {
-                                                                                                                            width: 32px;
-                                                                                                                            height: 32px;
-                                                                                                                            background: transparent;
-                                                                                                                        }
-
-                                                                                                                        .hero-slider .flickity-prev-next-button:hover {
-                                                                                                                            background: transparent;
-                                                                                                                        }
-
-                                                                                                                        .hero-slider .flickity-prev-next-button:disabled {
-                                                                                                                            display: none;
-                                                                                                                        }
-
-                                                                                                                        .hero-slider .flickity-prev-next-button .arrow {
-                                                                                                                            fill: whitesmoke;
-                                                                                                                        }
-
-                                                                                                                        .hero-slider .flickity-page-dots {
-                                                                                                                            bottom: 30px;
-                                                                                                                        }
-
-                                                                                                                        .hero-slider .flickity-page-dots .dot {
-                                                                                                                            width: 30px;
-                                                                                                                            height: 4px;
-                                                                                                                            opacity: 1;
-                                                                                                                            background: rgba(255, 255, 255, 0.5);
-                                                                                                                            border: 0 solid white;
-                                                                                                                            border-radius: 0;
-                                                                                                                        }
-
-                                                                                                                        .hero-slider .flickity-page-dots .dot.is-selected {
-                                                                                                                            background: var(--secondary-color);
-                                                                                                                        }
-
-                                                                                                                        @media screen and (max-width: 700px) {
-                                                                                                                            .hero-slider .flickity-prev-next-button {
-                                                                                                                                display: none;
-                                                                                                                            }
-                                                                                                                        } */
+                @media screen and (max-width: 500px) {
+                    .hero-cell[style*="background-image"] {
+                        background-image: url('{{ asset('/frontend/images/artwork4-p.png') }}') !important;
+                    }
+                }
             </style>
             <div class="hero-active">
-                <div class="hero-cell" style="background-image: url('{{ asset('/frontend/images/background.png') }}');">
+                <div class="hero-cell" style="background-image: url('{{ asset('/frontend/images/artwork2.png') }}');">
                     <div class="overlay">
                     </div>
                     <div class="inner">
@@ -230,7 +193,7 @@
             .latest-article .latest-article-img {
                 position: relative;
                 isolation: isolate;
-                background-image: url('./frontend/images/latest_article.jpg');
+                background-image: url('./frontend/images/latest_bg_f.png');
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: cover;
@@ -238,15 +201,14 @@
                 height: 400px;
             }
 
-            .latest-article .latest-article-img::after {
-                /* background: linear-gradient(91.7deg, rgb(50, 25, 79) -4.3%, rgb(122, 101, 149) 101.8%); */
-                background: linear-gradient(178.6deg, rgb(20, 36, 50) 11.8%, rgb(124, 143, 161) 83.8%);
-                content: '';
-                position: absolute;
-                inset: 0;
-                opacity: .5;
-                z-index: -1;
-            }
+            /* .latest-article .latest-article-img::after {
+                                            background: white;
+                                            content: '';
+                                            position: absolute;
+                                            inset: 0;
+                                            opacity: 1;
+                                            z-index: -1;
+                                        } */
 
             .latest-article .latest-article-img {
                 overflow: hidden;
@@ -405,14 +367,14 @@
                             $latestArticleName = $orderedArticlesName->first();
                             $getNamaArticle = $latestArticleName->nama_article ?? 'Default Article Name';
                         @endphp
-                        <p class="mb-0">Latest Release</p>
-                        <h1 style="margin-bottom: 0;">{{ $getNamaArticle }}</h1>
-                        <h5 style="margin-bottom: 0;">{{ $getDesc }}</h5>
+                        <p class="mb-1">Latest Release</p>
+                        <h1 class="mb-1">{{ $getNamaArticle }}</h1>
+                        <h5 class="mb-0">{{ $getDesc }}</h5>
                         {{-- <a href="#" class="btn">Let's Explore</a> --}}
                     @else
-                        <p class="mb-0">Latest Release</p>
-                        <h1 style="margin-bottom: 0;">Article Name</h1>
-                        <h5 style="margin-bottom: 0;">Description</h5>
+                        <p class="mb-1">Latest Release</p>
+                        <h1 class="mb-1">Article Name</h1>
+                        <h5 class="mb-0">Description</h5>
                     @endif
                 </div>
             </div>
@@ -536,13 +498,13 @@
                 }
 
                 /* .row-full {
-                                                                                                                                        width: 99.4vw;
-                                                                                                                                        position: relative;
-                                                                                                                                        margin-left: -50vw;
-                                                                                                                                        margin-right: 0;
-                                                                                                                                        height: 28px;
-                                                                                                                                        left: 50%;
-                                                                                                                                    } */
+                                                                                                                                                                        width: 99.4vw;
+                                                                                                                                                                        position: relative;
+                                                                                                                                                                        margin-left: -50vw;
+                                                                                                                                                                        margin-right: 0;
+                                                                                                                                                                        height: 28px;
+                                                                                                                                                                        left: 50%;
+                                                                                                                                                                    } */
 
                 .cover-wrapper {
                     display: flex;
@@ -685,29 +647,40 @@
                     @php
                         $getImage = json_decode($at->image);
                         $hasImage = !empty($getImage);
+                        
+                        $getMobileImage = json_decode($at->mobile_image);
+                        $hasMobileImage = !empty($getMobileImage);
                     @endphp
-                    <div class="carousel-cell"
+                    <div class="carousel-cell{{ $hasMobileImage ? ' has-mobile-image' : '' }}"
+                        data-mobile-image="{{ $hasMobileImage ? asset('/storage/articles/mobile_images/' . $getMobileImage) : '' }}"
                         style="background-image: url('{{ $hasImage ? asset('/storage/articles/images/' . $getImage) : asset('/frontend/images/background1.png') }}');">
-                        <div class="overlay">
-                        </div>
-                        <div class="inner">
-                            {{-- <h5>Norem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum
-                            est a, mattis tellus.<br>Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin
-                            lacus, ut interdum tellus elit sed risus.<br> Maecenas eget condimentum velit, sit amet
-                            feugiat
-                            lectus. Class aptent taciti sociosqu <br> ad litora torquent per conubia nostra, per
-                            inceptos
-                            himenaeos. Praesent auctor purus luctus enim egestas,<br> ac scelerisque ante pulvinar.
-                            Donec ut
-                            rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.<br> Curabitur vel bibendum lorem.
-                            Morbi
-                            convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
-                        </h5> --}}
-                            {{-- <a href="{{ url('/product') }}" class="btn">Let's Explore</a> --}}
-                        </div>
+                        <div class="overlay"></div>
+                        <div class="inner"></div>
                     </div>
                 @endforeach
             </div>
+
+            <script>
+                function setCarouselBackgrounds() {
+                    var slider = document.querySelector('.backstory-slider');
+                    var cells = slider.querySelectorAll('.carousel-cell');
+
+                    cells.forEach(function(cell) {
+                        if (window.innerWidth <= 500) {
+                            var mobileImageUrl = cell.getAttribute('data-mobile-image');
+                            if (mobileImageUrl) {
+                                cell.style.backgroundImage = 'url("' + mobileImageUrl + '")';
+                            }
+                        }
+                    });
+                }
+
+                // Set backgrounds initially
+                setCarouselBackgrounds();
+
+                // Update backgrounds on window resize
+                window.addEventListener('resize', setCarouselBackgrounds);
+            </script>
 
             {{-- <div class="container">
                 @if (Auth::user())
@@ -746,7 +719,7 @@
             }
 
             .resort .caption-related-product {
-                font: 600 1.50rem/1.90rem "Poppins", sans-serif;
+                font: 600 1.50rem/1.90rem "RubberNippleFactory", sans-serif;
             }
 
             .resort .d-flex {
@@ -1052,23 +1025,23 @@
             }
 
             /* .image-spin-about {
-                                                            position: relative;
-                                                            z-index: 999;
-                                                            right: 200px;
-                                                            top: 100px;
-                                                            width: 75px;
-                                                            height: 75px;
-                                                            animation: spin 7s infinite;
-                                                        }
+                                                                                            position: relative;
+                                                                                            z-index: 999;
+                                                                                            right: 200px;
+                                                                                            top: 100px;
+                                                                                            width: 75px;
+                                                                                            height: 75px;
+                                                                                            animation: spin 7s infinite;
+                                                                                        }
 
-                                                        .image-sign-about {
-                                                            position: relative;
-                                                            z-index: 999;
-                                                            right: 375px;
-                                                            top: 150px;
-                                                            width: 75px;
-                                                            height: 75px;
-                                                        } */
+                                                                                        .image-sign-about {
+                                                                                            position: relative;
+                                                                                            z-index: 999;
+                                                                                            right: 375px;
+                                                                                            top: 150px;
+                                                                                            width: 75px;
+                                                                                            height: 75px;
+                                                                                        } */
 
             @media screen and (min-width: 992px) {
                 .about-us .left-col {
@@ -1095,30 +1068,26 @@
             <div class="d-flex flex-lg-row flex-column">
                 <div class="left-col">
                     <img class="img-fluid w-100 d-lg-block d-none scroll-fadeInUp fadeInUp d4"
-                        src="./frontend/images/egocentric-bg.png" alt="ego">
+                        src="./frontend/images/square-bg-1.png" alt="ego">
                     <img class="image ratio r-4-3 img-fluid d-block d-lg-none scroll-fadeInUp fadeInUp d4"
-                        src="./frontend/images/egocentric-bg.png" alt="ego">
+                        src="./frontend/images/square-bg-1.png" alt="ego">
                 </div>
                 <div class="offset-lg-1 right-col">
                     {{-- <img src="{{ asset('frontend/images/set1@300x.png') }}" class="image-spin-about" />
                     <img src="{{ asset('frontend/images/sign-warna.png') }}" class="image-sign-about" /> --}}
                     <h5 class="caption-font">
-                        Our pieces is a work of art with colorful
-                        Indonesian designs, presented in
-                        modern form and ready-to-wear
-                        clothing for women to men (unisex). We
-                        present creations in eccentric colors
-                        with the philosophy to spread positive
-                        energy among the fashion savvy and
-                        people/society in general. In the manu
-                        facture of all of our products, we
-                        always conduct research and
-                        exploration regarding our products
-                        based on the latest trend forecasts.
-                        Research is also carried out to meet
-                        the needs and expectations of our
-                        market demand and consumer
-                        interest.
+                        We are constantly striving to improve
+                        ourselves in the best fashion, and will
+                        work with you through every process to
+                        ensure you get what you want. With our
+                        own factory and production line, we
+                        manage and control the production
+                        process itself from A to Z, to prevent
+                        fatal errors and keep the percentage
+                        chance of an error close to 0%. We also
+                        establish procedures that help us to
+                        effectively minimize time and material
+                        wastage.
                     </h5>
                 </div>
             </div>
@@ -1126,10 +1095,10 @@
     </section>
 
     <section class="img-ran pb-4">
-        <img class="img-fluid w-100 d-lg-block d-none scroll-fadeInUp fadeInUp d4" src="./frontend/images/img-ran.png"
+        <img class="img-fluid w-100 d-lg-block d-none scroll-fadeInUp fadeInUp d4" src="./frontend/images/artwork1.png"
             alt="flos">
         <img class="image ratio r-4-3 img-fluid d-block d-lg-none scroll-fadeInUp fadeInUp d4"
-            src="./frontend/images/img-ran.png" alt="flos">
+            src="./frontend/images/artwork1.png" alt="flos">
     </section>
 
     @include('includes.Frontend.footer')

@@ -57,6 +57,17 @@ class ArticleController extends Controller
                 $dataNewImage = $name;
             }
 
+            // Mobile Image Article
+            if ($request->hasfile('mobile_photos')) {
+                // Delete Old Photos
+                File::delete(storage_path() . '/app/public/articles/mobile_images/' . json_decode($editData->mobile_image, true));
+
+                // Add new images
+                $nameMobile = time() . rand(1, 100) . ' - ' . $request->mobile_photos->getClientOriginalName();
+                $request->mobile_photos->storeAs('articles/mobile_images/', $nameMobile, 'public');
+                $dataNewMobileImage = $nameMobile;
+            }
+
             // Logo Article
             if ($request->hasfile('logo')) {
                 // Delete Old Photos
@@ -76,6 +87,13 @@ class ArticleController extends Controller
                 }
             }
             $articleUp->title_header = $request->headline;
+            
+            if ($request->mobile_photos != null) {
+                if ($dataNewMobileImage != null) {
+                    $articleUp->mobile_image = json_encode($dataNewMobileImage);
+                }
+            }
+
             if ($request->photos != null) {
                 if ($dataNewImage != null) {
                     $articleUp->image = json_encode($dataNewImage);
@@ -114,6 +132,12 @@ class ArticleController extends Controller
                 $dataLogo = $nameLogo;
             }
 
+            if ($request->hasfile('mobile_photos')) {
+                $nameMobile = time() . rand(1, 100) . ' - ' . $request->mobile_photos->getClientOriginalName();
+                $request->mobile_photos->storeAs('articles/mobile_images/', $nameMobile, 'public');
+                $dataMobileImage = $nameMobile;
+            }
+
             if ($request->hasfile('photos')) {
                 $name = time() . rand(1, 100) . ' - ' . $request->photos->getClientOriginalName();
                 $request->photos->storeAs('articles/images/', $name, 'public');
@@ -129,6 +153,7 @@ class ArticleController extends Controller
             $file->nama_article = $request->nama_article;
             $file->title_header = $request->headline;
             $file->image = json_encode($data);
+            $file->mobile_image = json_decode($dataMobileImage);
             $file->desc = $request->desc;
             $file->header = "YES";
 
@@ -148,10 +173,14 @@ class ArticleController extends Controller
             $data = Article::findOrFail($id);
 
             $dataLogo = json_decode($data->logo_header, true);
+            $dataMobileImage = json_decode($data->mobile_image, true);
             $dataImage = json_decode($data->image, true);
 
             // Delete Logo Header
             File::delete(storage_path() . '/app/public/articles/logo/' . $dataLogo);
+
+            // Delete Mobile Image
+            File::delete(storage_path() . '/app/public/articles/mobile_images/' . $dataMobileImage);
 
             // Delete Image
             File::delete(storage_path() . '/app/public/articles/images/' . $dataImage);
